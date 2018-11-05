@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="loader_id_media_store_data" />
+
+    <item type="id" name="gridview" />
+    <item type="id" name="webview" />
+    <item type="id" name="glide_tag" />
+
+
+    <item name="can_content_view" type="id" />
+    <item name="can_refresh_header" type="id" />
+    <item name="can_refresh_footer" type="id" />
+    <item name="can_scroll_view" type="id" />
+</resources>

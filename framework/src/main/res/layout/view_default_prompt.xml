@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingEnd="15dp"
+        android:paddingStart="25dp"
+        android:paddingTop="20dp">
+
+        <!-- 提示标题 -->
+        <TextView
+            android:id="@+id/tvPromptTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#272B3C"
+            android:textSize="@dimen/CommonFontSize_Middle" />
+
+        <!-- 提示内容 -->
+        <TextView
+            android:id="@+id/tvPromptContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPromptTitle"
+            android:layout_marginTop="10dp"
+            android:textColor="#272B3C"
+            android:textSize="@dimen/CommonFontSizeMin_Middle" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:orientation="horizontal">
+
+            <!-- 取消 -->
+            <TextView
+                android:id="@+id/tvPromptCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:textColor="#9B9FAD"
+                android:textSize="@dimen/CommonFontSize_Middle" />
+
+            <!-- 确定 -->
+            <TextView
+                android:id="@+id/tvPromptDetermine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:textColor="#FF4444"
+                android:textSize="@dimen/CommonFontSize_Middle" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

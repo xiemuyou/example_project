@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <dimen name="CommonFontSizeMax_Large">22sp</dimen>
+    <dimen name="CommonFontSize_Large">20sp</dimen>
+    <dimen name="CommonFontSize_Middle">17sp</dimen>
+    <dimen name="CommonFontSizeMin_Middle">15sp</dimen>
+    <dimen name="CommonFontSize_Small">13sp</dimen>
+
+
+    <dimen name="commonFontSize_25">25sp</dimen>
+    <dimen name="commonFontSize_24">24sp</dimen>
+    <dimen name="commonFontSizeMax_22">22sp</dimen>
+    <dimen name="commonFontSize_20">20sp</dimen>
+    <dimen name="commonFontSize_18">18sp</dimen>
+    <dimen name="commonFontSize_17">17sp</dimen>
+    <dimen name="commonFontSize_16">16sp</dimen>
+    <dimen name="commonFontSize_15">15sp</dimen>
+    <dimen name="commonFontSize_14">14sp</dimen>
+    <dimen name="commonFontSize_13">13sp</dimen>
+    <dimen name="commonFontSize_12">12sp</dimen>
+    <dimen name="commonFontSize_11">11sp</dimen>
+    <dimen name="commonFontSize_10">10sp</dimen>
+    <dimen name="commonFontSize_3">1.5sp</dimen>
+    <dimen name="commonFontSize_7">3.5sp</dimen>
+    <dimen name="commonFontSize_1">0.5sp</dimen>
+
+    <!--头部默认高度-->
+    <dimen name="CommonHead_size">50dp</dimen>
+    <dimen name="editPageArrowSize">10dp</dimen>
+    <dimen name="editPageMarginLeft">15dp</dimen>
+    <dimen name="titleDividerHeight">1dp</dimen>
+    <!--默认列表分割线高度  水平-->
+    <dimen name="defaultDividerHeight">1dp</dimen>
+    <dimen name="defaultDividerHeight_new">0.5dp</dimen>
+    <!--默认列表分割线宽度  垂直-->
+    <dimen name="defaultDividerWidth">1dp</dimen>
+    <dimen name="defaultItemHeight">50dp</dimen>
+    <dimen name="historyscore_tb">40dp</dimen>
+    <dimen name="alert_width">50dp</dimen>
+    <dimen name="titleDefaultHigh">23dp</dimen>
+
+    <!--FloatingActionButton 设置大小-->
+    <dimen name="design_fab_size_mini" tools:override="true">40dp</dimen>
+    <dimen name="design_fab_size_normal" tools:override="true">40dp</dimen>
+</resources>

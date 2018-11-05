@@ -1,0 +1,70 @@
+apply plugin: 'com.android.library'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.androidCompileSdkVersion
+    buildToolsVersion globalConfiguration.androidBuildToolsVersion
+
+    defaultConfig {
+        minSdkVersion globalConfiguration.androidMinSdkVersion
+        targetSdkVersion globalConfiguration.anroidTargetSdkVersion
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dexOptions {
+        jumboMode true
+    }
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'armeabi-v7a'
+            universalApk true
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    def androidDependencies = rootProject.ext.androidDependencies
+    def viewDependencies = rootProject.ext.viewDependencies
+    def otherDependencies = rootProject.ext.otherDependencies
+
+    api androidDependencies.recyclerView
+    api androidDependencies.appcompat_v7
+    api androidDependencies.support_v4
+    api androidDependencies.design
+    api androidDependencies.constraint_layout
+    api androidDependencies.cardview
+
+    api otherDependencies.okgo
+    api otherDependencies.okrx2
+    api otherDependencies.okserver
+    api otherDependencies.glide
+    api otherDependencies.litepal
+    api otherDependencies.gson
+    api otherDependencies.utilCode
+    api viewDependencies.rvadapterHelper
+    api otherDependencies.rx_android
+}
+
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ssdk_oks_share">分享</string>
+    <string name="ssdk_oks_sharing">分享操作正在后台进行…</string>
+    <string name="ssdk_oks_share_failed">分享失败</string>
+    <string name="ssdk_oks_share_completed">分享成功</string>
+    <string name="ssdk_oks_share_canceled">分享已取消</string>
+    <string name="ssdk_oks_cancel">取消</string>
+    <string name="ssdk_oks_multi_share">图文分享</string>
+    <string name="ssdk_oks_confirm">确定</string>
+    <string name="ssdk_oks_contacts">联系人</string>
+    <string name="ssdk_oks_pull_to_refresh">下拉刷新</string>
+    <string name="ssdk_oks_release_to_refresh">松开刷新</string>
+    <string name="ssdk_oks_refreshing">刷新中…</string>
+
+    <string name="login_you_are_not_installed_wechat">您未安装微信客户端</string>
+    <string name="share_wechat_circle">朋友圈</string>
+    <string name="share_wechat">微信</string>
+    <string name="share_QQ">QQ</string>
+    <string name="share_sina">微博</string>
+    <string name="share_qzone">QQ空间</string>
+    <string name="share_mine_dynamic">我的动态</string>
+    <string name="share_copy_url">复制链接</string>
+    <string name="share_copy_url_success">视频链接已复制！</string>
+    <string name="share_copy_url_success_ok">链接已复制！</string>
+    <string name="share_open_the_browser">浏览器打开</string>
+    <string name="share_refresh">刷新</string>
+    <string name="share_report">举报</string>
+    <string name="share_delete">删除</string>
+    <string name="share_shield_video">屏蔽视频</string>
+    <string name="share_cancel">取消分享</string>
+    <string name="share_copy_success">复制成功</string>
+    <string name="share_success">分享成功</string>
+    <string name="share_failure">分享失败</string>
+    <string name="share_dec">分享自\"%1$s\"的三筒，走过路过不要错过啊！</string>
+</resources>

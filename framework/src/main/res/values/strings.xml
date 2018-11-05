@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <!--公用-->
+    <string name="app_name">三筒学堂</string>
+    <string name="line">线</string>
+    <string name="background">背景</string>
+    <string name="head">头像</string>
+    <string name="share">分享</string>
+    <string name="wechat">微信</string>
+    <string name="wechat_moments">朋友圈</string>
+    <string name="qq">QQ</string>
+    <string name="weibo">微博</string>
+    <string name="phone">手机号</string>
+    <string name="message">信息</string>
+    <string name="setting">设置</string>
+    <string name="check_all">查看全部</string>
+    <string name="dialog_prompt">温馨提示</string>
+    <string name="determine">确定</string>
+    <string name="ok">好</string>
+    <string name="upgrade">升级</string>
+    <string name="editor">编辑</string>
+    <string name="dec">描述</string>
+    <string name="loading">正在加载&#8230;</string>
+    <string name="loading_more">正在加载更多</string>
+    <string name="loading_complete">加载完成</string>
+    <string name="load_more_fail">加载更多失败</string>
+    <string name="email">邮箱</string>
+    <string name="operation">操作</string>
+    <string name="person">人</string>
+
+    <!-- 日期 时间 start-->
+    <string name="data_year">年</string>
+    <string name="data_month">月</string>
+    <string name="month">%1$s月</string>
+    <string name="data_week">周</string>
+    <string name="data_day">日</string>
+    <string name="data_hous">时</string>
+    <string name="data_minutes">分</string>
+    <string name="data_second">秒</string>
+    <string name="default_time">00:00</string>
+    <!-- 日期 end-->
+
+    <!--数字/符号 -->
+    <string name="number_zero">0</string>
+    <string name="number_one">1</string>
+    <string name="quotes">“%1$s”</string>
+    <string name="percentage">%1$s%</string>
+    <!--数字/符号 -->
+
+    <string name="cancel">取消</string>
+    <string name="cancel_empty">取&#160;&#160;消</string>
+    <string name="pullback_empty">拉&#160;&#160;黑</string>
+    <string name="delete_empty">删&#160;&#160;除</string>
+    <string name="report_empty">举&#160;&#160;报</string>
+    <string name="copy_empty">复&#160;&#160;制</string>
+    <string name="load_error">网络不给力哦~请重试</string>
+    <string name="load_connect_error">网络连接异常</string>
+    <string name="empty_prompt">没有任何内容哦</string>
+    <string name="go_to_school">去学习</string>
+    <string name="video_report_vulgar">色情低俗</string>
+    <string name="video_report_cheating">欺诈骗钱</string>
+    <string name="video_report_harassment">广告骚扰</string>
+    <string name="video_report_illegal">违法</string>
+    <string name="video_report_political">政治敏感</string>
+    <string name="video_report_infringement">侵权</string>
+    <string name="video_share_dynamic">分享到动态</string>
+    <string name="video_share_cancel">取消分享</string>
+    <string name="dialog_share_dynamic_hint">说说观看感受</string>
+    <string name="dialog_report_hint">请描述你要举报的内容</string>
+    <string name="other_favor_empty">没有收藏任何视频</string>
+    <string name="other_message_empty">没有任何消息</string>
+    <string name="other_cache_video_empty">没有缓存视频</string>
+    <string name="other_buy_video_empty">没有购买视频</string>
+    <string name="other_search_empty">没有搜索到内容</string>
+    <string name="other_title_empty">未点亮任何头衔</string>
+    <string name="other_saw_empty">没有人看过你</string>
+    <string name="other_master_pupil_empty">没有师父或徒弟</string>
+    <string name="other_master_empty">没有师父</string>
+    <string name="other_pupil_empty">没有徒弟</string>
+    <string name="other_dynamic_empty">没有任何动态</string>
+    <string name="other_history_empty">没有历史记录</string>
+    <string name="other_unite_empty">没有任何内容哦</string>
+    <string name="other_click_retry">点击屏幕重试</string>
+    <string name="other_unlogin">您还未登录</string>
+    <string name="login">登\u0020录</string>
+    <string name="share_say_something">随便说两句吧</string>
+    <string name="dialog_bind_phone">绑定手机号</string>
+    <string name="dialog_bind_phone_content">未实名认证的账号无法进行回复，请尽快完成手机号验证</string>
+    <string name="goto_bind">去绑定</string>
+    <string name="dialog_select_bs_time">请选择拜师时间</string>
+    <string name="dialog_bs_end_time">拜师到期时间：%1$s</string>
+    <string name="dialog_bs_help_text">拜师说明</string>
+    <string name="intimacy">亲密度</string>
+    <string name="growvalue">成长值</string>
+    <string name="gold">积分</string>
+    <string name="empty">空页面</string>
+    <!-- web -->
+    <string name="web_save_image_to_the_local">保存图片至本地</string>
+    <string name="web_save_success">保存成功</string>
+    <string name="web_save_failed">保存失败</string>
+    <string name="web_save_path">已保存至%s</string>
+    <string name="web_unable_to_save">无法保存</string>
+    <string name="web_ok">确定</string>
+    <string name="web_cancel">取消</string>
+</resources>

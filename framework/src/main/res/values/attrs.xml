@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CanRefreshLayout">
+        <attr name="can_enabled_up" format="boolean" />
+        <attr name="can_enabled_down" format="boolean" />
+
+        <attr name="can_style_up" format="enum">
+            <enum name="classic" value="0" />
+            <enum name="upper" value="1" />
+            <enum name="lower" value="2" />
+            <enum name="mid" value="3" />
+        </attr>
+
+        <attr name="can_style_down" format="enum">
+            <enum name="classic" value="0" />
+            <enum name="upper" value="1" />
+            <enum name="lower" value="2" />
+            <enum name="mid" value="3" />
+        </attr>
+        <attr name="can_friction" format="float" />
+        <attr name="can_duration" format="integer" />
+
+        <attr name="can_smooth_length" format="integer" />
+        <attr name="can_smooth_duration" format="integer" />
+        <attr name="can_bg_up" format="reference" />
+        <attr name="can_bg_down" format="reference" />
+        <attr name="can_is_coo" format="boolean" />
+    </declare-styleable>
+
+    <!--侧滑删除-->
+    <declare-styleable name="SwipeMenuLayout">
+        <attr name="swipeEnable" format="boolean" />
+        <attr name="ios" format="boolean" />
+        <attr name="leftSwipe" format="boolean" />
+    </declare-styleable>
+
+    <!--checkbox-->
+    <declare-styleable name="CheckBox">
+        <attr name="text" format="string" />
+        <attr name="type" format="integer" />
+        <attr name="textColor" format="integer" />
+        <attr name="textSize" format="integer" />
+    </declare-styleable>
+
+    <!--自定义标签流：padding可以直接写到background中去-->
+    <declare-styleable name="TagViewGroup">
+        <attr name="showLine" format="integer" />
+        <attr name="isRadio" format="boolean" />
+
+        <attr name="tagMarginLeft" format="dimension" />
+        <attr name="tagMarginTop" format="dimension" />
+        <attr name="tagMarginRight" format="dimension" />
+        <attr name="tagMarginBottom" format="dimension" />
+        <attr name="tagMargin" format="dimension" />
+    </declare-styleable>
+    <!--百分比ImageView-->
+    <declare-styleable name="RateImageView">
+        <attr name="uiWidth" format="integer" />
+        <attr name="uiHeight" format="integer" />
+        <attr name="resize" format="enum">
+            <enum name="height" value="0" />
+            <enum name="width" value="1" />
+            <enum name="screen" value="2" />
+        </attr>
+        <attr name="uiScreenWidth" format="integer" />
+    </declare-styleable>
+
+    <!--折叠ImageView-->
+    <declare-styleable name="CollapseTextView">
+        <attr name="endImage" format="integer" />
+    </declare-styleable>
+
+    <!--倒计时progress-->
+    <declare-styleable name="CircleTextProgressbar">
+        <attr name="in_circle_color" format="color" />
+    </declare-styleable>
+</resources>
