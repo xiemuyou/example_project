@@ -1,0 +1,82 @@
+allprojects {
+    repositories {
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+ext {
+    //Android
+    androidCompileSdkVersion = 28
+    androidBuildToolsVersion = "28.0.3"
+    androidMinSdkVersion = 17
+    anroidTargetSdkVersion = 28
+
+    //ViewLibraries
+    supportLibraryVersion = "27.0.0"
+    constraintLayoutVersion = "1.0.2"
+    //fragmentation fragment封装 https://github.com/YoKeyword/Fragmentation
+    fragmentationVersion = "1.3.3"
+    //butterknife view注入 https://github.com/JakeWharton/butterknife
+    butterKnifeVersion = '8.7.0'
+    //vlayout 整套布局方案和布局间的组件复用 https://github.com/alibaba/vlayout/
+    vlayoutVersion = "1.2.8@aar"
+    //SmartTabLayout 需要用到的Util //https://github.com/ogaclejapan/SmartTabLayout
+    smartTabLayoutVersion = "v4:1.0.0@aar"
+    //方便的RecycleViewAdapter https://github.com/CymChad/BaseRecyclerViewAdapterHelper
+    rvadapterVersion = "2.9.30"
+    //ImmersionBar  沉浸式 https://github.com/gyf-dev/ImmersionBar
+    immbersionBarVersion = "2.3.0"
+
+    //okgo 网络加载框架 https://github.com/jeasonlzy/okhttp-OkGo
+    okgoVersion = "3.0.4"
+    okrx2Version = "2.0.2"
+    okserverVersion = "2.0.5"
+    //glide 图片框架 https://github.com/bumptech/glide
+    glideVersion = "4.6.1"
+    //litepal 数据库框架 https://github.com/LitePalFramework/LitePal
+    litepalVersion = "1.6.1"
+    //gson  https://github.com/google/gson
+    gsonVersion = "2.8.2"
+    //RxAndroid https://github.com/ReactiveX/RxAndroid
+    rxandroidVerison = "2.0.1"
+    //AndroidUtilCode https://github.com/Blankj/AndroidUtilCode/blob/master/utilcode/README-CN.md
+    utilcodeVerison = "1.13.14"
+    //检测内存溢出 https://github.com/square/leakcanary
+    leakcanaryVersion = "1.5.4"
+    leakcanaryReleaseVersion = "1.5.4"
+
+    androidDependencies = [
+            recyclerView     : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+            appcompat_v7     : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+            support_v4       : "com.android.support:support-v4:${supportLibraryVersion}",
+            design           : "com.android.support:design:${supportLibraryVersion}",
+            cardview         : "com.android.support:cardview-v7:${supportLibraryVersion}",
+            annotations      : "com.android.support:support-annotations:${supportLibraryVersion}",
+            constraint_layout: "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
+    ]
+
+    viewDependencies = [
+            butterKnife    : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            apt_butterKnife: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
+            vlayout        : "com.alibaba.android:vlayout:${vlayoutVersion}",
+            fragmentation  : "me.yokeyword:fragmentation:${fragmentationVersion}",
+            smartTabLayout : "com.ogaclejapan.smarttablayout:utils-${smartTabLayoutVersion}",
+            rvadapterHelper: "com.github.CymChad:BaseRecyclerViewAdapterHelper:${rvadapterVersion}",
+            immbersionBar  : "com.gyf.barlibrary:barlibrary:${immbersionBarVersion}"
+    ]
+
+    otherDependencies = [
+            okgo             : "com.lzy.net:okgo:${okgoVersion}",
+            okrx2            : "com.lzy.net:okrx2:${okrx2Version}",
+            okserver         : "com.lzy.net:okserver:${okserverVersion}",
+            glide            : "com.github.bumptech.glide:glide:${glideVersion}",
+            litepal          : "org.litepal.android:core:${litepalVersion}",
+            gson             : "com.google.code.gson:gson:${gsonVersion}",
+            rx_android       : "io.reactivex.rxjava2:rxandroid:${rxandroidVerison}",
+            utilCode         : "com.blankj:utilcode:${utilcodeVerison}",
+
+            leakcanary       : "com.squareup.leakcanary:leakcanary-android:${leakcanaryVersion}",
+            leakcanaryRelease: "com.squareup.leakcanary:leakcanary-android-no-op:${leakcanaryReleaseVersion}"
+    ]
+}
