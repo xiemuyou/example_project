@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.doushi.library.widgets.canrefresh.CanRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.doushi.library.widgets.canrefresh.ClassicRefreshView
+            android:id="@id/can_refresh_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.doushi.library.widgets.canrefresh.ClassicRefreshView
+            android:id="@id/can_refresh_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/can_content_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+
+        <!--上拉底部-->
+        <include layout="@layout/view_foot_more_loading" />
+    </com.doushi.library.widgets.canrefresh.CanRefreshLayout>
+
+    <com.doushi.library.widgets.emptyview.OtherView
+        android:id="@+id/ovCommon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</FrameLayout>

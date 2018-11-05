@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">MyProject</string>
+    <string name="loading_more">正在加载更多</string>
+
+    <!-- 首页 Start -->
+    <string name="home">首页</string>
+    <!-- 首页 End -->
+
+    <!-- 视频 Start -->
+    <string name="video">视频</string>
+    <!-- 视频 End -->
+
+    <!-- 我的 Start -->
+    <string name="mine">我的</string>
+    <string name="help">帮助</string>
+    <!-- 我的 End -->
+</resources>

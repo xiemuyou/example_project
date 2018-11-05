@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llRootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <View
+        android:id="@+id/tbDiver"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/defaultDividerHeight_new"
+        android:background="@color/color_F2F2F2"
+        android:visibility="gone" />
+</LinearLayout>

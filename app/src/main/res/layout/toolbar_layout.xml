@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/CommonHead_size"
+    android:background="@color/white"
+    android:minHeight="@dimen/CommonHead_size"
+    android:visibility="gone"
+    app:navigationIcon="@drawable/back_black"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:titleTextAppearance="@style/ToolbarTitleText">
+
+    <TextView
+        android:id="@+id/tvHeadTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@null"
+        android:textColor="@color/color_272B3C"
+        android:textSize="@dimen/commonFontSize_16"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/rlHeadRight"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginEnd="15dp">
+
+        <ImageView
+            android:id="@+id/ivHeadRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/operation"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tvHeadRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="@color/color_272B3C"
+            android:textSize="@dimen/CommonFontSizeMin_Middle"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+</android.support.v7.widget.Toolbar>

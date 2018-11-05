@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/llHomeBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_F2F2F2"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivMainHome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/home"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/home_select" />
+
+        <ImageView
+            android:id="@+id/ivMainVideo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/video"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/video_unselect" />
+
+        <ImageView
+            android:id="@+id/ivMainMine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/mine"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/mine_unselect" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/flHomContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/llHomeBottom"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+</RelativeLayout>

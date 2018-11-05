@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.doushi.library.widgets.canrefresh.CanRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--下拉头部刷新-->
+    <com.doushi.library.widgets.canrefresh.ClassicRefreshView
+        android:id="@id/can_refresh_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!--上拉底部加载-->
+    <com.doushi.library.widgets.canrefresh.ClassicRefreshView
+        android:id="@id/can_refresh_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!--数据内容区-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@id/can_content_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false" />
+
+    <!--上拉底部-->
+    <include layout="@layout/view_foot_more_loading" />
+
+    <!--空白/错误/加载提示-->
+    <com.doushi.library.widgets.emptyview.OtherView
+        android:id="@+id/ovEmptyHint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/occupiedView" />
+
+</com.doushi.library.widgets.canrefresh.CanRefreshLayout>
