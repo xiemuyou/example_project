@@ -88,8 +88,8 @@ public class RefreshListActivity extends BaseRefreshActivity<UserInfo> implement
     @Override
     public void getDataSuccess(SearchUserResponse dataRes) {
         //数据为空也需要传NULL值,
-        List<UserInfo> dataList = ObjectUtils.isNotEmpty(dataRes.getData()) ? dataRes.getData().getUser_list() : null;
-        loadDataSuccess(dataList);
+//        List<UserInfo> dataList = ObjectUtils.isNotEmpty(dataRes.getData()) ? dataRes.getData().getUser_list() : null;
+//        loadDataSuccess(dataList);
     }
 
     @Override

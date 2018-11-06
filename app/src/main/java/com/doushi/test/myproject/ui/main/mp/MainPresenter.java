@@ -21,7 +21,7 @@ public class MainPresenter extends BasePresenter<MainView> {
     public void onLoadDataSuccess(InterfaceConfig.HttpHelperTag apiTag, BaseApiResponse modelRes, Map<String, Object> params) {
         switch (apiTag) {
             case HTTPHelperTag_ReportCrashLog:
-                getMvpView().getDataSuccess(modelRes.getErrcode() == 0);
+                getMvpView().getDataSuccess(modelRes.isError());
                 break;
 
             default:

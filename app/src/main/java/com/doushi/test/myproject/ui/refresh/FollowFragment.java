@@ -89,7 +89,7 @@ public class FollowFragment extends BaseRefreshFragment<VideoDetails> implements
 
     @Override
     public void getDataSuccess(SearchUserResponse dataRes) {
-        List<UserInfo> dataList = ObjectUtils.isNotEmpty(dataRes.getData()) ? dataRes.getData().getUser_list() : null;
+        //List<UserInfo> dataList = ObjectUtils.isNotEmpty(dataRes.getData()) ? dataRes.getData().getUser_list() : null;
     }
 
     @Override

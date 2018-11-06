@@ -41,14 +41,10 @@ public class InterfaceConfig {
     public enum HttpHelperTag {
 
         /**
-         * 2.1.3 token登录
+         * 获取最新一天的干货
          */
-        HTTPHelperTag_LoginByToken,
+        HTTPHelperTag_ToDay,
 
-        /**
-         * 获取搜索的用户
-         */
-        HTTPHelperTag_GetSearchUsers,
 
         //崩溃上报 start
         /**
@@ -62,13 +58,9 @@ public class InterfaceConfig {
 
     //start----user---start
     /**
-     * token登录
+     * 获取最新一天的干货
      */
-    private static final String LOGIN_BY_TOKEN = "UserAuth/LoginByToken";
-    /**
-     * 搜索用户
-     */
-    private static final String GET_SEARCH_USERS = "UiP1/GetSearchUsers";
+    private static final String TODAY = "today";
     /**
      * 崩溃上报
      */
@@ -82,16 +74,13 @@ public class InterfaceConfig {
         StringBuffer urlStr = new StringBuffer();
         urlStr.append(HttpConfig.getRootUrl());
 
-        // 默认POST
+        // 默认GET
         String queryTypeStr;
-        resultMap.put(REQUEST_CONFIG, null);
         switch (httpHelperTag) {
-
-            //================================》》》 UserAuth Start 《《《=====================================//
-            // Token登录  Post
-            case HTTPHelperTag_LoginByToken:
+            // 获取最新一天的干货
+            case HTTPHelperTag_ToDay:
                 //2.1.3	token登录
-                urlStr.append(LOGIN_BY_TOKEN);
+                urlStr.append(TODAY);
                 resultMap.put(INTERFACE_URL_STR, urlStr.toString());
                 resultMap.put(REQUEST_CONFIG,
                         new RequestConfig()
@@ -99,26 +88,6 @@ public class InterfaceConfig {
                                 .setRetryCount(0)
                                 // 不使用缓存
                                 .setCacheMode(CacheMode.NO_CACHE));
-                break;
-
-            //搜索
-            case HTTPHelperTag_GetSearchUsers:
-                //配置接口
-                urlStr.append(GET_SEARCH_USERS);
-                //添加接口, <== 搜索用户 ==>
-                resultMap.put(INTERFACE_URL_STR, urlStr.toString());
-                //特殊接口请求配置
-                resultMap.put(REQUEST_CONFIG,
-                        new RequestConfig()
-                                //缓存时长
-                                .setCacheTime(10000)
-                                //不重连
-                                .setRetryCount(0)
-                                // 不使用缓存
-                                .setCacheMode(CacheMode.NO_CACHE));
-
-                queryTypeStr = INTERFACE_QUERY_TYPE_GET;
-                resultMap.put(INTERFACE_QUERY_TYPE, queryTypeStr);
                 break;
 
             // region ----- 上传崩溃   ------
@@ -126,7 +95,6 @@ public class InterfaceConfig {
             case HTTPHelperTag_ReportCrashLog:
                 urlStr.append(RX_URL_REPORT_CRASH_LOG);
                 resultMap.put(INTERFACE_URL_STR, urlStr.toString());
-
                 resultMap.put(REQUEST_CONFIG,
                         new RequestConfig()
                                 //不重连

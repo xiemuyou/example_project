@@ -10,14 +10,13 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.doushi.library.util.ImageLoadUtils;
-import com.doushi.library.widgets.ToastUtils;
 import com.doushi.library.widgets.layoutManager.DividerItemDecoration;
 import com.doushi.test.myproject.R;
+import com.doushi.test.myproject.base.component.BaseRefreshFragment;
 import com.doushi.test.myproject.global.DefaultValue;
 import com.doushi.test.myproject.global.ParamConstants;
 import com.doushi.test.myproject.model.search.SearchUserResponse;
 import com.doushi.test.myproject.model.user.UserInfo;
-import com.doushi.test.myproject.base.component.BaseRefreshFragment;
 import com.doushi.test.myproject.model.video.VideoDetails;
 import com.doushi.test.myproject.ui.refresh.RefreshListActivity;
 import com.doushi.test.myproject.ui.refresh.rp.RefreshPresenter;
@@ -72,17 +71,12 @@ public class FirstFragment extends BaseRefreshFragment<VideoDetails> implements 
         if (followPresenter == null) {
             followPresenter = new RefreshPresenter(this);
         }
-        refresh.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                followPresenter.getSearchVideoList(page, CNT, "测试");
-            }
-        }, 1000);
+        followPresenter.getSearchUsers(page, CNT, "ceshi");
     }
 
     @Override
     public void getDataSuccess(SearchUserResponse dataRes) {
-        List<UserInfo> dataList = ObjectUtils.isNotEmpty(dataRes.getData()) ? dataRes.getData().getUser_list() : null;
+        //List<UserInfo> dataList = ObjectUtils.isNotEmpty(dataRes.getData()) ? dataRes.getData().getUser_list() : null;
         //loadDataSuccess(dataList);
     }
 

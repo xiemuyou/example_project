@@ -2,6 +2,8 @@ package com.doushi.test.myproject.model.base;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.List;
+
 /**
  * 请求网络返回数据基类
  *
@@ -11,16 +13,13 @@ import com.google.gson.annotations.Expose;
 public class BaseApiResponse<T> {
 
     @Expose
-    private int errcode;
+    private boolean error;
 
     @Expose
-    private int dynamics;
+    private List<String> category;
 
     @Expose
-    private String errmsg;
-
-    @Expose
-    private T data;
+    private T results;
 
     private long time;
 
@@ -32,23 +31,15 @@ public class BaseApiResponse<T> {
         this.time = time;
     }
 
-    public int getErrcode() {
-        return errcode;
+    public List<String> getCategory() {
+        return category;
     }
 
-    public String getErrmsg() {
-        return errmsg;
+    public T getResults() {
+        return results;
     }
 
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public int getDynamics() {
-        return dynamics;
+    public boolean isError() {
+        return error;
     }
 }

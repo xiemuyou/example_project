@@ -55,13 +55,13 @@ public class HomeFragment extends BaseFragment {
     private void initTabLayout() {
         FragmentPagerItems.Creator creator = FragmentPagerItems.with(_mActivity);
         FragmentPagerItems fragmentPagerItems = creator.create();
-        fragmentPagerItems.add(PagerFragmentItem.of("FirstFragment", FirstFragment.class));
-        fragmentPagerItems.add(PagerFragmentItem.of("Fragment2", FollowFragment.class));
-        fragmentPagerItems.add(PagerFragmentItem.of("FollowFragment", FollowFragment.class));
-        fragmentPagerItems.add(PagerFragmentItem.of("Fragment4", FollowFragment.class));
-        fragmentPagerItems.add(PagerFragmentItem.of("Fragment5", FollowFragment.class));
-        fragmentPagerItems.add(PagerFragmentItem.of("Fragment6", FollowFragment.class));
-        fragmentPagerItems.add(PagerFragmentItem.of("Fragment7", FollowFragment.class));
+        fragmentPagerItems.add(PagerFragmentItem.of("PAGE1", FirstFragment.class));
+        fragmentPagerItems.add(PagerFragmentItem.of("PAGE2", FollowFragment.class));
+        fragmentPagerItems.add(PagerFragmentItem.of("PAGE3", FollowFragment.class));
+        fragmentPagerItems.add(PagerFragmentItem.of("PAGE4", FollowFragment.class));
+        fragmentPagerItems.add(PagerFragmentItem.of("PAGE5", FollowFragment.class));
+        fragmentPagerItems.add(PagerFragmentItem.of("PAGE6", FollowFragment.class));
+        fragmentPagerItems.add(PagerFragmentItem.of("PAGE7", FollowFragment.class));
         fAdapter = new FragmentPagerItemAdapter(getChildFragmentManager(), fragmentPagerItems);
         vpHomePage.setAdapter(fAdapter);
         vpHomePage.setOffscreenPageLimit(7);

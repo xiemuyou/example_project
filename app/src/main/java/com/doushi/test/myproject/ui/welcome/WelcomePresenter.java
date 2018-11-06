@@ -35,17 +35,17 @@ public class WelcomePresenter extends BasePresenter<WelcomeView> {
         params.put("version", version);
         params.put("platform", 1);
         params.put("firstStartup", AppIntroUtil.getInstance().getIsFirstStartUp());
-        new RxRequestCallback().doRequestData(params, InterfaceConfig.HttpHelperTag.HTTPHelperTag_LoginByToken, ConfigResponse.class, this);
+        new RxRequestCallback().doRequestData(params, InterfaceConfig.HttpHelperTag.HTTPHelperTag_ReportCrashLog, ConfigResponse.class, this);
     }
 
     @Override
     public void onLoadDataSuccess(InterfaceConfig.HttpHelperTag apiTag, BaseApiResponse modelRes, Map<String, Object> params) {
         switch (apiTag) {
-            case HTTPHelperTag_LoginByToken:
-                ConfigResponse cRes = (ConfigResponse) modelRes;
-                RxHttpHelper.sharedInstance().setToken(cRes.getData().getUserInfo().getToken());
-                RxHttpHelper.sharedInstance().setUid(cRes.getData().getUserInfo().getUid());
-                getMvpView().loginSuccess(modelRes.getErrcode());
+            case HTTPHelperTag_ReportCrashLog:
+//                ConfigResponse cRes = (ConfigResponse) modelRes;
+//                RxHttpHelper.sharedInstance().setToken(cRes.getData().getUserInfo().getToken());
+//                RxHttpHelper.sharedInstance().setUid(cRes.getData().getUserInfo().getUid());
+//                getMvpView().loginSuccess(modelRes.getErrcode());
                 break;
 
             default:

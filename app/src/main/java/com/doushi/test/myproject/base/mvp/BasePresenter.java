@@ -72,11 +72,10 @@ public abstract class BasePresenter<T extends BaseView> implements Presenter<T> 
     public boolean isViewAttached(BaseApiResponse res, InterfaceConfig.HttpHelperTag tag, Map<String, Object> params) {
         if (isViewAttached()) {
             if (res != null) {
-                if (res.getErrcode() == 0) {
+                if (res.isError()) {
                     return true;
                 } else {
-                    Log.e(TAG, String.valueOf(res.getErrcode()) + res.getErrmsg());
-                    loadDataFail(tag, res.getErrcode(), params, res.getErrmsg());
+                    loadDataFail(tag, ErrorMsg.DATA_ERROR_CODE, params, DefaultValue.ERROR_MSG);
                 }
             } else {
                 loadDataFail(tag, ErrorMsg.DATA_ERROR_CODE, params, DefaultValue.ERROR_MSG);
