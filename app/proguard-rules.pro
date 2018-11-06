@@ -276,7 +276,7 @@
 -dontwarn org.jdesktop.application.**
 -keep class org.jdesktop.application.** { *; }
 
--keep class * extends com.doushi.test.myproject.model.BaseApiResponse{*;}
+-keep class * extends com.doushi.test.myproject.model.base.BaseApiResponse{*;}
 -keep class com.doushi.test.myproject.model.**{*; }
 
 

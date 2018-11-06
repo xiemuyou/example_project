@@ -22,6 +22,7 @@ import com.doushi.test.myproject.model.video.VideoDetails;
 import com.doushi.test.myproject.ui.refresh.RefreshListActivity;
 import com.doushi.test.myproject.ui.refresh.rp.RefreshPresenter;
 import com.doushi.test.myproject.ui.refresh.rv.RefreshListView;
+import com.doushi.test.myproject.znet.InterfaceConfig;
 
 import java.util.List;
 
@@ -88,5 +89,10 @@ public class FirstFragment extends BaseRefreshFragment<VideoDetails> implements 
     @Override
     public void getVideoListSuccess(List<VideoDetails> videoList) {
         loadDataSuccess(videoList);
+    }
+
+    @Override
+    public void loadDataFail(InterfaceConfig.HttpHelperTag apiTag, String errorInfo) {
+
     }
 }

@@ -16,6 +16,7 @@ import com.doushi.library.widgets.emptyview.OtherViewHolder;
 import com.doushi.test.myproject.R;
 import com.doushi.test.myproject.base.mvp.BaseView;
 import com.doushi.test.myproject.global.Constants;
+import com.doushi.test.myproject.znet.InterfaceConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -181,7 +182,7 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
     }
 
     @Override
-    public void loadDataFail(String errorInfo) {
+    public void loadDataFail(InterfaceConfig.HttpHelperTag apiTag, String errorInfo) {
         showNotice(errorInfo, ToastUtils.ToastType.ERROR_TYPE);
         loadState = LoadDataState.LOAD_FAIL;
         loadComplete(0);

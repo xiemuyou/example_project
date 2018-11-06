@@ -1,4 +1,4 @@
-package com.doushi.test.myproject.model;
+package com.doushi.test.myproject.model.base;
 
 import com.google.gson.annotations.Expose;
 

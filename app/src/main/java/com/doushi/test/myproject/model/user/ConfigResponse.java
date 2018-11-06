@@ -1,6 +1,6 @@
 package com.doushi.test.myproject.model.user;
 
-import com.doushi.test.myproject.model.BaseApiResponse;
+import com.doushi.test.myproject.model.base.BaseApiResponse;
 
 /**
  * LoginByToken 返回数据

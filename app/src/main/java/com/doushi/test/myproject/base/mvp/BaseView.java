@@ -1,5 +1,7 @@
 package com.doushi.test.myproject.base.mvp;
 
+import com.doushi.test.myproject.znet.InterfaceConfig;
+
 /**
  * MVP View层基类,负责更新UI
  *
@@ -11,7 +13,8 @@ public interface BaseView {
     /**
      * 请求失败
      *
+     * @param apiTag    请求标签
      * @param errorInfo 错误信息描述
      */
-    void loadDataFail(String errorInfo);
+    void loadDataFail(InterfaceConfig.HttpHelperTag apiTag, String errorInfo);
 }

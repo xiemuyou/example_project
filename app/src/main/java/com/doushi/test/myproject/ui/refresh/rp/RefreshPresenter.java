@@ -4,12 +4,12 @@ import android.support.annotation.NonNull;
 
 import com.doushi.test.myproject.base.mvp.BasePresenter;
 import com.doushi.test.myproject.global.ParamConstants;
-import com.doushi.test.myproject.model.BaseApiResponse;
+import com.doushi.test.myproject.model.base.BaseApiResponse;
 import com.doushi.test.myproject.model.search.SearchUserResponse;
 import com.doushi.test.myproject.model.video.VideoDetails;
 import com.doushi.test.myproject.ui.refresh.rv.RefreshListView;
 import com.doushi.test.myproject.znet.InterfaceConfig;
-import com.doushi.test.myproject.znet.request.RxRequest;
+import com.doushi.test.myproject.znet.request.RxRequestCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +26,28 @@ public class RefreshPresenter extends BasePresenter<RefreshListView> {
         super(view);
     }
 
+    public void getSearchUsers(int page, int cnt, String searchKey) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(ParamConstants.CNT, cnt);
+        int from = page * cnt;
+        params.put(ParamConstants.FROM, from);
+        params.put(ParamConstants.SEARCH_KEY, searchKey);
+        new RxRequestCallback().doRequestData(params, InterfaceConfig.HttpHelperTag.HTTPHelperTag_GetSearchUsers, SearchUserResponse.class, this);
+    }
+
+    @Override
+    public void onLoadDataSuccess(InterfaceConfig.HttpHelperTag apiTag, BaseApiResponse modelRes, Map<String, Object> params) {
+        switch (apiTag) {
+            case HTTPHelperTag_GetSearchUsers:
+                SearchUserResponse searchRes = (SearchUserResponse) modelRes;
+                getMvpView().getDataSuccess(searchRes);
+                break;
+
+            default:
+                break;
+        }
+    }
+
     public void getSearchVideoList(int page, int cnt, String searchKey) {
         List<VideoDetails> videoList = new ArrayList<>();
         if (page < 5) {
@@ -40,30 +62,6 @@ public class RefreshPresenter extends BasePresenter<RefreshListView> {
         }
         if (getMvpView() != null) {
             getMvpView().getVideoListSuccess(videoList);
-        }
-    }
-
-    public void getSearchUsers(int page, int cnt, String searchKey) {
-        Map<String, Object> params = new HashMap<>();
-        params.put(ParamConstants.CNT, cnt);
-        int from = page * cnt;
-        params.put(ParamConstants.FROM, from);
-        params.put(ParamConstants.SEARCH_KEY, searchKey);
-        new RxRequest<SearchUserResponse>().doRequestData(params, InterfaceConfig.HttpHelperTag.HTTPHelperTag_GetSearchUsers, SearchUserResponse.class, this);
-    }
-
-    @Override
-    public void onLoadDataSuccess(InterfaceConfig.HttpHelperTag apiTag, BaseApiResponse modelRes) {
-        switch (apiTag) {
-            case HTTPHelperTag_GetSearchUsers:
-                SearchUserResponse searchRes = (SearchUserResponse) modelRes;
-                if (isViewAttached(searchRes)) {
-                    getMvpView().getDataSuccess(searchRes);
-                }
-                break;
-
-            default:
-                break;
         }
     }
 }

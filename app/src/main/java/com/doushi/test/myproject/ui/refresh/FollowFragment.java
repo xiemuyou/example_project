@@ -29,8 +29,7 @@ import java.util.List;
  * @author xiemy
  * @date 2018/3/2
  */
-public class FollowFragment extends BaseRefreshFragment<VideoDetails>
-        implements RefreshListView {
+public class FollowFragment extends BaseRefreshFragment<VideoDetails> implements RefreshListView {
 
     private RefreshPresenter followPresenter;
 

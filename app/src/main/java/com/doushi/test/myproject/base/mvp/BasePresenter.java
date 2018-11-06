@@ -5,9 +5,12 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.doushi.test.myproject.base.listener.PresenterListener;
-import com.doushi.test.myproject.model.BaseApiResponse;
+import com.doushi.test.myproject.model.base.BaseApiResponse;
 import com.doushi.test.myproject.global.DefaultValue;
+import com.doushi.test.myproject.model.base.ErrorMsg;
 import com.doushi.test.myproject.znet.InterfaceConfig;
+
+import java.util.Map;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -23,11 +26,17 @@ import io.reactivex.disposables.Disposable;
  */
 public abstract class BasePresenter<T extends BaseView> implements Presenter<T> {
 
-    private static final String TAG = "BasePresenter";
+    public static final String TAG = BasePresenter.class.getSimpleName();
 
     private T mMvpView;
 
     private CompositeDisposable compositeDisposable;
+
+    /**
+     * 不需要view的构造方法
+     */
+    public BasePresenter() {
+    }
 
     public BasePresenter(@NonNull T view) {
         attachView(view);
@@ -60,17 +69,17 @@ public abstract class BasePresenter<T extends BaseView> implements Presenter<T> 
         return mMvpView != null;
     }
 
-    public boolean isViewAttached(BaseApiResponse response) {
+    public boolean isViewAttached(BaseApiResponse res, InterfaceConfig.HttpHelperTag tag, Map<String, Object> params) {
         if (isViewAttached()) {
-            if (response != null) {
-                if (response.getErrcode() == 0) {
+            if (res != null) {
+                if (res.getErrcode() == 0) {
                     return true;
                 } else {
-                    Log.e(TAG, String.valueOf(response.getErrcode()) + response.getErrmsg());
-                    loadDataFail(response.getErrmsg());
+                    Log.e(TAG, String.valueOf(res.getErrcode()) + res.getErrmsg());
+                    loadDataFail(tag, res.getErrcode(), params, res.getErrmsg());
                 }
             } else {
-                loadDataFail();
+                loadDataFail(tag, ErrorMsg.DATA_ERROR_CODE, params, DefaultValue.ERROR_MSG);
             }
         }
         return false;
@@ -85,21 +94,14 @@ public abstract class BasePresenter<T extends BaseView> implements Presenter<T> 
      *
      * @param apiTag   api接口
      * @param modelRes 返回数据
+     * @param params   请求参数
      */
-    public abstract void onLoadDataSuccess(InterfaceConfig.HttpHelperTag apiTag, BaseApiResponse modelRes);
+    public abstract void onLoadDataSuccess(InterfaceConfig.HttpHelperTag apiTag, BaseApiResponse modelRes, Map<String, Object> params);
 
-    public void loadDataFail() {
-        loadDataFail(DefaultValue.ERROR_MSG);
-    }
-
-    public void loadDataFail(String errorMsg) {
-        loadDataFail(null, errorMsg);
-    }
-
-    public void loadDataFail(InterfaceConfig.HttpHelperTag apiTag, String errorMsg) {
+    public void loadDataFail(@NonNull InterfaceConfig.HttpHelperTag apiTag, int errorCode, Map<String, Object> params, String errorMsg) {
         if (isViewAttached()) {
             errorMsg = !TextUtils.isEmpty(errorMsg) ? errorMsg : DefaultValue.ERROR_MSG;
-            mMvpView.loadDataFail(errorMsg);
+            mMvpView.loadDataFail(apiTag, errorMsg);
         }
     }
 }

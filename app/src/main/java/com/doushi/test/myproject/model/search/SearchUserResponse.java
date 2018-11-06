@@ -1,6 +1,6 @@
 package com.doushi.test.myproject.model.search;
 
-import com.doushi.test.myproject.model.BaseApiResponse;
+import com.doushi.test.myproject.model.base.BaseApiResponse;
 
 /**
  * 搜索用户

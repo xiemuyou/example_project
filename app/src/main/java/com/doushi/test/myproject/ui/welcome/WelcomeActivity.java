@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.doushi.test.myproject.R;
 import com.doushi.test.myproject.base.component.BaseActivity;
 import com.doushi.test.myproject.ui.main.MainActivity;
+import com.doushi.test.myproject.znet.InterfaceConfig;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,8 +40,8 @@ public class WelcomeActivity extends BaseActivity implements WelcomeView {
     }
 
     @Override
-    public void loadDataFail(String errorInfo) {
-        tvWelcome.setText(errorInfo + "; 失败");
+    public void loadDataFail(InterfaceConfig.HttpHelperTag apiTag, String errorInfo) {
+        tvWelcome.setText(errorInfo);
     }
 
     @OnClick(R.id.btTest1)
