@@ -356,40 +356,45 @@ public class ConvertUtils {
             String[] split = docId.split(":");
             String type = split[0];
             Uri contentUri = null;
-            switch (authority) {
-                // ExternalStorageProvider
-                case "com.android.externalstorage.documents":
-                    if ("primary".equalsIgnoreCase(type)) {
-                        return Environment.getExternalStorageDirectory() + "/" + split[1];
-                    }
-                    break;
-                // DownloadsProvider
-                case "com.android.providers.downloads.documents":
-                    contentUri = ContentUris.withAppendedId(
-                            Uri.parse("content://downloads/public_downloads"), Long.valueOf(docId));
-                    return _queryPathFromMediaStore(context, contentUri, null, null);
-                // MediaProvider
-                case "com.android.providers.media.documents":
-                    if ("image".equals(type)) {
-                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                    } else if ("video".equals(type)) {
-                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-                    } else if ("audio".equals(type)) {
-                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-                    }
-                    String selection = "_id=?";
-                    String[] selectionArgs = new String[]{split[1]};
-                    return _queryPathFromMediaStore(context, contentUri, selection, selectionArgs);
+            if (authority != null) {
+                switch (authority) {
+                    // ExternalStorageProvider
+                    case "com.android.externalstorage.documents":
+                        if ("primary".equalsIgnoreCase(type)) {
+                            return Environment.getExternalStorageDirectory() + "/" + split[1];
+                        }
+                        break;
+                    // DownloadsProvider
+                    case "com.android.providers.downloads.documents":
+                        contentUri = ContentUris.withAppendedId(
+                                Uri.parse("content://downloads/public_downloads"), Long.valueOf(docId));
+                        return queryPathFromMediaStore(context, contentUri, null, null);
+                    // MediaProvider
+                    case "com.android.providers.media.documents":
+                        if ("image".equals(type)) {
+                            contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                        } else if ("video".equals(type)) {
+                            contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                        } else if ("audio".equals(type)) {
+                            contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                        }
+                        String selection = "_id=?";
+                        String[] selectionArgs = new String[]{split[1]};
+                        return queryPathFromMediaStore(context, contentUri, selection, selectionArgs);
+
+                    default:
+                        break;
+                }
             }
         }
         // MediaStore (and general)
         else {
             if ("content".equalsIgnoreCase(scheme)) {
                 // Return the remote address
-                if (authority.equals("com.google.android.apps.photos.content")) {
+                if ("com.google.android.apps.photos.content".equals(authority)) {
                     return uri.getLastPathSegment();
                 }
-                return _queryPathFromMediaStore(context, uri, null, null);
+                return queryPathFromMediaStore(context, uri, null, null);
             }
             // File
             else if ("file".equalsIgnoreCase(scheme)) {
@@ -400,15 +405,15 @@ public class ConvertUtils {
         return path;
     }
 
-    private static String _queryPathFromMediaStore(Context context, Uri uri, String selection, String[] selectionArgs) {
+    private static String queryPathFromMediaStore(Context context, Uri uri, String selection, String[] selectionArgs) {
         String filePath = null;
         try {
             String[] projection = {MediaStore.Images.Media.DATA};
             Cursor cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
             if (cursor != null) {
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                 cursor.moveToFirst();
-                filePath = cursor.getString(column_index);
+                filePath = cursor.getString(columnIndex);
                 cursor.close();
             }
         } catch (IllegalArgumentException e) {
@@ -446,7 +451,8 @@ public class ConvertUtils {
         view.setWillNotCacheDrawing(false);
         // Reset the drawing cache background color to fully transparent for the duration of this operation
         int color = view.getDrawingCacheBackgroundColor();
-        view.setDrawingCacheBackgroundColor(Color.WHITE);//截图去黑色背景(透明像素)
+        //截图去黑色背景(透明像素)
+        view.setDrawingCacheBackgroundColor(Color.WHITE);
         if (color != Color.WHITE) {
             view.destroyDrawingCache();
         }
@@ -458,7 +464,8 @@ public class ConvertUtils {
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         canvas.drawBitmap(cacheBitmap, 0, 0, null);
-        canvas.save(Canvas.ALL_SAVE_FLAG);
+        //canvas.save(Canvas.ALL_SAVE_FLAG);
+        canvas.save();
         canvas.restore();
         if (!bitmap.isRecycled()) {
             LogUtils.verbose("recycle bitmap: " + bitmap.toString());
@@ -471,7 +478,7 @@ public class ConvertUtils {
         return bitmap;
     }
 
-    public static Drawable toDrawable(Bitmap bitmap) {
+    private static Drawable toDrawable(Bitmap bitmap) {
         return bitmap == null ? null : new BitmapDrawable(Resources.getSystem(), bitmap);
     }
 
@@ -568,7 +575,8 @@ public class ConvertUtils {
     public static int toDarkenColor(@ColorInt int color, @FloatRange(from = 0f, to = 1f) float value) {
         float[] hsv = new float[3];
         Color.colorToHSV(color, hsv);
-        hsv[2] *= value;//HSV指Hue、Saturation、Value，即色调、饱和度和亮度，此处表示修改亮度
+        //HSV指Hue、Saturation、Value，即色调、饱和度和亮度，此处表示修改亮度
+        hsv[2] *= value;
         return Color.HSVToColor(hsv);
     }
 
@@ -582,7 +590,7 @@ public class ConvertUtils {
     /**
      * 转换为6位十六进制颜色代码，不含“#”
      */
-    public static String toColorString(@ColorInt int color, boolean includeAlpha) {
+    private static String toColorString(@ColorInt int color, boolean includeAlpha) {
         String alpha = Integer.toHexString(Color.alpha(color));
         String red = Integer.toHexString(Color.red(color));
         String green = Integer.toHexString(Color.green(color));
@@ -635,6 +643,7 @@ public class ConvertUtils {
     /**
      * 转换成货币显示方式
      * 例如100000转换成100,000
+     *
      * @param value
      * @return
      */

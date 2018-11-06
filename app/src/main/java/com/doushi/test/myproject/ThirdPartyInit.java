@@ -11,9 +11,6 @@ import com.doushi.library.util.LogUtil;
 import com.doushi.test.myproject.znet.RequestConfig;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
-import com.taobao.sophix.PatchStatus;
-import com.taobao.sophix.SophixManager;
-import com.taobao.sophix.listener.PatchLoadStatusListener;
 import com.tencent.smtt.sdk.QbSdk;
 
 import org.litepal.LitePal;
@@ -54,8 +51,6 @@ public class ThirdPartyInit {
         initImageLoader(context);
         // 初始化工具类 init it in the function of onCreate in ur Application
         Utils.init(context);
-        //热修复
-        SophixManager.getInstance().queryAndLoadNewPatch();
         //初始化腾讯X5
         initTencentX5(context);
     }
@@ -66,29 +61,31 @@ public class ThirdPartyInit {
      * @param context Application
      */
     void initializeHotfix(Application context) {
-        String appVersion = AppInfoUtil.getAppVersionName();
-        // initialize最好放在attachBaseContext最前面
-        SophixManager.getInstance().setContext(context)
-                .setAppVersion(appVersion)
-                .setAesKey(null)
-                .setEnableDebug(true)
-                .setPatchLoadStatusStub(new PatchLoadStatusListener() {
-                    @Override
-                    public void onLoad(final int mode, final int code, final String info, final int handlePatchVersion) {
-                        // 补丁加载回调通知
-                        if (code == PatchStatus.CODE_LOAD_SUCCESS) {
-                            // 表明补丁加载成功
-                            LogUtil.d(TAG, "表明补丁加载成功 : " + info);
-                        } else if (code == PatchStatus.CODE_LOAD_RELAUNCH) {
-                            // 表明新补丁生效需要重启. 开发者可提示用户或者强制重启;
-                            // 建议: 用户可以监听进入后台事件, 然后调用killProcessSafely自杀，以此加快应用补丁，详见1.3.2.3
-                            LogUtil.d(TAG, "表明新补丁生效需要重启. 开发者可提示用户或者强制重启 : " + info);
-                        } else {
-                            // 其它错误信息, 查看PatchStatus类说明
-                            LogUtil.d(TAG, "其它错误信息 : " + info);
-                        }
-                    }
-                }).initialize();
+        //热修复
+//        SophixManager.getInstance().queryAndLoadNewPatch();
+//        String appVersion = AppInfoUtil.getAppVersionName();
+//        // initialize最好放在attachBaseContext最前面
+//        SophixManager.getInstance().setContext(context)
+//                .setAppVersion(appVersion)
+//                .setAesKey(null)
+//                .setEnableDebug(true)
+//                .setPatchLoadStatusStub(new PatchLoadStatusListener() {
+//                    @Override
+//                    public void onLoad(final int mode, final int code, final String info, final int handlePatchVersion) {
+//                        // 补丁加载回调通知
+//                        if (code == PatchStatus.CODE_LOAD_SUCCESS) {
+//                            // 表明补丁加载成功
+//                            LogUtil.d(TAG, "表明补丁加载成功 : " + info);
+//                        } else if (code == PatchStatus.CODE_LOAD_RELAUNCH) {
+//                            // 表明新补丁生效需要重启. 开发者可提示用户或者强制重启;
+//                            // 建议: 用户可以监听进入后台事件, 然后调用killProcessSafely自杀，以此加快应用补丁，详见1.3.2.3
+//                            LogUtil.d(TAG, "表明新补丁生效需要重启. 开发者可提示用户或者强制重启 : " + info);
+//                        } else {
+//                            // 其它错误信息, 查看PatchStatus类说明
+//                            LogUtil.d(TAG, "其它错误信息 : " + info);
+//                        }
+//                    }
+//                }).initialize();
     }
 
     /**
