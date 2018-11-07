@@ -82,7 +82,7 @@ public class FollowFragment extends BaseRefreshFragment<VideoDetails> implements
         refresh.postDelayed(new Runnable() {
             @Override
             public void run() {
-                followPresenter.getSearchVideoList(page, CNT, "测试");
+                followPresenter.getSearchUsers(page, CNT, "测试");
             }
         }, 1000);
     }
