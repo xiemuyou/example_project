@@ -19,7 +19,8 @@ import android.text.TextUtils;
 
 import com.blankj.utilcode.util.EncryptUtils;
 import com.doushi.library.global.FConstants;
-import com.doushi.library.thread.ZZThreadPool;
+import com.doushi.library.thread.AbstractSafeThread;
+import com.doushi.library.thread.ThreadPool;
 import com.doushi.library.util.AppInfoUtil;
 import com.doushi.library.util.JsonUtil;
 import com.doushi.library.util.LogUtil;
@@ -135,9 +136,9 @@ public class ServerApi {
     public static void reportCrashLog(String url, Map<String, Object> param) {
         final String req = JsonUtil.objetcToJson(param);
         final String postUrl = addUserParams(url);
-        ZZThreadPool.execute(new Runnable() {
+        ThreadPool.execute(new AbstractSafeThread() {
             @Override
-            public void run() {
+            public void deal() {
                 try {
                     URL url = new URL(postUrl);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();

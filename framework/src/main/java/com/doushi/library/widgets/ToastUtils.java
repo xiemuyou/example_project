@@ -11,7 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.doushi.library.R;
-import com.doushi.library.thread.ZZThreadPool;
+import com.doushi.library.thread.AbstractSafeThread;
+import com.doushi.library.thread.ThreadPool;
 import com.doushi.library.util.ViewUtil;
 import com.doushi.library.widgets.textstyleplus.StyleBuilder;
 
@@ -260,9 +261,9 @@ public class ToastUtils {
      */
     public static void showThToast(final Context context, final MessageModel messageModel) {
         if (messageModel != null) {
-            ZZThreadPool.execute(new Runnable() {
+            ThreadPool.execute(new AbstractSafeThread() {
                 @Override
-                public void run() {
+                public void deal() {
                     Looper.prepare();
                     ToastUtils.showToast(context, messageModel.toString(), ToastType.ERROR_TYPE);
                     Looper.loop();
