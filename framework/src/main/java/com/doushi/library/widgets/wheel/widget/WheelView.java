@@ -174,7 +174,8 @@ public class WheelView extends View {
         int size = items.size();
         if (index >= 0 && index < size && index != selectedIndex) {
             initPosition = index;
-            totalScrollY = 0;//回归顶部，不然重设索引的话位置会偏移，就会显示出不对位置的数据
+            //回归顶部，不然重设索引的话位置会偏移，就会显示出不对位置的数据
+            totalScrollY = 0;
             offset = 0;
             invalidate();
         }
@@ -442,7 +443,8 @@ public class WheelView extends View {
         cancelFuture();
         if (actionType == ACTION_FLING || actionType == ACTION_DRAG) {
             offset = (int) ((totalScrollY % itemHeight + itemHeight) % itemHeight);
-            if ((float) offset > itemHeight / 2.0F) {//如果超过Item高度的一半，滚动到下一个Item去
+            //如果超过Item高度的一半，滚动到下一个Item去
+            if ((float) offset > itemHeight / 2.0F) {
                 offset = (int) (itemHeight - (float) offset);
             } else {
                 offset = -offset;
@@ -450,7 +452,7 @@ public class WheelView extends View {
         }
         //停止的时候，位置有偏移，不是全部都能正确停止到中间位置的，这里把文字位置挪回中间去
         SmoothScrollTimerTask command = new SmoothScrollTimerTask(this, offset);
-        mFuture = Executors.newSingleThreadScheduledExecutor()
+         mFuture = Executors.newSingleThreadScheduledExecutor()
                 .scheduleWithFixedDelay(command, 0, 10, TimeUnit.MILLISECONDS);
     }
 
@@ -499,18 +501,22 @@ public class WheelView extends View {
         int change = (int) (totalScrollY / itemHeight);
         //滚动中实际的预选中的item(即经过了中间位置的item) ＝ 滑动前的位置 ＋ 滑动相对位置
         preCurrentIndex = initPosition + change % items.size();
-        if (!isLoop) {//不循环的情况
+        //不循环的情况
+        if (!isLoop) {
             if (preCurrentIndex < 0) {
                 preCurrentIndex = 0;
             }
             if (preCurrentIndex > items.size() - 1) {
                 preCurrentIndex = items.size() - 1;
             }
-        } else {//循环
-            if (preCurrentIndex < 0) {//举个例子：如果总数是5，preCurrentIndex ＝ －1，那么preCurrentIndex按循环来说，其实是0的上面，也就是4的位置
+            //循环
+        } else {
+            //举个例子：如果总数是5，preCurrentIndex ＝ －1，那么preCurrentIndex按循环来说，其实是0的上面，也就是4的位置
+            if (preCurrentIndex < 0) {
                 preCurrentIndex = items.size() + preCurrentIndex;
             }
-            if (preCurrentIndex > items.size() - 1) {//同理上面,自己脑补一下
+            //同理上面,自己脑补一下
+            if (preCurrentIndex > items.size() - 1) {
                 preCurrentIndex = preCurrentIndex - items.size();
             }
         }
@@ -519,7 +525,8 @@ public class WheelView extends View {
         // 设置数组中每个元素的值
         int counter = 0;
         while (counter < visibleItemCount) {
-            int index = preCurrentIndex - (visibleItemCount / 2 - counter);//索引值，即当前在控件中间的item看作数据源的中间，计算出相对源数据源的index值
+            //索引值，即当前在控件中间的item看作数据源的中间，计算出相对源数据源的index值
+            int index = preCurrentIndex - (visibleItemCount / 2 - counter);
             //判断是否循环，如果是循环数据源也使用相对循环的position获取对应的item值，如果不是循环则超出数据源范围使用""空白字符串填充，在界面上形成空白无数据的item项
             if (isLoop) {
                 index = getLoopMappingIndex(index);
@@ -552,7 +559,8 @@ public class WheelView extends View {
             double radian = ((itemHeight * counter - itemHeightOffset)) / radius;
             // 弧度转换成角度(把半圆以Y轴为轴心向右转90度，使其处于第一象限及第四象限
             // angle [-90°,90°]
-            float angle = (float) (90D - (radian / Math.PI) * 180D);//item第一项,从90度开始，逐渐递减到 -90度
+            //item第一项,从90度开始，逐渐递减到 -90度
+            float angle = (float) (90D - (radian / Math.PI) * 180D);
             // 计算取值可能有细微偏差，保证负90°到90°以外的不绘制
             if (angle >= 90F || angle <= -90F) {
                 canvas.restore();
@@ -601,8 +609,8 @@ public class WheelView extends View {
                 } else if (translateY >= firstLineY && maxTextHeight + translateY <= secondLineY) {
                     // 中间条目
                     canvas.clipRect(0, 0, measuredWidth, maxTextHeight);
-                    //让文字居中
-                    float Y = maxTextHeight - centerContentOffset;//因为圆弧角换算的向下取值，导致角度稍微有点偏差，加上画笔的基线会偏上，因此需要偏移量修正一下
+                    //让文字居中,因为圆弧角换算的向下取值，导致角度稍微有点偏差，加上画笔的基线会偏上，因此需要偏移量修正一下
+                    float Y = maxTextHeight - centerContentOffset;
                     int i = 0;
                     for (WheelItem item : items) {
                         if (item.getName().equals(tempStr)) {
@@ -686,14 +694,19 @@ public class WheelView extends View {
         Rect rect = new Rect();
         paintCenterText.getTextBounds(content, 0, content.length(), rect);
         switch (gravity) {
-            case Gravity.CENTER://显示内容居中
+            //显示内容居中
+            case Gravity.CENTER:
                 drawCenterContentStart = (int) ((measuredWidth - rect.width()) * 0.5);
                 break;
             case Gravity.LEFT:
                 drawCenterContentStart = 0;
                 break;
-            case Gravity.RIGHT://添加偏移量
+            //添加偏移量
+            case Gravity.RIGHT:
                 drawCenterContentStart = measuredWidth - rect.width() - (int) centerContentOffset;
+                break;
+
+            default:
                 break;
         }
     }
@@ -710,6 +723,8 @@ public class WheelView extends View {
                 break;
             case Gravity.RIGHT:
                 drawOutContentStart = measuredWidth - rect.width() - (int) centerContentOffset;
+                break;
+            default:
                 break;
         }
     }
@@ -760,7 +775,8 @@ public class WheelView extends View {
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
             default:
-                if (!eventConsumed) {//未消费掉事件
+                //未消费掉事件
+                if (!eventConsumed) {
                     /*
                      * 关于弧长的计算
                      *
@@ -912,7 +928,6 @@ public class WheelView extends View {
         public String toString() {
             return "visible=" + visible + ",color=" + color + ",alpha=" + alpha + ",thick=" + thick;
         }
-
     }
 
     /**
@@ -946,7 +961,6 @@ public class WheelView extends View {
          * @param index 当前选择项的索引
          */
         void onSelected(int index);
-
     }
 
     /**
@@ -956,9 +970,14 @@ public class WheelView extends View {
      */
     @Deprecated
     public interface OnWheelListener {
-
+        /**
+         * 滑动选择回调
+         *
+         * @param isUserScroll 用户选择
+         * @param index        坐标
+         * @param item         内容
+         */
         void onSelected(boolean isUserScroll, int index, String item);
-
     }
 
     /**
@@ -990,9 +1009,10 @@ public class WheelView extends View {
                 case WHAT_ITEM_SELECTED:
                     view.itemSelectedCallback();
                     break;
+                default:
+                    break;
             }
         }
-
     }
 
     private static class SmoothScrollTimerTask extends TimerTask {
@@ -1097,7 +1117,5 @@ public class WheelView extends View {
             }
             view.handler.sendEmptyMessage(MessageHandler.WHAT_INVALIDATE);
         }
-
     }
-
 }

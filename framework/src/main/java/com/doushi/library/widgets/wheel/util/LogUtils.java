@@ -18,11 +18,26 @@ import java.io.StringWriter;
  * @since 2013/11/2
  */
 public final class LogUtils {
-    private static final int MIN_STACK_OFFSET = 3;// starts at this class after two native calls
-    private static final int MAX_STACK_TRACE_SIZE = 131071; //128 KB - 1
-    private static final int METHOD_COUNT = 2; // show method count in trace
-    private static boolean isDebug = FConstants.debug; //是否调试模式
-    private static String debugTag = FConstants.DEBUG_TAG;// LogCat的标记
+    /**
+     * starts at this class after two native calls
+     */
+    private static final int MIN_STACK_OFFSET = 3;
+    /**
+     * 128 KB - 1
+     */
+    private static final int MAX_STACK_TRACE_SIZE = 131071;
+    /**
+     * show method count in trace
+     */
+    private static final int METHOD_COUNT = 2;
+    /**
+     * 是否调试模式
+     */
+    private static boolean isDebug = FConstants.debug;
+    /**
+     * LogCat的标记
+     */
+    private static String debugTag = FConstants.DEBUG_TAG;
 
     public static void setIsDebug(boolean isDebug) {
         LogUtils.isDebug = isDebug;

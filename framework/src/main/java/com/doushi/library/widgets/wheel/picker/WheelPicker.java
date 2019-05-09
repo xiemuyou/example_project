@@ -96,8 +96,7 @@ public abstract class WheelPicker extends ConfirmPopup<View> {
         if (null == dividerConfig) {
             dividerConfig = new WheelView.DividerConfig();
         }
-        dividerConfig.setShadowColor(color);
-        dividerConfig.setShadowAlpha(alpha);
+        dividerConfig.setShadowColor(color).setShadowAlpha(alpha);
     }
 
     /**
@@ -133,8 +132,7 @@ public abstract class WheelPicker extends ConfirmPopup<View> {
         if (null == dividerConfig) {
             dividerConfig = new WheelView.DividerConfig();
         }
-        dividerConfig.setVisible(true);
-        dividerConfig.setColor(lineColor);
+        dividerConfig.setVisible(true).setColor(lineColor);
     }
 
     /**
@@ -153,8 +151,7 @@ public abstract class WheelPicker extends ConfirmPopup<View> {
     public void setDividerConfig(@Nullable WheelView.DividerConfig config) {
         if (null == config) {
             dividerConfig = new WheelView.DividerConfig();
-            dividerConfig.setVisible(false);
-            dividerConfig.setShadowVisible(false);
+            dividerConfig.setVisible(false).setShadowVisible(false);
         } else {
             dividerConfig = config;
         }

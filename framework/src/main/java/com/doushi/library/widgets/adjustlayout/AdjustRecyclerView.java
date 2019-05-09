@@ -10,9 +10,9 @@ import android.widget.LinearLayout;
 import com.doushi.library.FApplication;
 
 /**
- * Created by xuleyuan on 24/11/2017
+ * @author xuleyuan
+ * @date 24/11/2017
  */
-
 public class AdjustRecyclerView extends RecyclerView {
 
     public AdjustRecyclerView(Context context) {

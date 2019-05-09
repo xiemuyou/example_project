@@ -42,7 +42,7 @@ dependencies {
     }
     implementation viewDependencies.butterKnife
     //3.0 需要添加
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation viewDependencies.vlayout
     implementation viewDependencies.fragmentation
     // (必选) 腾讯X5 webView，适配4.3系统

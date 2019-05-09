@@ -11,10 +11,11 @@ import android.widget.TextView;
 
 import com.doushi.library.widgets.KeepDesignValueUtils;
 
-/**
- * Created by xuleyuan on 23/11/2017
- */
 
+/**
+ * @author xuleyuan
+ * @date 24/11/2017
+ */
 public class AdjustUtils {
 
     public static void adjustViewPadding(View view) {
@@ -24,15 +25,17 @@ public class AdjustUtils {
         int paddingEnd = view.getPaddingEnd();
         int paddingLeft = view.getPaddingLeft();
         int paddingRight = view.getPaddingRight();
-        if (paddingBottom == 0 && paddingTop == 0 && paddingStart == 0 && paddingEnd == 0 && paddingLeft == 0 && paddingRight == 0)
+        if (paddingBottom == 0 && paddingTop == 0 && paddingStart == 0 && paddingEnd == 0 && paddingLeft == 0 && paddingRight == 0) {
             return;
-        if (paddingLeft != 0 || paddingRight != 0)
+        }
+        if (paddingLeft != 0 || paddingRight != 0) {
             view.setPadding(
                     KeepDesignValueUtils.getInstance().calculatorValue(paddingLeft),
                     KeepDesignValueUtils.getInstance().calculatorValue(paddingTop),
                     KeepDesignValueUtils.getInstance().calculatorValue(paddingRight),
                     KeepDesignValueUtils.getInstance().calculatorValue(paddingBottom)
             );
+        }
         view.setPaddingRelative(
                 KeepDesignValueUtils.getInstance().calculatorValue(paddingStart),
                 KeepDesignValueUtils.getInstance().calculatorValue(paddingTop),

@@ -5,10 +5,11 @@ import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.View;
 
-/**
- * Created by xuleyuan on 23/11/2017
- */
 
+/**
+ * @author xuleyuan
+ * @date 24/11/2017
+ */
 public class AdjustConstraintLayout extends ConstraintLayout {
 
     public AdjustConstraintLayout(Context context) {

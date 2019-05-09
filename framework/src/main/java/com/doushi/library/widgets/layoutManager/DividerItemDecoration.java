@@ -136,7 +136,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     public DividerItemDecoration(Context context, boolean isVertical, int drawableId, boolean isMarginTopShow, boolean isMiddleShow, boolean isMarginBottomshow) {
         this(context, 0, isVertical, isMarginTopShow, isMiddleShow, isMarginBottomshow);
         mDivider = ContextCompat.getDrawable(context, drawableId);
-        this.mDividerHeight = mDivider.getIntrinsicHeight();
+        this.mDividerHeight = mDivider != null ? mDivider.getIntrinsicHeight() : 0;
     }
 
     /**
@@ -153,7 +153,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         mDivider = a.getDrawable(0);
         a.recycle();
         this.isVertical = isVertical;
-        if (dividerHeight == 0) {
+        if (mDivider != null && dividerHeight == 0) {
             mDivider.getIntrinsicHeight();
         } else {
             this.mDividerHeight = dividerHeight;

@@ -109,6 +109,7 @@ public class CanRecyclerViewHeaderFooter extends FrameLayout {
 
     /**
      * 是否可以更多加载
+     *
      * @return
      */
     public boolean isLoadEnable() {

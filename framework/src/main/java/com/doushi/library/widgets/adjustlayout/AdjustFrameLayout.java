@@ -6,9 +6,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 /**
- * Created by xuleyuan on 23/11/2017
+ * @author xuleyuan
+ * @date 23/11/2017
  */
-
 public class AdjustFrameLayout extends FrameLayout {
 
     public AdjustFrameLayout(Context context) {

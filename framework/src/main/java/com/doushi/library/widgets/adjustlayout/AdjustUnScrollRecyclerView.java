@@ -5,10 +5,11 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-/**
- * Created by xuleyuan on 24/11/2017
- */
 
+/**
+ * @author xuleyuan
+ * @date 24/11/2017
+ */
 public class AdjustUnScrollRecyclerView extends AdjustRecyclerView {
 
     public AdjustUnScrollRecyclerView(Context context) {

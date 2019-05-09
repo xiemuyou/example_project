@@ -6,10 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-/**
- * Created by xuleyuan on 23/11/2017
- */
 
+/**
+ * @author xuleyuan
+ * @date 24/11/2017
+ */
 public class AdjustLinearLayout extends LinearLayout {
 
     public AdjustLinearLayout(Context context) {

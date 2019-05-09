@@ -635,6 +635,7 @@ public class LinkagePicker<Fst extends LinkageFirst<Snd>, Snd extends LinkageSec
             }
         }
 
+        @Override
         public boolean isOnlyTwo() {
             return onlyTwo;
         }

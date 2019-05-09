@@ -34,8 +34,10 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
     private boolean hideProvince = false;
     //只显示省份及地市
     private boolean hideCounty = false;
-    //省市区数据
-    private ArrayList<Province> provinces = new ArrayList<>();
+    /**
+     * 省市区数据
+     */
+    private ArrayList<Province> provinces;
 
     public AddressPicker(Activity activity, ArrayList<Province> provinces) {
         super(activity, new AddressProvider(provinces));
@@ -45,6 +47,7 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
     /**
      * 设置默认选中的省市县
      */
+    @Override
     public void setSelectedItem(Province province, City city, County county) {
         super.setSelectedItem(province, city, county);
     }
@@ -60,7 +63,8 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
     public City getSelectedCity() {
         List<City> cities = getSelectedProvince().getCities();
         if (cities.size() == 0) {
-            return null;//可能没有第二级数据
+            //可能没有第二级数据
+            return null;
         }
         return cities.get(selectedSecondIndex);
     }
@@ -68,7 +72,8 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
     public County getSelectedCounty() {
         List<County> counties = getSelectedCity().getCounties();
         if (counties.size() == 0) {
-            return null;//可能没有第三级数据
+            //可能没有第三级数据
+            return null;
         }
         return counties.get(selectedThirdIndex);
     }
@@ -166,8 +171,10 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
                     onWheelListener.onProvinceWheeled(selectedFirstIndex, selectedFirstItem);
                 }
                 LogUtils.verbose(this, "change cities after province wheeled: index=" + index);
-                selectedSecondIndex = 0;//重置地级索引
-                selectedThirdIndex = 0;//重置县级索引
+                //重置地级索引
+                selectedSecondIndex = 0;
+                //重置县级索引
+                selectedThirdIndex = 0;
                 //根据省份获取地市
                 //noinspection unchecked
                 List<City> cities = provider.linkageSecondData(selectedFirstIndex);
@@ -201,7 +208,8 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
                     onWheelListener.onCityWheeled(selectedSecondIndex, selectedSecondItem);
                 }
                 LogUtils.verbose(this, "change counties after city wheeled: index=" + index);
-                selectedThirdIndex = 0;//重置县级索引
+                //重置县级索引
+                selectedThirdIndex = 0;
                 //根据地市获取区县
                 //noinspection unchecked
                 List<County> counties = provider.linkageThirdData(selectedFirstIndex, selectedSecondIndex);
@@ -247,7 +255,13 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
      * 地址选择回调
      */
     public interface OnAddressPickListener {
-
+        /**
+         * 地址选择回调
+         *
+         * @param province 省份
+         * @param city     城市
+         * @param county   县市
+         */
         void onAddressPicked(Province province, City city, County county);
 
     }
@@ -269,11 +283,12 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
      * 地址提供者
      */
     private static class AddressProvider implements Provider<Province, City, County> {
+
         private List<Province> firstList = new ArrayList<>();
         private List<List<City>> secondList = new ArrayList<>();
         private List<List<List<County>>> thirdList = new ArrayList<>();
 
-        public AddressProvider(List<Province> provinces) {
+        AddressProvider(List<Province> provinces) {
             parseData(provinces);
         }
 
@@ -288,8 +303,8 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
             return firstList;
         }
 
-        @Override
         @NonNull
+        @Override
         public List<City> linkageSecondData(int firstIndex) {
             return secondList.get(firstIndex);
         }
@@ -330,7 +345,5 @@ public class AddressPicker extends LinkagePicker<Province, City, County> {
                 thirdList.add(xCounties);
             }
         }
-
     }
-
 }

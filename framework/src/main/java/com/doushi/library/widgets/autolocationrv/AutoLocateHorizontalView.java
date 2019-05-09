@@ -13,9 +13,9 @@ import android.widget.Scroller;
 import com.blankj.utilcode.util.SizeUtils;
 
 /**
- * Created by xuleyuan on 2017/8/17
+ * @author xuleyuan
+ * @date 2017/8/17
  */
-
 public class AutoLocateHorizontalView extends RecyclerView {
     /**
      * 一个屏幕中显示多少个item，必须为奇数
@@ -32,8 +32,14 @@ public class AutoLocateHorizontalView extends RecyclerView {
     private LinearLayoutManager linearLayoutManager;
     private boolean isInit;
     private OnSelectedPositionChangedListener listener;
-    private boolean isFirstPosChanged = true;        //刚初始化时是否触发位置改变的监听
-    private int oldSelectedPos = initPos;   //记录上次选中的位置
+    /**
+     * 刚初始化时是否触发位置改变的监听
+     */
+    private boolean isFirstPosChanged = true;
+    /**
+     * 记录上次选中的位置
+     */
+    private int oldSelectedPos = initPos;
     /**
      * 当前被选中的位置
      */

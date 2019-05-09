@@ -5,10 +5,11 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-/**
- * Created by xuleyuan on 23/11/2017
- */
 
+/**
+ * @author xuleyuan
+ * @date 24/11/2017
+ */
 public class AdjustRelativeLayout extends RelativeLayout {
 
     public AdjustRelativeLayout(Context context) {

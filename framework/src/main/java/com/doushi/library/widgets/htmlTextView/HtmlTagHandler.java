@@ -37,7 +37,7 @@ import android.util.Log;
 public class HtmlTagHandler implements Html.TagHandler {
 
     private int mListItemCount = 0;
-    private final Vector<String> mListParents = new Vector<String>();
+    private final Vector<String> mListParents = new Vector<>();
 
     private static class Code {
     }
@@ -47,7 +47,7 @@ public class HtmlTagHandler implements Html.TagHandler {
 
     @Override
     public void handleTag(final boolean opening, final String tag, Editable output,
-            final XMLReader xmlReader) {
+                          final XMLReader xmlReader) {
         if (opening) {
             // opening tag
             if (HtmlTextView.DEBUG) {
@@ -86,7 +86,7 @@ public class HtmlTagHandler implements Html.TagHandler {
 
     /**
      * Mark the opening tag by using private classes
-     * 
+     *
      * @param output
      * @param mark
      */
@@ -125,7 +125,7 @@ public class HtmlTagHandler implements Html.TagHandler {
 
     /**
      * Get last marked position of a specific tag kind (private class)
-     * 
+     *
      * @param text
      * @param kind
      * @return
