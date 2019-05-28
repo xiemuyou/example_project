@@ -21,4 +21,13 @@ public class DefaultValue {
      * 背景
      */
     public static final int BACKGROUND = R.mipmap.video_item_background;
+
+    /**
+     * 圆角背景
+     */
+    public static final int RADIUS_BACKGROUND = R.drawable.shape_grey_solid_f4_layout;
+
+    public static final int RADIUS_LEFT_BACKGROUND = R.drawable.shape_grey_solid_f4_layout_left;
+
+    public static final int RADIUS_RIGHT_BACKGROUND = R.drawable.shape_grey_solid_f4_layout_right;
 }

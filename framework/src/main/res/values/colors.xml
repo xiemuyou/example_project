@@ -56,4 +56,9 @@
     <color name="color_C6C9D2">#C6C9D2</color>
     <color name="default_toast_bg">#CC272B3C</color>
     <color name="color_8E909C">#8E909C</color>
+    <color name="color_F4F4F4">#F4F4F4</color>
+    <color name="color_FF023B">#FF023B</color>
+
+    <color name="text_color_9F9F9F">#9F9F9F</color>
+    <color name="text_color_2C2C2C">#2C2C2C</color>
 </resources>

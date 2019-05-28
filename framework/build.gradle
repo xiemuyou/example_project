@@ -60,6 +60,7 @@ dependencies {
     api otherDependencies.okrx2
     api otherDependencies.okserver
     api otherDependencies.glide
+    api otherDependencies.glide_trasnform
     api otherDependencies.litepal
     api otherDependencies.gson
     api otherDependencies.utilCode

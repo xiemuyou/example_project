@@ -7,7 +7,7 @@ import com.doushi.test.myproject.R
 import com.doushi.test.myproject.base.component.BaseFragment
 import com.doushi.test.myproject.base.component.BaseRefreshFragment
 import com.doushi.test.myproject.model.sort.NewsSortListResponse
-import com.doushi.test.myproject.ui.main.home.child.FirstFragment
+import com.doushi.test.myproject.ui.main.home.child.RecommendFragment
 import com.doushi.test.myproject.ui.main.mp.MainPresenter
 import com.doushi.test.myproject.ui.main.mv.MainView
 import com.doushi.test.myproject.widgets.tab.PagerFragmentItem
@@ -45,8 +45,8 @@ class HomeFragment : BaseFragment(), MainView {
         if (sortList != null && sortList.isNotEmpty()) {
             sortList.forEach {
                 val arts = Bundle()
-                arts.putString(FirstFragment.SORT_NAME, it.category)
-                fragmentPagerItems.add(PagerFragmentItem.of(it.name, FirstFragment::class.java, arts))
+                arts.putString(RecommendFragment.SORT_NAME, it.category)
+                fragmentPagerItems.add(PagerFragmentItem.of(it.name, RecommendFragment::class.java, arts))
             }
         }
         fAdapter = FragmentPagerItemAdapter(childFragmentManager, fragmentPagerItems)

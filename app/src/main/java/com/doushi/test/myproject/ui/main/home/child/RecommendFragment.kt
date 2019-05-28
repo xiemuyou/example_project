@@ -16,20 +16,18 @@ import com.doushi.test.myproject.global.DefaultValue
 import com.doushi.test.myproject.global.ParamConstants
 import com.doushi.test.myproject.model.news.NewsInfo
 import com.doushi.test.myproject.model.news.RecommendResponse
-import com.doushi.test.myproject.model.search.SearchUserResponse
-import com.doushi.test.myproject.model.sort.NewsSortListResponse
 import com.doushi.test.myproject.model.video.VideoDetails
-import com.doushi.test.myproject.ui.main.home.HomeFragment
 import com.doushi.test.myproject.ui.refresh.RefreshListActivity
 import com.doushi.test.myproject.ui.refresh.rp.RefreshPresenter
 import com.doushi.test.myproject.ui.refresh.rv.RefreshListView
+import com.doushi.test.myproject.widgets.news.InformationItemContentView
 import com.doushi.test.myproject.znet.InterfaceConfig
 
 /**
  * @author xiemy
  * @date 2018/3/19.
  */
-class FirstFragment : BaseRefreshFragment<NewsInfo>(), RefreshListView {
+class RecommendFragment : BaseRefreshFragment<NewsInfo>(), RefreshListView {
     var category = ""
 
     companion object {
@@ -46,26 +44,11 @@ class FirstFragment : BaseRefreshFragment<NewsInfo>(), RefreshListView {
     }
 
     override fun getRefreshAdapter(dataList: List<NewsInfo>): RecyclerView.Adapter<*> {
-        val llm = LinearLayoutManager(_mActivity, LinearLayoutManager.VERTICAL, false)
-        canContentView.layoutManager = llm
-        val decoration = DividerItemDecoration(_mActivity, 5, true,
-                ContextCompat.getColor(_mActivity, R.color.default_toast_bg))
-        canContentView.addItemDecoration(decoration)
-        val adapter = object : BaseQuickAdapter<NewsInfo, BaseViewHolder>(R.layout.item_search_user, dataList) {
+        canContentView.layoutManager = LinearLayoutManager(_mActivity, LinearLayoutManager.VERTICAL, false)
+        val adapter = object : BaseQuickAdapter<NewsInfo, BaseViewHolder>(R.layout.item_information, dataList) {
             override fun convert(helper: BaseViewHolder, item: NewsInfo) {
-                helper.setText(R.id.tvUserName, item.userInfo?.name)
-                helper.setText(R.id.tvContent, item.content)
-                val ivVideoBg = helper.getView<ImageView>(R.id.ivVideoBg)
-                var imgUrl = ""
-                if (item.images != null && item.images!!.isNotEmpty()) {
-                    imgUrl = item.images?.get(0).toString()
-                }
-                ImageLoadUtils(ivVideoBg).commonDisplayImage(imgUrl, ivVideoBg, DefaultValue.BACKGROUND)
-
-                val ivHead = helper.getView<ImageView>(R.id.ivUserAvatar)
-
-                val avatarUrl = item.userInfo?.avatarUrl ?: ""
-                ImageLoadUtils(this@FirstFragment).commonCircleImage(avatarUrl, ivHead, DefaultValue.HEAD)
+                val informationItemView = helper.getView<InformationItemContentView>(R.id.informationItemView)
+                informationItemView.setInformationContent(mContext, item)
             }
         }
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { mAdapter, _, position ->

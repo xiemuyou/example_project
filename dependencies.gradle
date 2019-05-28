@@ -34,6 +34,8 @@ ext {
     okserverVersion = "2.0.5"
     //glide 图片框架 https://github.com/bumptech/glide
     glideVersion = "4.6.1"
+    //Glide Transformations
+    glideTransformations = "3.3.0"
     //litepal 数据库框架 https://github.com/LitePalFramework/LitePal
     litepalVersion = "1.6.1"
     //gson  https://github.com/google/gson
@@ -71,6 +73,7 @@ ext {
             okrx2            : "com.lzy.net:okrx2:${okrx2Version}",
             okserver         : "com.lzy.net:okserver:${okserverVersion}",
             glide            : "com.github.bumptech.glide:glide:${glideVersion}",
+            glide_trasnform  : "jp.wasabeef:glide-transformations:${glideTransformations}",
             litepal          : "org.litepal.android:core:${litepalVersion}",
             gson             : "com.google.code.gson:gson:${gsonVersion}",
             rx_android       : "io.reactivex.rxjava2:rxandroid:${rxandroidVerison}",

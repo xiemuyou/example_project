@@ -4,4 +4,15 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="default_un_select_color">#9B9FAD</color>
+
+    <!--黑色%10透明度-->
+    <color name="black_transparency_10">#19000000</color>
+    <!--黑色%20透明度-->
+    <color name="black_transparency_20">#33000000</color>
+    <!--黑色%40透明度-->
+    <color name="black_transparency_40">#66000000</color>
+    <!--黑色%60透明度-->
+    <color name="black_transparency_60">#99000000</color>
+    <!--黑色%80透明度-->
+    <color name="black_transparency_80">#CC000000</color>
 </resources>

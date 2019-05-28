@@ -304,4 +304,40 @@ public class ViewUtil {
         }
         v.requestLayout();
     }
+
+    private static int imgViewHeight = -1;
+
+    public static int setSmallImgViewHeight(View view) {
+        if (imgViewHeight <= 0) {
+            setSmallImageViewSize(null);
+        }
+        if (view != null) {
+            ViewGroup.LayoutParams vglp = view.getLayoutParams();
+            if (vglp != null) {
+                vglp.height = imgViewHeight;
+            }
+        }
+        return imgViewHeight;
+    }
+
+    /**
+     * 设置赋值图片宽高
+     */
+    public static void setSmallImageViewSize(View view) {
+        //分割线宽度 * 2
+        int dSize = SizeUtils.dp2px(3) * 2;
+        //边距宽度 * 2
+        int mSize = SizeUtils.dp2px(18) * 2;
+        int imgViewWidth = (ScreenUtils.getScreenWidth() - (mSize + dSize)) / 3;
+        //默认的图片3/4宽高比
+        double ratio = (3 * 1.0) / 4;
+        imgViewHeight = (int) (imgViewWidth * ratio);
+        if (view != null) {
+            ViewGroup.LayoutParams vglp = view.getLayoutParams();
+            if (vglp != null) {
+                vglp.width = imgViewWidth;
+                vglp.height = imgViewHeight;
+            }
+        }
+    }
 }

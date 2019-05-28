@@ -11,9 +11,13 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
@@ -51,15 +55,47 @@ public class ImageLoadUtils {
         }
     }
 
-//    public void commonDisplayImage(@NonNull String imgUrl, @NonNull ImageView imageView, @DrawableRes int drawableRes) {
-//        if (requestManager != null) {
-//            requestManager.load(imgUrl).apply(getRequestOptions(drawableRes)).into(imageView);
-//        }
-//    }
-
     public void commonCircleImage(@NonNull String imgUrl, @NonNull ImageView imageView, @DrawableRes int drawableRes) {
         if (requestManager != null) {
             requestManager.load(imgUrl).apply(getRequestOptions(drawableRes).transform(new CircleCrop())).into(imageView);
+        }
+    }
+
+    public void commonRoundImage(@NonNull String imgUrl, @NonNull ImageView imageView, int roundDp, @DrawableRes int drawableRes) {
+        if (requestManager != null) {
+            requestManager.asBitmap().load(imgUrl)
+                    .transition(new BitmapTransitionOptions().crossFade(withCrossFadeTime))
+                    .apply(getRequestOptions(drawableRes).transform(new MultiTransformation<>(
+                            new CenterCrop(), new RoundedCornersTransformation(roundDp, 0))))
+                    .into(imageView);
+        }
+    }
+
+    public void commonRoundLeftImage(@NonNull String imgUrl, @NonNull ImageView imageView, int roundDp, @DrawableRes int drawableRes) {
+        if (requestManager != null) {
+            requestManager.asBitmap().load(imgUrl)
+                    .transition(new BitmapTransitionOptions().crossFade(withCrossFadeTime))
+                    .apply(getRequestOptions(drawableRes).transform(new MultiTransformation<>(
+                            new CenterCrop(),
+                            new RoundedCornersTransformation(roundDp, 0, RoundedCornersTransformation.CornerType.LEFT))))
+                    .into(imageView);
+        }
+    }
+
+    public void commonRoundRightImage(@NonNull String imgUrl, @NonNull ImageView imageView, int roundDp, @DrawableRes int drawableRes) {
+        if (requestManager != null) {
+            requestManager.asBitmap().load(imgUrl)
+                    .transition(new BitmapTransitionOptions().crossFade(withCrossFadeTime))
+                    .apply(getRequestOptions(drawableRes).transform(new MultiTransformation<>(
+                            new CenterCrop(), new RoundedCornersTransformation(roundDp, 0, RoundedCornersTransformation.CornerType.RIGHT))))
+                    .into(imageView);
+        }
+    }
+
+    public void asBitmap(@NonNull String imgUrl, @NonNull ImageView imageView, @DrawableRes int drawableRes) {
+        if (requestManager != null) {
+            requestManager.asBitmap().transition(new BitmapTransitionOptions().crossFade(withCrossFadeTime))
+                    .load(imgUrl).apply(getRequestOptions(drawableRes)).into(imageView);
         }
     }
 

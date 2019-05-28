@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clItemSimpleGraph"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--资讯描述-->
+        <com.doushi.test.myproject.widgets.extra.LineSpaceExtraContainer
+            android:id="@+id/lsecTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px_28"
+            app:layout_constraintEnd_toStartOf="@id/ivSimpleGraph"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.doushi.test.myproject.widgets.extra.LineSpaceExtraCompatTextView
+                android:id="@+id/tvInformationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lineSpacingExtra="@dimen/px_12"
+                android:maxLines="3"
+                android:paddingStart="@dimen/px_36"
+                android:paddingEnd="@dimen/px_36"
+                android:textColor="@color/text_color_2C2C2C"
+                android:textSize="@dimen/commonFontSize_17" />
+
+        </com.doushi.test.myproject.widgets.extra.LineSpaceExtraContainer>
+
+        <!--单图-->
+        <ImageView
+            android:id="@+id/ivSimpleGraph"
+            android:layout_width="@dimen/px_222"
+            android:layout_height="@dimen/px_166"
+            android:layout_marginTop="@dimen/px_36"
+            android:layout_marginEnd="@dimen/px_36"
+            android:background="@drawable/shape_color_10000000_corner_12_stroke"
+            android:contentDescription="@string/background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--视频时长-->
+        <TextView
+            android:id="@+id/tvVideoTime"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/px_36"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/px_12"
+            android:layout_marginBottom="@dimen/px_12"
+            android:background="@drawable/shape_grey_transparent_button"
+            android:drawableStart="@drawable/video_small_start"
+            android:drawablePadding="@dimen/px_6"
+            android:gravity="center"
+            android:minWidth="@dimen/px_80"
+            android:paddingStart="@dimen/px_12"
+            android:paddingEnd="@dimen/px_12"
+            android:textColor="@color/white"
+            android:textSize="@dimen/px_22_sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivSimpleGraph"
+            app:layout_constraintEnd_toEndOf="@id/ivSimpleGraph" />
+
+        <!--两行底部样式-->
+        <RelativeLayout
+            android:id="@+id/llItemBottomView1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/px_32"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/px_36"
+            android:paddingEnd="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivSimpleGraph"
+            app:layout_constraintEnd_toStartOf="@id/ivSimpleGraph"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <FrameLayout
+                android:id="@+id/flUserAvatar1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:paddingStart="0dp"
+                android:paddingEnd="@dimen/px_12">
+
+                <!--头像-->
+                <ImageView
+                    android:id="@+id/ivUserAvatar1"
+                    android:layout_width="@dimen/px_32"
+                    android:layout_height="@dimen/px_32"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/head"
+                    android:src="@drawable/ic_default_head_circle" />
+
+                <!--头像描边-->
+                <ImageView
+                    android:layout_width="@dimen/px_32"
+                    android:layout_height="@dimen/px_32"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/user_avatar_contour"
+                    android:contentDescription="@string/head" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvNickOrCreateTime1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/px_32"
+                android:layout_alignTop="@+id/flUserAvatar1"
+                android:layout_alignBottom="@+id/flUserAvatar1"
+                android:layout_toEndOf="@+id/flUserAvatar1"
+                android:gravity="start|center_vertical"
+                android:textColor="@color/text_color_9F9F9F"
+                android:textSize="@dimen/px_22_sp" />
+
+            <!--更多-->
+            <ImageView
+                android:id="@+id/ivContentMore1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/more"
+                android:paddingStart="@dimen/px_24"
+                android:paddingEnd="@dimen/px_36"
+                android:src="@drawable/item_more" />
+        </RelativeLayout>
+
+        <!--三行底部样式-->
+        <RelativeLayout
+            android:id="@+id/llItemBottomView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/px_36"
+            android:paddingEnd="0dp"
+            android:paddingBottom="@dimen/px_18"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivSimpleGraph">
+
+            <FrameLayout
+                android:id="@+id/flUserAvatar2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="0dp"
+                android:paddingTop="@dimen/px_14"
+                android:paddingEnd="@dimen/px_12"
+                android:paddingBottom="@dimen/px_14">
+
+                <!--头像-->
+                <ImageView
+                    android:id="@+id/ivUserAvatar2"
+                    android:layout_width="@dimen/px_32"
+                    android:layout_height="@dimen/px_32"
+                    android:contentDescription="@string/head"
+                    android:src="@drawable/ic_default_head_circle" />
+
+                <!--头像描边-->
+                <ImageView
+                    android:layout_width="@dimen/px_32"
+                    android:layout_height="@dimen/px_32"
+                    android:layout_gravity="center"
+                    android:background="@drawable/user_avatar_contour"
+                    android:contentDescription="@string/head" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvNickOrCreateTime2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/px_32"
+                android:layout_alignTop="@+id/flUserAvatar2"
+                android:layout_alignBottom="@+id/flUserAvatar2"
+                android:layout_marginTop="@dimen/px_14"
+                android:layout_marginBottom="@dimen/px_14"
+                android:layout_toEndOf="@+id/flUserAvatar2"
+                android:gravity="start|center_vertical"
+                android:textColor="@color/text_color_9F9F9F"
+                android:textSize="@dimen/px_22_sp" />
+
+            <!--更多-->
+            <ImageView
+                android:id="@+id/ivContentMore2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvNickOrCreateTime2"
+                android:layout_alignBottom="@+id/tvNickOrCreateTime2"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/more"
+                android:paddingStart="@dimen/px_24"
+                android:paddingEnd="@dimen/px_36"
+                android:src="@drawable/item_more" />
+        </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
+</merge>

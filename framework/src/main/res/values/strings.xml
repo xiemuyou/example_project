@@ -27,6 +27,7 @@
     <string name="email">邮箱</string>
     <string name="operation">操作</string>
     <string name="person">人</string>
+    <string name="more">更多</string>
 
     <!-- 日期 时间 start-->
     <string name="data_year">年</string>
@@ -102,4 +103,10 @@
     <string name="web_unable_to_save">无法保存</string>
     <string name="web_ok">确定</string>
     <string name="web_cancel">取消</string>
+
+
+    <string name="nick_comment">%1$s&#160;&#160;%2$s评</string>
+    <string name="number_comment">%1$s评</string>
+    <string name="nick_comment_create_time">%1$s&#160;&#160;%2$s评&#160;&#160;%3$s</string>
+    <string name="comment_create_time">%1$s评&#160;&#160;%2$s</string>
 </resources>
