@@ -1,7 +1,9 @@
 package com.doushi.test.myproject.ui.refresh.rv;
 
 import com.doushi.test.myproject.base.mvp.BaseView;
+import com.doushi.test.myproject.model.news.RecommendResponse;
 import com.doushi.test.myproject.model.search.SearchUserResponse;
+import com.doushi.test.myproject.model.sort.NewsSortListResponse;
 import com.doushi.test.myproject.model.video.VideoDetails;
 
 import java.util.List;
@@ -19,7 +21,7 @@ public interface RefreshListView extends BaseView {
      *
      * @param response 测试
      */
-    void getDataSuccess(SearchUserResponse response);
+    void getDataSuccess(RecommendResponse response);
 
     /**
      * 成功获取数据,允许数据为NULL

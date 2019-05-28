@@ -17,6 +17,7 @@ import com.doushi.test.myproject.R;
 import com.doushi.test.myproject.base.component.BaseRefreshFragment;
 import com.doushi.test.myproject.global.DefaultValue;
 import com.doushi.test.myproject.global.ParamConstants;
+import com.doushi.test.myproject.model.news.RecommendResponse;
 import com.doushi.test.myproject.model.search.SearchUserResponse;
 import com.doushi.test.myproject.model.user.UserInfo;
 import com.doushi.test.myproject.model.video.VideoDetails;
@@ -82,13 +83,13 @@ public class FollowFragment extends BaseRefreshFragment<VideoDetails> implements
         refresh.postDelayed(new Runnable() {
             @Override
             public void run() {
-                followPresenter.getSearchUsers(page, CNT, "测试");
+                followPresenter.getSearchUsers("测试");
             }
         }, 1000);
     }
 
     @Override
-    public void getDataSuccess(SearchUserResponse dataRes) {
+    public void getDataSuccess(RecommendResponse dataRes) {
         //List<UserInfo> dataList = ObjectUtils.isNotEmpty(dataRes.getData()) ? dataRes.getData().getUser_list() : null;
     }
 

@@ -19,9 +19,14 @@ public class BaseApiResponse<T> {
     private List<String> category;
 
     @Expose
-    private T results;
+    private T data;
 
     private long time;
+    private String message;
+
+    public boolean isSuccess() {
+        return "success".equals(message);
+    }
 
     public long getTime() {
         return time;
@@ -35,11 +40,11 @@ public class BaseApiResponse<T> {
         return category;
     }
 
-    public T getResults() {
-        return results;
+    public T getData() {
+        return data;
     }
 
     public boolean isError() {
-        return error;
+        return !isSuccess();
     }
 }

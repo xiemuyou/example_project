@@ -15,6 +15,7 @@ import com.doushi.test.myproject.R;
 import com.doushi.test.myproject.base.component.BaseRefreshActivity;
 import com.doushi.test.myproject.global.DefaultValue;
 import com.doushi.test.myproject.global.ParamConstants;
+import com.doushi.test.myproject.model.news.RecommendResponse;
 import com.doushi.test.myproject.model.search.SearchUserResponse;
 import com.doushi.test.myproject.model.user.UserInfo;
 import com.doushi.test.myproject.model.video.VideoDetails;
@@ -47,12 +48,12 @@ public class RefreshListActivity extends BaseRefreshActivity<UserInfo> implement
 
             @Override
             protected void convert(BaseViewHolder helper, UserInfo item) {
-                helper.setText(R.id.tvUserName, item.getNick() + ":" + helper.getAdapterPosition());
+                helper.setText(R.id.tvUserName, item.getName() + ":" + helper.getAdapterPosition());
                 ImageView ivVideoBg = helper.getView(R.id.ivVideoBg);
-                new ImageLoadUtils(RefreshListActivity.this).commonDisplayImage(item.getHead(), ivVideoBg, DefaultValue.BACKGROUND);
+                new ImageLoadUtils(RefreshListActivity.this).commonDisplayImage(item.getAvatarUrl(), ivVideoBg, DefaultValue.BACKGROUND);
 
                 ImageView ivHead = helper.getView(R.id.ivUserAvatar);
-                new ImageLoadUtils(RefreshListActivity.this).commonCircleImage(item.getHead(), ivHead, DefaultValue.HEAD);
+                new ImageLoadUtils(RefreshListActivity.this).commonCircleImage(item.getAvatarUrl(), ivHead, DefaultValue.HEAD);
             }
         };
         refreshAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -80,13 +81,13 @@ public class RefreshListActivity extends BaseRefreshActivity<UserInfo> implement
         canContentView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                refreshPresenter.getSearchUsers(page, CNT, searchKey);
+                refreshPresenter.getSearchUsers(searchKey);
             }
         }, 2000);
     }
 
     @Override
-    public void getDataSuccess(SearchUserResponse dataRes) {
+    public void getDataSuccess(RecommendResponse dataRes) {
         //数据为空也需要传NULL值,
 //        List<UserInfo> dataList = ObjectUtils.isNotEmpty(dataRes.getData()) ? dataRes.getData().getUser_list() : null;
 //        loadDataSuccess(dataList);

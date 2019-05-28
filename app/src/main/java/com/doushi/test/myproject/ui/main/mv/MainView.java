@@ -1,6 +1,7 @@
 package com.doushi.test.myproject.ui.main.mv;
 
 import com.doushi.test.myproject.base.mvp.BaseView;
+import com.doushi.test.myproject.model.sort.NewsSortListResponse;
 
 /**
  * 欢迎页UI更新
@@ -13,7 +14,7 @@ public interface MainView extends BaseView {
     /**
      * 成功获取数据
      *
-     * @param test 测试
+     * @param res 分类列表
      */
-    void getDataSuccess(boolean test);
+    void getCategoryExtraSuccess(NewsSortListResponse res);
 }

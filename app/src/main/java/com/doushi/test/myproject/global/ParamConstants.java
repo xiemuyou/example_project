@@ -20,6 +20,10 @@ public class ParamConstants {
      */
     public static final String FROM = "form";
     /**
+     * 分类
+     */
+    public final static String CATEGORY = "category";
+    /**
      * 搜索Key
      */
     public final static String SEARCH_KEY = "search_key";

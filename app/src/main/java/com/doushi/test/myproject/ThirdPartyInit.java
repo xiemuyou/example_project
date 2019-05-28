@@ -5,9 +5,7 @@ import android.util.Log;
 
 import com.blankj.utilcode.util.Utils;
 import com.doushi.library.global.FConstants;
-import com.doushi.library.util.AppInfoUtil;
 import com.doushi.library.util.AppIntroUtil;
-import com.doushi.library.util.LogUtil;
 import com.doushi.test.myproject.znet.RequestConfig;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
@@ -26,7 +24,7 @@ import okhttp3.OkHttpClient;
  * @author xiemy
  * @date 2017/4/18.
  */
-public class ThirdPartyInit {
+class ThirdPartyInit {
 
     private static final String TAG = "ThirdPartyInit";
 

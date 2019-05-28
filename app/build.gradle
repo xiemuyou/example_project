@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -30,6 +32,7 @@ repositories {
     maven {
         url "http://maven.aliyun.com/nexus/content/repositories/releases"
     }
+    mavenCentral()
 }
 
 dependencies {
@@ -49,4 +52,5 @@ dependencies {
     compileOnly files('libs/tbs_sdk_thirdapp_v3.5.0.jar')
     implementation viewDependencies.rvadapterHelper
     implementation viewDependencies.smartTabLayout
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }

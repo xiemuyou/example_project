@@ -69,10 +69,21 @@ public abstract class BasePresenter<T extends BaseView> implements Presenter<T> 
         return mMvpView != null;
     }
 
+    public boolean isViewAttached(String res, InterfaceConfig.HttpHelperTag tag, Map<String, Object> params) {
+        if (isViewAttached()) {
+            if (!TextUtils.isEmpty(res)) {
+                return true;
+            } else {
+                loadDataFail(tag, ErrorMsg.DATA_ERROR_CODE, params, DefaultValue.ERROR_MSG);
+            }
+        }
+        return false;
+    }
+
     public boolean isViewAttached(BaseApiResponse res, InterfaceConfig.HttpHelperTag tag, Map<String, Object> params) {
         if (isViewAttached()) {
             if (res != null) {
-                if (res.isError()) {
+                if (res.isSuccess()) {
                     return true;
                 } else {
                     loadDataFail(tag, ErrorMsg.DATA_ERROR_CODE, params, DefaultValue.ERROR_MSG);
@@ -96,6 +107,10 @@ public abstract class BasePresenter<T extends BaseView> implements Presenter<T> 
      * @param params   请求参数
      */
     public abstract void onLoadDataSuccess(InterfaceConfig.HttpHelperTag apiTag, BaseApiResponse modelRes, Map<String, Object> params);
+
+    public void onLoadDataSuccess(InterfaceConfig.HttpHelperTag apiTag, String res, Map<String, Object> params) {
+
+    }
 
     public void loadDataFail(@NonNull InterfaceConfig.HttpHelperTag apiTag, int errorCode, Map<String, Object> params, String errorMsg) {
         if (isViewAttached()) {

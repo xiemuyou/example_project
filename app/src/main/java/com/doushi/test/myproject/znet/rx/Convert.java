@@ -33,6 +33,8 @@ import java.lang.reflect.Type;
  * 描    述：
  * 修订历史：
  * ================================================
+ *
+ * @author jeasonlzy
  */
 public class Convert {
 

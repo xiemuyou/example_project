@@ -1,0 +1,108 @@
+package com.doushi.test.myproject.ui.refresh.rp
+
+import android.text.TextUtils
+import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.ObjectUtils
+import com.blankj.utilcode.util.StringUtils
+import com.doushi.test.myproject.base.mvp.BasePresenter
+import com.doushi.test.myproject.global.ParamConstants
+import com.doushi.test.myproject.model.base.BaseApiResponse
+import com.doushi.test.myproject.model.news.NewsInfo
+import com.doushi.test.myproject.model.news.RecommendResponse
+import com.doushi.test.myproject.model.search.SearchUserResponse
+import com.doushi.test.myproject.model.sort.NewsSortInfo
+import com.doushi.test.myproject.model.sort.NewsSortListResponse
+import com.doushi.test.myproject.model.user.UserInfo
+import com.doushi.test.myproject.model.video.VideoDetails
+import com.doushi.test.myproject.ui.refresh.rv.RefreshListView
+import com.doushi.test.myproject.znet.InterfaceConfig
+import com.doushi.test.myproject.znet.request.RxRequestCallback
+import org.json.JSONObject
+
+import java.util.ArrayList
+import java.util.HashMap
+
+/**
+ * @author xiemy
+ * @date 2018/2/28.
+ */
+class RefreshPresenter(view: RefreshListView) : BasePresenter<RefreshListView>(view) {
+
+    fun getSearchUsers(searchKey: String) {
+        val params = HashMap<String, Any>()
+        params[ParamConstants.CATEGORY] = searchKey
+        RxRequestCallback().doRequestString(null, InterfaceConfig.HttpHelperTag.HTTPHelperTag_NesFeedV58, this)
+    }
+
+    override fun onLoadDataSuccess(apiTag: InterfaceConfig.HttpHelperTag, modelRes: BaseApiResponse<*>, params: Map<String, Any>) {
+    }
+
+    override fun onLoadDataSuccess(apiTag: InterfaceConfig.HttpHelperTag?, res: String?, params: MutableMap<String, Any>?) {
+        if (!TextUtils.isEmpty(res)) {
+            mvpView.getDataSuccess(parseJson(res!!))
+        }
+    }
+
+    private fun parseJson(resStr: String): RecommendResponse {
+        val res = RecommendResponse()
+        val jsons = JSONObject(resStr)
+        val isSuccess = StringUtils.equals(jsons.getString("message"), "success")
+        if (isSuccess) {
+            val newsList = jsons.getJSONArray("data")
+            val list = ArrayList<NewsInfo>(newsList.length())
+            for (i in 0 until newsList.length()) {
+                val news = NewsInfo()
+                val newsContent = newsList[i] as JSONObject
+                var content = newsContent.getString("content")
+
+                content = content.replace("{", "")
+                content = content.replace("}", "")
+                content = content.replace("[", "")
+                content = content.replace("]", "")
+                content = content.replace("(", "")
+                content = content.replace(")", "")
+                content = content.replace("\\\"", "\"")
+                content = content.replace("\"", "")
+
+                val keyValue = content.split(",")
+                val images = ArrayList<String>()
+                val user = UserInfo()
+                keyValue.forEach {
+                    if (!it.contains("http")) {
+                        val param = it.split(":")
+                        val key = if (param.isNotEmpty()) param[0] else ""
+                        val value = if (param.size > 1) param[1] else ""
+                        if (key == "abstract") {
+                            news.content = value
+                        }
+                        if (key == "title") {
+                            news.title = value
+                        }
+                        if (key == "name") {
+                            user.name = value
+                        }
+                    } else {
+                        val index = it.indexOf(':')
+                        val key = it.substring(0, index)
+                        val value = it.substring(index + 1)
+                        LogUtils.d("AAAAAA ", "key = $key value = $value")
+                        if (key == "url") {
+                            images.add(value)
+                        }
+                        if (key == "avatar_url") {
+                            user.avatarUrl = value
+                        }
+                    }
+                }
+                if (images.size > 1) {
+                    images.removeAt(images.size - 1)
+                }
+                news.userInfo = user
+                news.images = images
+                list.add(news)
+            }
+            res.data = list
+        }
+        return res
+    }
+}
