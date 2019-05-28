@@ -85,12 +85,19 @@ class RefreshPresenter(view: RefreshListView) : BasePresenter<RefreshListView>(v
                         val index = it.indexOf(':')
                         val key = it.substring(0, index)
                         val value = it.substring(index + 1)
-                        LogUtils.d("AAAAAA ", "key = $key value = $value")
                         if (key == "url") {
                             images.add(value)
                         }
-                        if (key == "avatar_url") {
-                            user.avatarUrl = value
+                        if ("user_info" == key) {
+                            value.apply {
+                                val uIndex = indexOf(':')
+                                val uKey = substring(0, uIndex)
+                                val uValue = substring(uIndex + 1)
+                                LogUtils.d("AAAAAA ", "userKey = $uKey userValue = $uValue")
+                                if (uKey == "avatar_url") {
+                                    user.avatarUrl = uValue
+                                }
+                            }
                         }
                     }
                 }

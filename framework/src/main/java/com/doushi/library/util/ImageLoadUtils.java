@@ -15,6 +15,8 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+
 /**
  * 图片加载工具类
  * 参考链接 : https://my.oschina.net/u/1268043/blog/1591758
@@ -22,6 +24,8 @@ import com.bumptech.glide.request.RequestOptions;
  * @author xiemy
  */
 public class ImageLoadUtils {
+
+    private final int withCrossFadeTime = 500;
 
     private RequestManager requestManager;
 
@@ -43,9 +47,15 @@ public class ImageLoadUtils {
 
     public void commonDisplayImage(@NonNull String imgUrl, @NonNull ImageView imageView, @DrawableRes int drawableRes) {
         if (requestManager != null) {
-            requestManager.load(imgUrl).apply(getRequestOptions(drawableRes)).into(imageView);
+            requestManager.load(imgUrl).transition(withCrossFade(withCrossFadeTime)).apply(getRequestOptions(drawableRes)).into(imageView);
         }
     }
+
+//    public void commonDisplayImage(@NonNull String imgUrl, @NonNull ImageView imageView, @DrawableRes int drawableRes) {
+//        if (requestManager != null) {
+//            requestManager.load(imgUrl).apply(getRequestOptions(drawableRes)).into(imageView);
+//        }
+//    }
 
     public void commonCircleImage(@NonNull String imgUrl, @NonNull ImageView imageView, @DrawableRes int drawableRes) {
         if (requestManager != null) {

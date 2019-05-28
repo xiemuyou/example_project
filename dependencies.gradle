@@ -7,13 +7,13 @@ allprojects {
 
 ext {
     //Android
-    androidCompileSdkVersion = 28
+    androidCompileSdkVersion = 27
     androidBuildToolsVersion = "28.0.3"
     androidMinSdkVersion = 17
-    anroidTargetSdkVersion = 28
+    anroidTargetSdkVersion = 27
 
     //ViewLibraries
-    supportLibraryVersion = "27.0.0"
+    supportLibraryVersion = "27.1.1"
     constraintLayoutVersion = "1.0.2"
     //fragmentation fragment封装 https://github.com/YoKeyword/Fragmentation
     fragmentationVersion = "1.3.3"

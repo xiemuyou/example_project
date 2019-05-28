@@ -60,12 +60,12 @@ class FirstFragment : BaseRefreshFragment<NewsInfo>(), RefreshListView {
                 if (item.images != null && item.images!!.isNotEmpty()) {
                     imgUrl = item.images?.get(0).toString()
                 }
-                ImageLoadUtils(this@FirstFragment).commonDisplayImage("http://p9-tt.byteimg.com/list/300x196/pgc-image/RRe1UEV9TqSEYb.webp", ivVideoBg, DefaultValue.BACKGROUND)
+                ImageLoadUtils(ivVideoBg).commonDisplayImage(imgUrl, ivVideoBg, DefaultValue.BACKGROUND)
 
                 val ivHead = helper.getView<ImageView>(R.id.ivUserAvatar)
 
                 val avatarUrl = item.userInfo?.avatarUrl ?: ""
-                ImageLoadUtils(this@FirstFragment).commonCircleImage("http://p9.pstatp.com/thumb/ff9a000030618970b882", ivHead, DefaultValue.HEAD)
+                ImageLoadUtils(this@FirstFragment).commonCircleImage(avatarUrl, ivHead, DefaultValue.HEAD)
             }
         }
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { mAdapter, _, position ->
