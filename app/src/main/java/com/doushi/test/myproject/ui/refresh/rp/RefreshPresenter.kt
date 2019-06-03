@@ -67,6 +67,8 @@ class RefreshPresenter(view: RefreshListView) : BasePresenter<RefreshListView>(v
                 val keyValue = content.split(",")
                 val images = ArrayList<String>()
                 val user = UserInfo()
+
+                tempList = ArrayList()
                 keyValue.forEach {
                     if (!it.contains("http")) {
                         val param = it.split(":")
@@ -78,6 +80,9 @@ class RefreshPresenter(view: RefreshListView) : BasePresenter<RefreshListView>(v
                         if (key == "title") {
                             news.title = value
                         }
+                        if (key == "publish_time") {
+                            news.publish_time = value.toLongOrNull()
+                        }
                         if (key == "name") {
                             user.name = value
                         }
@@ -85,7 +90,8 @@ class RefreshPresenter(view: RefreshListView) : BasePresenter<RefreshListView>(v
                         val index = it.indexOf(':')
                         val key = it.substring(0, index)
                         val value = it.substring(index + 1)
-                        if (key == "url") {
+
+                        if (key == "url" && addImageUrl(value)) {
                             images.add(value)
                         }
                         if ("user_info" == key) {
@@ -93,7 +99,6 @@ class RefreshPresenter(view: RefreshListView) : BasePresenter<RefreshListView>(v
                                 val uIndex = indexOf(':')
                                 val uKey = substring(0, uIndex)
                                 val uValue = substring(uIndex + 1)
-                                LogUtils.d("AAAAAA ", "userKey = $uKey userValue = $uValue")
                                 if (uKey == "avatar_url") {
                                     user.avatarUrl = uValue
                                 }
@@ -111,5 +116,15 @@ class RefreshPresenter(view: RefreshListView) : BasePresenter<RefreshListView>(v
             res.data = list
         }
         return res
+    }
+
+    private var tempList = ArrayList<String>()
+    private fun addImageUrl(url: String): Boolean {
+        val vl = url.substring(url.lastIndexOf("-") + 1)
+        if (!tempList.contains(vl)) {
+            tempList.add(vl)
+            return true
+        }
+        return false
     }
 }

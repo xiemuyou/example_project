@@ -24,6 +24,10 @@ public class DateUtil {
     public static final String MONTH_AND_YEAR = "yyyy年MM月";
     public static final String MORE_THAN_A_YEAR = "yy-MM-dd HH:mm";
     public static final String RELATION_TIME = "yyyy.MM.dd";
+    private static final long SECONDS = 1000;
+    private static final long POINTS = 60 * SECONDS;
+    private static final long WHEN = 60 * POINTS;
+    public static final long DAY = 24 * WHEN;
     private static int serverDifference = 0;
 
     public static String getString(Date date) {
@@ -187,6 +191,7 @@ public class DateUtil {
 
     /**
      * 时间规则
+     *
      * @return
      */
     public static String getDateTimeString(long commentsTimes) {
@@ -302,7 +307,6 @@ public class DateUtil {
      * @return 变成多少号
      */
     public static String getTimeAfterDays(String dateStr1, int days, String Pattern) {
-
         // 加上的天数
         SimpleDateFormat dateFormat = new SimpleDateFormat(Pattern);
         Date date1 = null;
@@ -319,6 +323,30 @@ public class DateUtil {
         }
         cal.setTimeInMillis(addMill);
         return dateFormat.format(cal.getTime());
+    }
+
+    /**
+     * 判断当前时间跟服务器时间是否相差3小时
+     *
+     * @param eTime 比较时间,规则(yyyy-MM-dd HH:mm:ss)
+     * @return 在 <= 3小时返回true,否则false
+     */
+    public static boolean timeBeforeThreeWhen(String eTime) {
+        if (eTime == null || eTime.isEmpty()) {
+            return false;
+        }
+        long commentsTimes = getDate(eTime, FULL_DATE_PATTERN).getTime();
+        return (AppIntroUtil.getServiceTime() - commentsTimes) <= (DAY * 3);
+    }
+
+    /**
+     * 判断当前时间跟服务器时间是否相差3小时
+     *
+     * @param commentsTimes 比较时间,规则(yyyy-MM-dd HH:mm:ss)
+     * @return 在 <= 3小时返回true,否则false
+     */
+    public static boolean timeBeforeThreeWhen(long commentsTimes) {
+        return (AppIntroUtil.getServiceTime() - commentsTimes) <= (DAY * 3);
     }
 }
 

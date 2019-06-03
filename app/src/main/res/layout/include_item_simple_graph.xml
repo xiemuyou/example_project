@@ -42,6 +42,7 @@
             android:layout_marginEnd="@dimen/px_36"
             android:background="@drawable/shape_color_10000000_corner_12_stroke"
             android:contentDescription="@string/background"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

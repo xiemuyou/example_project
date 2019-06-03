@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SizeUtils;
+import com.doushi.library.util.DateUtil;
 import com.doushi.library.util.ImageLoadUtils;
 import com.doushi.library.util.ViewUtil;
 import com.doushi.test.myproject.R;
@@ -24,6 +25,7 @@ import com.doushi.test.myproject.model.user.UserInfo;
 import com.doushi.test.myproject.widgets.extra.LineSpaceExtraCompatTextView;
 
 import java.math.BigDecimal;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,6 +62,8 @@ public class InformationItemContentView extends RelativeLayout {
     ConstraintLayout clItemSimpleGraph;
     @BindView(R.id.tvInformationDesc)
     LineSpaceExtraCompatTextView tvInformationDesc;
+    @BindView(R.id.tvNickOrCreateTime)
+    TextView tvNickOrCreateTime;
     @BindView(R.id.ivInfoPic1)
     ImageView ivInfoPic1;
     @BindView(R.id.ivInfoPic2)
@@ -106,7 +110,9 @@ public class InformationItemContentView extends RelativeLayout {
         }
         this.info = info;
         //设置资讯详情信息
-
+        String name = info.getUserInfo() != null ? info.getUserInfo().getName() : "";
+        long cTime = info.getPublish_time() != null ? info.getPublish_time() : 0L;
+        String commentOrCreateTime = getCommentOrCreateTime(context, name, cTime);
         UserInfo uInfo = info.getUserInfo();
         if (uInfo != null) {
             showUserPic = true;
@@ -120,13 +126,13 @@ public class InformationItemContentView extends RelativeLayout {
         }
         //无图
         if (tSize == 0) {
-            setNoImageInformation(showUserPic, uInfo != null ? uInfo.getAvatarUrl() : "");
+            setNoImageInformation(showUserPic, uInfo != null ? uInfo.getAvatarUrl() : "", commentOrCreateTime);
             //一张图
         } else if (tSize < maxItems) {
-            setSimpleGraphLayout(context, info, showUserPic);
+            setSimpleGraphLayout(context, info, showUserPic, commentOrCreateTime);
         } else {
             //三张图
-            setThreePicLayout(context, info, showUserPic);
+            setThreePicLayout(context, info, showUserPic, commentOrCreateTime);
         }
     }
 
@@ -136,7 +142,7 @@ public class InformationItemContentView extends RelativeLayout {
      * @param showUserPic 是否显示用户头像
      * @param avatarUrl   用户头像URL
      */
-    private void setNoImageInformation(boolean showUserPic, String avatarUrl) {
+    private void setNoImageInformation(boolean showUserPic, String avatarUrl, String commentOrCreateTime) {
         if (rlItemBottomView != null) {
             ViewUtil.setMargins(rlItemBottomView, SizeUtils.dp2px(18), SizeUtils.dp2px(15), 0, SizeUtils.dp2px(10));
         }
@@ -144,6 +150,7 @@ public class InformationItemContentView extends RelativeLayout {
         clItemSimpleGraph.setVisibility(View.GONE);
         clItemThreePic.setVisibility(View.VISIBLE);
         tvInformationDesc.setText(info.getTitle());
+        tvNickOrCreateTime.setText(commentOrCreateTime);
         if (showUserPic) {
             flUserAvatar.setVisibility(VISIBLE);
             new ImageLoadUtils(getContext()).commonCircleImage(avatarUrl, ivUserAvatar0, DefaultValue.HEAD);
@@ -159,7 +166,8 @@ public class InformationItemContentView extends RelativeLayout {
      */
     private void setSimpleGraphLayout(@NonNull final Context context,
                                       @NonNull final NewsInfo info,
-                                      final boolean showUserPic) {
+                                      final boolean showUserPic,
+                                      final String commentOrCreateTime) {
         clItemSimpleGraph.setVisibility(View.VISIBLE);
         clItemThreePic.setVisibility(View.GONE);
         tvInformationTitle.setText(info.getTitle());
@@ -168,7 +176,8 @@ public class InformationItemContentView extends RelativeLayout {
 
         //设置图片(3图)4/3宽高比
         ViewUtil.setSmallImageViewSize(ivSimpleGraph);
-        new ImageLoadUtils(context).commonRoundImage(info.getImages().get(0), ivSimpleGraph, SizeUtils.dp2px(6f), DefaultValue.RADIUS_BACKGROUND);
+        String img0 = (info.getImages() != null && !info.getImages().isEmpty()) ? info.getImages().get(0) : "";
+        new ImageLoadUtils(context).commonRoundImage(img0, ivSimpleGraph, SizeUtils.dp2px(6f), DefaultValue.RADIUS_BACKGROUND);
         //置顶视频类型设置视频时长
 //        if (BaseMultiItemEntity.VIDEO.equals(info.getItem_type())) {
 //            tvVideoTime.setVisibility(VISIBLE);
@@ -190,6 +199,7 @@ public class InformationItemContentView extends RelativeLayout {
                 if (lineCount < maxCount) {
                     llItemBottomView1.setVisibility(View.VISIBLE);
                     tvNickOrCreateTime1.setVisibility(View.VISIBLE);
+                    tvNickOrCreateTime1.setText(commentOrCreateTime);
                     llItemBottomView2.setVisibility(View.GONE);
                     tvNickOrCreateTime2.setVisibility(View.GONE);
                     ViewUtil.setPadding(clItemSimpleGraph, 0, 0, 0, SizeUtils.dp2px(18));
@@ -204,6 +214,7 @@ public class InformationItemContentView extends RelativeLayout {
                     tvNickOrCreateTime1.setVisibility(View.GONE);
                     llItemBottomView2.setVisibility(View.VISIBLE);
                     tvNickOrCreateTime2.setVisibility(View.VISIBLE);
+                    tvNickOrCreateTime2.setText(commentOrCreateTime);
                     ViewUtil.setPadding(clItemSimpleGraph, 0, 0, 0, 0);
                     if (showUserPic && info.getUserInfo() != null) {
                         flUserAvatar2.setVisibility(View.VISIBLE);
@@ -220,20 +231,23 @@ public class InformationItemContentView extends RelativeLayout {
      *
      * @param info 资讯详情
      */
-    private void setThreePicLayout(@NonNull Context context, @NonNull final NewsInfo info, boolean showUserPic) {
-
+    private void setThreePicLayout(@NonNull Context context, @NonNull final NewsInfo info, boolean showUserPic, String commentOrCreateTime) {
         flImagsContent.setVisibility(View.VISIBLE);
         clItemSimpleGraph.setVisibility(View.GONE);
         clItemThreePic.setVisibility(View.VISIBLE);
         tvInformationDesc.setText(info.getTitle());
+        tvNickOrCreateTime.setText(commentOrCreateTime);
         ViewUtil.setSmallImgViewHeight(flImagsContent);
         //设置图片(3图)4/3宽高比
         ViewUtil.setSmallImageViewSize(ivInfoPic1);
         ViewUtil.setSmallImageViewSize(ivInfoPic2);
         ViewUtil.setSmallImageViewSize(ivInfoPic3);
-        new ImageLoadUtils(context).commonRoundLeftImage(info.getImages().get(0), ivInfoPic1, SizeUtils.dp2px(6), DefaultValue.RADIUS_LEFT_BACKGROUND);
-        new ImageLoadUtils(context).asBitmap(info.getImages().get(1), ivInfoPic2, DefaultValue.BACKGROUND);
-        new ImageLoadUtils(context).commonRoundRightImage(info.getImages().get(2), ivInfoPic3, SizeUtils.dp2px(6), DefaultValue.RADIUS_RIGHT_BACKGROUND);
+        String img0 = (info.getImages() != null && !info.getImages().isEmpty()) ? info.getImages().get(0) : "";
+        new ImageLoadUtils(context).commonRoundLeftImage(img0, ivInfoPic1, SizeUtils.dp2px(6), DefaultValue.RADIUS_LEFT_BACKGROUND);
+        String img1 = (info.getImages() != null && info.getImages().size() > 1) ? info.getImages().get(1) : "";
+        new ImageLoadUtils(context).asBitmap(img1, ivInfoPic2, DefaultValue.BACKGROUND);
+        String img2 = (info.getImages() != null && info.getImages().size() > 2) ? info.getImages().get(2) : "";
+        new ImageLoadUtils(context).commonRoundRightImage(img2, ivInfoPic3, SizeUtils.dp2px(6), DefaultValue.RADIUS_RIGHT_BACKGROUND);
         if (showUserPic) {
             flUserAvatar.setVisibility(VISIBLE);
             new ImageLoadUtils(context).commonCircleImage(info.getUserInfo() != null ? info.getUserInfo().getAvatarUrl() :
@@ -241,6 +255,13 @@ public class InformationItemContentView extends RelativeLayout {
         } else {
             flUserAvatar.setVisibility(GONE);
         }
+    }
+
+    private String getCommentOrCreateTime(Context context, String nick, long cTime) {
+        long random = new Random().nextInt(10000);
+        String commentCount = getString(random);
+        String createTime = DateUtil.getStringTime(cTime);
+        return context.getString(R.string.nick_comment_create_time, nick, commentCount, createTime);
     }
 
 //    @OnClick({R.id.tvNickOrCreateTime, R.id.tvNickOrCreateTime1, R.id.tvNickOrCreateTime2,
@@ -277,7 +298,6 @@ public class InformationItemContentView extends RelativeLayout {
 //                break;
 //        }
 //    }
-
 
     /**
      * 一些数值的显示规则

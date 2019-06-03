@@ -109,4 +109,23 @@ public class AppIntroUtil {
     public boolean isFirstLaunch() {
         return launchMode == LMODE_NEW_INSTALL;
     }
+
+    /**
+     * 本地时间与系统时间差值
+     */
+    private static long betweenTime;
+
+    public static long getServiceTime() {
+        return System.currentTimeMillis() + betweenTime;
+    }
+
+    /**
+     * 设置系统时间
+     *
+     * @param systime 请求接口获取的系统时间
+     */
+    public static void setSystime(long systime) {
+        long cTime = System.currentTimeMillis();
+        betweenTime = (systime * 1000) - cTime;
+    }
 }
