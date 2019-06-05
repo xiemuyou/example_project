@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <com.doushi.library.widgets.imagepreview.wight.PhotoViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent" />
+
+    <TextView
+        android:id="@+id/ltAddDot"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/px_110"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="@dimen/px_12"
+        android:gravity="center"
+        android:padding="@dimen/px_24"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/px_30_sp" />
+
+    <TextView
+        android:id="@+id/mTextSave"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/px_110"
+        android:layout_gravity="bottom|end"
+        android:gravity="center"
+        android:padding="@dimen/px_24"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:textSize="@dimen/px_30_sp" />
+
+    <com.doushi.library.widgets.imagepreview.wight.BezierBannerView
+        android:id="@+id/bezierBannerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_vertical|center_horizontal"
+        android:paddingBottom="10dp"
+        android:visibility="gone"
+        app:selectedColor="@android:color/white"
+        app:selectedRaduis="4dp"
+        app:spacing="6dp"
+        app:unSelectedColor="@android:color/darker_gray"
+        app:unSelectedRaduis="4dp" />
+
+</FrameLayout>

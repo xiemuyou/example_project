@@ -80,11 +80,14 @@ class RefreshPresenter(view: RefreshListView) : BasePresenter<RefreshListView>(v
                         if (key == "title") {
                             news.title = value
                         }
+                        if (key == "stick_label") {
+                            news.stick_label = value
+                        }
                         if (key == "publish_time") {
                             news.publish_time = value.toLongOrNull()
                         }
                         if (key == "name") {
-                            user.name = value
+                            user.name = if (value.length > 8) value.replace(value.substring(8), "...") else value
                         }
                     } else {
                         val index = it.indexOf(':')
@@ -93,6 +96,9 @@ class RefreshPresenter(view: RefreshListView) : BasePresenter<RefreshListView>(v
 
                         if (key == "url" && addImageUrl(value)) {
                             images.add(value)
+                        }
+                        if (key == "display_url") {
+                            news.display_url = value
                         }
                         if ("user_info" == key) {
                             value.apply {

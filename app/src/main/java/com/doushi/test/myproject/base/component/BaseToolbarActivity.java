@@ -1,10 +1,9 @@
 package com.doushi.test.myproject.base.component;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,8 +86,7 @@ public abstract class BaseToolbarActivity extends SupportActivity {
             //获取到mSubtitleTextView的实例
             //这里使用final是为了方便下面在匿名内部类里使用
             //传入的是toolbar实例
-            final TextView tv = (TextView) f.get(tbHead);
-            return tv;
+            return (TextView) f.get(tbHead);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -130,7 +128,11 @@ public abstract class BaseToolbarActivity extends SupportActivity {
     }
 
     public void setHeadTitle(@StringRes int titleStr) {
-        setHeadTitle(0, getString(titleStr));
+        setHeadTitle(-1, getString(titleStr));
+    }
+
+    public void setHeadTitle(String title) {
+        setHeadTitle(-1, title);
     }
 
     /**
@@ -139,13 +141,9 @@ public abstract class BaseToolbarActivity extends SupportActivity {
      * @param headColor 背景颜色
      * @param titleStr  头部标题
      */
-    public void setHeadTitle(@ColorRes int headColor, String titleStr) {
-        if (headColor > 0) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                tbHead.setBackgroundColor(getResources().getColor(headColor, null));
-            } else {
-                tbHead.setBackgroundColor(getResources().getColor(headColor));
-            }
+    public void setHeadTitle(int headColor, String titleStr) {
+        if (headColor >= 0) {
+            tbHead.setBackgroundColor(ContextCompat.getColor(this, headColor));
         }
         tvHeadTitle.setText(titleStr);
     }
@@ -183,8 +181,7 @@ public abstract class BaseToolbarActivity extends SupportActivity {
         if (llRootView == null) {
             return;
         }
-        llRootView.addView(view,
-                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        llRootView.addView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         initToolbar();
     }
 }

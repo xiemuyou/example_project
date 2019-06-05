@@ -28,6 +28,9 @@
     <string name="operation">操作</string>
     <string name="person">人</string>
     <string name="more">更多</string>
+    <string name="string_count">%1$s/%2$s</string>
+    <string name="save">保存</string>
+    <string name="back">返回</string>
 
     <!-- 日期 时间 start-->
     <string name="data_year">年</string>
@@ -103,6 +106,7 @@
     <string name="web_unable_to_save">无法保存</string>
     <string name="web_ok">确定</string>
     <string name="web_cancel">取消</string>
+    <string name="load_image_fail">图片加载失败</string>
 
 
     <string name="nick_comment">%1$s&#160;&#160;%2$s评</string>

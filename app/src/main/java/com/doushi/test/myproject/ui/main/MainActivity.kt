@@ -1,6 +1,7 @@
 package com.doushi.test.myproject.ui.main
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.view.View
 
 import com.blankj.utilcode.util.ObjectUtils
@@ -31,6 +32,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initEnv() {
+        setStatusLight(ContextCompat.getColor(this, R.color.white))
         val firstFragment = findFragment(HomeFragment::class.java)
         if (firstFragment == null) {
             mFragments[HomeFragment.MAIN_INDEX] = HomeFragment.newInstance()

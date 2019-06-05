@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/webView"
@@ -14,10 +12,10 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        style="@style/Progress.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-7dp"
+        android:layout_marginTop="@dimen/_px_10"
         android:indeterminate="true"
         android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />

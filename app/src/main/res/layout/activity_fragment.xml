@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llFragmentRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -8,4 +9,16 @@
         android:id="@+id/flContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-</LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="@dimen/px_36"
+        android:layout_height="@dimen/px_36"
+        android:layout_gravity="start|top"
+        android:layout_marginStart="@dimen/px_36"
+        android:layout_marginTop="@dimen/px_50"
+        android:contentDescription="@string/back"
+        android:src="@drawable/back_black"
+        android:visibility="gone" />
+
+</FrameLayout>

@@ -35,7 +35,7 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
-    <style name="BaseDialog" parent="@android:style/Theme.Dialog"/>
+    <style name="BaseDialog" parent="@android:style/Theme.Dialog" />
 
     <style name="Theme.Light.FullScreenDialogAct" parent="@style/BaseDialog">
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -82,6 +82,16 @@
         <item name="android:windowAnimationStyle">@null</item>
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:backgroundDimAmount">0.4</item>
+    </style>A
+
+    <style name="Progress.Horizontal" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:indeterminateOnly">false</item>
+        <!--进度条的进度颜色drawable文件-->
+        <item name="android:progressDrawable">@drawable/progress_indeterminate_horizontal</item>
+        <!--进度条的最小高度-->
+        <item name="android:minHeight">17dp</item>
+        <!--进度条的最大高度-->
+        <item name="android:maxHeight">17dp</item>
     </style>
 
 </resources>

@@ -1,25 +1,18 @@
 package com.doushi.test.myproject.ui.main.home.child
 
-import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.widget.ImageView
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.doushi.library.util.ImageLoadUtils
-import com.doushi.library.widgets.layoutManager.DividerItemDecoration
 import com.doushi.test.myproject.R
 import com.doushi.test.myproject.base.component.BaseRefreshFragment
-import com.doushi.test.myproject.global.DefaultValue
-import com.doushi.test.myproject.global.ParamConstants
 import com.doushi.test.myproject.model.news.NewsInfo
 import com.doushi.test.myproject.model.news.RecommendResponse
 import com.doushi.test.myproject.model.video.VideoDetails
-import com.doushi.test.myproject.ui.refresh.RefreshListActivity
 import com.doushi.test.myproject.ui.refresh.rp.RefreshPresenter
 import com.doushi.test.myproject.ui.refresh.rv.RefreshListView
+import com.doushi.test.myproject.ui.web.NoHeadCommonWebActivity
 import com.doushi.test.myproject.widgets.news.InformationItemContentView
 import com.doushi.test.myproject.znet.InterfaceConfig
 
@@ -53,9 +46,7 @@ class RecommendFragment : BaseRefreshFragment<NewsInfo>(), RefreshListView {
         }
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { mAdapter, _, position ->
             val info = mAdapter.getItem(position) as NewsInfo? ?: return@OnItemClickListener
-            val bundle = Bundle()
-            bundle.putString(ParamConstants.SEARCH_KEY, info.userInfo?.name)
-            toPage(RefreshListActivity::class.java, bundle)
+            info.display_url?.let { NoHeadCommonWebActivity.showClass(_mActivity, it) }
         }
         return adapter
     }

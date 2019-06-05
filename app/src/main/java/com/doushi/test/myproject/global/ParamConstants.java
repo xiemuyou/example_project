@@ -8,10 +8,6 @@ package com.doushi.test.myproject.global;
  */
 public class ParamConstants {
     /**
-     * webUrl 链接地址
-     */
-    public static final String WEB_URL = "webUrl";
-    /**
      * 默认一页加载数量
      */
     public static final String CNT = "cnt";
@@ -27,5 +23,18 @@ public class ParamConstants {
      * 搜索Key
      */
     public final static String SEARCH_KEY = "search_key";
+
+    /**
+     * webUrl 链接地址
+     */
+    public static final String WEB_URL = "webUrl";
+    /**
+     * title 标题
+     */
+    public static final String TITLE = "title";
+    /**
+     * 页面头部分割线
+     */
+    public static final String DIVER_FLAG = "diverFlag";
 
 }

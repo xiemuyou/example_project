@@ -9,7 +9,9 @@ import com.doushi.test.myproject.model.user.UserInfo
 data class NewsInfo(
         var content: String? = "",
         var title: String? = "",
+        var stick_label: String? = "",
         var publish_time: Long? = 0L,
+        var display_url: String? = "",
         var userInfo: UserInfo? = UserInfo(),
         var images: List<String>? = ArrayList()
 )

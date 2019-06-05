@@ -2,16 +2,23 @@ package com.doushi.test.myproject.base.component;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import com.blankj.utilcode.util.ObjectUtils;
 import com.doushi.library.widgets.ToastUtils;
+import com.doushi.library.widgets.statusbar.StatusBarCompat;
 import com.doushi.test.myproject.Application;
 import com.doushi.test.myproject.base.listener.PresenterListener;
 import com.doushi.test.myproject.base.mvp.Presenter;
@@ -74,6 +81,10 @@ public abstract class BaseActivity extends BaseToolbarActivity implements Presen
             presenterList = new ArrayList<>();
         }
         presenterList.add(presenter);
+    }
+
+    public void setStatusLight(int color) {
+        StatusBarCompat.setStatusBarColor(this, color);
     }
 
     public void showNotice(@StringRes int errorMsg) {
@@ -157,6 +168,47 @@ public abstract class BaseActivity extends BaseToolbarActivity implements Presen
             InputMethodManager inputMethodManager = ((InputMethodManager) Application.getContext().getSystemService(Context.INPUT_METHOD_SERVICE));
             if (inputMethodManager != null) {
                 inputMethodManager.hideSoftInputFromWindow(weakReference.get().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    }
+
+    public static class ActivityHandler extends Handler {
+
+        WeakReference<BaseActivity> activityWeakReference;
+
+        public ActivityHandler(BaseActivity baseActivity) {
+            activityWeakReference = new WeakReference<>(baseActivity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (activityWeakReference == null || activityWeakReference.get() == null) {
+                return;
+            }
+            activityWeakReference.get().handleMessage(msg);
+        }
+    }
+
+    public void handleMessage(Message msg) {
+    }
+
+    /**
+     * 状态栏去掉灰色透明阴影（部分room）
+     */
+    protected void setStatusTransparent() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            try {
+                Window window = getWindow();
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                        | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                //该参数指布局能延伸到NavigationBar，我们场景中不应加这个参数
+                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.TRANSPARENT);
+            } catch (Exception e) {
+                //nothing
             }
         }
     }
