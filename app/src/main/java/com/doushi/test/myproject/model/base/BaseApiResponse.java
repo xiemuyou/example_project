@@ -19,10 +19,11 @@ public class BaseApiResponse<T> {
     private List<String> category;
 
     @Expose
-    private T data;
+    private T result;
 
     private long time;
     private String message;
+    private int code;
 
     public boolean isSuccess() {
         return "success".equals(message);
@@ -41,7 +42,7 @@ public class BaseApiResponse<T> {
     }
 
     public T getData() {
-        return data;
+        return result;
     }
 
     public boolean isError() {

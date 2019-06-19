@@ -41,8 +41,9 @@
         <ImageView
             android:id="@+id/vflVideoContent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_8E909C"
+            android:layout_height="202.5dp"
+            android:contentDescription="@string/background"
+            android:scaleType="fitXY"
             app:layout_constraintTop_toBottomOf="@+id/tvVideoDescribe" />
 
         <TextView

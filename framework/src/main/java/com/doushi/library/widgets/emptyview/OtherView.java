@@ -128,7 +128,6 @@ public class OtherView extends LinearLayout {
      * @param emptyType 空白显示类型
      */
     private void setShowOrHide(EmptyEnum emptyType) {
-
         if (mHolder == null) {
             throw new RuntimeException("OtherView::请先设置OtherHolder");
         }

@@ -1,5 +1,7 @@
 package com.doushi.test.myproject.znet
 
+import com.lzy.okgo.cache.CacheMode
+
 /**
  * 接口配置
  *
@@ -59,7 +61,10 @@ object InterfaceConfig {
 
         /* ------------------------ > 用户  User Start <---------------------- */
         /***获取支付渠道 https://api.apiopen.top/todayVideo */
-        TODAY_VIDEO(HttpConfig.SNS_SDK, "/todayVideo");
+        TODAY_VIDEO(HttpConfig.API_OPEN,
+                "/todayVideo",
+                RequestConfig().setCacheMode(CacheMode.NO_CACHE)
+                        .setCacheTime(10000).setRetryCount(3));
         /* ------------------------ > 用户  User Start <---------------------- */
 
         /**是否有需要回调到View(前台显示)*/
@@ -87,6 +92,15 @@ object InterfaceConfig {
          * @param rType  地址类型
          */
         constructor(@HttpConfig.RootType rType: Int, apiTag: String) : this(rType, METHOD_GET, apiTag)
+
+        /**
+         * API 接口配置
+         *
+         * @param apiTag    接口api
+         * @param rType     地址类型
+         * @param config    网络配置
+         */
+        constructor(@HttpConfig.RootType rType: Int, apiTag: String, config: RequestConfig) : this(rType, METHOD_GET, apiTag, config)
 
         val apiUrl: String
             get() = HttpConfig.getRootUrl(rType) + apiTag

@@ -113,7 +113,7 @@ public class JsonConvert<T> implements Converter<T> {
         }
     }
 
-    private T parseType(Response response, Type type) throws Exception {
+    private T parseType(Response response, Type type) {
         if (type == null) {
             return null;
         }

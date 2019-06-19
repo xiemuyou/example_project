@@ -70,7 +70,6 @@ public class ServerApi {
      * @param internetConfig 是否读取缓存,默认为application OkGo 配置
      * @param <T>            返回参数泛型
      * @return RxJava Observable对象
-     * @throws UnsupportedEncodingException 编码转换异常
      */
     public static <T> Observable<T> getData(String url, Map<String, Object> map, Type type, RequestConfig internetConfig) {
         url = addUserParams(url);

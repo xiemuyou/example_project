@@ -10,34 +10,34 @@ import java.io.Serializable;
  */
 public class VideoDetails implements Serializable {
     private int vid;
-    private String head;
-    private String nick;
     private String imgUrl;
     private String mp4Url;
+    private String description;
+    private long createTime;
     private UserInfo userInfo;
-
-    public VideoDetails(int vid, String head, String nick, String imgUrl, String mp4Url) {
-        this.vid = vid;
-        this.head = head;
-        this.nick = nick;
-        this.imgUrl = imgUrl;
-        this.mp4Url = mp4Url;
-    }
 
     public int getVid() {
         return vid;
     }
 
-    public String getHead() {
-        return head;
-    }
-
-    public String getNick() {
-        return nick;
+    public void setVid(int vid) {
+        this.vid = vid;
     }
 
     public String getImgUrl() {
         return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public String getMp4Url() {
+        return mp4Url;
+    }
+
+    public void setMp4Url(String mp4Url) {
+        this.mp4Url = mp4Url;
     }
 
     public UserInfo getUserInfo() {
@@ -48,7 +48,19 @@ public class VideoDetails implements Serializable {
         this.userInfo = userInfo;
     }
 
-    public String getMp4Url() {
-        return mp4Url;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
     }
 }

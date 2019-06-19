@@ -195,7 +195,11 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
      */
     private void loadComplete(int currentSize) {
         flLoadMoreView.setVisibility(View.GONE);
-        loadState = RefreshStateUtil.getLoadState(loadState, currentSize, followList.size(), Constants.CNT_NUMBER);
+        int dataSize = 0;
+        if (followList != null) {
+            dataSize = followList.size();
+        }
+        loadState = RefreshStateUtil.getLoadState(loadState, currentSize, dataSize, Constants.CNT_NUMBER);
         switch (loadState) {
             case EMPTY:
                 ovHintView.showEmptyView();

@@ -52,12 +52,12 @@ public class FollowFragment extends BaseRefreshFragment<VideoDetails> implements
         BaseQuickAdapter adapter = new BaseQuickAdapter<VideoDetails, BaseViewHolder>(R.layout.item_user, followList) {
             @Override
             protected void convert(BaseViewHolder helper, VideoDetails item) {
-                helper.setText(R.id.tvUserName, item.getNick() + ":" + helper.getAdapterPosition());
+                helper.setText(R.id.tvUserName, item.getUserInfo().getName() + ":" + helper.getAdapterPosition());
                 ImageView ivVideoBg = helper.getView(R.id.ivVideoBg);
                 new ImageLoadUtils(FollowFragment.this).commonDisplayImage(item.getImgUrl(), ivVideoBg, DefaultValue.BACKGROUND);
 
                 ImageView ivHead = helper.getView(R.id.ivUserAvatar);
-                new ImageLoadUtils(FollowFragment.this).commonCircleImage(item.getHead(), ivHead, DefaultValue.HEAD);
+                new ImageLoadUtils(FollowFragment.this).commonCircleImage(item.getUserInfo().getAvatarUrl(), ivHead, DefaultValue.HEAD);
             }
         };
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -68,7 +68,7 @@ public class FollowFragment extends BaseRefreshFragment<VideoDetails> implements
                     return;
                 }
                 Bundle bundle = new Bundle();
-                bundle.putString(ParamConstants.SEARCH_KEY, info.getNick());
+                bundle.putString(ParamConstants.SEARCH_KEY, info.getUserInfo().getName());
                 toPage(RefreshListActivity.class, bundle);
             }
         });

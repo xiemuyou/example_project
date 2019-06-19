@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.doushi.library.util.DateUtil;
 import com.doushi.library.util.ImageLoadUtils;
@@ -103,8 +104,7 @@ public class VideoContentView extends RelativeLayout {
     }
 
     private void init(Context context) {
-        View childView = LayoutInflater.from(context).inflate(R.layout.view_video_item,
-                this, true);
+        View childView = LayoutInflater.from(context).inflate(R.layout.view_video_item, this, true);
         ButterKnife.bind(this, childView);
     }
 
@@ -116,10 +116,9 @@ public class VideoContentView extends RelativeLayout {
         this.tag = tag;
     }
 
-    public void setItemVideoContent(VideoDetails info,/*, BaseFragment baseFragment,*/ boolean
-            showCrateTime, boolean isUserClick) {
+    public void setItemVideoContent(VideoDetails info, BaseFragment baseFragment, boolean showCrateTime, boolean isUserClick) {
         this.item = info;
-//        this.baseFragment = baseFragment;
+        this.baseFragment = baseFragment;
         setNickOrCreateTimeOrCommentCount(tvCommentOrCreateTime, info, showCrateTime, isUserClick);
         UserInfo uInfo = item.getUserInfo();
         if (uInfo != null) {
@@ -130,7 +129,7 @@ public class VideoContentView extends RelativeLayout {
         //置頂图标占位空格符
 //        String emptyTop = "       ";
 //        String title = item.isTopFlag() ? emptyTop + item.getTitle() : item.getTitle();
-        tvVideoDescribe.setText("视频标题");
+        tvVideoDescribe.setText(info.getDescription());
 
         //设置点赞
 //        if (item.validReadFlag()) {
@@ -143,7 +142,8 @@ public class VideoContentView extends RelativeLayout {
 
         tvVideoTime.setText("4:01"/*VideoHelper.Companion.getVideoDuration(video.getDuration())*/);
 
-        new ImageLoadUtils(baseFragment).commonCircleImage(item.getImgUrl(), ivUserPortrait, DefaultValue.HEAD);
+        new ImageLoadUtils(baseFragment).commonRoundImage(item.getImgUrl(), vflVideoContent, SizeUtils.dp2px(6f), DefaultValue.RADIUS_BACKGROUND);
+//        new ImageLoadUtils(baseFragment).commonRoundImage(item.getImgUrl(), vflVideoContent, 6, DefaultValue.BACKGROUND);
     }
 
     /**
