@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/px_12"
+    android:paddingEnd="0dp"
+    android:paddingStart="@dimen/px_36">
+
+    <!--更多-->
+    <ImageView
+        android:id="@+id/ivContentMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvCommentOrCreateTime"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/tvCommentOrCreateTime"
+        android:contentDescription="@string/more"
+        android:paddingEnd="@dimen/px_36"
+        android:paddingStart="@dimen/px_24"
+        android:src="@drawable/item_more" />
+
+    <!--点赞-->
+    <ImageView
+        android:id="@+id/praiseView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvCommentOrCreateTime"
+        android:layout_alignTop="@+id/tvCommentOrCreateTime"
+        android:layout_toStartOf="@+id/ivContentMore"
+        android:paddingEnd="@dimen/px_24"
+        android:paddingStart="@dimen/px_24" />
+
+    <TextView
+        android:id="@+id/tvCommentOrCreateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/flUserAvatar"
+        android:layout_alignTop="@+id/flUserAvatar"
+        android:layout_toEndOf="@+id/flUserAvatar"
+        android:gravity="start|center_vertical"
+        android:paddingBottom="@dimen/px_20"
+        android:paddingTop="@dimen/px_20"
+        android:textColor="@color/text_color_9F9F9F"
+        android:textSize="@dimen/px_24_sp" />
+
+    <FrameLayout
+        android:id="@+id/flUserAvatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:paddingBottom="@dimen/px_20"
+        android:paddingEnd="@dimen/px_12"
+        android:paddingStart="0dp"
+        android:paddingTop="@dimen/px_20">
+
+        <!--头像-->
+        <ImageView
+            android:id="@+id/ivUserPortrait"
+            android:layout_width="@dimen/px_32"
+            android:layout_height="@dimen/px_32"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/head"
+            android:src="@drawable/ic_default_head_circle" />
+
+        <!--头像描边-->
+        <ImageView
+            android:layout_width="@dimen/px_32"
+            android:layout_height="@dimen/px_32"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/user_avatar_contour"
+            android:contentDescription="@string/head" />
+    </FrameLayout>
+</RelativeLayout>

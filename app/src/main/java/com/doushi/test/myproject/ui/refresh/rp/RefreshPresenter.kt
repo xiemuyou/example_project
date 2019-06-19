@@ -1,22 +1,16 @@
 package com.doushi.test.myproject.ui.refresh.rp
 
 import android.text.TextUtils
-import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.ObjectUtils
 import com.blankj.utilcode.util.StringUtils
 import com.doushi.test.myproject.base.mvp.BasePresenter
 import com.doushi.test.myproject.global.ParamConstants
 import com.doushi.test.myproject.model.base.BaseApiResponse
 import com.doushi.test.myproject.model.news.NewsInfo
 import com.doushi.test.myproject.model.news.RecommendResponse
-import com.doushi.test.myproject.model.search.SearchUserResponse
-import com.doushi.test.myproject.model.sort.NewsSortInfo
-import com.doushi.test.myproject.model.sort.NewsSortListResponse
 import com.doushi.test.myproject.model.user.UserInfo
-import com.doushi.test.myproject.model.video.VideoDetails
 import com.doushi.test.myproject.ui.refresh.rv.RefreshListView
 import com.doushi.test.myproject.znet.InterfaceConfig
-import com.doushi.test.myproject.znet.request.RxRequestCallback
+import com.doushi.test.myproject.znet.rx.RxRequestCallback
 import org.json.JSONObject
 
 import java.util.ArrayList
@@ -31,7 +25,7 @@ class RefreshPresenter(view: RefreshListView) : BasePresenter<RefreshListView>(v
     fun getSearchUsers(searchKey: String) {
         val params = HashMap<String, Any>()
         params[ParamConstants.CATEGORY] = searchKey
-        RxRequestCallback().doRequestString(null, InterfaceConfig.HttpHelperTag.HTTPHelperTag_NesFeedV58, this)
+        RxRequestCallback().request(params = null, api = InterfaceConfig.HttpHelperTag.NEWS_FEED_V58, presenter = this)
     }
 
     override fun onLoadDataSuccess(apiTag: InterfaceConfig.HttpHelperTag, modelRes: BaseApiResponse<*>, params: Map<String, Any>) {

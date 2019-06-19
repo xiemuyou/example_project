@@ -44,6 +44,10 @@ import java.util.Map;
 import java.util.Set;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 网络请求
@@ -68,8 +72,7 @@ public class ServerApi {
      * @return RxJava Observable对象
      * @throws UnsupportedEncodingException 编码转换异常
      */
-    public static <T> Observable<T> getData(String url, Map<String, Object> map, Type type, RequestConfig internetConfig)
-            throws UnsupportedEncodingException {
+    public static <T> Observable<T> getData(String url, Map<String, Object> map, Type type, RequestConfig internetConfig) {
         url = addUserParams(url);
         StringBuilder sb = new StringBuilder(url);
         if (map != null) {
@@ -78,7 +81,12 @@ public class ServerApi {
             sb.append('&');
             while (iterator.hasNext()) {
                 String key = iterator.next();
-                String value = java.net.URLEncoder.encode(String.valueOf(map.get(key)), "utf-8");
+                String value;
+                try {
+                    value = java.net.URLEncoder.encode(String.valueOf(map.get(key)), "utf-8");
+                } catch (UnsupportedEncodingException e) {
+                    value = java.net.URLEncoder.encode(String.valueOf(map.get(key)));
+                }
                 sb.append(key).append('=').append(value).append('&');
             }
             url = sb.substring(0, sb.length() - 1);

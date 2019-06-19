@@ -6,7 +6,7 @@ import com.doushi.test.myproject.model.sort.NewsSortInfo
 import com.doushi.test.myproject.model.sort.NewsSortListResponse
 import com.doushi.test.myproject.ui.main.mv.MainView
 import com.doushi.test.myproject.znet.InterfaceConfig
-import com.doushi.test.myproject.znet.request.RxRequestCallback
+import com.doushi.test.myproject.znet.rx.RxRequestCallback
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -17,7 +17,7 @@ import org.json.JSONObject
 class MainPresenter(view: MainView) : BasePresenter<MainView>(view) {
 
     fun getCategoryExtra() {
-        RxRequestCallback().doRequestString(null, InterfaceConfig.HttpHelperTag.HTTPHelperTag_GET_EXTRA, this)
+        RxRequestCallback().request(params = null, api = InterfaceConfig.HttpHelperTag.ARTICLE_CATEGORY_GET_EXTRA_V1, presenter = this)
     }
 
     override fun onLoadDataSuccess(apiTag: InterfaceConfig.HttpHelperTag, modelRes: BaseApiResponse<*>, params: Map<String, Any>?) {
@@ -26,7 +26,7 @@ class MainPresenter(view: MainView) : BasePresenter<MainView>(view) {
 
     override fun onLoadDataSuccess(apiTag: InterfaceConfig.HttpHelperTag, res: String, params: Map<String, Any>?) {
         when (apiTag) {
-            InterfaceConfig.HttpHelperTag.HTTPHelperTag_GET_EXTRA -> {
+            InterfaceConfig.HttpHelperTag.ARTICLE_CATEGORY_GET_EXTRA_V1 -> {
                 val success = parseJson(res)
                 mvpView.getCategoryExtraSuccess(success)
             }

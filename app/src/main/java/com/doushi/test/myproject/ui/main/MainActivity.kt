@@ -2,7 +2,6 @@ package com.doushi.test.myproject.ui.main
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.view.View
 
 import com.blankj.utilcode.util.ObjectUtils
 import com.doushi.test.myproject.R
@@ -11,7 +10,6 @@ import com.doushi.test.myproject.ui.main.home.HomeFragment
 import com.doushi.test.myproject.ui.main.mine.MineFragment
 import com.doushi.test.myproject.ui.main.video.VideoFragment
 
-import butterknife.OnClick
 import kotlinx.android.synthetic.main.activity_main.*
 import me.yokeyword.fragmentation.SupportFragment
 
@@ -51,19 +49,18 @@ class MainActivity : BaseActivity() {
             mFragments[MineFragment.MAIN_INDEX] = findFragment(MineFragment::class.java)
         }
         switchTabView(showTabIndex)
+        setTabClickListener()
     }
 
-    @OnClick(R.id.ivMainHome, R.id.ivMainVideo, R.id.ivMainMine)
-    fun onViewClicked(view: View) {
-        when (view.id) {
-            R.id.ivMainHome -> switchTabView(HomeFragment.MAIN_INDEX)
-
-            R.id.ivMainVideo -> switchTabView(VideoFragment.MAIN_INDEX)
-
-            R.id.ivMainMine -> switchTabView(MineFragment.MAIN_INDEX)
-
-            else -> {
-            }
+    private fun setTabClickListener() {
+        ivMainHome.setOnClickListener {
+            switchTabView(HomeFragment.MAIN_INDEX)
+        }
+        ivMainVideo.setOnClickListener {
+            switchTabView(VideoFragment.MAIN_INDEX)
+        }
+        ivMainMine.setOnClickListener {
+            switchTabView(MineFragment.MAIN_INDEX)
         }
     }
 

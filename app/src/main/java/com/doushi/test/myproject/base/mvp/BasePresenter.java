@@ -17,18 +17,16 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * MVP 业务处理层基类，
- * 既能调用UI逻辑，
- * 又能请求数据，该层为纯Java类，
- * 不涉及任何Android API
+ * 请求数据，调用UI逻辑
  *
  * @author xiemy
  * @date 2018/2/28
  */
-public abstract class BasePresenter<T extends BaseView> implements Presenter<T> {
+public abstract class BasePresenter<V extends BaseView> implements Presenter<V> {
 
     public static final String TAG = BasePresenter.class.getSimpleName();
 
-    private T mMvpView;
+    private V mMvpView;
 
     private CompositeDisposable compositeDisposable;
 
@@ -38,7 +36,7 @@ public abstract class BasePresenter<T extends BaseView> implements Presenter<T> 
     public BasePresenter() {
     }
 
-    public BasePresenter(@NonNull T view) {
+    public BasePresenter(@NonNull V view) {
         attachView(view);
         if (view instanceof PresenterListener) {
             ((PresenterListener) view).addPresenter(this);
@@ -53,7 +51,7 @@ public abstract class BasePresenter<T extends BaseView> implements Presenter<T> 
     }
 
     @Override
-    public void attachView(T mvpView) {
+    public void attachView(V mvpView) {
         mMvpView = mvpView;
     }
 
@@ -95,7 +93,7 @@ public abstract class BasePresenter<T extends BaseView> implements Presenter<T> 
         return false;
     }
 
-    public T getMvpView() {
+    public V getMvpView() {
         return mMvpView;
     }
 

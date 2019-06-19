@@ -1,5 +1,7 @@
 package com.doushi.test.myproject.model.video;
 
+import com.doushi.test.myproject.model.user.UserInfo;
+
 import java.io.Serializable;
 
 /**
@@ -12,6 +14,7 @@ public class VideoDetails implements Serializable {
     private String nick;
     private String imgUrl;
     private String mp4Url;
+    private UserInfo userInfo;
 
     public VideoDetails(int vid, String head, String nick, String imgUrl, String mp4Url) {
         this.vid = vid;
@@ -35,6 +38,14 @@ public class VideoDetails implements Serializable {
 
     public String getImgUrl() {
         return imgUrl;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 
     public String getMp4Url() {

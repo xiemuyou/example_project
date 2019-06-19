@@ -6,8 +6,7 @@ import com.doushi.test.myproject.base.mvp.BasePresenter;
 import com.doushi.test.myproject.model.base.BaseApiResponse;
 import com.doushi.test.myproject.model.user.ConfigResponse;
 import com.doushi.test.myproject.znet.InterfaceConfig;
-import com.doushi.test.myproject.znet.request.RxRequestCallback;
-import com.doushi.test.myproject.znet.rx.RxHttpHelper;
+import com.doushi.test.myproject.znet.rx.RxRequestCallback;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,13 +34,13 @@ public class WelcomePresenter extends BasePresenter<WelcomeView> {
         params.put("version", version);
         params.put("platform", 1);
         params.put("firstStartup", AppIntroUtil.getInstance().getIsFirstStartUp());
-        new RxRequestCallback().doRequestData(params, InterfaceConfig.HttpHelperTag.HTTPHelperTag_ReportCrashLog, ConfigResponse.class, this);
+        new RxRequestCallback().request(params, InterfaceConfig.HttpHelperTag.RX_URL_REPORT_CRASH_LOG, ConfigResponse.class, this);
     }
 
     @Override
     public void onLoadDataSuccess(InterfaceConfig.HttpHelperTag apiTag, BaseApiResponse modelRes, Map<String, Object> params) {
         switch (apiTag) {
-            case HTTPHelperTag_ReportCrashLog:
+            case RX_URL_REPORT_CRASH_LOG:
 //                ConfigResponse cRes = (ConfigResponse) modelRes;
 //                RxHttpHelper.sharedInstance().setToken(cRes.getData().getUserInfo().getToken());
 //                RxHttpHelper.sharedInstance().setUid(cRes.getData().getUserInfo().getUid());

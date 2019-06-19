@@ -1,144 +1,94 @@
 package com.doushi.test.myproject.znet
 
-import com.lzy.okgo.cache.CacheMode
-
-import java.util.HashMap
-
 /**
- * 请求接口配置信息
+ * 接口配置
  *
- * @author xiemy
- * @date 2018/2/28
+ * @author xiemy2
+ * @date 2019/3/14
  */
 object InterfaceConfig {
 
-    /**
-     * 请求接口
-     */
-    val INTERFACE_URL_STR = "INTERFACE_URL_STR"
-    /**
-     * 配置请求类型 POST/GET
-     */
-    val INTERFACE_QUERY_TYPE = "INTERFACE_QUERY_TYPE"
-    /**
-     * 缓存模式,默认Application配置,一些特殊接口可修改此项配置
-     */
-    val REQUEST_CONFIG = "RequestConfig"
+    internal const val METHOD_POST = "POST"
+    internal const val METHOD_GET = "GET"
 
-    val INTERFACE_QUERY_TYPE_POST = "POST"
-    val INTERFACE_QUERY_TYPE_GET = "GET"
+    enum class HttpHelperTag
     /**
-     * 上传文件类型
+     * API 接口配置
+     *
+     * @param method 请求类型 post|get
+     * @param apiTag 接口api
+     * @param rType  地址类型
      */
-    val InterfaceQueryType_POST_UPDATE = "POST_UPDATE"
+    constructor(
+            /**地址类型(支付/默认)  */
+            @param:HttpConfig.RootType @field:HttpConfig.RootType
+            private val rType: Int = HttpConfig.API_OPEN,
+            /**请求类型 post|get */
+            val method: String? = METHOD_GET,
+            /**接口api*/
+            private val apiTag: String,
+            /**网络请求配置api*/
+            var config: RequestConfig? = null) {
 
-    /**
-     * 用户信息参数类型
-     */
-    private val PARAMS_TYPE = "PARAMS_TYPE"
-
-    //start----user---start
-    /**
-     * 获取最新一天的干货
-     */
-    private val TODAY = "today"
-    /**
-     * 分类列表
-     */
-    private val ARTICLE_CATEGORY_GET_EXTRA_V1 = "article/category/get_extra/v1/"
-    /**
-     * 分类列表
-     */
-    private val NEWS_FEED_V58 = "api/news/feed/v58/"
-    /**
-     * 分类列表
-     */
-    private val NATIVE_FEED_BROW = "wenda/v1/native/feedbrow"
-    /**
-     * 崩溃上报
-     */
-    private val RX_URL_REPORT_CRASH_LOG = "UiP1/ReportCrashLog"
-
-    enum class HttpHelperTag {
-
+        /* ------------------------ > 用户  User Start <---------------------- */
         /**
          * 获取最新一天的干货
          */
-        HTTPHelperTag_ToDay,
+        TODAY(HttpConfig.SNS_SDK, "today"),
         /**
-         * 获取最新一天的干货
+         * 分类列表
          */
-        HTTPHelperTag_GET_EXTRA,
+        ARTICLE_CATEGORY_GET_EXTRA_V1(HttpConfig.SNS_SDK, "article/category/get_extra/v1/"),
         /**
-         * 获取最新一天的干货
-         * /wenda/v1/native/feedbrow/
+         * 分类列表
          */
-        HTTPHelperTag_NativeFeedBrow,
+        NEWS_FEED_V58(HttpConfig.SNS_SDK, "api/news/feed/v58/"),
         /**
-         * 获取最新一天的干货
-         * https://is.snssdk.com/api/news/feed/v58/
+         * 分类列表
          */
-        HTTPHelperTag_NesFeedV58,
-
-
-        //崩溃上报 start
+        NATIVE_FEED_BROW(HttpConfig.SNS_SDK, "wenda/v1/native/feedbrow"),
         /**
          * 崩溃上报
-         * ReportCrashLog
          */
-        HTTPHelperTag_ReportCrashLog
-        //崩溃上报 end
+        RX_URL_REPORT_CRASH_LOG(HttpConfig.SNS_SDK, "UiP1/ReportCrashLog"),
 
-    }
-    //崩溃上报 end===============
+        /***获取支付渠道 */
+        GET_PAY_CHANNEL(HttpConfig.SNS_SDK, "/paychannel/android"),
+        /* ------------------------ > 用户  User Start <---------------------- */
 
-    fun interfaceConfigByHttpTag(httpHelperTag: HttpHelperTag): Map<String, Any> {
 
-        val resultMap = HashMap<String, Any>()
-        resultMap[REQUEST_CONFIG] = false
-        val urlStr = StringBuffer()
-        urlStr.append(HttpConfig.getRootUrl())
+        /* ------------------------ > 用户  User Start <---------------------- */
+        /***获取支付渠道 https://api.apiopen.top/todayVideo */
+        TODAY_VIDEO(HttpConfig.SNS_SDK, "/todayVideo");
+        /* ------------------------ > 用户  User Start <---------------------- */
 
-        when (httpHelperTag) {
-            // 获取最新一天的干货
-            InterfaceConfig.HttpHelperTag.HTTPHelperTag_ToDay -> {
-                //2.1.3	token登录
-                urlStr.append(TODAY)
-                resultMap[INTERFACE_URL_STR] = urlStr.toString()
-                resultMap[REQUEST_CONFIG] = RequestConfig()
-                        //不重连
-                        .setRetryCount(0)
-                        // 不使用缓存
-                        .setCacheMode(CacheMode.NO_CACHE)
-            }
+        /**是否有需要回调到View(前台显示)*/
+        var isAttachedView = true
 
-            //分类列表
-            InterfaceConfig.HttpHelperTag.HTTPHelperTag_GET_EXTRA -> {
-                urlStr.append(ARTICLE_CATEGORY_GET_EXTRA_V1)
-                resultMap[INTERFACE_URL_STR] = urlStr.toString()
-            }
+        /**
+         * API 接口配置
+         *
+         * @param apiTag 接口api
+         */
+        constructor(apiTag: String) : this(METHOD_GET, apiTag)
 
-            //分类列表
-            InterfaceConfig.HttpHelperTag.HTTPHelperTag_NesFeedV58 -> {
-                urlStr.append(NEWS_FEED_V58)
-                resultMap[INTERFACE_URL_STR] = urlStr.toString()
-            }
+        /**
+         * API 接口配置
+         *
+         * @param method 请求类型 post|get
+         * @param apiTag 接口api
+         */
+        constructor(method: String, apiTag: String) : this(HttpConfig.API_OPEN, method, apiTag)
 
-            //分类详情
-            InterfaceConfig.HttpHelperTag.HTTPHelperTag_NativeFeedBrow -> {
-                urlStr.append(NATIVE_FEED_BROW)
-                resultMap[INTERFACE_URL_STR] = urlStr.toString()
-            }
+        /**
+         * API 接口配置
+         *
+         * @param apiTag 接口api
+         * @param rType  地址类型
+         */
+        constructor(@HttpConfig.RootType rType: Int, apiTag: String) : this(rType, METHOD_GET, apiTag)
 
-            // region ----- 上传崩溃   ------
-            //崩溃上报 GET
-            InterfaceConfig.HttpHelperTag.HTTPHelperTag_ReportCrashLog -> {
-                urlStr.append(RX_URL_REPORT_CRASH_LOG)
-                resultMap[INTERFACE_URL_STR] = urlStr.toString()
-            }
-            // endregion ----- 上传崩溃 ----end
-
-        }// 获取最新一天的干货
-        return resultMap
+        val apiUrl: String
+            get() = HttpConfig.getRootUrl(rType) + apiTag
     }
 }
