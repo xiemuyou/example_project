@@ -14,6 +14,7 @@ import com.doushi.test.myproject.ui.main.video.vp.VideoPresenter
 import com.doushi.test.myproject.ui.main.video.vv.VideoView
 import com.doushi.test.myproject.ui.web.NoHeadCommonWebActivity
 import com.doushi.test.myproject.widgets.video.VideoContentView
+import com.shuyu.gsyvideoplayer.GSYVideoManager
 
 /**
  * @author xiemy
@@ -36,7 +37,8 @@ class VideoFragment : BaseRefreshFragment<VideoDetails>(), VideoView {
     }
 
     override fun getRefreshAdapter(dataList: MutableList<VideoDetails>?): RecyclerView.Adapter<*> {
-        canContentView.layoutManager = LinearLayoutManager(_mActivity, LinearLayoutManager.VERTICAL, false)
+        canContentView.layoutManager = LinearLayoutManager(_mActivity, RecyclerView.VERTICAL, false)
+        canContentView.addOnScrollListener(scrollListener)
         val adapter = object : BaseQuickAdapter<VideoDetails, BaseViewHolder>(R.layout.item_video, dataList) {
             override fun convert(helper: BaseViewHolder, item: VideoDetails) {
                 val videoView = helper.getView<VideoContentView>(R.id.vvContent)
@@ -44,10 +46,33 @@ class VideoFragment : BaseRefreshFragment<VideoDetails>(), VideoView {
             }
         }
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { mAdapter, _, position ->
-            val info = mAdapter.getItem(position) as NewsInfo? ?: return@OnItemClickListener
-            info.display_url?.let { NoHeadCommonWebActivity.showClass(_mActivity, it) }
+//            val info = mAdapter.getItem(position) as NewsInfo? ?: return@OnItemClickListener
+//            info.display_url?.let { NoHeadCommonWebActivity.showClass(_mActivity, it) }
         }
         return adapter
+    }
+
+
+    private val scrollListener = object : RecyclerView.OnScrollListener() {
+
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+//                val lastVisibleItem = firstVisibleItem + visibleItemCount
+//                //大于0说明有播放
+//                if (GSYVideoManager.instance().playPosition >= 0) {
+//                    //当前播放的位置
+//                    val position = GSYVideoManager.instance().playPosition
+//                    //对应的播放列表TAG
+//                    if (GSYVideoManager.instance().playTag == ListNormalAdapter.TAG && (position < firstVisibleItem || position > lastVisibleItem)) {
+//                        if (GSYVideoManager.isFullState(_mActivity)) {
+//                            return
+//                        }
+//                        //如果滑出去了上面和下面就是否，和今日头条一样
+//                        GSYVideoManager.releaseAllVideos()
+//                        adapter.notifyDataSetChanged()
+//                    }
+//                }
+        }
     }
 
     override fun refreshDataList() {
@@ -56,5 +81,27 @@ class VideoFragment : BaseRefreshFragment<VideoDetails>(), VideoView {
 
     override fun getVideoListSuccess(videoList: MutableList<VideoDetails>?) {
         loadDataSuccess(videoList)
+    }
+
+    override fun onBackPressedSupport(): Boolean {
+        if (GSYVideoManager.backFromWindowFull(_mActivity)) {
+            return false
+        }
+        return super.onBackPressedSupport()
+    }
+
+    override fun onSupportInvisible() {
+        super.onSupportInvisible()
+        GSYVideoManager.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        GSYVideoManager.onResume()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        GSYVideoManager.releaseAllVideos()
     }
 }

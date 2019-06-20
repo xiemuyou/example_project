@@ -1,7 +1,9 @@
 package com.doushi.test.myproject.base.component;
 
 import android.os.Bundle;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 
 import com.blankj.utilcode.util.ObjectUtils;
@@ -123,6 +125,10 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
      * 刷新数据
      */
     public abstract void refreshDataList();
+
+    public RecyclerView.Adapter getAdapter() {
+        return adapter;
+    }
 
     @Override
     public void onLoadMore() {
