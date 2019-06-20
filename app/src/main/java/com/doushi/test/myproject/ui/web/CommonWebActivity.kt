@@ -4,19 +4,15 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Bundle
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.text.TextUtils
 import android.view.View
-import android.widget.FrameLayout
 
 import com.blankj.utilcode.util.ActivityUtils
 import com.doushi.test.myproject.R
 import com.doushi.test.myproject.base.component.BaseActivity
-import com.doushi.test.myproject.global.Constants
 import com.doushi.test.myproject.global.ParamConstants
 
-import butterknife.BindView
 import kotlinx.android.synthetic.main.activity_fragment.*
 
 /**

@@ -2,13 +2,12 @@ package com.doushi.library.widgets.canrefresh;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.FloatRange;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.view.NestedScrollingChild;
-import android.support.v4.view.ViewCompat;
+import androidx.annotation.FloatRange;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.NestedScrollingChild;
+import androidx.core.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.Scroller;
 
 import com.doushi.library.R;
+import com.google.android.material.appbar.AppBarLayout;
 
 import java.util.ArrayList;
 import java.util.List;

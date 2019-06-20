@@ -1,8 +1,7 @@
 package com.doushi.test.myproject.base.mvp;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.doushi.test.myproject.base.listener.PresenterListener;
 import com.doushi.test.myproject.model.base.BaseApiResponse;

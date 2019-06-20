@@ -1,25 +1,21 @@
 package com.doushi.test.myproject.ui.refresh;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.blankj.utilcode.util.ObjectUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.doushi.library.global.FConstants;
 import com.doushi.library.util.ImageLoadUtils;
-import com.doushi.library.widgets.ToastUtils;
 import com.doushi.library.widgets.layoutManager.DividerItemDecoration;
 import com.doushi.test.myproject.R;
 import com.doushi.test.myproject.base.component.BaseRefreshFragment;
 import com.doushi.test.myproject.global.DefaultValue;
 import com.doushi.test.myproject.global.ParamConstants;
 import com.doushi.test.myproject.model.news.RecommendResponse;
-import com.doushi.test.myproject.model.search.SearchUserResponse;
-import com.doushi.test.myproject.model.user.UserInfo;
 import com.doushi.test.myproject.model.video.VideoDetails;
 import com.doushi.test.myproject.ui.refresh.rp.RefreshPresenter;
 import com.doushi.test.myproject.ui.refresh.rv.RefreshListView;
@@ -54,10 +50,10 @@ public class FollowFragment extends BaseRefreshFragment<VideoDetails> implements
             protected void convert(BaseViewHolder helper, VideoDetails item) {
                 helper.setText(R.id.tvUserName, item.getUserInfo().getName() + ":" + helper.getAdapterPosition());
                 ImageView ivVideoBg = helper.getView(R.id.ivVideoBg);
-                new ImageLoadUtils(FollowFragment.this).commonDisplayImage(item.getImgUrl(), ivVideoBg, DefaultValue.BACKGROUND);
+                new ImageLoadUtils(_mActivity).commonDisplayImage(item.getImgUrl(), ivVideoBg, DefaultValue.BACKGROUND);
 
                 ImageView ivHead = helper.getView(R.id.ivUserAvatar);
-                new ImageLoadUtils(FollowFragment.this).commonCircleImage(item.getUserInfo().getAvatarUrl(), ivHead, DefaultValue.HEAD);
+                new ImageLoadUtils(_mActivity).commonCircleImage(item.getUserInfo().getAvatarUrl(), ivHead, DefaultValue.HEAD);
             }
         };
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

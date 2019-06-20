@@ -4,10 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.FloatRange;
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewGroupCompat;
-import android.support.v4.widget.ViewDragHelper;
+import androidx.annotation.FloatRange;
+import androidx.annotation.NonNull;
+import androidx.core.view.ViewGroupCompat;
+import androidx.customview.widget.ViewDragHelper;
+
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;

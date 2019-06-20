@@ -1,12 +1,11 @@
 package com.doushi.library.util;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.Registry;
-import com.bumptech.glide.module.AppGlideModule;
 import com.bumptech.glide.module.GlideModule;
 import com.bumptech.glide.request.target.ViewTarget;
 

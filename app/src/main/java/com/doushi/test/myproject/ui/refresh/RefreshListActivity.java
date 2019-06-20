@@ -1,12 +1,11 @@
 package com.doushi.test.myproject.ui.refresh;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.blankj.utilcode.util.ObjectUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.doushi.library.util.ImageLoadUtils;
@@ -16,7 +15,6 @@ import com.doushi.test.myproject.base.component.BaseRefreshActivity;
 import com.doushi.test.myproject.global.DefaultValue;
 import com.doushi.test.myproject.global.ParamConstants;
 import com.doushi.test.myproject.model.news.RecommendResponse;
-import com.doushi.test.myproject.model.search.SearchUserResponse;
 import com.doushi.test.myproject.model.user.UserInfo;
 import com.doushi.test.myproject.model.video.VideoDetails;
 import com.doushi.test.myproject.ui.refresh.rp.RefreshPresenter;

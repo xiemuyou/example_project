@@ -6,13 +6,16 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.CallSuper;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import android.os.PersistableBundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -56,10 +59,9 @@ public class GPreviewActivity extends FragmentActivity {
     /***默认显示***/
     private boolean isShow = true;
 
-    @CallSuper
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
         if (setContentLayout() == 0) {
             setContentView(R.layout.activity_image_preview_photo);
         } else {
@@ -68,6 +70,20 @@ public class GPreviewActivity extends FragmentActivity {
         initData();
         initView();
     }
+
+// TODO: 2019/6/20
+//    @CallSuper
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        if (setContentLayout() == 0) {
+//            setContentView(R.layout.activity_image_preview_photo);
+//        } else {
+//            setContentView(setContentLayout());
+//        }
+//        initData();
+//        initView();
+//    }
 
     @Override
     protected void onDestroy() {

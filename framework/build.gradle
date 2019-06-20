@@ -43,7 +43,7 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.jar'])
 
     def androidDependencies = rootProject.ext.androidDependencies
     def viewDependencies = rootProject.ext.viewDependencies

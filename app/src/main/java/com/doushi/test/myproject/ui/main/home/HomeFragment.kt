@@ -1,7 +1,7 @@
 package com.doushi.test.myproject.ui.main.home
 
 import android.os.Bundle
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 
 import com.doushi.test.myproject.R
 import com.doushi.test.myproject.base.component.BaseFragment

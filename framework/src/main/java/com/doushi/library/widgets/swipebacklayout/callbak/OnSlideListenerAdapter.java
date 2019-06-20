@@ -1,6 +1,6 @@
 package com.doushi.library.widgets.swipebacklayout.callbak;
 
-import android.support.annotation.FloatRange;
+import androidx.annotation.FloatRange;
 
 /**
  * Created by Oubowu on 2016/9/23 0:05.

@@ -1,7 +1,7 @@
 package com.doushi.test.myproject.ui.main
 
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 
 import com.blankj.utilcode.util.ObjectUtils
 import com.doushi.test.myproject.R

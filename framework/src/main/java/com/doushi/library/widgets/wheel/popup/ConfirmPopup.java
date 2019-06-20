@@ -2,11 +2,11 @@ package com.doushi.library.widgets.wheel.popup;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.doushi.library.R;
 import com.doushi.library.widgets.wheel.util.ConvertUtils;
 
 //import cn.qqtheme.framework.util.ConvertUtils;

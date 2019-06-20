@@ -3,14 +3,9 @@ package com.doushi.test.myproject.ui.web
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.ImageView
-import com.blankj.utilcode.util.SizeUtils
-import com.doushi.library.util.ViewUtil
-import com.doushi.library.widgets.statusbar.StatusBarCompat
+import androidx.fragment.app.FragmentManager
 import com.doushi.test.myproject.R
 import com.doushi.test.myproject.base.component.BaseSwipeActivity
 import kotlinx.android.synthetic.main.activity_fragment.*

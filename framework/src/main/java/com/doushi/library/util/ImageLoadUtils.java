@@ -3,9 +3,8 @@ package com.doushi.library.util;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Looper;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -35,10 +34,6 @@ public class ImageLoadUtils {
 
     public ImageLoadUtils(Activity activity) {
         requestManager = Glide.with(activity);
-    }
-
-    public ImageLoadUtils(Fragment fragment) {
-        requestManager = Glide.with(fragment);
     }
 
     public ImageLoadUtils(Context context) {

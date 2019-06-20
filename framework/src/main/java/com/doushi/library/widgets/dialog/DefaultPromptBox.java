@@ -1,8 +1,8 @@
 package com.doushi.library.widgets.dialog;
 
 import android.content.Context;
-import android.support.annotation.ColorRes;
-import android.support.annotation.StringRes;
+import androidx.annotation.ColorRes;
+import androidx.annotation.StringRes;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;

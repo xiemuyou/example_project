@@ -1,7 +1,7 @@
 package com.doushi.test.myproject.base.component;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * 懒加载 Fragment基类

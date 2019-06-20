@@ -1,14 +1,14 @@
 package com.doushi.library.widgets;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 /**
  * Created by xuleyuan on 22/11/2017
  * 百分比TextView，改完类名直接把textSize改为设计稿的px，就可以了，记住是px,不要除2
  */
 
-public class PercentTextView extends android.support.v7.widget.AppCompatTextView {
+public class PercentTextView extends androidx.appcompat.widget.AppCompatTextView {
 
     public PercentTextView(Context context) {
         super(context);

@@ -1,7 +1,7 @@
 package com.doushi.library.widgets.wheel.picker;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.doushi.library.widgets.wheel.entiry.CarNumberCity;
 import com.doushi.library.widgets.wheel.entiry.CarNumberProvince;

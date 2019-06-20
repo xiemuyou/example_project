@@ -9,7 +9,7 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
-import android.support.annotation.FloatRange;
+import androidx.annotation.FloatRange;
 import android.view.View;
 
 /**

@@ -7,9 +7,9 @@ allprojects {
 
 ext {
     //Android
-    androidCompileSdkVersion = 27
+    androidCompileSdkVersion = 28
     androidBuildToolsVersion = "28.0.3"
-    androidMinSdkVersion = 17
+    androidMinSdkVersion = 19
     anroidTargetSdkVersion = 27
 
     //ViewLibraries
@@ -18,7 +18,7 @@ ext {
     //fragmentation fragment封装 https://github.com/YoKeyword/Fragmentation
     fragmentationVersion = "1.3.3"
     //butterknife view注入 https://github.com/JakeWharton/butterknife
-    butterKnifeVersion = '8.7.0'
+    butterKnifeVersion = '10.0.0'
     //vlayout 整套布局方案和布局间的组件复用 https://github.com/alibaba/vlayout/
     vlayoutVersion = "1.2.8@aar"
     //SmartTabLayout 需要用到的Util //https://github.com/ogaclejapan/SmartTabLayout
@@ -49,13 +49,13 @@ ext {
     leakcanaryReleaseVersion = "1.5.4"
 
     androidDependencies = [
-            recyclerView     : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
-            appcompat_v7     : "com.android.support:appcompat-v7:${supportLibraryVersion}",
-            support_v4       : "com.android.support:support-v4:${supportLibraryVersion}",
-            design           : "com.android.support:design:${supportLibraryVersion}",
-            cardview         : "com.android.support:cardview-v7:${supportLibraryVersion}",
+            recyclerView     : 'androidx.recyclerview:recyclerview:1.0.0',
+            appcompat_v7     : 'androidx.appcompat:appcompat:1.0.0',
+            support_v4       : 'androidx.legacy:legacy-support-v4:1.0.0',
+            design           : 'com.google.android.material:material:1.0.0',
+            cardview         : 'androidx.cardview:cardview:1.0.0',
             annotations      : "com.android.support:support-annotations:${supportLibraryVersion}",
-            constraint_layout: "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
+            constraint_layout: 'androidx.constraintlayout:constraintlayout:1.1.3',
     ]
 
     viewDependencies = [

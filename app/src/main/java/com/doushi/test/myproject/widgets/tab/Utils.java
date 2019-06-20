@@ -16,8 +16,8 @@
  */
 package com.doushi.test.myproject.widgets.tab;
 
-import android.support.v4.view.MarginLayoutParamsCompat;
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.MarginLayoutParamsCompat;
+import androidx.core.view.ViewCompat;
 import android.view.View;
 import android.view.ViewGroup;
 

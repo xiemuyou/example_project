@@ -1,6 +1,6 @@
 package com.doushi.library.widgets.swipebacklayout.callbak;
 
-import android.support.annotation.FloatRange;
+import androidx.annotation.FloatRange;
 
 import com.doushi.library.widgets.swipebacklayout.widget.SlideBackLayout;
 

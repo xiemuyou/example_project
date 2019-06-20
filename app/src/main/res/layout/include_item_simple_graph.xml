@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clItemSimpleGraph"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -191,5 +191,5 @@
                 android:paddingEnd="@dimen/px_36"
                 android:src="@drawable/item_more" />
         </RelativeLayout>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>

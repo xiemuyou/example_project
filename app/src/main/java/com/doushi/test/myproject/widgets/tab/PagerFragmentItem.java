@@ -1,7 +1,8 @@
 package com.doushi.test.myproject.widgets.tab;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
+import androidx.fragment.app.Fragment;
 
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 

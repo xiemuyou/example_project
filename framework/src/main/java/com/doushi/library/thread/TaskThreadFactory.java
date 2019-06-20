@@ -1,6 +1,6 @@
 package com.doushi.library.thread;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.TextUtils;
 
 import java.util.concurrent.ThreadFactory;

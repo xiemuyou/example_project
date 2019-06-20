@@ -50,7 +50,8 @@ class NewsDetailsActivity : BaseActivity(), ConsultWebCallback.ConsultCallBack {
 //            JsBridgeWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null)
 //        }
 
-        wvNewsContent.settings.javaScriptEnabled = true
+        //TODO 崩溃 ,先注释
+//        wvNewsContent.settings.javaScriptEnabled = true
         wvNewsContent.addJavascriptInterface(this, "App")
         wvNewsContent.addJavascriptInterface(ConsultWebCallback(this), "SuperCall")
         wvNewsContent.loadDataWithBaseURL(null, content, "text/html", "utf-8", null)

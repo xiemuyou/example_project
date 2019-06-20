@@ -3,7 +3,7 @@ package com.doushi.library.widgets;
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
-import android.support.annotation.ColorRes;
+import androidx.annotation.ColorRes;
 
 import com.doushi.library.R;
 

@@ -1,8 +1,10 @@
 package com.doushi.test.myproject.widgets.video;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.blankj.utilcode.util.StringUtils;
-import com.doushi.library.util.DateUtil;
 import com.doushi.library.util.ImageLoadUtils;
 import com.doushi.test.myproject.R;
 import com.doushi.test.myproject.base.component.BaseFragment;
@@ -22,6 +21,7 @@ import com.doushi.test.myproject.global.DefaultValue;
 import com.doushi.test.myproject.model.user.UserInfo;
 import com.doushi.test.myproject.model.video.VideoDetails;
 import com.doushi.test.myproject.widgets.extra.LineSpaceExtraCompatTextView;
+import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 //import com.doushi.library.util.StringUtils;
 //import com.doushi.library.util.VerificationUtils;
 //import com.doushi.library.widgets.linespace.LineSpaceExtraCompatTextView;
@@ -48,7 +48,6 @@ import com.doushi.test.myproject.widgets.extra.LineSpaceExtraCompatTextView;
 //import com.kingnet.videoplayer.ui.BaseVideoPlayerView;
 
 import org.jetbrains.annotations.NotNull;
-import org.litepal.crud.callback.SaveCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,11 +73,13 @@ public class VideoContentView extends RelativeLayout {
     ImageView ivUserPortrait;
     @BindView(R.id.flUserAvatar)
     FrameLayout flUserAvatar;
+    @BindView(R.id.vpContent)
+    StandardGSYVideoPlayer vpContent;
 
     //    private OnInformationClickListener informationClickListener;
     private int position;
     private VideoDetails item;
-    private BaseFragment baseFragment;
+    private Context context;
     /**
      * 数据上报需要的pos
      */
@@ -104,6 +105,7 @@ public class VideoContentView extends RelativeLayout {
     }
 
     private void init(Context context) {
+        this.context = context;
         View childView = LayoutInflater.from(context).inflate(R.layout.view_video_item, this, true);
         ButterKnife.bind(this, childView);
     }
@@ -118,32 +120,18 @@ public class VideoContentView extends RelativeLayout {
 
     public void setItemVideoContent(VideoDetails info, BaseFragment baseFragment, boolean showCrateTime, boolean isUserClick) {
         this.item = info;
-        this.baseFragment = baseFragment;
         setNickOrCreateTimeOrCommentCount(tvCommentOrCreateTime, info, showCrateTime, isUserClick);
         UserInfo uInfo = item.getUserInfo();
         if (uInfo != null) {
             flUserAvatar.setVisibility(VISIBLE);
-            new ImageLoadUtils(baseFragment).commonCircleImage(uInfo.getAvatarUrl(), ivUserPortrait, DefaultValue.HEAD);
+            new ImageLoadUtils(context).commonCircleImage(uInfo.getAvatarUrl(), ivUserPortrait, DefaultValue.HEAD);
         }
-        //视频描述
-        //置頂图标占位空格符
-//        String emptyTop = "       ";
-//        String title = item.isTopFlag() ? emptyTop + item.getTitle() : item.getTitle();
         tvVideoDescribe.setText(info.getDescription());
-
-        //设置点赞
-//        if (item.validReadFlag()) {
-//            praiseView.setVisibility(View.INVISIBLE);
-//        } else {
-//            praiseView.setVisibility(View.INVISIBLE);
-//        }
-//        praiseView.setPraise(item.getLike(), item.getLike_count(), item.getDislike_count());
-//        VideoDetails video = ObjectUtils.isNotEmpty(item.getVideos()) ? item.getVideos().get(0) : null;
-
-        tvVideoTime.setText("4:01"/*VideoHelper.Companion.getVideoDuration(video.getDuration())*/);
-
-        new ImageLoadUtils(baseFragment).commonRoundImage(item.getImgUrl(), vflVideoContent, SizeUtils.dp2px(6f), DefaultValue.RADIUS_BACKGROUND);
-//        new ImageLoadUtils(baseFragment).commonRoundImage(item.getImgUrl(), vflVideoContent, 6, DefaultValue.BACKGROUND);
+        tvVideoTime.setText("4:01");
+        new ImageLoadUtils(context).commonRoundImage(item.getImgUrl(), vflVideoContent, SizeUtils.dp2px(6f), DefaultValue.RADIUS_BACKGROUND);
+        setVideoPlay(info.getMp4Url(), info.getDescription(), String.valueOf(info.getVid()));
+        tvVideoTime.setVisibility(View.GONE);
+        vflVideoContent.setVisibility(View.GONE);
     }
 
     /**
@@ -158,26 +146,28 @@ public class VideoContentView extends RelativeLayout {
             return;
         }
         String commentOrCreateTime = "100评论  13:23";
-//        String commentCount = StringUtils.getString(info.getComment_count());
-//        String createTime = DateUtil.getStringTime(info.getCreate_time());
-//        String nick = info.getUinfo() != null ? info.getUinfo().getNickname() : "";
-//        //3小时以内,显示时间
-//        if (showCreateTime) {
-//            //显示用户头像,显示评论数+时间
-//            if (/*baseFragment instanceof FollowFragment ||*/ !isUserClick) {
-//                commentOrCreateTime = getContext().getString(R.string.comment_create_time, commentCount, createTime);
-//            } else {
-//                commentOrCreateTime = getContext().getString(R.string.nick_comment_create_time, nick, commentCount, createTime);
-//            }
-//        } else {
-//            //显示用户头像,显示评论数+时间
-//            if (/*baseFragment instanceof FollowFragment || */!isUserClick) {
-//                commentOrCreateTime = getContext().getString(R.string.number_comment, commentCount);
-//            } else {
-//                commentOrCreateTime = getContext().getString(R.string.nick_comment, nick, commentCount);
-//            }
-//        }
         tvCommentOrCreateTime.setText(commentOrCreateTime);
+    }
+
+    private void setVideoPlay(String videoUrl, String videoTitle, String videoTag) {
+        vpContent.setUpLazy(videoUrl, true, null, null, videoTitle);
+        //增加title
+        vpContent.getTitleTextView().setVisibility(View.GONE);
+        //设置返回键
+        vpContent.getBackButton().setVisibility(View.GONE);
+        //设置全屏按键功能
+        vpContent.getFullscreenButton().setOnClickListener(v -> vpContent.startWindowFullscreen(context, false, true));
+        //防止错位设置
+        vpContent.setPlayTag(videoTag);
+        vpContent.setPlayPosition(position);
+        //是否根据视频尺寸，自动选择竖屏全屏或者横屏全屏
+        vpContent.setAutoFullWithSize(true);
+        //音频焦点冲突时是否释放
+        vpContent.setReleaseWhenLossAudio(false);
+        //全屏动画
+        vpContent.setShowFullAnimation(true);
+        //小屏时不触摸滑动
+        vpContent.setIsTouchWiget(false);
     }
 
     @OnClick({R.id.praiseView, R.id.tvCommentOrCreateTime, R.id.flUserAvatar, R.id.ivContentMore})

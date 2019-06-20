@@ -1,7 +1,7 @@
 package com.doushi.library.widgets.wheel.picker;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;

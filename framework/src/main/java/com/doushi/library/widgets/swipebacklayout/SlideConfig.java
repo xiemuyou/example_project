@@ -1,6 +1,6 @@
 package com.doushi.library.widgets.swipebacklayout;
 
-import android.support.annotation.FloatRange;
+import androidx.annotation.FloatRange;
 
 /**
  * Created by Oubowu on 2016/9/22 23:37.

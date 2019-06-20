@@ -1,7 +1,7 @@
 package com.doushi.library.widgets.emptyview;
 
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
 
 import com.doushi.library.R;
 

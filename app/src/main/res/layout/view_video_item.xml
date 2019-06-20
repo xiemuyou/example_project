@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mLayoutParent"
     android:layout_width="match_parent"
@@ -38,12 +38,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lsecVideoTitle">
 
+        <!--视频播放器-->
+        <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+            android:id="@+id/vpContent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_video_height" />
+
         <ImageView
             android:id="@+id/vflVideoContent"
             android:layout_width="match_parent"
-            android:layout_height="202.5dp"
+            android:layout_height="@dimen/item_video_height"
             android:contentDescription="@string/background"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             app:layout_constraintTop_toBottomOf="@+id/tvVideoDescribe" />
 
         <TextView
@@ -85,4 +91,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

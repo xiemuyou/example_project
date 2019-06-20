@@ -1,6 +1,5 @@
 package com.doushi.library.widgets.adjustlayout;
 
-import android.support.constraint.ConstraintLayout;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +7,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.doushi.library.widgets.KeepDesignValueUtils;
 

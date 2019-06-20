@@ -1,13 +1,11 @@
 package com.doushi.library.widgets.adjustlayout;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.doushi.library.FApplication;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * @author xuleyuan

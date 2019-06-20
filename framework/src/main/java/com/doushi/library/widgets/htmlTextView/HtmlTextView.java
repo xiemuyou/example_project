@@ -1,12 +1,10 @@
 package com.doushi.library.widgets.htmlTextView;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.widget.TextView;
 
 import java.io.InputStream;
 
