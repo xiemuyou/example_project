@@ -22,7 +22,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
             android:name=".ui.news.NewsDetailsActivity"
