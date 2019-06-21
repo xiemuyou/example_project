@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tvMenuContent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mLayoutParent"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/px_200"
-    android:gravity="start|center_vertical"
-    android:padding="@dimen/px_36" />
+    android:layout_height="@dimen/px_108"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:paddingLeft="@dimen/px_36"
+    android:paddingRight="@dimen/px_36">
+
+    <TextView
+        android:id="@+id/tvMenuContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="@string/help"
+        android:textColor="@color/text_color_2C2C2C"
+        android:textSize="@dimen/px_32_sp" />
+
+    <ImageView
+        android:layout_width="@dimen/px_12"
+        android:layout_height="@dimen/px_24"
+        android:layout_gravity="center_vertical|end"
+        android:contentDescription="@string/arrow"
+        android:src="@drawable/ic_forward_grey" />
+
+    <!--分割线-->
+    <ImageView
+        android:id="@+id/ivItemDecoration"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_2"
+        android:layout_gravity="bottom"
+        android:background="@color/color_F4F4F4"
+        android:contentDescription="@string/line" />
+</FrameLayout>
+

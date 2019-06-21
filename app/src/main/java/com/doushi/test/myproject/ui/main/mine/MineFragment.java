@@ -42,15 +42,12 @@ public class MineFragment extends BaseFragment {
     RelativeLayout rlMineHead;
     @BindView(R.id.tvMineName)
     TextView tvMineName;
-    @BindView(R.id.mPullToZoomScrollViewEx)
-    PullToZoomScrollViewEx mPullToZoomScrollViewEx;
+    @BindView(R.id.pzvMineScroll)
+    PullToZoomScrollViewEx pzvMineScroll;
 
     private ImageView ivZoomHead, ivMineUserAvatar;
     private TextView tvMineUserName;
-    RecyclerView rvContentView;
-
-    private final int radius = 13;
-    private final int sampling = 9;
+    private RecyclerView rvContentView;
 
     public static MineFragment newInstance() {
         Bundle args = new Bundle();
@@ -67,8 +64,8 @@ public class MineFragment extends BaseFragment {
     @Override
     public void initEnv() {
         rlMineHead.setAlpha(0f);
-        View headView = LayoutInflater.from(_mActivity).inflate(R.layout.view_mine_head, mPullToZoomScrollViewEx, false);
-        View zoomView = LayoutInflater.from(_mActivity).inflate(R.layout.view_mine_zoom, mPullToZoomScrollViewEx, false);
+        View headView = LayoutInflater.from(_mActivity).inflate(R.layout.view_mine_head, pzvMineScroll, false);
+        View zoomView = LayoutInflater.from(_mActivity).inflate(R.layout.view_mine_zoom, pzvMineScroll, false);
 
         rvContentView = new RecyclerView(_mActivity);
         ViewGroup.LayoutParams vglp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -81,11 +78,11 @@ public class MineFragment extends BaseFragment {
         ivMineUserAvatar = headView.findViewById(R.id.ivMineUserAvatar);
         ivZoomHead = zoomView.findViewById(R.id.ivZoomHead);
 
-        mPullToZoomScrollViewEx.setHeaderView(headView);
-        mPullToZoomScrollViewEx.setZoomView(zoomView);
-        mPullToZoomScrollViewEx.setScrollContentView(rvContentView);
-        mPullToZoomScrollViewEx.setHeaderLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, SizeUtils.dp2px(225F)));
-        mPullToZoomScrollViewEx.getPullRootView().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, sx, sy, osx, osy) -> {
+        pzvMineScroll.setHeaderView(headView);
+        pzvMineScroll.setZoomView(zoomView);
+        pzvMineScroll.setScrollContentView(rvContentView);
+        pzvMineScroll.setHeaderLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, SizeUtils.dp2px(225F)));
+        pzvMineScroll.getPullRootView().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, sx, sy, osx, osy) -> {
             if (sy < SizeUtils.dp2px(100F)) {
                 float alpha = ((float) sy) / SizeUtils.dp2px(100F);
                 rlMineHead.setAlpha(alpha);
@@ -97,6 +94,8 @@ public class MineFragment extends BaseFragment {
     }
 
     private void setMineData() {
+        int radius = 13;
+        int sampling = 9;
         ivMineUserAvatar.setImageResource(DefaultValue.MINE_HEAD_BLUR);
         //设置高斯模糊背景
         new ImageLoadUtils(_mActivity).commonBlurImage(DefaultValue.HEAD_BLUR, ivZoomHead, radius, sampling, DefaultValue.HEAD_BLUR);
@@ -104,8 +103,8 @@ public class MineFragment extends BaseFragment {
         tvMineName.setText(R.string.mine);
 
         MineMenuAdapter menuAdapter = new MineMenuAdapter();
-        List<MineMenuData> menuList = new ArrayList<>(15);
-        for (int i = 0; i < 15; i++) {
+        List<MineMenuData> menuList = new ArrayList<>(8);
+        for (int i = 0; i < 8; i++) {
             menuList.add(new MineMenuData("跳转" + i));
         }
         rvContentView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false) {

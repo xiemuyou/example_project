@@ -6,7 +6,7 @@
     android:background="@color/white">
 
     <com.doushi.library.widgets.pullzoom.PullToZoomScrollViewEx
-        android:id="@+id/mPullToZoomScrollViewEx"
+        android:id="@+id/pzvMineScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

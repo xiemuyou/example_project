@@ -3,8 +3,10 @@ package com.doushi.test.myproject.ui.main.video
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.SizeUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import com.doushi.library.util.ViewUtil
 
 import com.doushi.test.myproject.R
 import com.doushi.test.myproject.base.component.BaseRefreshFragment
@@ -13,6 +15,7 @@ import com.doushi.test.myproject.ui.main.video.vp.VideoPresenter
 import com.doushi.test.myproject.ui.main.video.vv.VideoView
 import com.doushi.test.myproject.widgets.video.VideoContentView
 import com.shuyu.gsyvideoplayer.GSYVideoManager
+import com.shuyu.gsyvideoplayer.utils.CommonUtil
 
 /**
  * @author xiemy
@@ -32,6 +35,11 @@ class VideoFragment : BaseRefreshFragment<VideoDetails>(), VideoView {
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun initEnv() {
+        super.initEnv()
+        ViewUtil.setMargins(refresh, 0, CommonUtil.getStatusBarHeight(_mActivity), 0, 0)
     }
 
     override fun getRefreshAdapter(dataList: MutableList<VideoDetails>?): RecyclerView.Adapter<*> {

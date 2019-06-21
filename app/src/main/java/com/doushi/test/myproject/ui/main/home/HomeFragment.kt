@@ -2,6 +2,7 @@ package com.doushi.test.myproject.ui.main.home
 
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
+import com.doushi.library.util.ViewUtil
 
 import com.doushi.test.myproject.R
 import com.doushi.test.myproject.base.component.BaseFragment
@@ -14,6 +15,7 @@ import com.doushi.test.myproject.widgets.tab.PagerFragmentItem
 import com.doushi.test.myproject.znet.InterfaceConfig
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems
+import com.shuyu.gsyvideoplayer.utils.CommonUtil
 
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -39,6 +41,7 @@ class HomeFragment : BaseFragment(), MainView {
     }
 
     private fun initTabLayout(res: NewsSortListResponse) {
+        ViewUtil.setMargins(ablHomePage, 0, CommonUtil.getStatusBarHeight(_mActivity), 0, 0)
         val creator = FragmentPagerItems.with(_mActivity)
         val fragmentPagerItems = creator.create()
         val sortList = res.data
