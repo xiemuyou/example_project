@@ -3,28 +3,32 @@
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:padding="@dimen/px_32">
+    android:background="@color/white">
 
-    <TextView
+    <com.doushi.library.widgets.pullzoom.PullToZoomScrollViewEx
+        android:id="@+id/mPullToZoomScrollViewEx"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/mine"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent" />
 
-    <!--帮助-->
-    <TextView
-        android:id="@+id/tvMineHelp"
+    <RelativeLayout
+        android:id="@+id/rlMineHead"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/bgColor"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="@string/help"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="@dimen/CommonFontSize_Middle" />
+        android:layout_height="@dimen/px_148"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/px_48">
 
+        <TextView
+            android:id="@+id/tvMineName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/mine"
+            android:textColor="@color/text_color_2C2C2C"
+            android:textSize="@dimen/px_36_sp" />
+
+    </RelativeLayout>
 </FrameLayout>

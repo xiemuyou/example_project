@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/mLayoutUserInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/px_12"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/px_6"
+        android:paddingEnd="@dimen/px_36">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/projection_head_108">
+
+            <ImageView
+                android:id="@+id/ivMineUserAvatar"
+                android:layout_width="@dimen/px_108"
+                android:layout_height="@dimen/px_108"
+                android:layout_gravity="center"
+                android:contentDescription="@string/avatar" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvMineUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color_2C2C2C"
+                android:textSize="@dimen/px_48_sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/mTextUserTips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_12"
+                android:text="@string/edit_user"
+                android:textColor="#805e5e5e"
+                android:textSize="@dimen/px_28_sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="@dimen/px_12"
+            android:layout_height="@dimen/px_24"
+            android:contentDescription="@string/arrow"
+            android:src="@drawable/ic_mine_forward" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_88"
+        android:layout_marginBottom="@dimen/px_62"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/px_36"
+        android:paddingEnd="@dimen/px_36">
+
+        <LinearLayout
+            android:id="@+id/ll_user_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/follow"
+                android:textColor="@color/text_color_9F9F9F"
+                android:textSize="@dimen/px_36_sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/mTextUserFollowNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/px_8"
+                android:text="@string/rail"
+                android:textColor="@color/text_color_2C2C2C"
+                android:textSize="@dimen/px_42_sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_user_fans"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/px_36"
+                android:paddingEnd="@dimen/px_0"
+                android:text="@string/fans"
+                android:textColor="@color/text_color_9F9F9F"
+                android:textSize="@dimen/px_36_sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/mTextUserFansNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/px_8"
+                android:text="@string/rail"
+                android:textColor="@color/text_color_2C2C2C"
+                android:textSize="@dimen/px_42_sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/mImageCreator"
+            android:layout_width="@dimen/px_72"
+            android:layout_height="@dimen/px_88"
+            android:contentDescription="@string/creator"
+            android:src="@drawable/ic_creator"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/mImageFinder"
+            android:layout_width="@dimen/px_72"
+            android:layout_height="@dimen/px_88"
+            android:layout_marginStart="@dimen/px_24"
+            android:contentDescription="@string/finder"
+            android:src="@drawable/ic_finder"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

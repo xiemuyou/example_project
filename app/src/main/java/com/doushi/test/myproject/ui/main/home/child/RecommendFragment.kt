@@ -37,7 +37,7 @@ class RecommendFragment : BaseRefreshFragment<NewsInfo>(), RefreshListView {
     }
 
     override fun getRefreshAdapter(dataList: List<NewsInfo>): RecyclerView.Adapter<*> {
-        canContentView.layoutManager = LinearLayoutManager(_mActivity, LinearLayoutManager.VERTICAL, false)
+        canContentView.layoutManager = LinearLayoutManager(_mActivity, RecyclerView.VERTICAL, false)
         val adapter = object : BaseQuickAdapter<NewsInfo, BaseViewHolder>(R.layout.item_information, dataList) {
             override fun convert(helper: BaseViewHolder, item: NewsInfo) {
                 val informationItemView = helper.getView<InformationItemContentView>(R.id.informationItemView)

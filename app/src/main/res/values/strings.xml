@@ -14,5 +14,10 @@
     <!-- 我的 Start -->
     <string name="mine">我的</string>
     <string name="help">帮助</string>
+    <string name="fans">粉丝</string>
+    <string name="creator">创作</string>
+    <string name="finder">发现</string>
+    <string name="follow">关注</string>
+    <string name="edit_user">查看和编辑个人资料</string>
     <!-- 我的 End -->
 </resources>

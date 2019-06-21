@@ -45,10 +45,10 @@ class VideoFragment : BaseRefreshFragment<VideoDetails>(), VideoView {
                 videoView.setItemVideoContent(item, this@VideoFragment, true, true)
             }
         }
-        adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { mAdapter, _, position ->
+//        adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { mAdapter, _, position ->
 //            val info = mAdapter.getItem(position) as NewsInfo? ?: return@OnItemClickListener
 //            info.display_url?.let { NoHeadCommonWebActivity.showClass(_mActivity, it) }
-        }
+//        }
         return adapter
     }
 

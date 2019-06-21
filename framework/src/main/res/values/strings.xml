@@ -4,7 +4,8 @@
     <string name="app_name">三筒学堂</string>
     <string name="line">线</string>
     <string name="background">背景</string>
-    <string name="head">头像</string>
+    <string name="head">头部</string>
+    <string name="avatar">头像</string>
     <string name="share">分享</string>
     <string name="wechat">微信</string>
     <string name="wechat_moments">朋友圈</string>
@@ -49,6 +50,8 @@
     <string name="number_one">1</string>
     <string name="quotes">“%1$s”</string>
     <string name="percentage">%1$s%</string>
+    <string name="rail">-</string>
+    <string name="arrow">箭头</string>
     <!--数字/符号 -->
 
     <string name="cancel">取消</string>
@@ -87,6 +90,7 @@
     <string name="other_click_retry">点击屏幕重试</string>
     <string name="other_unlogin">您还未登录</string>
     <string name="login">登\u0020录</string>
+    <string name="no_login">未登录</string>
     <string name="share_say_something">随便说两句吧</string>
     <string name="dialog_bind_phone">绑定手机号</string>
     <string name="dialog_bind_phone_content">未实名认证的账号无法进行回复，请尽快完成手机号验证</string>

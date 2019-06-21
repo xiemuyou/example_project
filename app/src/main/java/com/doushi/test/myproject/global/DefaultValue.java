@@ -30,4 +30,12 @@ public class DefaultValue {
     public static final int RADIUS_LEFT_BACKGROUND = R.drawable.shape_grey_solid_f4_layout_left;
 
     public static final int RADIUS_RIGHT_BACKGROUND = R.drawable.shape_grey_solid_f4_layout_right;
+    /**
+     * 头像--高斯模糊
+     */
+    public static final int MINE_HEAD_BLUR = R.drawable.ic_default_head_circle;
+    /**
+     * 头像--高斯模糊
+     */
+    public static final int HEAD_BLUR = R.drawable.ic_default_head_blur;
 }

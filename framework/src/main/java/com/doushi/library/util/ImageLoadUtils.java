@@ -3,8 +3,12 @@ package com.doushi.library.util;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Looper;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RawRes;
+
 import android.view.View;
 import android.widget.ImageView;
 
@@ -16,6 +20,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 
+import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
@@ -92,6 +97,10 @@ public class ImageLoadUtils {
             requestManager.asBitmap().transition(new BitmapTransitionOptions().crossFade(withCrossFadeTime))
                     .load(imgUrl).apply(getRequestOptions(drawableRes)).into(imageView);
         }
+    }
+
+    public void commonBlurImage(@RawRes @DrawableRes @Nullable Integer resourceId, @NonNull ImageView imageView, int radius, int sampling, @DrawableRes int drawableRes) {
+        requestManager.load(resourceId).apply(getRequestOptions(drawableRes).transform(new BlurTransformation(radius, sampling))).into(imageView);
     }
 
     private RequestOptions getRequestOptions(@DrawableRes int drawableRes) {
