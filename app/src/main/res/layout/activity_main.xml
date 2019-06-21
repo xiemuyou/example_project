@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/color_F2F2F2"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <ImageView
@@ -17,8 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="@string/home"
-            android:paddingBottom="10dp"
             android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:src="@drawable/home_select" />
 
         <ImageView
@@ -27,8 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="@string/video"
-            android:paddingBottom="10dp"
             android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:src="@drawable/video_unselect" />
 
         <ImageView
@@ -37,8 +37,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="@string/mine"
-            android:paddingBottom="10dp"
             android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:src="@drawable/mine_unselect" />
     </LinearLayout>
 
@@ -47,7 +47,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/llHomeBottom"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:background="@color/white"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_above="@id/llHomeBottom"
+        android:background="@drawable/page_bottom_line"
+        android:contentDescription="@string/line" />
+
 </RelativeLayout>

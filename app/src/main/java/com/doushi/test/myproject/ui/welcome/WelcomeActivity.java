@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.doushi.test.myproject.R;
 import com.doushi.test.myproject.base.component.BaseActivity;
 import com.doushi.test.myproject.ui.main.MainActivity;
@@ -30,6 +32,7 @@ public class WelcomeActivity extends BaseActivity implements WelcomeView {
 
     @Override
     public void initEnv() {
+        setStatusLight(ContextCompat.getColor(this, R.color.white));
         new WelcomePresenter(this).loginByToken();
     }
 

@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 
 import com.blankj.utilcode.util.ObjectUtils
+import com.blankj.utilcode.util.SizeUtils
+import com.doushi.library.widgets.statusbar.StatusBarCompat
 import com.doushi.test.myproject.R
 import com.doushi.test.myproject.base.component.BaseActivity
 import com.doushi.test.myproject.ui.main.home.HomeFragment
@@ -26,11 +28,13 @@ class MainActivity : BaseActivity() {
     private var showTabIndex = HomeFragment.MAIN_INDEX
 
     override fun getLayoutId(savedInstanceState: Bundle?): Int {
+        setStatusTransparent()
         return R.layout.activity_main
     }
 
     override fun initEnv() {
-        setStatusLight(ContextCompat.getColor(this, R.color.white))
+        // 状态栏颜色修改
+        StatusBarCompat.setLightStatusBar(window, true)
         val firstFragment = findFragment(HomeFragment::class.java)
         if (firstFragment == null) {
             mFragments[HomeFragment.MAIN_INDEX] = HomeFragment.newInstance()

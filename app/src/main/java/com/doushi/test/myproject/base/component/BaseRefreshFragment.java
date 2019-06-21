@@ -85,12 +85,9 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
     public void initEnv() {
         followList = new ArrayList<>();
         OtherViewHolder otherHolder = new OtherViewHolder(_mActivity);
-        otherHolder.setOnEmptyRetryListener(new OtherViewHolder.EmptyRetryListener() {
-            @Override
-            public void onEmptyRetryListener() {
-                page = 0;
-                refreshDataList();
-            }
+        otherHolder.setOnEmptyRetryListener(() -> {
+            page = 0;
+            refreshDataList();
         });
         ovHintView.setHolder(otherHolder);
         ovHintView.showLoadingView();

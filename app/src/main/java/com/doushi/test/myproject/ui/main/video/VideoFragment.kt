@@ -8,11 +8,9 @@ import com.chad.library.adapter.base.BaseViewHolder
 
 import com.doushi.test.myproject.R
 import com.doushi.test.myproject.base.component.BaseRefreshFragment
-import com.doushi.test.myproject.model.news.NewsInfo
 import com.doushi.test.myproject.model.video.VideoDetails
 import com.doushi.test.myproject.ui.main.video.vp.VideoPresenter
 import com.doushi.test.myproject.ui.main.video.vv.VideoView
-import com.doushi.test.myproject.ui.web.NoHeadCommonWebActivity
 import com.doushi.test.myproject.widgets.video.VideoContentView
 import com.shuyu.gsyvideoplayer.GSYVideoManager
 
