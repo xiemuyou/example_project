@@ -26,9 +26,8 @@
 
     </com.doushi.test.myproject.widgets.extra.LineSpaceExtraContainer>
 
-    <!--视频播放器-->
-    <com.doushi.test.myproject.ui.main.video.widget.SampleCoverVideo
-        android:id="@+id/flVideoContent"
+    <com.doushi.test.myproject.widgets.clip.RoundAngleFrameLayout
+        android:id="@+id/videoParent"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_video_height"
         android:layout_marginStart="@dimen/px_36"
@@ -36,46 +35,55 @@
         android:layout_marginEnd="@dimen/px_36"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lsecVideoTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/lsecVideoTitle"
+        app:radiusSize="@dimen/px_12">
 
-    <!--   <ImageView
-           android:id="@+id/vflVideoContent"
-           android:layout_width="match_parent"
-           android:layout_height="@dimen/item_video_height"
-           android:contentDescription="@string/background"
-           android:scaleType="fitCenter"
-           app:layout_constraintTop_toBottomOf="@+id/tvVideoDescribe" />
+        <!--视频播放器-->
+        <com.doushi.test.myproject.ui.main.video.widget.SampleCoverVideo
+            android:id="@+id/flVideoContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-       <ImageView
-           android:id="@+id/ivVideoPlay"
-           android:layout_width="@dimen/px_134"
-           android:layout_height="@dimen/px_134"
-           android:layout_gravity="center"
-           android:background="@drawable/video_click_play_selector"
-           android:contentDescription="@string/play" />
+        <!--   <ImageView
+               android:id="@+id/vflVideoContent"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/item_video_height"
+               android:contentDescription="@string/background"
+               android:scaleType="fitCenter"
+               app:layout_constraintTop_toBottomOf="@+id/tvVideoDescribe" />
 
-                   <TextView
-            android:id="@+id/tvVideoTime"
-            android:layout_width="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="@dimen/px_24"
-            android:layout_marginBottom="@dimen/px_22"
-            android:background="@drawable/shape_grey_transparent_button"
-            android:drawablePadding="@dimen/px_6"
-            android:gravity="center"
-            android:minWidth="@dimen/px_80"
-            android:paddingStart="@dimen/px_12"
-            android:paddingEnd="@dimen/px_12"
-            android:textColor="@color/white"
-            android:textSize="@dimen/px_22_sp" />
-           -->
+           <ImageView
+               android:id="@+id/ivVideoPlay"
+               android:layout_width="@dimen/px_134"
+               android:layout_height="@dimen/px_134"
+               android:layout_gravity="center"
+               android:background="@drawable/video_click_play_selector"
+               android:contentDescription="@string/play" />
+
+                       <TextView
+                android:id="@+id/tvVideoTime"
+                android:layout_width="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="@dimen/px_24"
+                android:layout_marginBottom="@dimen/px_22"
+                android:background="@drawable/shape_grey_transparent_button"
+                android:drawablePadding="@dimen/px_6"
+                android:gravity="center"
+                android:minWidth="@dimen/px_80"
+                android:paddingStart="@dimen/px_12"
+                android:paddingEnd="@dimen/px_12"
+                android:textColor="@color/white"
+                android:textSize="@dimen/px_22_sp" />
+               -->
+
+    </com.doushi.test.myproject.widgets.clip.RoundAngleFrameLayout>
 
     <include
         layout="@layout/view_information_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/ivItemDecoration"
-        app:layout_constraintTop_toBottomOf="@+id/flVideoContent" />
+        app:layout_constraintTop_toBottomOf="@+id/videoParent" />
 
     <!--分割线-->
     <ImageView
