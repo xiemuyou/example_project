@@ -12,7 +12,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     defaultConfig {
-        applicationId "com.doushi.test.myproject"
+        applicationId "com.news.example.myproject"
 
         minSdkVersion globalConfiguration.androidMinSdkVersion
         targetSdkVersion globalConfiguration.anroidTargetSdkVersion

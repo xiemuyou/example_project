@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <!--资讯描述-->
-        <com.doushi.test.myproject.widgets.extra.LineSpaceExtraContainer
+        <com.news.example.myproject.widgets.extra.LineSpaceExtraContainer
             android:id="@+id/lsecTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.doushi.test.myproject.widgets.extra.LineSpaceExtraCompatTextView
+            <com.news.example.myproject.widgets.extra.LineSpaceExtraCompatTextView
                 android:id="@+id/tvInformationTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
                 android:textColor="@color/text_color_2C2C2C"
                 android:textSize="@dimen/commonFontSize_17" />
 
-        </com.doushi.test.myproject.widgets.extra.LineSpaceExtraContainer>
+        </com.news.example.myproject.widgets.extra.LineSpaceExtraContainer>
 
         <!--单图-->
         <ImageView

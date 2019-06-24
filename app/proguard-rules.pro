@@ -266,7 +266,7 @@
 -keep class com.taobao.sophix.**{*;}
 -keep public class com.alipay.**  { *; }
 -keep class com.ta.utdid2.device.**{*;}
--keepclassmembers class com.doushi.test.myproject.Application {
+-keepclassmembers class com.test.myproject.Application {
     public <init>();
 }
 
@@ -276,7 +276,7 @@
 -dontwarn org.jdesktop.application.**
 -keep class org.jdesktop.application.** { *; }
 
--keep class * extends com.doushi.test.myproject.model.base.BaseApiResponse{*;}
--keep class com.doushi.test.myproject.model.**{*; }
+-keep class * extends com.test.myproject.model.base.BaseApiResponse{*;}
+-keep class com.test.myproject.model.**{*; }
 
 

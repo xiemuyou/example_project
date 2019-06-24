@@ -121,7 +121,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.doushi.test.myproject.widgets.tab.SmartTabLayout
+            <com.news.example.myproject.widgets.tab.SmartTabLayout
                 android:id="@+id/tlHomeHF"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/CommonHead_size"
