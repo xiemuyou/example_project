@@ -89,6 +89,13 @@ class VideoFragment : BaseRefreshFragment<VideoDetails>(), VideoView {
         loadDataSuccess(videoList)
     }
 
+    /**
+     * 刷新数据
+     */
+    fun refreshData() {
+        placedTopAutoRefresh()
+    }
+
     override fun onBackPressedSupport(): Boolean {
         if (GSYVideoManager.backFromWindowFull(_mActivity)) {
             return false

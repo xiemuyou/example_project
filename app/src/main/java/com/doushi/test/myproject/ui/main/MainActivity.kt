@@ -1,10 +1,8 @@
 package com.doushi.test.myproject.ui.main
 
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 
 import com.blankj.utilcode.util.ObjectUtils
-import com.blankj.utilcode.util.SizeUtils
 import com.doushi.library.widgets.statusbar.StatusBarCompat
 import com.doushi.test.myproject.R
 import com.doushi.test.myproject.base.component.BaseActivity
@@ -87,9 +85,16 @@ class MainActivity : BaseActivity() {
                 }
             }
 
-            VideoFragment.MAIN_INDEX -> if (!isRefreshData) {
+            VideoFragment.MAIN_INDEX -> {
                 ivMainVideo.setImageResource(R.drawable.video_select)
-                showHideFragment(mFragments[VideoFragment.MAIN_INDEX], mFragments[showTabIndex])
+                if (isRefreshData) {
+                    val videoFragment = findFragment(VideoFragment::class.java)
+                    if (ObjectUtils.isNotEmpty(videoFragment)) {
+                        videoFragment.refreshData()
+                    }
+                } else {
+                    showHideFragment(mFragments[VideoFragment.MAIN_INDEX], mFragments[showTabIndex])
+                }
             }
 
             MineFragment.MAIN_INDEX -> if (!isRefreshData) {

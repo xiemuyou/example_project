@@ -78,7 +78,7 @@ class HomeFragment : BaseFragment(), MainView {
         if (fAdapter == null) {
             return
         }
-        val fragment = fAdapter!!.getPage(showIndex)
+        val fragment = fAdapter?.getPage(showIndex)
         if (fragment is BaseRefreshFragment<*>) {
             fragment.placedTopAutoRefresh()
         }
