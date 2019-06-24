@@ -42,8 +42,7 @@
         <com.doushi.test.myproject.ui.main.video.widget.SampleCoverVideo
             android:id="@+id/flVideoContent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/px_1" />
+            android:layout_height="match_parent" />
 
         <!--   <ImageView
                android:id="@+id/vflVideoContent"

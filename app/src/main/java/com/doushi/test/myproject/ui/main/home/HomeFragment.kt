@@ -30,7 +30,17 @@ class HomeFragment : BaseFragment(), MainView {
 
     private var showIndex = 0
     private var fAdapter: FragmentPagerItemAdapter? = null
-    private var hotList: MutableList<String>? = null
+    private var bannerAdapter: SearchBannerAdapter? = null
+
+    companion object {
+        const val MAIN_INDEX = 0
+        fun newInstance(): HomeFragment {
+            val args = Bundle()
+            val fragment = HomeFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
 
     private val homePresenter by lazy {
         MainPresenter(this)
@@ -89,20 +99,6 @@ class HomeFragment : BaseFragment(), MainView {
             fragment.placedTopAutoRefresh()
         }
     }
-
-    companion object {
-
-        const val MAIN_INDEX = 0
-
-        fun newInstance(): HomeFragment {
-            val args = Bundle()
-            val fragment = HomeFragment()
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
-    private var bannerAdapter: SearchBannerAdapter? = null
 
     override fun getSortListSuccess(hotList: MutableList<String>?) {
         if (hotList != null && hotList.isNotEmpty()) {

@@ -3,6 +3,7 @@ package com.doushi.test.myproject.ui.main.recommend.adapter
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.doushi.library.widgets.ToastUtils
 import com.doushi.library.widgets.vb.BaseBannerAdapter
 import com.doushi.library.widgets.vb.VerticalBannerView
 import com.doushi.test.myproject.R
@@ -21,10 +22,9 @@ class SearchBannerAdapter(banners: List<String>) : BaseBannerAdapter<String>(ban
     }
 
     override fun setItem(view: View?, data: String?) {
-        if (view is TextView) {
-            view.text = data
+        (view as? TextView)?.text = data
+        view?.setOnClickListener {
+            ToastUtils.showToast(view.context, data)
         }
-        //view?.findViewById<TextView>(R.id.tvHomeSearch)?.text =
-        //view?.context?.getString(R.string.invite_friend_award, data?.nickname, data?.reward_value)
     }
 }

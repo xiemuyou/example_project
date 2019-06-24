@@ -12,35 +12,36 @@ import java.util.List;
  * Description:
  * <p/>
  *
- * @author rowandjj(chuyi)<br               />
+ * @author rowandjj(chuyi)<br />
  * @date 16/1/6<br/>
  * Time: 下午4:59<br/>
  */
 @SuppressWarnings("unused")
 public abstract class BaseBannerAdapter<T> {
-    private List<T> mDatas;
+
+    private List<T> mDataList;
     private OnDataChangedListener mOnDataChangedListener;
 
-    public BaseBannerAdapter(List<T> datas) {
-        mDatas = datas;
-        if (datas == null || datas.isEmpty()) {
+    public BaseBannerAdapter(List<T> dataList) {
+        mDataList = dataList;
+        if (dataList == null || dataList.isEmpty()) {
             throw new RuntimeException("nothing to show");
         }
     }
 
-    public BaseBannerAdapter(T[] datas) {
-        mDatas = new ArrayList<>(Arrays.asList(datas));
+    public BaseBannerAdapter(T[] dataList) {
+        mDataList = new ArrayList<>(Arrays.asList(dataList));
     }
 
     /**
      * 设置banner填充的数据
      */
-    public void setData(List<T> datas) {
+    public void setData(List<T> dataList) {
         //列表数据相等, 不做更新
-        if (VerificationUtils.isListEquals(mDatas, datas)) {
+        if (VerificationUtils.isListEquals(mDataList, dataList)) {
             return;
         }
-        this.mDatas = datas;
+        this.mDataList = dataList;
         notifyDataChanged();
     }
 
@@ -49,29 +50,36 @@ public abstract class BaseBannerAdapter<T> {
     }
 
     public int getCount() {
-        return mDatas == null ? 0 : mDatas.size();
+        return mDataList == null ? 0 : mDataList.size();
     }
 
-    void notifyDataChanged() {
+    private void notifyDataChanged() {
         mOnDataChangedListener.onChanged();
     }
 
     public T getItem(int position) {
-        return mDatas.get(position);
+        return mDataList.get(position);
     }
 
     /**
-     * 设置banner的样式
+     * * 设置banner的样式
+     *
+     * @param parent 父控件
+     * @return 父控件
      */
     public abstract View getView(VerticalBannerView parent);
 
     /**
      * 设置banner的数据
+     *
+     * @param data banner列表数据
      */
     public abstract void setItem(View view, T data);
 
-
     interface OnDataChangedListener {
+        /**
+         * 切换监听
+         */
         void onChanged();
     }
 }
