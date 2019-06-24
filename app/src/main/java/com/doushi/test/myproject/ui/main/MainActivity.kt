@@ -3,7 +3,7 @@ package com.doushi.test.myproject.ui.main
 import android.os.Bundle
 
 import com.blankj.utilcode.util.ObjectUtils
-import com.doushi.library.widgets.statusbar.StatusBarCompat
+import com.library.widgets.statusbar.StatusBarCompat
 import com.doushi.test.myproject.R
 import com.doushi.test.myproject.base.component.BaseActivity
 import com.doushi.test.myproject.ui.main.home.HomeFragment

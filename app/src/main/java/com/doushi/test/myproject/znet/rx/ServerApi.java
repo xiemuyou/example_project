@@ -18,12 +18,12 @@ package com.doushi.test.myproject.znet.rx;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.EncryptUtils;
-import com.doushi.library.global.FConstants;
-import com.doushi.library.thread.AbstractSafeThread;
-import com.doushi.library.thread.ThreadPool;
-import com.doushi.library.util.AppInfoUtil;
-import com.doushi.library.util.JsonUtil;
-import com.doushi.library.util.LogUtil;
+import com.library.global.FConstants;
+import com.library.thread.AbstractSafeThread;
+import com.library.thread.ThreadPool;
+import com.library.util.AppInfoUtil;
+import com.library.util.JsonUtil;
+import com.library.util.LogUtil;
 import com.doushi.test.myproject.global.Constants;
 import com.doushi.test.myproject.znet.RequestConfig;
 import com.doushi.test.myproject.znet.RequestCookie;
@@ -44,10 +44,6 @@ import java.util.Map;
 import java.util.Set;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * 网络请求

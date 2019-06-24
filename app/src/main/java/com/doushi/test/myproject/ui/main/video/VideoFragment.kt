@@ -3,10 +3,9 @@ package com.doushi.test.myproject.ui.main.video
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.blankj.utilcode.util.SizeUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.doushi.library.util.ViewUtil
+import com.library.util.ViewUtil
 
 import com.doushi.test.myproject.R
 import com.doushi.test.myproject.base.component.BaseRefreshFragment

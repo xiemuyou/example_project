@@ -1,7 +1,7 @@
 package com.doushi.test.myproject.ui.welcome;
 
-import com.doushi.library.util.AppInfoUtil;
-import com.doushi.library.util.AppIntroUtil;
+import com.library.util.AppInfoUtil;
+import com.library.util.AppIntroUtil;
 import com.doushi.test.myproject.base.mvp.BasePresenter;
 import com.doushi.test.myproject.model.base.BaseApiResponse;
 import com.doushi.test.myproject.model.user.ConfigResponse;

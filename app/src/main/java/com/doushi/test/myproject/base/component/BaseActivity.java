@@ -17,8 +17,8 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import com.blankj.utilcode.util.ObjectUtils;
-import com.doushi.library.widgets.ToastUtils;
-import com.doushi.library.widgets.statusbar.StatusBarCompat;
+import com.library.widgets.ToastUtils;
+import com.library.widgets.statusbar.StatusBarCompat;
 import com.doushi.test.myproject.Application;
 import com.doushi.test.myproject.base.listener.PresenterListener;
 import com.doushi.test.myproject.base.mvp.Presenter;

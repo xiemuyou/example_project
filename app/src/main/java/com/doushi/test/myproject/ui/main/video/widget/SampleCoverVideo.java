@@ -44,9 +44,9 @@ public class SampleCoverVideo extends StandardGSYVideoPlayer {
     @Override
     protected void init(Context context) {
         super.init(context);
-        mCoverImage = (ImageView) findViewById(R.id.thumbImage);
-        if (mThumbImageViewLayout != null &&
-                (mCurrentState == -1 || mCurrentState == CURRENT_STATE_NORMAL || mCurrentState == CURRENT_STATE_ERROR)) {
+        mCoverImage = findViewById(R.id.thumbImage);
+        boolean isVisible = mThumbImageViewLayout != null && (mCurrentState == -1 || mCurrentState == CURRENT_STATE_NORMAL || mCurrentState == CURRENT_STATE_ERROR);
+        if (isVisible) {
             mThumbImageViewLayout.setVisibility(VISIBLE);
         }
     }

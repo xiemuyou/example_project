@@ -32,6 +32,7 @@
     <string name="string_count">%1$s/%2$s</string>
     <string name="save">保存</string>
     <string name="back">返回</string>
+    <string name="close">关闭</string>
 
     <!-- 日期 时间 start-->
     <string name="data_year">年</string>

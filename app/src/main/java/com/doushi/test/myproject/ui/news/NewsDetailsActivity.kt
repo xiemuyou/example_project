@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.FutureTarget
-import com.doushi.library.FApplication
-import com.doushi.library.thread.ThreadPool
+import com.library.FApplication
+import com.library.thread.ThreadPool
 import com.doushi.test.myproject.R
 import com.doushi.test.myproject.base.component.BaseActivity
 import com.doushi.test.myproject.global.ParamConstants

@@ -4,8 +4,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.blankj.utilcode.util.Utils;
-import com.doushi.library.global.FConstants;
-import com.doushi.library.util.AppIntroUtil;
+import com.library.global.FConstants;
+import com.library.util.AppIntroUtil;
 import com.doushi.test.myproject.znet.RequestConfig;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;

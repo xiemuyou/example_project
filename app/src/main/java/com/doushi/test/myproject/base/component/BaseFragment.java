@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.ObjectUtils;
-import com.doushi.library.widgets.ToastUtils;
+import com.library.widgets.ToastUtils;
 import com.doushi.test.myproject.base.listener.PresenterListener;
 import com.doushi.test.myproject.base.mvp.Presenter;
 

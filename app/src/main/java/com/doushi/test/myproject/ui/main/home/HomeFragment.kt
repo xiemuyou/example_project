@@ -2,13 +2,12 @@ package com.doushi.test.myproject.ui.main.home
 
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
-import com.doushi.library.util.ViewUtil
+import com.library.util.ViewUtil
 
 import com.doushi.test.myproject.R
 import com.doushi.test.myproject.base.component.BaseFragment
 import com.doushi.test.myproject.base.component.BaseRefreshFragment
 import com.doushi.test.myproject.model.sort.NewsSortListResponse
-import com.doushi.test.myproject.ui.main.MainActivity
 import com.doushi.test.myproject.ui.main.home.sort.SortFragment
 import com.doushi.test.myproject.ui.main.recommend.RecommendFragment
 import com.doushi.test.myproject.ui.main.mp.MainPresenter

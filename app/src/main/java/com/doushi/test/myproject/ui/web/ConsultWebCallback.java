@@ -2,7 +2,7 @@ package com.doushi.test.myproject.ui.web;
 
 import android.webkit.JavascriptInterface;
 
-import com.doushi.library.util.JsonUtil;
+import com.library.util.JsonUtil;
 
 import java.util.List;
 

@@ -1,8 +1,6 @@
 package com.doushi.test.myproject.ui.main.video.vp
 
 import android.text.TextUtils
-import com.doushi.library.util.LogUtil
-import com.doushi.library.widgets.wheel.util.LogUtils
 import com.doushi.test.myproject.base.mvp.BasePresenter
 import com.doushi.test.myproject.global.ParamConstants
 import com.doushi.test.myproject.model.base.BaseApiResponse

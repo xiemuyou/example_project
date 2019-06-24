@@ -16,9 +16,9 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.doushi.library.util.DateUtil;
-import com.doushi.library.util.ImageLoadUtils;
-import com.doushi.library.util.ViewUtil;
+import com.library.util.DateUtil;
+import com.library.util.ImageLoadUtils;
+import com.library.util.ViewUtil;
 import com.doushi.test.myproject.R;
 import com.doushi.test.myproject.global.DefaultValue;
 import com.doushi.test.myproject.model.news.NewsInfo;

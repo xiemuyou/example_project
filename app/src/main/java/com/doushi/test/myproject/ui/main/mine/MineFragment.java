@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.SizeUtils;
-import com.doushi.library.util.ImageLoadUtils;
-import com.doushi.library.widgets.pullzoom.PullToZoomScrollViewEx;
+import com.library.util.ImageLoadUtils;
+import com.library.widgets.pullzoom.PullToZoomScrollViewEx;
 import com.doushi.test.myproject.R;
 import com.doushi.test.myproject.base.component.BaseFragment;
 import com.doushi.test.myproject.global.DefaultValue;

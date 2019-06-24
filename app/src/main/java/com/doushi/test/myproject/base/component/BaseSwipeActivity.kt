@@ -2,10 +2,10 @@ package com.doushi.test.myproject.base.component
 
 import android.os.Bundle
 import com.blankj.utilcode.util.ActivityUtils
-import com.doushi.library.widgets.swipebacklayout.SlideBackHelper
-import com.doushi.library.widgets.swipebacklayout.SlideConfig
-import com.doushi.library.widgets.swipebacklayout.callbak.OnSlideListener
-import com.doushi.library.widgets.swipebacklayout.widget.SlideBackLayout
+import com.library.widgets.swipebacklayout.SlideBackHelper
+import com.library.widgets.swipebacklayout.SlideConfig
+import com.library.widgets.swipebacklayout.callbak.OnSlideListener
+import com.library.widgets.swipebacklayout.widget.SlideBackLayout
 import com.doushi.test.myproject.Application
 
 abstract class BaseSwipeActivity : BaseActivity(), OnSlideListener {

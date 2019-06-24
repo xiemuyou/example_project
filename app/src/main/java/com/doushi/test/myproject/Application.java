@@ -2,8 +2,7 @@ package com.doushi.test.myproject;
 
 import android.content.Context;
 
-import com.doushi.library.FApplication;
-import com.doushi.library.widgets.swipebacklayout.ActivityHelper;
+import com.library.FApplication;
 
 /**
  * @author xiemy

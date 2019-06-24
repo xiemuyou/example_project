@@ -4,20 +4,18 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SizeUtils;
-import com.doushi.library.util.ImageLoadUtils;
+import com.library.util.ImageLoadUtils;
 import com.doushi.test.myproject.R;
 import com.doushi.test.myproject.base.component.BaseFragment;
 import com.doushi.test.myproject.global.DefaultValue;
@@ -28,11 +26,9 @@ import com.doushi.test.myproject.widgets.extra.LineSpaceExtraCompatTextView;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack;
-import com.shuyu.gsyvideoplayer.utils.GSYVideoHelper;
-import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
-//import com.doushi.library.util.StringUtils;
-//import com.doushi.library.util.VerificationUtils;
-//import com.doushi.library.widgets.linespace.LineSpaceExtraCompatTextView;
+//import com.library.util.StringUtils;
+//import com.library.util.VerificationUtils;
+//import com.library.widgets.linespace.LineSpaceExtraCompatTextView;
 //import com.kingnet.fiveline.R;
 //import com.kingnet.fiveline.base.component.BaseFragment;
 //import com.kingnet.fiveline.base.listener.OnInformationClickListener;
@@ -55,14 +51,11 @@ import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 //import com.kingnet.videoplayer.listener.VideoEventListener;
 //import com.kingnet.videoplayer.ui.BaseVideoPlayerView;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * @author xiemy1

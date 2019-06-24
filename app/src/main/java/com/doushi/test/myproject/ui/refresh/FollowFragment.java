@@ -8,9 +8,9 @@ import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.doushi.library.global.FConstants;
-import com.doushi.library.util.ImageLoadUtils;
-import com.doushi.library.widgets.layoutManager.DividerItemDecoration;
+import com.library.global.FConstants;
+import com.library.util.ImageLoadUtils;
+import com.library.widgets.layoutManager.DividerItemDecoration;
 import com.doushi.test.myproject.R;
 import com.doushi.test.myproject.base.component.BaseRefreshFragment;
 import com.doushi.test.myproject.global.DefaultValue;

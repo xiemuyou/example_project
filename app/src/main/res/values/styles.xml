@@ -18,4 +18,16 @@
         <item name="android:fitsSystemWindows">false</item> <!-- 布局与状态栏，这养设置全屏时候布局就会提上去-->
     </style>
 
+    <!-- 视频 Style -->
+    <style name="Video">
+        <item name="android:layout_width">@dimen/px_84</item>
+        <item name="android:layout_height">@dimen/px_84</item>
+    </style>
+
+    <!-- 视频加载 Style -->
+    <style name="Video.Loading">
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:indeterminateDrawable">@drawable/video_loading</item>
+    </style>
+
 </resources>

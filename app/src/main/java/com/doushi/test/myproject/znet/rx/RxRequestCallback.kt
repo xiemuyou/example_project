@@ -1,6 +1,6 @@
 package com.doushi.test.myproject.znet.rx
 
-import com.doushi.library.global.FConstants
+import com.library.global.FConstants
 import com.doushi.test.myproject.base.mvp.BasePresenter
 import com.doushi.test.myproject.model.base.BaseApiResponse
 import com.doushi.test.myproject.model.base.ErrorMsg

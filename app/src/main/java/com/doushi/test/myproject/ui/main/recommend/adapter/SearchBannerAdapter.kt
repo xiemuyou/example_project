@@ -3,9 +3,9 @@ package com.doushi.test.myproject.ui.main.recommend.adapter
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.doushi.library.widgets.ToastUtils
-import com.doushi.library.widgets.vb.BaseBannerAdapter
-import com.doushi.library.widgets.vb.VerticalBannerView
+import com.library.widgets.ToastUtils
+import com.library.widgets.vb.BaseBannerAdapter
+import com.library.widgets.vb.VerticalBannerView
 import com.doushi.test.myproject.R
 
 /**

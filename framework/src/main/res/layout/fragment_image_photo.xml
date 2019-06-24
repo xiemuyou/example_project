@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
 
-    <com.doushi.library.widgets.imagepreview.wight.SmoothImageView
+    <com.library.widgets.imagepreview.wight.SmoothImageView
         android:id="@+id/photoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/transparent" />
 
-    <com.doushi.library.widgets.imagepreview.progress.CircleProgressView
+    <com.library.widgets.imagepreview.progress.CircleProgressView
         android:id="@+id/loading"
         android:layout_width="50dp"
         android:layout_height="50dp"

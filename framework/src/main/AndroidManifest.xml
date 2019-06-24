@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.doushi.library">
+    package="com.library">
 
 
     <!-- 支持多分辨率设备 -->
@@ -28,7 +28,7 @@
 
         <!--https://github.com/bumptech/glide/releases/tag/v3.6.0-->
         <meta-data
-            android:name="com.doushi.library.util.MyGlideModule"
+            android:name="com.library.util.MyGlideModule"
             android:value="GlideModule" />
     </application>
 </manifest>
