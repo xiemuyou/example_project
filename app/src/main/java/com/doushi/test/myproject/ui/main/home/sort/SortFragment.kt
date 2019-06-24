@@ -1,4 +1,4 @@
-package com.doushi.test.myproject.ui.main.home.child
+package com.doushi.test.myproject.ui.main.home.sort
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +20,7 @@ import com.doushi.test.myproject.znet.InterfaceConfig
  * @author xiemy
  * @date 2018/3/19.
  */
-class RecommendFragment : BaseRefreshFragment<NewsInfo>(), RefreshListView {
+class SortFragment : BaseRefreshFragment<NewsInfo>(), RefreshListView {
     var category = ""
 
     companion object {

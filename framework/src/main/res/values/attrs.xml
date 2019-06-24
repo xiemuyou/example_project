@@ -118,4 +118,9 @@
         <attr name="isHeaderParallax" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="VerticalBannerView">
+        <attr name="gap" format="integer" />
+        <attr name="animDuration" format="integer" />
+    </declare-styleable>
+
 </resources>

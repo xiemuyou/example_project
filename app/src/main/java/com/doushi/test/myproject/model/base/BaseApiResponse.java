@@ -21,6 +21,9 @@ public class BaseApiResponse<T> {
     @Expose
     private T result;
 
+    @Expose
+    private T data;
+
     private long time;
     private String message;
     private int code;
@@ -42,7 +45,7 @@ public class BaseApiResponse<T> {
     }
 
     public T getData() {
-        return result;
+        return result != null ? result : data;
     }
 
     public boolean isError() {

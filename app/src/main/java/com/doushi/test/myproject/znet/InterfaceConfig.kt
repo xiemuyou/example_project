@@ -38,6 +38,10 @@ object InterfaceConfig {
          */
         TODAY(HttpConfig.SNS_SDK, "today"),
         /**
+         *热搜
+         */
+        ARTICLE_HOT_WORDS(HttpConfig.SNS_SDK, "2/article/hot_words/"),
+        /**
          * 分类列表
          */
         ARTICLE_CATEGORY_GET_EXTRA_V1(HttpConfig.SNS_SDK, "article/category/get_extra/v1/"),

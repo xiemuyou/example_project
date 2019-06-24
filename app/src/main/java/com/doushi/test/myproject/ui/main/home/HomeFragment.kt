@@ -8,9 +8,12 @@ import com.doushi.test.myproject.R
 import com.doushi.test.myproject.base.component.BaseFragment
 import com.doushi.test.myproject.base.component.BaseRefreshFragment
 import com.doushi.test.myproject.model.sort.NewsSortListResponse
-import com.doushi.test.myproject.ui.main.home.child.RecommendFragment
+import com.doushi.test.myproject.ui.main.MainActivity
+import com.doushi.test.myproject.ui.main.home.sort.SortFragment
+import com.doushi.test.myproject.ui.main.recommend.RecommendFragment
 import com.doushi.test.myproject.ui.main.mp.MainPresenter
 import com.doushi.test.myproject.ui.main.mv.MainView
+import com.doushi.test.myproject.ui.main.recommend.adapter.SearchBannerAdapter
 import com.doushi.test.myproject.widgets.tab.PagerFragmentItem
 import com.doushi.test.myproject.znet.InterfaceConfig
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
@@ -27,6 +30,7 @@ class HomeFragment : BaseFragment(), MainView {
 
     private var showIndex = 0
     private var fAdapter: FragmentPagerItemAdapter? = null
+    private var hotList: MutableList<String>? = null
 
     private val homePresenter by lazy {
         MainPresenter(this)
@@ -38,6 +42,7 @@ class HomeFragment : BaseFragment(), MainView {
 
     override fun initEnv() {
         homePresenter.getCategoryExtra()
+        homePresenter.articleHotWords()
     }
 
     private fun initTabLayout(res: NewsSortListResponse) {
@@ -45,11 +50,12 @@ class HomeFragment : BaseFragment(), MainView {
         val creator = FragmentPagerItems.with(_mActivity)
         val fragmentPagerItems = creator.create()
         val sortList = res.data
+        fragmentPagerItems.add(PagerFragmentItem.of("推荐", RecommendFragment::class.java))
         if (sortList != null && sortList.isNotEmpty()) {
             sortList.forEach {
                 val arts = Bundle()
                 arts.putString(RecommendFragment.SORT_NAME, it.category)
-                fragmentPagerItems.add(PagerFragmentItem.of(it.name, RecommendFragment::class.java, arts))
+                fragmentPagerItems.add(PagerFragmentItem.of(it.name, SortFragment::class.java, arts))
             }
         }
         fAdapter = FragmentPagerItemAdapter(childFragmentManager, fragmentPagerItems)
@@ -93,6 +99,20 @@ class HomeFragment : BaseFragment(), MainView {
             val fragment = HomeFragment()
             fragment.arguments = args
             return fragment
+        }
+    }
+
+    private var bannerAdapter: SearchBannerAdapter? = null
+
+    override fun getSortListSuccess(hotList: MutableList<String>?) {
+        if (hotList != null && hotList.isNotEmpty()) {
+            if (bannerAdapter == null) {
+                bannerAdapter = SearchBannerAdapter(hotList)
+                vbvHomeSearch.setAdapter(bannerAdapter)
+                vbvHomeSearch.start()
+            } else {
+                bannerAdapter?.setData(hotList)
+            }
         }
     }
 

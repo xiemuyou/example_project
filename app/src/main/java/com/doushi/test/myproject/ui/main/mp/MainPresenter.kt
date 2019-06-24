@@ -2,8 +2,10 @@ package com.doushi.test.myproject.ui.main.mp
 
 import com.doushi.test.myproject.base.mvp.BasePresenter
 import com.doushi.test.myproject.model.base.BaseApiResponse
+import com.doushi.test.myproject.model.base.StringListResponse
 import com.doushi.test.myproject.model.sort.NewsSortInfo
 import com.doushi.test.myproject.model.sort.NewsSortListResponse
+import com.doushi.test.myproject.model.user.ConfigResponse
 import com.doushi.test.myproject.ui.main.mv.MainView
 import com.doushi.test.myproject.znet.InterfaceConfig
 import com.doushi.test.myproject.znet.rx.RxRequestCallback
@@ -16,12 +18,31 @@ import org.json.JSONObject
  */
 class MainPresenter(view: MainView) : BasePresenter<MainView>(view) {
 
+    /**
+     * 热搜
+     * https://is.snssdk.com/2/article/hot_words/
+     */
+    fun articleHotWords() {
+        RxRequestCallback().request(params = null, api = InterfaceConfig.HttpHelperTag.ARTICLE_HOT_WORDS, entityClass = StringListResponse::class.java, presenter = this)
+    }
+
+    /**
+     * 分类
+     */
     fun getCategoryExtra() {
         RxRequestCallback().request(params = null, api = InterfaceConfig.HttpHelperTag.ARTICLE_CATEGORY_GET_EXTRA_V1, presenter = this)
     }
 
     override fun onLoadDataSuccess(apiTag: InterfaceConfig.HttpHelperTag, modelRes: BaseApiResponse<*>, params: Map<String, Any>?) {
-        //nothing
+        when (apiTag) {
+            InterfaceConfig.HttpHelperTag.ARTICLE_HOT_WORDS -> {
+                val res: StringListResponse = modelRes as StringListResponse
+                mvpView.getSortListSuccess(res.data)
+            }
+
+            else -> {
+            }
+        }
     }
 
     override fun onLoadDataSuccess(apiTag: InterfaceConfig.HttpHelperTag, res: String, params: Map<String, Any>?) {

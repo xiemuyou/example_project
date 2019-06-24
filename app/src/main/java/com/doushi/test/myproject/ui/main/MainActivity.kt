@@ -107,7 +107,7 @@ class MainActivity : BaseActivity() {
         }
         showTabIndex = index
     }
-
+    
     private fun refreshHomeTabView() {
         ivMainHome.setImageResource(R.drawable.home_unselect)
         ivMainVideo.setImageResource(R.drawable.video_unselect)
