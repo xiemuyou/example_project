@@ -1,4 +1,4 @@
-package com.news.example.myproject.ui.refresh.rp
+package com.news.example.myproject.ui.news.np
 
 import android.text.TextUtils
 import com.blankj.utilcode.util.StringUtils
@@ -8,19 +8,17 @@ import com.news.example.myproject.model.base.BaseApiResponse
 import com.news.example.myproject.model.news.NewsInfo
 import com.news.example.myproject.model.news.RecommendResponse
 import com.news.example.myproject.model.user.UserInfo
-import com.news.example.myproject.ui.refresh.rv.RefreshListView
+import com.news.example.myproject.ui.news.nv.NewsListView
 import com.news.example.myproject.znet.InterfaceConfig
 import com.news.example.myproject.znet.rx.RxRequestCallback
 import org.json.JSONObject
-
-import java.util.ArrayList
-import java.util.HashMap
+import java.util.*
 
 /**
  * @author xiemy
  * @date 2018/2/28.
  */
-class RefreshPresenter(view: RefreshListView) : BasePresenter<RefreshListView>(view) {
+class NewsListPresenter(view: NewsListView) : BasePresenter<NewsListView>(view) {
 
     fun getSearchUsers(searchKey: String) {
         val params = HashMap<String, Any>()

@@ -50,7 +50,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.refresh.RefreshListActivity" />
+        <activity android:name=".ui.news.NewsListActivity" />
 
         <!--默认Web页-->
         <activity

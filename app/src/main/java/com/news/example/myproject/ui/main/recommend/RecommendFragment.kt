@@ -2,16 +2,14 @@ package com.news.example.myproject.ui.main.recommend
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.news.example.myproject.R
 import com.news.example.myproject.base.component.BaseRefreshFragment
 import com.news.example.myproject.model.news.NewsInfo
 import com.news.example.myproject.model.news.RecommendResponse
-import com.news.example.myproject.model.video.VideoDetails
-import com.news.example.myproject.ui.refresh.rp.RefreshPresenter
-import com.news.example.myproject.ui.refresh.rv.RefreshListView
+import com.news.example.myproject.ui.news.np.NewsListPresenter
+import com.news.example.myproject.ui.news.nv.RefreshListView
 import com.news.example.myproject.ui.web.NoHeadCommonWebActivity
 import com.news.example.myproject.widgets.news.InformationItemContentView
 import com.news.example.myproject.znet.InterfaceConfig
@@ -21,6 +19,7 @@ import com.news.example.myproject.znet.InterfaceConfig
  * @date 2018/3/19.
  */
 class RecommendFragment : BaseRefreshFragment<NewsInfo>(), RefreshListView {
+
     var category = ""
 
     companion object {
@@ -28,7 +27,7 @@ class RecommendFragment : BaseRefreshFragment<NewsInfo>(), RefreshListView {
     }
 
     private val followPresenter by lazy {
-        RefreshPresenter(this)
+        NewsListPresenter(this)
     }
 
     override fun initEnv() {
@@ -55,14 +54,8 @@ class RecommendFragment : BaseRefreshFragment<NewsInfo>(), RefreshListView {
         followPresenter.getSearchUsers(category)
     }
 
-    override fun getDataSuccess(dataRes: RecommendResponse) {
-        val dataList = dataRes.data
-        if (dataList != null)
-            loadDataSuccess(dataList)
-    }
-
-    override fun getVideoListSuccess(videoList: List<VideoDetails>) {
-        //loadDataSuccess(videoList)
+    override fun getDataSuccess(dataRes: RecommendResponse?) {
+        loadDataSuccess(dataRes?.data)
     }
 
     override fun loadDataFail(apiTag: InterfaceConfig.HttpHelperTag, errorInfo: String) {

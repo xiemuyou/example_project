@@ -24,8 +24,6 @@ class NoHeadCommonWebActivity : BaseSwipeActivity() {
         /**
          * @param context        上下文
          * @param url            H5 url
-         * @param title          H5 title
-         * @param isShowTitleBar 是否显示titleBar
          */
         fun showClass(context: Context, url: String) {
             val intent = Intent(context, NoHeadCommonWebActivity::class.java)

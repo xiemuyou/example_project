@@ -1,10 +1,10 @@
-package com.news.example.myproject.ui.refresh;
+package com.news.example.myproject.ui.news;
+
+import android.text.TextUtils;
+import android.widget.ImageView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -16,9 +16,9 @@ import com.news.example.myproject.global.DefaultValue;
 import com.news.example.myproject.global.ParamConstants;
 import com.news.example.myproject.model.news.RecommendResponse;
 import com.news.example.myproject.model.user.UserInfo;
-import com.news.example.myproject.model.video.VideoDetails;
-import com.news.example.myproject.ui.refresh.rp.RefreshPresenter;
-import com.news.example.myproject.ui.refresh.rv.RefreshListView;
+import com.news.example.myproject.ui.news.np.NewsListPresenter;
+import com.news.example.myproject.ui.news.nv.NewsListView;
+import com.news.example.myproject.ui.refresh.FollowActivity;
 
 import java.util.List;
 
@@ -29,9 +29,9 @@ import java.util.List;
  * @author xiemy
  * @date 2018/3/1.
  */
-public class RefreshListActivity extends BaseRefreshActivity<UserInfo> implements RefreshListView {
+public class NewsListActivity extends BaseRefreshActivity<UserInfo> implements NewsListView {
 
-    private RefreshPresenter refreshPresenter;
+    private NewsListPresenter refreshPresenter;
     private String searchText;
 
     @Override
@@ -48,20 +48,15 @@ public class RefreshListActivity extends BaseRefreshActivity<UserInfo> implement
             protected void convert(BaseViewHolder helper, UserInfo item) {
                 helper.setText(R.id.tvUserName, item.getName() + ":" + helper.getAdapterPosition());
                 ImageView ivVideoBg = helper.getView(R.id.ivVideoBg);
-                new ImageLoadUtils(RefreshListActivity.this).commonDisplayImage(item.getAvatarUrl(), ivVideoBg, DefaultValue.BACKGROUND);
+                new ImageLoadUtils(NewsListActivity.this).commonDisplayImage(item.getAvatarUrl(), ivVideoBg, DefaultValue.BACKGROUND);
 
                 ImageView ivHead = helper.getView(R.id.ivUserAvatar);
-                new ImageLoadUtils(RefreshListActivity.this).commonCircleImage(item.getAvatarUrl(), ivHead, DefaultValue.HEAD);
+                new ImageLoadUtils(NewsListActivity.this).commonCircleImage(item.getAvatarUrl(), ivHead, DefaultValue.HEAD);
             }
         };
-        refreshAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                toPage(FollowActivity.class);
-            }
-        });
+        refreshAdapter.setOnItemClickListener((adapter, view, position) -> toPage(FollowActivity.class));
 
-        LinearLayoutManager llm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager llm = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         canContentView.setLayoutManager(llm);
         DividerItemDecoration decoration = new DividerItemDecoration(this, 5, true,
                 getResources().getColor(R.color.default_toast_bg));
@@ -73,15 +68,10 @@ public class RefreshListActivity extends BaseRefreshActivity<UserInfo> implement
     @Override
     public void refreshDataList() {
         if (refreshPresenter == null) {
-            refreshPresenter = new RefreshPresenter(this);
+            refreshPresenter = new NewsListPresenter(this);
         }
         final String searchKey = TextUtils.isEmpty(searchText) ? searchText : "1";
-        canContentView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                refreshPresenter.getSearchUsers(searchKey);
-            }
-        }, 2000);
+        canContentView.postDelayed(() -> refreshPresenter.getSearchUsers(searchKey), 2000);
     }
 
     @Override
@@ -89,10 +79,5 @@ public class RefreshListActivity extends BaseRefreshActivity<UserInfo> implement
         //数据为空也需要传NULL值,
 //        List<UserInfo> dataList = ObjectUtils.isNotEmpty(dataRes.getData()) ? dataRes.getData().getUser_list() : null;
 //        loadDataSuccess(dataList);
-    }
-
-    @Override
-    public void getVideoListSuccess(List<VideoDetails> videoList) {
-
     }
 }
