@@ -50,16 +50,9 @@ object InterfaceConfig {
          */
         NEWS_FEED_V58(HttpConfig.SNS_SDK, "api/news/feed/v58/"),
         /**
-         * 分类列表
-         */
-        NATIVE_FEED_BROW(HttpConfig.SNS_SDK, "wenda/v1/native/feedbrow"),
-        /**
          * 崩溃上报
          */
         RX_URL_REPORT_CRASH_LOG(HttpConfig.SNS_SDK, "UiP1/ReportCrashLog"),
-
-        /***获取支付渠道 */
-        GET_PAY_CHANNEL(HttpConfig.SNS_SDK, "/paychannel/android"),
         /* ------------------------ > 用户  User Start <---------------------- */
 
 
