@@ -21,9 +21,9 @@ import com.news.example.myproject.R;
 import com.news.example.myproject.base.component.BaseFragment;
 import com.news.example.myproject.global.DefaultValue;
 import com.news.example.myproject.global.ParamConstants;
-import com.news.example.myproject.ui.main.mine.adapter.MineMenuData;
 import com.news.example.myproject.ui.main.mine.adapter.MineMenuAdapter;
-import com.news.example.myproject.ui.web.CommonWebActivity;
+import com.news.example.myproject.ui.main.mine.adapter.MineMenuData;
+import com.news.example.myproject.ui.web.NoHeadCommonWebActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +118,7 @@ public class MineFragment extends BaseFragment {
         menuAdapter.setOnItemClickListener((adapter, view, position) -> {
             Bundle bundle = new Bundle();
             bundle.putString(ParamConstants.WEB_URL, "https://www.baidu.com");
-            toPage(CommonWebActivity.class, bundle);
+            toPage(NoHeadCommonWebActivity.class, bundle);
         });
     }
 }

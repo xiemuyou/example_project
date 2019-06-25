@@ -57,7 +57,10 @@ class HomeFragment : BaseFragment(), MainView {
         val creator = FragmentPagerItems.with(_mActivity)
         val fragmentPagerItems = creator.create()
         val sortList = res.data
-        fragmentPagerItems.add(PagerFragmentItem.of("推荐", RecommendFragment::class.java))
+        //手动添加推荐页
+        val recommend = getString(R.string.recommend)
+        fragmentPagerItems.add(PagerFragmentItem.of(recommend, RecommendFragment::class.java))
+        //循环添加分类页
         if (sortList != null && sortList.isNotEmpty()) {
             sortList.forEach {
                 val arts = Bundle()

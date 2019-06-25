@@ -3,11 +3,12 @@ package com.news.example.myproject.ui.web
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import com.news.example.myproject.R
 import com.news.example.myproject.base.component.BaseSwipeActivity
+import com.news.example.myproject.global.ParamConstants
 import kotlinx.android.synthetic.main.activity_fragment.*
 
 /**
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_fragment.*
  */
 class NoHeadCommonWebActivity : BaseSwipeActivity() {
 
-    var fragmentManager: FragmentManager? = null
+    private var fragmentManager: FragmentManager? = null
 
     companion object {
         /**
@@ -28,7 +29,7 @@ class NoHeadCommonWebActivity : BaseSwipeActivity() {
          */
         fun showClass(context: Context, url: String) {
             val intent = Intent(context, NoHeadCommonWebActivity::class.java)
-            intent.putExtra("url", url)
+            intent.putExtra(ParamConstants.WEB_URL, url)
             intent.putExtra("isShowTitleBar", false)
             context.startActivity(intent)
         }
@@ -46,10 +47,15 @@ class NoHeadCommonWebActivity : BaseSwipeActivity() {
             return
         }
         fragmentManager = supportFragmentManager
-        val url = intent.getStringExtra("url")
+        val url = intent.getStringExtra(ParamConstants.WEB_URL)
+        val showBack = intent.getBooleanExtra(ParamConstants.SHOW_BACK, false)
         showHead(false, false)
         loadRootFragment(R.id.flContainer, CommonWebFragment.newInstance(url ?: ""))
-        addBackButton()
+        if (showBack) {
+            addBackButton()
+        } else {
+            ivBack.visibility = View.GONE
+        }
     }
 
     private fun addBackButton() {

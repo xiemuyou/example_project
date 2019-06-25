@@ -72,6 +72,7 @@ public abstract class BaseBannerAdapter<T> {
     /**
      * 设置banner的数据
      *
+     * @param view itemView
      * @param data banner列表数据
      */
     public abstract void setItem(View view, T data);

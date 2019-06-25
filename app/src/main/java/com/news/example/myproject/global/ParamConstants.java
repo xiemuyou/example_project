@@ -29,6 +29,10 @@ public class ParamConstants {
      */
     public static final String WEB_URL = "webUrl";
     /**
+     * 是否显示返回键
+     */
+    public static final String SHOW_BACK = "showBack";
+    /**
      * title 标题
      */
     public static final String TITLE = "title";
