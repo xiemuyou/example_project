@@ -53,7 +53,7 @@ class HomeFragment : BaseFragment(), MainView {
     }
 
     private fun initTabLayout(res: NewsSortListResponse) {
-        ViewUtil.setMargins(ablHomePage, 0, CommonUtil.getStatusBarHeight(_mActivity), 0, 0)
+        ViewUtil.setMargins(clHomeRootView, 0, CommonUtil.getStatusBarHeight(_mActivity), 0, 0)
         val creator = FragmentPagerItems.with(_mActivity)
         val fragmentPagerItems = creator.create()
         val sortList = res.data

@@ -9,6 +9,9 @@
         <!--<item name="android:fitsSystemWindows">true</item> &lt;!&ndash;这一行防止状态栏与布局重叠&ndash;&gt;-->
         <item name="windowActionBar">false</item> <!-- 加这行 -->
         <item name="windowNoTitle">true</item> <!-- 再加这行 -->
+
+        <!--todo activity 动画 -->
+        <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -16,6 +19,22 @@
     <!-- 全屏专题 -->
     <style name="FullscreenTheme" parent="AppTheme">
         <item name="android:fitsSystemWindows">false</item> <!-- 布局与状态栏，这养设置全屏时候布局就会提上去-->
+    </style>
+
+    <!-- 透明状态栏颜色专题 -->
+    <style name="TransparentStatusBarTheme" parent="FullscreenTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="android:background">@drawable/welcome</item>
+    </style>
+
+    <!-- 全屏透明专题 -->
+    <style name="FullscreenTheme.TransparentTheme" parent="FullscreenTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/transparent</item>
+        <item name="colorPrimaryDark">@color/transparent</item>
+        <item name="android:windowBackground">@color/transparent</item>
     </style>
 
     <!-- 视频 Style -->
@@ -30,4 +49,11 @@
         <item name="android:indeterminateDrawable">@drawable/video_loading</item>
     </style>
 
+    <style name="AnimationActivity" parent="AppTheme">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_left_out</item>
+
+        <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
+    </style>
 </resources>

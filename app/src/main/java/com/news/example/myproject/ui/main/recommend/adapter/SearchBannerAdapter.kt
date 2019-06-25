@@ -17,7 +17,7 @@ class SearchBannerAdapter(banners: List<String>) : BaseBannerAdapter<String>(ban
 
     override fun getView(parent: VerticalBannerView?): View {
         val pView = View.inflate(parent?.context, R.layout.item_home_search, null)
-        pView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        pView?.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         return pView
     }
 

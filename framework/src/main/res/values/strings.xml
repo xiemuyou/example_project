@@ -53,6 +53,7 @@
     <string name="percentage">%1$s%</string>
     <string name="rail">-</string>
     <string name="arrow">箭头</string>
+    <string name="icon">图标</string>
     <!--数字/符号 -->
 
     <string name="cancel">取消</string>

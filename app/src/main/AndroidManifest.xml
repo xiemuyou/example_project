@@ -5,22 +5,33 @@
 
     <application
         android:name=".Application"
-        android:allowBackup="true"
-        android:fullBackupContent="false"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:replace="icon, label, theme,allowBackup,name">
 
-        <activity android:name="com.news.example.myproject.ui.welcome.WelcomeActivity">
+        <activity
+            android:name=".ui.welcome.WelcomeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/TransparentStatusBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--启动引导页-->
+        <activity
+            android:name=".ui.welcome.GuildActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenTheme.TransparentTheme" />
 
         <activity
             android:name=".ui.main.MainActivity"

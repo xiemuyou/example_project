@@ -3,14 +3,13 @@ package com.library.util;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Looper;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
-
-import android.view.View;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -89,6 +88,12 @@ public class ImageLoadUtils {
                     .apply(getRequestOptions(drawableRes).transform(new MultiTransformation<>(
                             new CenterCrop(), new RoundedCornersTransformation(roundDp, 0, RoundedCornersTransformation.CornerType.RIGHT))))
                     .into(imageView);
+        }
+    }
+
+    public void commonDisplayResImage(@DrawableRes int imgUrl, @NonNull ImageView imageView, @DrawableRes int drawableRes) {
+        if (requestManager != null) {
+            requestManager.load(imgUrl).transition(withCrossFade(withCrossFadeTime)).apply(getRequestOptions(drawableRes)).into(imageView);
         }
     }
 
