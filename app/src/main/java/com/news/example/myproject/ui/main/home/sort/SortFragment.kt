@@ -9,7 +9,7 @@ import com.news.example.myproject.base.component.BaseRefreshFragment
 import com.news.example.myproject.model.news.NewsInfo
 import com.news.example.myproject.model.news.RecommendResponse
 import com.news.example.myproject.ui.news.np.NewsListPresenter
-import com.news.example.myproject.ui.news.nv.RefreshListView
+import com.news.example.myproject.ui.news.nv.NewsListView
 import com.news.example.myproject.ui.web.NoHeadCommonWebActivity
 import com.news.example.myproject.widgets.news.InformationItemContentView
 import com.news.example.myproject.znet.InterfaceConfig
@@ -18,7 +18,7 @@ import com.news.example.myproject.znet.InterfaceConfig
  * @author xiemy
  * @date 2018/3/19.
  */
-class SortFragment : BaseRefreshFragment<NewsInfo>(), RefreshListView {
+class SortFragment : BaseRefreshFragment<NewsInfo>(), NewsListView {
     var category = ""
 
     companion object {
@@ -53,10 +53,8 @@ class SortFragment : BaseRefreshFragment<NewsInfo>(), RefreshListView {
         followPresenter.getSearchUsers(category)
     }
 
-    override fun getDataSuccess(dataRes: RecommendResponse) {
-        val dataList = dataRes.data
-        if (dataList != null)
-            loadDataSuccess(dataList)
+    override fun getDataSuccess(response: RecommendResponse?) {
+        loadDataSuccess(response?.data)
     }
 
     override fun loadDataFail(apiTag: InterfaceConfig.HttpHelperTag, errorInfo: String) {

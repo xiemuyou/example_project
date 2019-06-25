@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clHomeRootView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/px_50">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/ablHomePage"

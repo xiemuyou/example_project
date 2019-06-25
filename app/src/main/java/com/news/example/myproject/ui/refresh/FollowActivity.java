@@ -24,6 +24,6 @@ public class FollowActivity extends BaseActivity {
     public void initEnv() {
         Intent intent = getIntent();
         int uid = intent.getIntExtra("100", -1);
-        loadRootFragment(R.id.flContainer, FollowFragment.newInstance(uid));
+        loadRootFragment(R.id.flContainer, FollowFragment.Companion.newInstance(uid));
     }
 }

@@ -16,5 +16,5 @@ interface NewsListView : BaseView {
      *
      * @param response 测试
      */
-    fun getDataSuccess(response: RecommendResponse)
+    fun getDataSuccess(response: RecommendResponse?)
 }
