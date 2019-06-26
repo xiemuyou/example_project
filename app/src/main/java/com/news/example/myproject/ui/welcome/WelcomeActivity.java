@@ -61,4 +61,9 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeView {
             }
         }, 3000);
     }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }

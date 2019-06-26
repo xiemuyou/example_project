@@ -1,6 +1,7 @@
 package com.news.example.myproject.ui.main
 
 import android.os.Bundle
+import android.widget.Toast
 
 import com.blankj.utilcode.util.ObjectUtils
 import com.library.widgets.statusbar.StatusBarCompat
@@ -107,10 +108,23 @@ class MainActivity : BaseActivity() {
         }
         showTabIndex = index
     }
-    
+
     private fun refreshHomeTabView() {
         ivMainHome.setImageResource(R.drawable.home_unselect)
         ivMainVideo.setImageResource(R.drawable.video_unselect)
         ivMainMine.setImageResource(R.drawable.mine_unselect)
+    }
+
+    private var exitTime: Long = 0
+
+    override fun onBackPressedSupport() {
+        if (System.currentTimeMillis() - exitTime > 2000) {
+            Toast.makeText(this, R.string.again_accord_exit, Toast.LENGTH_SHORT).show()
+            exitTime = System.currentTimeMillis()
+            return
+        } else {
+            moveTaskToBack(true)
+        }
+        super.onBackPressedSupport()
     }
 }

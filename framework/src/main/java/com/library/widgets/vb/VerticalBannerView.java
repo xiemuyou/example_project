@@ -21,7 +21,7 @@ import com.library.R;
  * Description:
  * <p>
  *
- * @author rowandjj(chuyi)<br   />
+ * @author rowandjj(chuyi)<br />
  * @date 16/1/6<br/>
  * Time: 下午4:50<br/>
  */
@@ -52,7 +52,6 @@ public class VerticalBannerView extends LinearLayout implements BaseBannerAdapte
         init(context, attrs, defStyleAttr);
     }
 
-
     /**
      * bannerHeight banner的高度
      * animDuration 每次切换动画时间
@@ -64,12 +63,10 @@ public class VerticalBannerView extends LinearLayout implements BaseBannerAdapte
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.VerticalBannerView);
         mGap = array.getInteger(R.styleable.VerticalBannerView_gap, mGap);
         mAnimDuration = array.getInteger(R.styleable.VerticalBannerView_animDuration, mAnimDuration);
-
         if (mGap <= mAnimDuration) {
             mGap = 4000;
             mAnimDuration = 1000;
         }
-
         array.recycle();
     }
 
@@ -92,7 +89,6 @@ public class VerticalBannerView extends LinearLayout implements BaseBannerAdapte
         if (mAdapter == null) {
             throw new RuntimeException("you must call setAdapter() before start");
         }
-
         if (!isStarted && mAdapter.getCount() > 1) {
             isStarted = true;
             postDelayed(mRunnable, mGap);
@@ -123,7 +119,7 @@ public class VerticalBannerView extends LinearLayout implements BaseBannerAdapte
             mPosition = 1;
             isStarted = false;
         }
-        setBackgroundDrawable(mFirstView.getBackground());
+        setBackground(mFirstView.getBackground());
     }
 
     @Override
