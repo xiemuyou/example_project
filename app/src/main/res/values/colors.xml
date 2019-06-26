@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="default_un_select_color">#9B9FAD</color>
+    <color name="gold_color">#DCAE5F</color>
+    <color name="color_F5F5F5">#F5F5F5</color>
 
     <!--黑色%10透明度-->
     <color name="black_transparency_10">#19000000</color>
@@ -15,4 +17,12 @@
     <color name="black_transparency_60">#99000000</color>
     <!--黑色%80透明度-->
     <color name="black_transparency_80">#CC000000</color>
+
+    <!--常用黑色文字颜色-->
+    <color name="common_black_text_color">#333333</color>
+    <!--常用灰色文字颜色-->
+    <color name="common_gray_text_color">#666666</color>
+    <!--常用浅灰色色文字颜色-->
+    <color name="common_light_gray_text_color">#999999</color>
+
 </resources>

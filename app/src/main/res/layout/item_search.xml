@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mLayoutParent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvSearchItem"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/px_36"
+        android:paddingEnd="@dimen/px_36"
+        android:text="@string/search"
+        android:textColor="@color/common_gray_text_color"
+        android:textSize="@dimen/px_24_sp"
+        android:textStyle="bold" />
+
+    <!--底部分割线-->
+    <ImageView
+        android:id="@+id/ivItemDecoration"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_2"
+        android:layout_marginStart="@dimen/px_36"
+        android:layout_marginEnd="@dimen/px_36"
+        android:background="@color/color_F4F4F4"
+        android:contentDescription="@string/line" />
+</LinearLayout>

@@ -40,5 +40,9 @@ public class ParamConstants {
      * 页面头部分割线
      */
     public static final String DIVER_FLAG = "diverFlag";
+    /**
+     * 数据列表
+     */
+    public static final String DATA_LIST = "dataList";
 
 }

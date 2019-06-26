@@ -23,4 +23,11 @@
     <string name="follow">关注</string>
     <string name="edit_user">查看和编辑个人资料</string>
     <!-- 我的 End -->
+
+    <!-- 搜索 Start -->
+    <string name="search">搜索</string>
+    <string name="search_hint">搜索新闻/视频</string>
+    <string name="search_history">搜索历史</string>
+    <string name="search_empty">未找到结果</string>
+    <!-- 搜索 End -->
 </resources>

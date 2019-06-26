@@ -19,7 +19,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public abstract class BaseBannerAdapter<T> {
 
-    private List<T> mDataList;
+    protected List<T> mDataList;
     private OnDataChangedListener mOnDataChangedListener;
 
     public BaseBannerAdapter(List<T> dataList) {

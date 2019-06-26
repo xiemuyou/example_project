@@ -3,10 +3,10 @@ package com.news.example.myproject.ui.main.recommend.adapter
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.library.widgets.ToastUtils
 import com.library.widgets.vb.BaseBannerAdapter
 import com.library.widgets.vb.VerticalBannerView
 import com.news.example.myproject.R
+import com.news.example.myproject.ui.search.SearchActivity
 
 /**
  *
@@ -21,10 +21,11 @@ class SearchBannerAdapter(banners: List<String>) : BaseBannerAdapter<String>(ban
         return pView
     }
 
-    override fun setItem(view: View?, data: String?) {
-        (view as? TextView)?.text = data
+    override fun setItem(view: View?, item: String?) {
+        (view as? TextView)?.text = item
         view?.setOnClickListener {
-            ToastUtils.showToast(view.context, data)
+            //  val searchList = if (mDataList is ArrayList<String>) mDataList else ArrayList<String>
+            SearchActivity.showClass(mDataList as ArrayList<String>, item ?: "")
         }
     }
 }

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/llSearchContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rlSearchInputTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="20dp">
+
+            <!--搜索输入-->
+            <EditText
+                android:id="@+id/etSearchInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/tvSearchCancel"
+                android:background="@color/transparent"
+                android:drawableStart="@drawable/search_small"
+                android:drawablePadding="4dp"
+                android:hint="@string/search_hint"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/common_gray_text_color"
+                android:textSize="@dimen/commonFontSize_14" />
+
+            <!--搜索取消-->
+            <TextView
+                android:id="@+id/tvSearchCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical|end"
+                android:text="@string/cancel"
+                android:textColor="@color/gold_color"
+                android:textSize="@dimen/commonFontSize_15" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/ivSearchTopLine"
+            style="@style/common_horizontal_divider"
+            android:contentDescription="@string/line" />
+
+        <LinearLayout
+            android:id="@+id/llMoreHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/flSearchHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:text="@string/search_history"
+                    android:textColor="@color/common_light_gray_text_color"
+                    android:textSize="@dimen/commonFontSize_15" />
+
+                <!--清空历史搜索-->
+                <TextView
+                    android:id="@+id/ivSearchHistoryEmpty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:background="@drawable/search_empty"
+                    android:textColor="@color/common_light_gray_text_color"
+                    android:textSize="@dimen/px_24_sp" />
+            </FrameLayout>
+
+            <!--搜索历史-->
+            <TableLayout
+                android:id="@+id/tlSearchHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="10dp"
+                android:paddingRight="10dp" />
+        </LinearLayout>
+
+        <include layout="@layout/view_refresh" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvSearchEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:drawableTop="@drawable/search_big"
+        android:drawablePadding="10dp"
+        android:gravity="center_horizontal"
+        android:text="@string/search_empty"
+        android:textColor="@color/common_black_text_color"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/pbDefaultLoading"
+        style="@style/progressbar_custom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:indeterminate="false"
+        android:visibility="gone" />
+
+    <com.news.example.myproject.widgets.reward.RewardGiftsLinearLayout
+        android:id="@+id/llRewardGiftContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/ivMoreVideoBack"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/CommonHead_size"
+        android:layout_alignParentEnd="true"
+        android:background="@color/transparent"
+        android:contentDescription="@string/back"
+        android:padding="10dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/other_close_unselected"
+        android:visibility="gone" />
+</RelativeLayout>

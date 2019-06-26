@@ -90,3 +90,4 @@ kyvideoplayer/.gitignore
 /gradle/
 app/release
 /captures/
+*.name
