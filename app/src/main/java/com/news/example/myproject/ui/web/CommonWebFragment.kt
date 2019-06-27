@@ -53,6 +53,7 @@ class CommonWebFragment : BaseFragment(), ConsultWebCallback.ConsultCallBack {
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView() {
         webView?.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+        //loadUrl(url);
         webView?.webViewClient = object : WebViewClient() {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
@@ -102,8 +103,7 @@ class CommonWebFragment : BaseFragment(), ConsultWebCallback.ConsultCallBack {
         settings?.allowContentAccess = true
 
         webView?.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(viewVew: WebView?, url: String?): Boolean {
-                webView?.loadUrl(url)
+            override fun shouldOverrideUrlLoading(p0: WebView?, p1: String?): Boolean {
                 return true
             }
 

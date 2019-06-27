@@ -68,12 +68,12 @@ public class ServerApi {
      * @return RxJava Observable对象
      */
     public static <T> Observable<T> getData(String url, Map<String, Object> map, Type type, RequestConfig internetConfig) {
-        url = addUserParams(url);
+//        url = addUserParams(url);
         StringBuilder sb = new StringBuilder(url);
         if (map != null) {
             Set<String> keys = map.keySet();
             Iterator<String> iterator = keys.iterator();
-            sb.append('&');
+            sb.append('?');
             while (iterator.hasNext()) {
                 String key = iterator.next();
                 String value;
@@ -87,8 +87,8 @@ public class ServerApi {
             url = sb.substring(0, sb.length() - 1);
         }
         Request<T, ? extends Request> request = OkGo.get(url);
-        String cookie = getRequestKey(url);
-        request.headers(COOKIE, cookie);
+//        String cookie = getRequestKey(url);
+//        request.headers(COOKIE, cookie);
         if (internetConfig != null) {
             //全局统一缓存时间，默认永不过期，可以不传
             request.cacheTime(internetConfig.getCacheTime())

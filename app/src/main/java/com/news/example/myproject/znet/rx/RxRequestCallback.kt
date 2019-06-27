@@ -1,6 +1,5 @@
 package com.news.example.myproject.znet.rx
 
-import com.library.global.FConstants
 import com.news.example.myproject.base.mvp.BasePresenter
 import com.news.example.myproject.model.base.BaseApiResponse
 import com.news.example.myproject.model.base.ErrorMsg
@@ -48,9 +47,9 @@ class RxRequestCallback {
         if (presenter == null) {
             return
         }
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Observer<M> {
+        observable?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe(object : Observer<M> {
 
                     override fun onSubscribe(@NonNull d: Disposable) {
                         presenter.addDisposable(d)
@@ -95,9 +94,9 @@ class RxRequestCallback {
           默认填 0 的情况正常逻辑只可能出现在 LoginByToken
           没有登录用户,游客用户ID也会保存在getUid()
          */
-        val uid = RxHttpHelper.sharedInstance().uid
-        map[FConstants.MY_UID] = uid
-        map[FConstants.TOKEN] = RxHttpHelper.sharedInstance().token
+//        val uid = RxHttpHelper.sharedInstance().uid
+//        map[FConstants.MY_UID] = uid
+//        map[FConstants.TOKEN] = RxHttpHelper.sharedInstance().token
         return map
     }
 }
