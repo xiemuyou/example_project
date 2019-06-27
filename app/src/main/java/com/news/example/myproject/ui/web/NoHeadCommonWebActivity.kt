@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
+import com.library.widgets.statusbar.StatusBarCompat
 import com.news.example.myproject.R
 import com.news.example.myproject.base.component.BaseSwipeActivity
 import com.news.example.myproject.global.ParamConstants
@@ -25,16 +26,17 @@ class NoHeadCommonWebActivity : BaseSwipeActivity() {
          * @param context        上下文
          * @param url            H5 url
          */
-        fun showClass(context: Context, url: String) {
+        fun showClass(context: Context, url: String? = null, content: String? = null) {
             val intent = Intent(context, NoHeadCommonWebActivity::class.java)
             intent.putExtra(ParamConstants.WEB_URL, url)
+            intent.putExtra(ParamConstants.CONTENT, content)
             intent.putExtra("isShowTitleBar", false)
             context.startActivity(intent)
         }
     }
 
     override fun getLayoutId(savedInstanceState: Bundle?): Int {
-        setStatusLight(ContextCompat.getColor(this, R.color.white))
+        StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this, R.color.white))
         return R.layout.activity_fragment
     }
 
@@ -46,9 +48,10 @@ class NoHeadCommonWebActivity : BaseSwipeActivity() {
         }
         fragmentManager = supportFragmentManager
         val url = intent.getStringExtra(ParamConstants.WEB_URL)
+        val content = intent.getStringExtra(ParamConstants.CONTENT)
         val showBack = intent.getBooleanExtra(ParamConstants.SHOW_BACK, false)
         showHead(false, false)
-        loadRootFragment(R.id.flContainer, CommonWebFragment.newInstance(url ?: ""))
+        loadRootFragment(R.id.flContainer, CommonWebFragment.newInstance(webUrl = url, webContent = content))
         if (showBack) {
             addBackButton()
         } else {
@@ -74,8 +77,8 @@ class NoHeadCommonWebActivity : BaseSwipeActivity() {
             closePage()
             return
         }
-        if (commonWebFragment.webView.canGoBack()) {
-            commonWebFragment.webView.goBack()
+        if (commonWebFragment.webView?.canGoBack() == true) {
+            commonWebFragment.webView?.goBack()
         } else {
             super.backPressed()
             closePage()

@@ -1,6 +1,7 @@
 package com.news.example.myproject.ui.search
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TableRow
@@ -46,7 +47,6 @@ class SearchActivity : BaseActivity(), SearchView, CanRecyclerViewHeaderFooter.O
     private val marginSize = SizeUtils.dp2px(6F)
     private val rowWidth = (ScreenUtils.getScreenWidth() - marginSize * 3) / 2
     private var cllManager: CustomLinearLayoutManager? = null
-
 
     companion object {
 
@@ -139,7 +139,7 @@ class SearchActivity : BaseActivity(), SearchView, CanRecyclerViewHeaderFooter.O
         can_content_view.adapter = searchAdapter
 //        can_content_view.setOnVideoPlayerListener(searchAdapter)
 
-        footer.setBackgroundColor(resources.getColor(R.color.white))
+        footer.setBackgroundColor(ContextCompat.getColor(this@SearchActivity, R.color.white))
         //设置到底自动加载
         footer.attachTo(can_content_view, false)
         footer.setLoadMoreListener(this)
@@ -162,6 +162,21 @@ class SearchActivity : BaseActivity(), SearchView, CanRecyclerViewHeaderFooter.O
 
     override fun onLoadMore() {
         //    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_ENTER) {
+            if (check()) {
+                searchStr = etSearchInput.text.toString()
+                llMoreHistory.visibility = View.GONE
+                pbDefaultLoading.visibility = View.VISIBLE
+                if (searchPresenter.search(searchStr)) {
+                    searchPresenter.attachView(this)
+                }
+                return false
+            }
+        }
+        return super.onKeyUp(keyCode, event)
     }
 
     override fun searchDataList(searchRes: BaseApiResponse<*>?) {
@@ -192,7 +207,7 @@ private val page = 0
 private val uCount: Int = 0
 private val searchInput: String? = null
 
-private val searchStr: String? = null
+private var searchStr: String? = null
 //
 //    private int rowWidth = (Screen.getInstance().widthPixels - marginSize * 3) / 2;
 

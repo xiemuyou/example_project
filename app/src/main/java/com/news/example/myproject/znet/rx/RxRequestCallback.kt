@@ -5,13 +5,12 @@ import com.news.example.myproject.base.mvp.BasePresenter
 import com.news.example.myproject.model.base.BaseApiResponse
 import com.news.example.myproject.model.base.ErrorMsg
 import com.news.example.myproject.znet.InterfaceConfig
-
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.annotations.NonNull
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import java.util.HashMap
+import java.util.*
 
 /**
  * RxJava数据请求实现类
@@ -42,9 +41,9 @@ class RxRequestCallback {
      */
     fun <M : Any> request(params: MutableMap<String, Any>? = null, api: InterfaceConfig.HttpHelperTag, entityClass: Class<M>?, presenter: BasePresenter<*>?) {
         val observable = if (InterfaceConfig.METHOD_GET == api.method) {
-            ServerApi.postData<M>(api.apiUrl, addUserParams(params), entityClass, api.config)
-        } else {
             ServerApi.getData<M>(api.apiUrl, addUserParams(params), entityClass, api.config)
+        } else {
+            ServerApi.postData(api.apiUrl, addUserParams(params), entityClass, api.config)
         }
         if (presenter == null) {
             return

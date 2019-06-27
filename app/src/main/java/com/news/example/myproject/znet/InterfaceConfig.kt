@@ -56,6 +56,14 @@ object InterfaceConfig {
         /* ------------------------ > 用户  User Start <---------------------- */
 
 
+        /* ------------------------ > 搜索  Search Start <---------------------- */
+        /**
+         * 头条搜索
+         */
+        SEARCH_TOU_TIAO(HttpConfig.SNS_SDK, "search"),
+        /* ------------------------ > 搜索  Search End <---------------------- */
+
+
         /* ------------------------ > 用户  User Start <---------------------- */
         /***获取支付渠道 https://api.apiopen.top/todayVideo */
         TODAY_VIDEO(HttpConfig.API_OPEN,

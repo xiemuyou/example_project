@@ -1,18 +1,15 @@
 package com.news.example.myproject.ui.web
 
-import android.content.Context
-import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import android.text.TextUtils
 import android.view.View
-
+import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.ActivityUtils
+import com.library.widgets.statusbar.StatusBarCompat
 import com.news.example.myproject.R
 import com.news.example.myproject.base.component.BaseActivity
 import com.news.example.myproject.global.ParamConstants
-
 import kotlinx.android.synthetic.main.activity_fragment.*
 
 /**
@@ -23,7 +20,23 @@ import kotlinx.android.synthetic.main.activity_fragment.*
  */
 class CommonWebActivity : BaseActivity() {
 
+    companion object {
+
+        @JvmOverloads
+        fun showClass(webUrl: String, title: String? = "", content: String? = "", diverFlag: Boolean? = null) {
+            val bundle = Bundle()
+            bundle.putString(ParamConstants.WEB_URL, webUrl)
+            bundle.putString(ParamConstants.TITLE, title)
+            bundle.putString(ParamConstants.CONTENT, content)
+            if (diverFlag != null) {
+                bundle.putBoolean(ParamConstants.DIVER_FLAG, diverFlag)
+            }
+            ActivityUtils.startActivity(bundle, CommonWebActivity::class.java)
+        }
+    }
+
     override fun getLayoutId(savedInstanceState: Bundle?): Int {
+        StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this, R.color.white))
         return R.layout.activity_fragment
     }
 
@@ -42,7 +55,10 @@ class CommonWebActivity : BaseActivity() {
         val diverFlag = intent.getBooleanExtra(ParamConstants.DIVER_FLAG, true)
         showHead(!TextUtils.isEmpty(title), diverFlag)
         setHeadTitle(title)
-        loadRootFragment(R.id.flContainer, CommonWebFragment.newInstance(intent.getStringExtra(ParamConstants.WEB_URL)))
+
+        val url = intent.getStringExtra(ParamConstants.WEB_URL)
+        val content = intent.getStringExtra(ParamConstants.CONTENT)
+        loadRootFragment(R.id.flContainer, CommonWebFragment.newInstance(webUrl = url, webContent = content))
         if (!TextUtils.isEmpty(title)) {
             ivBack.visibility = View.VISIBLE
             ivBack.setOnClickListener {
@@ -65,27 +81,11 @@ class CommonWebActivity : BaseActivity() {
             closePage()
             return
         }
-        if (commonWebFragment.webView.canGoBack()) {
-            commonWebFragment.webView.goBack()
+        if (commonWebFragment.webView?.canGoBack() == true) {
+            commonWebFragment.webView?.goBack()
         } else {
             super.backPressed()
             closePage()
-        }
-    }
-
-    companion object {
-
-        @JvmOverloads
-        fun showClass(context: Context, webUrl: String, title: String? = "", diverFlag: Boolean? = null) {
-            val intent = Intent(context, CommonWebActivity::class.java)
-            val bundle = Bundle()
-            bundle.putString(ParamConstants.WEB_URL, webUrl)
-            bundle.putString(ParamConstants.TITLE, title)
-            if (diverFlag != null) {
-                bundle.putBoolean(ParamConstants.DIVER_FLAG, diverFlag)
-            }
-            intent.putExtras(bundle)
-            ActivityUtils.startActivity(intent)
         }
     }
 }

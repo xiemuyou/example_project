@@ -2,12 +2,14 @@ package com.news.example.myproject.base.component;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import com.blankj.utilcode.util.ObjectUtils;
 import com.library.widgets.ToastUtils;
@@ -39,8 +41,13 @@ public abstract class BaseFragment extends SupportFragment implements PresenterL
         // Inflate the layout for this fragment
         View view = inflater.inflate(getLayoutId(savedInstanceState), container, false);
         unbinder = ButterKnife.bind(this, view);
-        initEnv();
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initEnv();
     }
 
     /**

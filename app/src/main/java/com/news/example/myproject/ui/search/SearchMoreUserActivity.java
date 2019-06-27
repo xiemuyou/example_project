@@ -1,6 +1,19 @@
 package com.news.example.myproject.ui.search;
 
-public class SearchMoreUserActivity {
+import android.os.Bundle;
+
+import com.news.example.myproject.base.component.BaseActivity;
+
+public class SearchMoreUserActivity extends BaseActivity {
+    @Override
+    public int getLayoutId(Bundle savedInstanceState) {
+        return 0;
+    }
+
+    @Override
+    public void initEnv() {
+
+    }
 }
 //
 //import android.content.Intent;
