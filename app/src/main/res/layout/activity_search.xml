@@ -1,153 +1,83 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <LinearLayout
-        android:id="@+id/llSearchContent"
+    <RelativeLayout
+        android:id="@+id/rlSearchHead"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
 
-        <RelativeLayout
-            android:id="@+id/rlSearchInputTop"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/btSearchCancel"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingTop="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent"
+            android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:paddingBottom="20dp">
+            android:text="@string/cancel"
+            android:textColor="@color/color_9B9FAD"
+            android:textSize="@dimen/commonFontSize_15" />
 
-            <!--搜索输入-->
-            <EditText
-                android:id="@+id/etSearchInput"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@+id/tvSearchCancel"
-                android:background="@color/transparent"
-                android:drawableStart="@drawable/search_small"
-                android:drawablePadding="4dp"
-                android:hint="@string/search_hint"
-                android:imeOptions="actionSearch"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="@color/common_gray_text_color"
-                android:textSize="@dimen/commonFontSize_14" />
-
-            <!--搜索取消-->
-            <TextView
-                android:id="@+id/tvSearchCancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center_vertical|end"
-                android:text="@string/cancel"
-                android:textColor="@color/gold_color"
-                android:textSize="@dimen/commonFontSize_15" />
-        </RelativeLayout>
-
-        <ImageView
-            android:id="@+id/ivSearchTopLine"
-            style="@style/common_horizontal_divider"
-            android:contentDescription="@string/line" />
-
-        <LinearLayout
-            android:id="@+id/llMoreHistory"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="15dp"
+            android:layout_toStartOf="@+id/btSearchCancel">
 
-            <FrameLayout
-                android:id="@+id/flSearchHistory"
+            <EditText
+                android:id="@+id/etSearchMsg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp">
+                android:background="@drawable/et_search_bg"
+                android:drawableStart="@drawable/home_search"
+                android:drawablePadding="10dp"
+                android:inputType="text"
+                android:labelFor="@+id/etSearchMsg"
+                android:padding="10dp"
+                android:textColor="@color/color_595D71"
+                android:textColorHint="@color/color_9B9FAD"
+                android:textSize="@dimen/commonFontSize_13" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"
-                    android:text="@string/search_history"
-                    android:textColor="@color/common_light_gray_text_color"
-                    android:textSize="@dimen/commonFontSize_15" />
-
-                <!--清空历史搜索-->
-                <TextView
-                    android:id="@+id/ivSearchHistoryEmpty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center_vertical"
-                    android:background="@drawable/search_empty"
-                    android:textColor="@color/common_light_gray_text_color"
-                    android:textSize="@dimen/px_24_sp" />
-            </FrameLayout>
-
-            <!--搜索历史-->
-            <TableLayout
-                android:id="@+id/tlSearchHistory"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/ivSearchClear"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="10dp"
-                android:paddingLeft="10dp"
-                android:paddingEnd="10dp"
-                android:paddingRight="10dp" />
-        </LinearLayout>
+                android:layout_gravity="end|center_vertical"
+                android:contentDescription="@string/cancel"
+                android:padding="@dimen/px_20"
+                android:src="@drawable/not_interested" />
+        </FrameLayout>
 
-        <include layout="@layout/view_refresh" />
+    </RelativeLayout>
 
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvSearchEmpty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:drawableTop="@drawable/search_big"
-        android:drawablePadding="10dp"
-        android:gravity="center_horizontal"
-        android:text="@string/search_empty"
-        android:textColor="@color/common_black_text_color"
-        android:textSize="18sp"
-        android:visibility="gone" />
-
-    <ProgressBar
-        android:id="@+id/pbDefaultLoading"
-        style="@style/progressbar_custom"
+    <FrameLayout
+        android:id="@+id/flSearchContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="100dp"
-        android:indeterminate="false"
-        android:visibility="gone" />
+        android:layout_below="@+id/rlSearchHead">
 
-    <com.news.example.myproject.widgets.reward.RewardGiftsLinearLayout
-        android:id="@+id/llRewardGiftContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:visibility="gone" />
+        <include layout="@layout/include_search_fast" />
 
-    <ImageView
-        android:id="@+id/ivMoreVideoBack"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/CommonHead_size"
-        android:layout_alignParentEnd="true"
-        android:background="@color/transparent"
-        android:contentDescription="@string/back"
-        android:padding="10dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/other_close_unselected"
-        android:visibility="gone" />
+        <include
+            layout="@layout/view_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+
+    <com.library.widgets.emptyview.OtherView
+        android:id="@+id/ovHintView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlSearchHead" />
 </RelativeLayout>

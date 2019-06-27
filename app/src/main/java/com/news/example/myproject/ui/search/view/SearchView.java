@@ -22,4 +22,6 @@ public interface SearchView extends BaseView {
      * 成功获取更多视频列表
      */
     void getSearchedVideoSuccess(List<VideoDetails> searchVideoList);
+
+    void notifyChangedHistorySearchKey();
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhy="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/svFastSearch"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/flSearchHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvHistorySearchTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/px_100"
+                android:layout_marginStart="15dp"
+                android:gravity="center"
+                android:text="@string/search_history"
+                android:textColor="@color/color_272B3C"
+                android:textSize="@dimen/commonFontSize_16"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ivSearchRemoveHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="15dp"
+                android:contentDescription="@string/share_delete"
+                android:src="@drawable/search_delete" />
+        </FrameLayout>
+
+        <com.news.example.myproject.widgets.flow.TagFlowLayout
+            android:id="@+id/tflSearchHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            zhy:max_line="2"
+            zhy:max_select="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/px_100"
+            android:layout_marginStart="15dp"
+            android:gravity="center"
+            android:text="@string/search"
+            android:textColor="@color/color_272B3C"
+            android:textSize="@dimen/commonFontSize_16"
+            android:textStyle="bold" />
+
+        <com.news.example.myproject.widgets.flow.TagFlowLayout
+            android:id="@+id/tflSearchHot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            zhy:max_select="1" />
+    </LinearLayout>
+</ScrollView>

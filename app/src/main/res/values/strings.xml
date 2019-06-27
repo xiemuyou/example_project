@@ -27,7 +27,9 @@
     <!-- 搜索 Start -->
     <string name="search">搜索</string>
     <string name="search_hint">搜索新闻/视频</string>
+    <string name="search_hot">热门搜索</string>
     <string name="search_history">搜索历史</string>
     <string name="search_empty">未找到结果</string>
+    <string name="search_ever_one">大家都在搜“%1$s”</string>
     <!-- 搜索 End -->
 </resources>
