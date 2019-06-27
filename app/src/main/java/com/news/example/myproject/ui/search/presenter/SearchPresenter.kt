@@ -4,12 +4,11 @@ import android.text.TextUtils
 import com.google.gson.reflect.TypeToken
 import com.library.util.JsonUtil
 import com.library.util.JsonUtil.jsonToList
-import com.library.util.LogUtil
 import com.library.util.PreferencesUtils
+import com.library.util.VerificationUtils
 import com.news.example.myproject.base.mvp.BasePresenter
 import com.news.example.myproject.model.base.BaseApiResponse
 import com.news.example.myproject.ui.search.view.SearchView
-import com.news.example.myproject.ui.web.CommonWebActivity
 import com.news.example.myproject.znet.InterfaceConfig
 import com.news.example.myproject.znet.rx.RxRequestCallback
 import io.reactivex.annotations.NonNull
@@ -25,8 +24,9 @@ import kotlin.collections.ArrayList
  */
 class SearchPresenter(searchView: SearchView) : BasePresenter<SearchView>() {
 
-    private val SEARCH_HISTORY_LIST = "SearchHistory"
-    private var searchHistoryList: MutableList<String>? = null
+    private var historySearchKeys: ArrayList<String>? = null
+    private val MAX_HISTORY_SEARCH_SIZE = 10
+    private val HISTORY_SEARCH_KEYS = "historySearchKeys"
 
     init {
         attachView(searchView)
@@ -39,6 +39,9 @@ class SearchPresenter(searchView: SearchView) : BasePresenter<SearchView>() {
      * @param keyword 用户输入要字符串
      */
     fun search(keyword: String?): Boolean {
+        if (VerificationUtils.isFastDoubleClick()) {
+            return false
+        }
         val result = !TextUtils.isEmpty(keyword) && mvpView != null
         if (keyword != null) {
             addHistorySearchKeys(keyword)
@@ -51,28 +54,12 @@ class SearchPresenter(searchView: SearchView) : BasePresenter<SearchView>() {
 
     override fun onLoadDataSuccess(apiTag: InterfaceConfig.HttpHelperTag?, res: String?, params: MutableMap<String, Any>?) {
         super.onLoadDataSuccess(apiTag, res, params)
-        val key = params?.get("keyword")?.toString()
-        LogUtil.d(TAG, "SearchResponse = $res searchKey = $key")
-        CommonWebActivity.showClass(webUrl = "", content = res)
+        mvpView.getSearchSuccess(res)
     }
 
     override fun onLoadDataSuccess(apiTag: InterfaceConfig.HttpHelperTag, modelRes: BaseApiResponse<*>?, params: Map<String, Any>?) {
-        when (apiTag) {
-            InterfaceConfig.HttpHelperTag.SEARCH_TOU_TIAO -> {
-                //val res =
-
-//                val success = parseJson(res)
-//                mvpView.getCategoryExtraSuccess(success)
-            }
-
-            else -> {
-            }
-        }
+        //nothing
     }
-
-    private var historySearchKeys: ArrayList<String>? = null
-    private val MAX_HISTORY_SEARCH_SIZE = 10
-    private val HISTORY_SEARCH_KEYS = "historySearchKeys"
 
     /**
      * 获取历史搜索关键字列表

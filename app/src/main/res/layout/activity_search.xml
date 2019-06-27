@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -43,7 +44,9 @@
                 android:padding="10dp"
                 android:textColor="@color/color_595D71"
                 android:textColorHint="@color/color_9B9FAD"
-                android:textSize="@dimen/commonFontSize_13" />
+                android:textSize="@dimen/commonFontSize_13"
+                android:autofillHints="@string/search_hint"
+                tools:ignore="UnusedAttribute" />
 
             <ImageView
                 android:id="@+id/ivSearchClear"
@@ -57,26 +60,14 @@
 
     </RelativeLayout>
 
-    <FrameLayout
-        android:id="@+id/flSearchContent"
+    <include
+        layout="@layout/include_search_fast"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rlSearchHead">
-
-        <include layout="@layout/include_search_fast" />
-
-        <include
-            layout="@layout/view_refresh"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="gone" />
-
-    </FrameLayout>
-
+        android:layout_below="@+id/rlSearchHead" />
 
     <com.library.widgets.emptyview.OtherView
-        android:id="@+id/ovHintView"
+        android:id="@+id/ovEmptyHint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rlSearchHead" />

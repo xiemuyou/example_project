@@ -3,14 +3,12 @@ package com.news.example.myproject.ui.web
 import android.graphics.PixelFormat
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
 import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.ActivityUtils
 import com.library.widgets.statusbar.StatusBarCompat
 import com.news.example.myproject.R
 import com.news.example.myproject.base.component.BaseActivity
 import com.news.example.myproject.global.ParamConstants
-import kotlinx.android.synthetic.main.activity_fragment.*
 
 /**
  * 默认 WebView Activity
@@ -59,14 +57,6 @@ class CommonWebActivity : BaseActivity() {
         val url = intent.getStringExtra(ParamConstants.WEB_URL)
         val content = intent.getStringExtra(ParamConstants.CONTENT)
         loadRootFragment(R.id.flContainer, CommonWebFragment.newInstance(webUrl = url, webContent = content))
-        if (!TextUtils.isEmpty(title)) {
-            ivBack.visibility = View.VISIBLE
-            ivBack.setOnClickListener {
-                onBackPressedSupport()
-            }
-        } else {
-            ivBack.visibility = View.GONE
-        }
     }
 
     override fun onBackPressedSupport() {

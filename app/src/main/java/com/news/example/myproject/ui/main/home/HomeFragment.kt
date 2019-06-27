@@ -12,6 +12,7 @@ import com.news.example.myproject.ui.main.mp.MainPresenter
 import com.news.example.myproject.ui.main.mv.MainView
 import com.news.example.myproject.ui.main.recommend.RecommendFragment
 import com.news.example.myproject.ui.main.recommend.adapter.SearchBannerAdapter
+import com.news.example.myproject.ui.search.SearchActivity
 import com.news.example.myproject.widgets.tab.PagerFragmentItem
 import com.news.example.myproject.znet.InterfaceConfig
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
@@ -50,6 +51,9 @@ class HomeFragment : BaseFragment(), MainView {
     override fun initEnv() {
         homePresenter.getCategoryExtra()
         homePresenter.articleHotWords()
+        vbvHomeSearch?.setOnClickListener {
+            SearchActivity.showClass(ArrayList(), "")
+        }
     }
 
     private fun initTabLayout(res: NewsSortListResponse) {
@@ -102,6 +106,7 @@ class HomeFragment : BaseFragment(), MainView {
 
     override fun getSortListSuccess(hotList: MutableList<String>?) {
         if (hotList != null && hotList.isNotEmpty()) {
+            vbvHomeSearch?.setOnClickListener(null)
             if (bannerAdapter == null) {
                 bannerAdapter = SearchBannerAdapter(hotList)
                 vbvHomeSearch.setAdapter(bannerAdapter)

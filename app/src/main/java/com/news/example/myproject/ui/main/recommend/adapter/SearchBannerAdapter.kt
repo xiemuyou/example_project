@@ -24,7 +24,6 @@ class SearchBannerAdapter(banners: List<String>) : BaseBannerAdapter<String>(ban
     override fun setItem(view: View?, item: String?) {
         (view as? TextView)?.text = item
         view?.setOnClickListener {
-            //  val searchList = if (mDataList is ArrayList<String>) mDataList else ArrayList<String>
             SearchActivity.showClass(mDataList as ArrayList<String>, item ?: "")
         }
     }

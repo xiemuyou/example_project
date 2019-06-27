@@ -9,25 +9,24 @@ import android.view.View
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.ActivityUtils
+import com.library.widgets.emptyview.EmptyEnum
 import com.library.widgets.emptyview.OtherViewHolder
 import com.library.widgets.statusbar.StatusBarCompat
 import com.news.example.myproject.R
 import com.news.example.myproject.base.component.BaseActivity
 import com.news.example.myproject.global.ParamConstants
-import com.news.example.myproject.model.base.BaseApiResponse
-import com.news.example.myproject.model.video.VideoDetails
 import com.news.example.myproject.ui.search.presenter.SearchPresenter
 import com.news.example.myproject.ui.search.view.SearchView
+import com.news.example.myproject.ui.web.CommonWebActivity
 import com.news.example.myproject.widgets.flow.FlowLayout
 import com.news.example.myproject.widgets.flow.MyTagAdapter
 import com.news.example.myproject.widgets.flow.TagFlowLayout
 import com.news.example.myproject.znet.InterfaceConfig
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.include_search_fast.*
-import kotlinx.android.synthetic.main.view_refresh.*
 
-class SearchActivity : BaseActivity(), SearchView, TagFlowLayout.OnTagClickListener,
-        View.OnKeyListener {
+class SearchActivity : BaseActivity(), SearchView,
+        TagFlowLayout.OnTagClickListener, View.OnKeyListener {
 
     private var hotSearchList: ArrayList<String>? = null
     private var historySearch: ArrayList<String>? = null
@@ -71,6 +70,9 @@ class SearchActivity : BaseActivity(), SearchView, TagFlowLayout.OnTagClickListe
 
     private fun initView() {
         val ovHolder = OtherViewHolder(this@SearchActivity)
+        ovHolder.setOnEmptyRetryListener {
+            searchPresenter.search(searchKey)
+        }
         ovEmptyHint?.setHolder(ovHolder)
 
         historyAdapter = MyTagAdapter(this@SearchActivity, historySearch)
@@ -90,6 +92,9 @@ class SearchActivity : BaseActivity(), SearchView, TagFlowLayout.OnTagClickListe
         }
         ivSearchClear?.setOnClickListener {
             etSearchMsg.setText("")
+        }
+        btSearchCancel?.setOnClickListener {
+            ActivityUtils.finishActivity(this@SearchActivity)
         }
     }
 
@@ -143,9 +148,8 @@ class SearchActivity : BaseActivity(), SearchView, TagFlowLayout.OnTagClickListe
                 etSearchMsg.setSelection(searchLen)
                 ivSearchClear.visibility = View.VISIBLE
             } else if (TextUtils.isEmpty(matchStr)) {
-                ovHintView.showContentView()
+                ovEmptyHint.showContentView()
                 svFastSearch.visibility = View.VISIBLE
-                refresh.visibility = View.GONE
                 ivSearchClear.visibility = View.GONE
             }
         }
@@ -185,14 +189,17 @@ class SearchActivity : BaseActivity(), SearchView, TagFlowLayout.OnTagClickListe
         return super.onKeyDown(keyCode, event)
     }
 
-    override fun searchDataList(searchRes: BaseApiResponse<*>?) {
+    override fun getSearchSuccess(res: String?) {
+        if (TextUtils.isEmpty(res)) {
+            ovEmptyHint?.showEmptyView(EmptyEnum.SearchEmpty)
+        } else {
+            CommonWebActivity.showClass(webUrl = "", title = searchKey, content = res, diverFlag = true)
+        }
     }
 
     override fun loadDataFail(apiTag: InterfaceConfig.HttpHelperTag?, errorInfo: String?) {
         showNotice(errorInfo)
-    }
-
-    override fun getSearchedVideoSuccess(searchVideoList: MutableList<VideoDetails>?) {
+        ovEmptyHint?.showEmptyView(EmptyEnum.NetEmpty)
     }
 
     override fun onDestroy() {
