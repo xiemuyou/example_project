@@ -12,7 +12,7 @@ public class DefaultValue {
     /**
      * 默认错误提示
      */
-    public static final String ERROR_MSG = "默认错误提示";
+    public static final String ERROR_MSG = "网络异常，请稍后再试";
     /**
      * 头像
      */

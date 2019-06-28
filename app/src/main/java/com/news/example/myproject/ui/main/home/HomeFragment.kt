@@ -103,6 +103,10 @@ class HomeFragment : BaseFragment(), MainView {
         if (fragment is BaseRefreshFragment<*>) {
             fragment.placedTopAutoRefresh()
         }
+        checkHotSearchList()
+    }
+
+    fun checkHotSearchList() {
         if (hotSearchList == null) {
             homePresenter.articleHotWords()
         }
