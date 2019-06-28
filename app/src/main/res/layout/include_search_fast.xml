@@ -47,6 +47,7 @@
             zhy:max_select="1" />
 
         <TextView
+            android:id="@+id/tvHotSearch"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/px_100"
             android:layout_marginStart="15dp"

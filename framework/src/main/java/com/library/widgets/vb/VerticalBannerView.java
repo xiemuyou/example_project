@@ -158,7 +158,6 @@ public class VerticalBannerView extends LinearLayout implements BaseBannerAdapte
         setupAdapter();
     }
 
-
     private void performSwitch() {
         ObjectAnimator animator1 = ObjectAnimator.ofFloat(mFirstView, "translationY", mFirstView.getTranslationY() - mBannerHeight);
         ObjectAnimator animator2 = ObjectAnimator.ofFloat(mSecondView, "translationY", mSecondView.getTranslationY() - mBannerHeight);

@@ -76,13 +76,18 @@ class SearchActivity : BaseActivity(), SearchView,
         }
         ovEmptyHint?.setHolder(ovHolder)
 
-        historyAdapter = MyTagAdapter(this@SearchActivity, historySearch)
+        historyAdapter = historySearch?.let { MyTagAdapter(this@SearchActivity, it) }
         tflSearchHistory?.adapter = historyAdapter
         tflSearchHistory?.setOnTagClickListener(this@SearchActivity)
 
-        val hotSearchAdapter = MyTagAdapter(this@SearchActivity, hotSearchList)
-        tflSearchHot?.adapter = hotSearchAdapter
-        tflSearchHot?.setOnTagClickListener(this)
+        if (hotSearchList?.size ?: 0 <= 0) {
+            tflSearchHot.visibility = View.GONE
+            tvHotSearch.visibility = View.GONE
+        } else {
+            val hotSearchAdapter = MyTagAdapter(this@SearchActivity, hotSearchList)
+            tflSearchHot?.adapter = hotSearchAdapter
+            tflSearchHot?.setOnTagClickListener(this)
+        }
 
         etSearchMsg.addTextChangedListener(textWatcher)
         etSearchMsg.setOnKeyListener(this)
@@ -93,7 +98,6 @@ class SearchActivity : BaseActivity(), SearchView,
         }
         ivSearchClear?.setOnClickListener {
             etSearchMsg.setText("")
-            openSoftInput(ivSearchClear)
         }
         btSearchCancel?.setOnClickListener {
             ActivityUtils.finishActivity(this@SearchActivity)
@@ -112,6 +116,7 @@ class SearchActivity : BaseActivity(), SearchView,
             tflSearchHistory?.visibility = View.VISIBLE
             historySearch?.reverse()
             historyAdapter?.notifyDataChanged()
+            openSoftInput(ivSearchClear)
         }
     }
 

@@ -114,6 +114,7 @@ class HomeFragment : BaseFragment(), MainView {
 
     override fun getSortListSuccess(hotList: MutableList<String>?) {
         if (hotList != null && hotList.isNotEmpty()) {
+            tvSearchIcon.hint = ""
             hotSearchList = hotList
             vbvHomeSearch?.setOnClickListener(null)
             if (bannerAdapter == null) {

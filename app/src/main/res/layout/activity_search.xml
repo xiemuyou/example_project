@@ -42,6 +42,7 @@
                 android:inputType="text"
                 android:labelFor="@+id/etSearchMsg"
                 android:padding="10dp"
+                android:imeOptions="actionSearch"
                 android:textColor="@color/color_595D71"
                 android:textColorHint="@color/color_9B9FAD"
                 android:textSize="@dimen/commonFontSize_13"
