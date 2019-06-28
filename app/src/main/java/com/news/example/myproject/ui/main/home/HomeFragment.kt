@@ -29,6 +29,7 @@ class HomeFragment : BaseFragment(), MainView {
     private var showIndex = 0
     private var fAdapter: FragmentPagerItemAdapter? = null
     private var bannerAdapter: SearchBannerAdapter? = null
+    private var hotSearchList: MutableList<String>? = null
 
     companion object {
         const val MAIN_INDEX = 0
@@ -102,10 +103,14 @@ class HomeFragment : BaseFragment(), MainView {
         if (fragment is BaseRefreshFragment<*>) {
             fragment.placedTopAutoRefresh()
         }
+        if (hotSearchList == null) {
+            homePresenter.articleHotWords()
+        }
     }
 
     override fun getSortListSuccess(hotList: MutableList<String>?) {
         if (hotList != null && hotList.isNotEmpty()) {
+            hotSearchList = hotList
             vbvHomeSearch?.setOnClickListener(null)
             if (bannerAdapter == null) {
                 bannerAdapter = SearchBannerAdapter(hotList)
