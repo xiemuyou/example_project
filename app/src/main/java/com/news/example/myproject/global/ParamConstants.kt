@@ -34,6 +34,11 @@ object ParamConstants {
      */
     const val CONTENT = "content"
     /**
+     * 内容key,Intent 数据内容不能过大
+     * 先缓存再取
+     */
+    const val CONTENT_KEY = "contentKey"
+    /**
      * 是否显示返回键
      */
     const val SHOW_BACK = "showBack"

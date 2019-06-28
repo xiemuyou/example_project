@@ -21,11 +21,11 @@ class CommonWebActivity : BaseActivity() {
     companion object {
 
         @JvmOverloads
-        fun showClass(webUrl: String, title: String? = "", content: String? = "", diverFlag: Boolean? = null) {
+        fun showClass(webUrl: String, title: String? = "", contentKey: String? = "", diverFlag: Boolean? = null) {
             val bundle = Bundle()
             bundle.putString(ParamConstants.WEB_URL, webUrl)
             bundle.putString(ParamConstants.TITLE, title)
-            bundle.putString(ParamConstants.CONTENT, content)
+            bundle.putString(ParamConstants.CONTENT_KEY, contentKey)
             if (diverFlag != null) {
                 bundle.putBoolean(ParamConstants.DIVER_FLAG, diverFlag)
             }
@@ -55,7 +55,7 @@ class CommonWebActivity : BaseActivity() {
         setHeadTitle(title)
 
         val url = intent.getStringExtra(ParamConstants.WEB_URL)
-        val content = intent.getStringExtra(ParamConstants.CONTENT)
+        val content = intent.getStringExtra(ParamConstants.CONTENT_KEY)
         loadRootFragment(R.id.flContainer, CommonWebFragment.newInstance(webUrl = url, webContent = content))
     }
 

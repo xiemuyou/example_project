@@ -29,7 +29,7 @@ class NoHeadCommonWebActivity : BaseSwipeActivity() {
         fun showClass(context: Context, url: String? = null, content: String? = null) {
             val intent = Intent(context, NoHeadCommonWebActivity::class.java)
             intent.putExtra(ParamConstants.WEB_URL, url)
-            intent.putExtra(ParamConstants.CONTENT, content)
+            intent.putExtra(ParamConstants.CONTENT_KEY, content)
             intent.putExtra("isShowTitleBar", false)
             context.startActivity(intent)
         }
@@ -48,7 +48,7 @@ class NoHeadCommonWebActivity : BaseSwipeActivity() {
         }
         fragmentManager = supportFragmentManager
         val url = intent.getStringExtra(ParamConstants.WEB_URL)
-        val content = intent.getStringExtra(ParamConstants.CONTENT)
+        val content = intent.getStringExtra(ParamConstants.CONTENT_KEY)
         val showBack = intent.getBooleanExtra(ParamConstants.SHOW_BACK, false)
         showHead(false, false)
         loadRootFragment(R.id.flContainer, CommonWebFragment.newInstance(webUrl = url, webContent = content))

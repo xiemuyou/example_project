@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.ActivityUtils
+import com.library.util.PreferencesUtils
 import com.library.widgets.emptyview.EmptyEnum
 import com.library.widgets.emptyview.OtherViewHolder
 import com.library.widgets.statusbar.StatusBarCompat
@@ -92,6 +93,7 @@ class SearchActivity : BaseActivity(), SearchView,
         }
         ivSearchClear?.setOnClickListener {
             etSearchMsg.setText("")
+            openSoftInput(ivSearchClear)
         }
         btSearchCancel?.setOnClickListener {
             ActivityUtils.finishActivity(this@SearchActivity)
@@ -190,10 +192,12 @@ class SearchActivity : BaseActivity(), SearchView,
     }
 
     override fun getSearchSuccess(res: String?) {
+        //返回不为空,缓存成功
         if (TextUtils.isEmpty(res)) {
             ovEmptyHint?.showEmptyView(EmptyEnum.SearchEmpty)
         } else {
-            CommonWebActivity.showClass(webUrl = "", title = searchKey, content = res, diverFlag = true)
+            PreferencesUtils.setStringPreferences(ParamConstants.CONTENT, res)
+            CommonWebActivity.showClass(webUrl = "", title = searchKey, contentKey = ParamConstants.CONTENT, diverFlag = true)
         }
     }
 

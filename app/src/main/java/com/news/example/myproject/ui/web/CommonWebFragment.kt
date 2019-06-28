@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.FutureTarget
 import com.library.FApplication
 import com.library.thread.ThreadPool
+import com.library.util.PreferencesUtils
 import com.news.example.myproject.R
 import com.news.example.myproject.base.component.BaseFragment
 import com.news.example.myproject.global.ParamConstants
@@ -41,9 +42,11 @@ class CommonWebFragment : BaseFragment(), ConsultWebCallback.ConsultCallBack {
         webView = X5WebView(_mActivity, null)
         flWebViewContent?.addView(webView, FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT))
         val webUrl = arguments?.getString(ParamConstants.WEB_URL)
-        val webContent = arguments?.getString(ParamConstants.CONTENT)
-        if (!TextUtils.isEmpty(webContent)) {
-            loadJsBridgeWebView(webContent!!)
+        val contentKey = arguments?.getString(ParamConstants.CONTENT_KEY)
+        if (!TextUtils.isEmpty(contentKey)) {
+            val webContent = PreferencesUtils.getStringPreferences(contentKey, "")
+            loadJsBridgeWebView(webContent)
+            PreferencesUtils.remove(contentKey)
         } else {
             webView?.loadUrl(webUrl)
         }
@@ -82,7 +85,7 @@ class CommonWebFragment : BaseFragment(), ConsultWebCallback.ConsultCallBack {
      */
     @SuppressLint("SetJavaScriptEnabled")
     private fun loadJsBridgeWebView(content: String) {
-        val settings = webView?.settings;
+        val settings = webView?.settings
         settings?.builtInZoomControls = false
         settings?.setSupportZoom(false)
         settings?.displayZoomControls = false
@@ -177,7 +180,7 @@ class CommonWebFragment : BaseFragment(), ConsultWebCallback.ConsultCallBack {
             val webFragment = CommonWebFragment()
             val bundle = Bundle()
             bundle.putString(ParamConstants.WEB_URL, webUrl)
-            bundle.putString(ParamConstants.CONTENT, webContent)
+            bundle.putString(ParamConstants.CONTENT_KEY, webContent)
             webFragment.arguments = bundle
             return webFragment
         }
