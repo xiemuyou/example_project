@@ -1,12 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tvCustomText"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:background="@color/transparent"
-    android:gravity="center"
-    android:paddingEnd="10dp"
-    android:paddingStart="10dp"
-    android:textAllCaps="true"
-    android:textColor="@drawable/custom_tab_medium"
-    android:textSize="@dimen/commonFontSize_14" />
+    android:layout_height="@dimen/px_108"
+    android:paddingStart="@dimen/px_22"
+    android:paddingEnd="0dp">
+
+    <TextView
+        android:id="@+id/tvCustomText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/px_10"
+        android:gravity="center"
+        android:text="@string/recommend"
+        android:textAllCaps="true"
+        android:textColor="@drawable/custom_tab_medium"
+        android:textSize="@dimen/commonFontSize_14" />
+
+    <!-- <com.airbnb.lottie.LottieAnimationView
+         android:id="@+id/ivTabTag"
+         android:layout_width="@dimen/px_20"
+         android:layout_height="@dimen/px_14"
+         android:layout_alignTop="@+id/tvCustomText"
+         android:layout_alignParentTop="true"
+         android:layout_marginTop="@dimen/px_30"
+         android:layout_toEndOf="@+id/tvCustomText"
+         android:background="@color/transparent"
+         android:contentDescription="@string/tag"
+         app:lottie_autoPlay="false"
+         app:lottie_imageAssetsFolder="images/"
+         app:lottie_loop="false" />-->
+
+</RelativeLayout>
+
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tvCustomText"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:gravity="center"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:textAllCaps="true"
+        android:textColor="@drawable/custom_tab_medium"
+        android:textSize="@dimen/commonFontSize_14" />-->
