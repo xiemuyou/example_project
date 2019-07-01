@@ -15,7 +15,6 @@ data class NewsSortInfo(
         var tip_new: String? = "",
         var default_add: String? = "",
         var concern_id: String? = "",
-        var labelType: Int? = -1,
         var type: String? = "",
         var icon_url: String? = "") : BaseMultiItemEntity {
 

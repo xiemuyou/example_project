@@ -1,6 +1,7 @@
 package com.news.example.myproject.ui.main.home.sort;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -320,6 +321,7 @@ public class SortEditFragment extends BaseDialogFragment {
          */
         private float dimAmount = 0.6f;
         private FragmentManager fragmentManager;
+        private Activity mActivity;
         private HomeFragment homeFragment;
         private EditSortListCallback mEditSortListCallback;
         private NewsSortInfo posSortInfo;
@@ -331,10 +333,12 @@ public class SortEditFragment extends BaseDialogFragment {
         private List<NewsSortInfo> allList = new ArrayList<>();
 
         public SortEditFragment.Builder setSortData(
+                Activity activity,
                 HomeFragment homeFragment,
                 EditSortListCallback editSortListCallback,
                 NewsSortInfo posSortInfo,
                 SortInfoData sortRes) {
+            this.mActivity = activity;
             this.homeFragment = homeFragment;
             this.mEditSortListCallback = editSortListCallback;
             this.posSortInfo = posSortInfo;

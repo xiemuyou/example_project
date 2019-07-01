@@ -72,7 +72,7 @@ class HomeFragment : BaseFragment(), MainView {
         val sortList: List<NewsSortInfo>? = mSortListRes?.data
         SortEditFragment.Builder()
                 .setFragmentManager(_mActivity.supportFragmentManager)
-                .setSortData(this, sortListCallback, if (sortList?.isEmpty() == true) null else sortList?.get(showIndex),
+                .setSortData(_mActivity, this, sortListCallback, if (sortList?.isEmpty() == true) null else sortList?.get(showIndex),
                         SortFilter.divideList(sortList))
                 .create().showDialog()
     }
@@ -112,16 +112,15 @@ class HomeFragment : BaseFragment(), MainView {
         for (i in 0 until sortSize) {
             val it = sortList?.get(i)
             it?.apply {
-                if (recommend == it.name) {
-                    fragmentPagerItems.add(PagerFragmentItem.of(recommend, RecommendFragment::class.java))
-                }
-                if (i < 10) {
-                    it.labelType = NewsSortInfo.CHOOSE
-                    val arts = Bundle()
-                    arts.putString(SortFragment.SORT_NAME, it.category)
-                    fragmentPagerItems.add(PagerFragmentItem.of(it.name, SortFragment::class.java, arts))
-                } else {
-                    it.labelType = NewsSortInfo.MORE
+                when {
+                    recommend == it.name -> fragmentPagerItems.add(PagerFragmentItem.of(recommend, RecommendFragment::class.java))
+                    i < 10 -> {
+                        it.itemType = NewsSortInfo.CHOOSE
+                        val arts = Bundle()
+                        arts.putString(SortFragment.SORT_NAME, it.category)
+                        fragmentPagerItems.add(PagerFragmentItem.of(it.name, SortFragment::class.java, arts))
+                    }
+                    else -> it.itemType = NewsSortInfo.MORE
                 }
             }
         }
@@ -188,7 +187,7 @@ class HomeFragment : BaseFragment(), MainView {
         if (sortList != null) {
             val recommendSort = NewsSortInfo()
             recommendSort.name = recommend
-            recommendSort.labelType = NewsSortInfo.FIXED
+            recommendSort.itemType = NewsSortInfo.FIXED
             sortList.add(0, recommendSort)
         }
         initTabLayout(res)

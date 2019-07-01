@@ -15,7 +15,7 @@ object SortFilter {
 
     fun divideList(sortList: List<NewsSortInfo>, sortData: SortInfoData): SortInfoData {
         for (sortInfo in sortList) {
-            when (sortInfo.labelType) {
+            when (sortInfo.itemType) {
                 NewsSortInfo.FIXED -> sortData.fixedList.add(sortInfo)
 
                 NewsSortInfo.CHOOSE -> sortData.chooseList.add(sortInfo)
@@ -35,7 +35,7 @@ object SortFilter {
             return sortData
         }
         for (sortInfo in sortList) {
-            when (sortInfo.labelType) {
+            when (sortInfo.itemType) {
                 NewsSortInfo.FIXED -> sortData.fixedList.add(sortInfo)
 
                 NewsSortInfo.CHOOSE -> sortData.chooseList.add(sortInfo)

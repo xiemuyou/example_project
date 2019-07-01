@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import com.blankj.utilcode.util.SizeUtils;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.library.util.LogUtil;
 import com.news.example.myproject.R;
 
 import java.util.List;
@@ -44,13 +45,15 @@ public class SortEditAdapter extends BaseMultiItemQuickAdapter<NewsSortInfo, Bas
         }
         String sortName = item.getName();
         int nameLen = sortName != null ? sortName.length() : 0;
+        LogUtil.d(TAG, "SortName = " + sortName + "; ItemType = " + helper.getItemViewType());
+        LogUtil.d(TAG, "====================");
         switch (helper.getItemViewType()) {
             case NewsSortInfo.FIXED:
             case NewsSortInfo.CHOOSE:
                 TextView tvLabel = helper.getView(R.id.tvSortLabel);
                 tvLabel.setText(sortName);
-                int color = (item.getLabelType() == NewsSortInfo.FIXED)
-                        ? Color.parseColor("#9c9c9c") : Color.parseColor("#2c2c2c");
+                boolean isFixed = helper.getItemViewType() == NewsSortInfo.FIXED;
+                int color = isFixed ? Color.parseColor("#9c9c9c") : Color.parseColor("#2c2c2c");
                 tvLabel.setTextColor(color);
                 int textSize = 15;
                 if (nameLen == 4) {
@@ -59,7 +62,7 @@ public class SortEditAdapter extends BaseMultiItemQuickAdapter<NewsSortInfo, Bas
                     textSize = 12;
                 }
                 tvLabel.setTextSize(textSize);
-                int visible = isShowClose && helper.getAdapterPosition() > 1 ? View.VISIBLE : View.GONE;
+                int visible = isShowClose && !isFixed ? View.VISIBLE : View.GONE;
                 helper.getView(R.id.ivSortClose).setVisibility(visible);
                 if (onLongPressListener == null) {
                     return;
