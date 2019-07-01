@@ -33,6 +33,7 @@
     <string name="save">保存</string>
     <string name="back">返回</string>
     <string name="close">关闭</string>
+    <string name="finish">完成</string>
 
     <!-- 日期 时间 start-->
     <string name="data_year">年</string>
@@ -57,6 +58,7 @@
     <!--数字/符号 -->
 
     <string name="cancel">取消</string>
+    <string name="add">添加</string>
     <string name="cancel_empty">取&#160;&#160;消</string>
     <string name="pullback_empty">拉&#160;&#160;黑</string>
     <string name="delete_empty">删&#160;&#160;除</string>
@@ -119,4 +121,5 @@
     <string name="number_comment">%1$s评</string>
     <string name="nick_comment_create_time">%1$s&#160;&#160;%2$s评&#160;&#160;%3$s</string>
     <string name="comment_create_time">%1$s评&#160;&#160;%2$s</string>
+
 </resources>

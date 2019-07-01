@@ -82,7 +82,7 @@
         <item name="android:windowAnimationStyle">@null</item>
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:backgroundDimAmount">0.4</item>
-    </style>A
+    </style>
 
     <style name="Progress.Horizontal" parent="Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:indeterminateOnly">false</item>
@@ -94,4 +94,8 @@
         <item name="android:maxHeight">17dp</item>
     </style>
 
+    <style name="dialog_fragment_center_anim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_push_center_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_push_out</item>
+    </style>
 </resources>

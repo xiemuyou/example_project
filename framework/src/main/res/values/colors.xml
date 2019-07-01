@@ -35,6 +35,8 @@
     <color name="white_transparency_80">#CCFFFFFF</color>
     <!-- 白色 90%透明度 -->
     <color name="white_transparency_90">#E6FFFFFF</color>
+    <!-- 白色 100%透明度 -->
+    <color name="white_transparency">#00FFFFFF</color>
 
     <!--黑色%30透明度-->
     <color name="black_transparency_30">#66000000</color>
@@ -60,6 +62,10 @@
     <color name="color_8E909C">#8E909C</color>
     <color name="color_F4F4F4">#F4F4F4</color>
     <color name="color_FF023B">#FF023B</color>
+    <color name="color_9F9F9F">#9F9F9F</color>
+    <color name="color_2C2C2C">#2C2C2C</color>
+    <color name="color_C9C9C9">#C9C9C9</color>
+    <color name="color_FFE5EB">#FFE5EB</color>
 
     <color name="text_color_9F9F9F">#9F9F9F</color>
     <color name="text_color_2C2C2C">#2C2C2C</color>

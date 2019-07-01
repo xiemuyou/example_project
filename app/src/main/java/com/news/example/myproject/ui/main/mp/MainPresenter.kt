@@ -5,6 +5,7 @@ import com.news.example.myproject.model.base.BaseApiResponse
 import com.news.example.myproject.model.base.StringListResponse
 import com.news.example.myproject.model.sort.NewsSortInfo
 import com.news.example.myproject.model.sort.NewsSortListResponse
+import com.news.example.myproject.ui.main.home.sort.sp.SortPresenter
 import com.news.example.myproject.ui.main.mv.MainView
 import com.news.example.myproject.znet.InterfaceConfig
 import com.news.example.myproject.znet.rx.RxRequestCallback
@@ -48,6 +49,7 @@ class MainPresenter(view: MainView) : BasePresenter<MainView>(view) {
         when (apiTag) {
             InterfaceConfig.HttpHelperTag.ARTICLE_CATEGORY_GET_EXTRA_V1 -> {
                 val success = parseJson(res)
+                success.data = SortPresenter().compareList(success.data)
                 mvpView.getCategoryExtraSuccess(success)
             }
 

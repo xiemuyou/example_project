@@ -1,9 +1,5 @@
 package com.library.util;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,6 +7,10 @@ import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 
 import com.library.FApplication;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import static com.library.util.PreferencesUtils.PreferenceType.DEFAULT;
 
@@ -288,10 +288,6 @@ public class PreferencesUtils {
      */
     public static String getStringPreferences(PreferenceType type, String key, String defaultValue) {
         return getPreferenceInstance(type).getString(key, defaultValue);
-    }
-
-    public static void saveList(PreferenceType type, String key, List<Object> datas) {
-
     }
 
     /**

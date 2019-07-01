@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mLayoutParent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/sv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_sort">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--关闭-->
+            <RelativeLayout
+                android:id="@+id/rl_close"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/px_78"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/px_24"
+                android:paddingEnd="@dimen/px_24">
+
+                <ImageView
+                    android:layout_width="@dimen/px_36"
+                    android:layout_height="@dimen/px_36"
+                    android:contentDescription="@string/close"
+                    android:src="@drawable/sort_close" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_120"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/px_24"
+                android:paddingEnd="@dimen/px_24">
+
+                <!--我的频道提示文本-->
+                <TextView
+                    android:id="@+id/tvMySortHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/my_channel"
+                    android:textColor="@color/color_2C2C2C"
+                    android:textSize="@dimen/px_36_sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/px_12"
+                    android:layout_toEndOf="@+id/tvMySortHint"
+                    android:text="@string/click_go_to_sort"
+                    android:textColor="@color/color_C9C9C9"
+                    android:textSize="@dimen/px_28_sp" />
+
+                <!--编辑按钮-->
+                <TextView
+                    android:id="@+id/tv_edit"
+                    android:layout_width="@dimen/px_120"
+                    android:layout_height="@dimen/px_60"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/bg_ffe5eb_botton"
+                    android:gravity="center"
+                    android:text="@string/editor"
+                    android:textColor="@color/color_FF023B"
+                    android:textSize="@dimen/px_26_sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <!--我的频道-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_mine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/px_0"
+                android:paddingEnd="@dimen/px_24" />
+
+            <!--更多频道提示文本-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/px_116"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/px_24"
+                android:paddingEnd="@dimen/px_0">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_channel"
+                    android:textColor="@color/color_2C2C2C"
+                    android:textSize="@dimen/px_36_sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/px_12"
+                    android:text="@string/click_add_sort"
+                    android:textColor="@color/color_C9C9C9"
+                    android:textSize="@dimen/px_28_sp" />
+            </LinearLayout>
+
+            <!--更多频道-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/px_24"
+                android:paddingEnd="@dimen/px_0" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>

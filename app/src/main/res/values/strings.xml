@@ -32,4 +32,13 @@
     <string name="search_empty">未找到结果</string>
     <string name="search_ever_one">大家都在搜“%1$s”</string>
     <!-- 搜索 End -->
+
+    <!-- 类型编辑 Start -->
+    <string name="click_in_my_channel">点击进入频道</string>
+    <string name="my_channel">我的频道</string>
+    <string name="more_channel">更多频道</string>
+    <string name="drag_and_drop_to_sort">拖拽可以排序</string>
+    <string name="click_go_to_sort">点击进入频道</string>
+    <string name="click_add_sort">点击可添加频道</string>
+    <!-- 类型编辑 End -->
 </resources>

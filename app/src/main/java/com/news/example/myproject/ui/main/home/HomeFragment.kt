@@ -2,11 +2,16 @@ package com.news.example.myproject.ui.main.home
 
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
+import com.library.thread.AbstractSafeThread
+import com.library.thread.ThreadPool
 import com.library.util.ViewUtil
 import com.news.example.myproject.R
 import com.news.example.myproject.base.component.BaseFragment
 import com.news.example.myproject.base.component.BaseRefreshFragment
+import com.news.example.myproject.model.sort.NewsSortInfo
 import com.news.example.myproject.model.sort.NewsSortListResponse
+import com.news.example.myproject.model.sort.SortFilter
+import com.news.example.myproject.ui.main.home.sort.SortEditFragment
 import com.news.example.myproject.ui.main.home.sort.SortFragment
 import com.news.example.myproject.ui.main.mp.MainPresenter
 import com.news.example.myproject.ui.main.mv.MainView
@@ -49,28 +54,75 @@ class HomeFragment : BaseFragment(), MainView {
         return R.layout.fragment_home
     }
 
+    private var mSortListRes: NewsSortListResponse? = null
+
     override fun initEnv() {
+        recommend = getString(R.string.recommend)
         homePresenter.getCategoryExtra()
         homePresenter.articleHotWords()
         vbvHomeSearch?.setOnClickListener {
             SearchActivity.showClass(ArrayList(), "")
         }
+        ivSortCustom?.setOnClickListener {
+            editSortList()
+        }
     }
 
-    private fun initTabLayout(res: NewsSortListResponse) {
+    private fun editSortList() {
+        val sortList: List<NewsSortInfo>? = mSortListRes?.data
+        SortEditFragment.Builder()
+                .setFragmentManager(_mActivity.supportFragmentManager)
+                .setSortData(this, sortListCallback, if (sortList?.isEmpty() == true) null else sortList?.get(showIndex),
+                        SortFilter.divideList(sortList))
+                .create().showDialog()
+    }
+
+    private val sortListCallback = SortEditFragment.EditSortListCallback { _, _, _ ->
+        //    private val sortListCallback = SortEditFragment.EditSortListCallback { isChange, showIndex, sortData ->
+        //        if (isChange) {
+//            editHomeSortList(sortData)
+//            tlHomeHF.setViewPager(vpHomePage)
+//            AppDanaClient.postEventClick(_mActivity, "A#sort_1", null, "", "", "")
+//        }
+//        val index = showIndex
+//        vpHomePage.postDelayed(Runnable {
+//            setTabSelectDefaultTag(index, 0)
+//            setCurrentTab(index)
+//        }, 400)
+
+        ThreadPool.execute(object : AbstractSafeThread() {
+            override fun deal() {
+//                val json = JsonUtil.objectToJson(sortData)
+//                if (UserOperationUtil.whetherLogin()) {
+//                    val sortPresenter = SortPresenter(this@HomeFragment)
+//                    sortPresenter.uploadSortData(json)
+//                }
+//                AppSharedPreferences.INSTANCE.saveString(AppSharedPreferences.SORT_MINE, json)
+            }
+        })
+    }
+
+    private fun initTabLayout(res: NewsSortListResponse?) {
         ViewUtil.setMargins(clHomeRootView, 0, CommonUtil.getStatusBarHeight(_mActivity), 0, 0)
         val creator = FragmentPagerItems.with(_mActivity)
         val fragmentPagerItems = creator.create()
-        val sortList = res.data
-        //手动添加推荐页
-        val recommend = getString(R.string.recommend)
-        fragmentPagerItems.add(PagerFragmentItem.of(recommend, RecommendFragment::class.java))
+        val sortList = res?.data
+        val sortSize = sortList?.size ?: 0
         //循环添加分类页
-        if (sortList != null && sortList.isNotEmpty()) {
-            sortList.forEach {
-                val arts = Bundle()
-                arts.putString(RecommendFragment.SORT_NAME, it.category)
-                fragmentPagerItems.add(PagerFragmentItem.of(it.name, SortFragment::class.java, arts))
+        for (i in 0 until sortSize) {
+            val it = sortList?.get(i)
+            it?.apply {
+                if (recommend == it.name) {
+                    fragmentPagerItems.add(PagerFragmentItem.of(recommend, RecommendFragment::class.java))
+                }
+                if (i < 10) {
+                    it.labelType = NewsSortInfo.CHOOSE
+                    val arts = Bundle()
+                    arts.putString(SortFragment.SORT_NAME, it.category)
+                    fragmentPagerItems.add(PagerFragmentItem.of(it.name, SortFragment::class.java, arts))
+                } else {
+                    it.labelType = NewsSortInfo.MORE
+                }
             }
         }
         fAdapter = FragmentPagerItemAdapter(childFragmentManager, fragmentPagerItems)
@@ -127,10 +179,19 @@ class HomeFragment : BaseFragment(), MainView {
         }
     }
 
+    //手动添加推荐页
+    private var recommend = ""
+
     override fun getCategoryExtraSuccess(res: NewsSortListResponse?) {
-        if (res != null) {
-            initTabLayout(res)
+        mSortListRes = res
+        val sortList: MutableList<NewsSortInfo>? = mSortListRes?.data
+        if (sortList != null) {
+            val recommendSort = NewsSortInfo()
+            recommendSort.name = recommend
+            recommendSort.labelType = NewsSortInfo.FIXED
+            sortList.add(0, recommendSort)
         }
+        initTabLayout(res)
     }
 
     override fun loadDataFail(apiTag: InterfaceConfig.HttpHelperTag?, errorInfo: String?) {

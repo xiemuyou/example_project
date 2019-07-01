@@ -24,6 +24,7 @@ class RecommendFragment : BaseRefreshFragment<NewsInfo>(), NewsListView {
     var category = ""
 
     companion object {
+        const val HOME_INDEX = 0
         const val SORT_NAME = "sortName"
     }
 

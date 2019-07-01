@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/px_120"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/px_24"
+    android:paddingEnd="@dimen/px_0">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/my_channel"
+        android:textColor="@color/color_2C2C2C"
+        android:textSize="@dimen/px_36_sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/px_12"
+        android:text="@string/click_in_my_channel"
+        android:textColor="@color/color_C9C9C9"
+        android:textSize="@dimen/px_28_sp" />
+</LinearLayout>
