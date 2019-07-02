@@ -1,7 +1,7 @@
 package com.news.example.myproject.ui.main.mv;
 
 import com.news.example.myproject.base.mvp.BaseView;
-import com.news.example.myproject.model.sort.NewsSortListResponse;
+import com.news.example.myproject.model.sort.NewsSortInfo;
 
 import java.util.List;
 
@@ -18,7 +18,8 @@ public interface MainView extends BaseView {
      *
      * @param res 分类列表
      */
-    void getCategoryExtraSuccess(NewsSortListResponse res);
+    //void getCategoryExtraSuccess(NewsSortListResponse res);
+    void getCategoryExtraSuccess(List<NewsSortInfo> res);
 
     /**
      * 成功获取数据

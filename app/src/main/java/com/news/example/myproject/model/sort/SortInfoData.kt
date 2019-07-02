@@ -21,7 +21,7 @@ data class SortInfoData(
     /**
      * 获取全部List
      */
-    fun getAllList(): List<NewsSortInfo> {
+    fun getAllList(): MutableList<NewsSortInfo> {
         val allList = ArrayList<NewsSortInfo>()
         allList.addAll(fixedList)
         allList.addAll(chooseList)

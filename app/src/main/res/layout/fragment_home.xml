@@ -85,6 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/CommonHead_size"
                 android:layout_gravity="start"
+                android:overScrollMode="never"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -131,6 +132,7 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="never"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

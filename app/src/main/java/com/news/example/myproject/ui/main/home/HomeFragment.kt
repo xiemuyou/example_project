@@ -11,11 +11,10 @@ import com.news.example.myproject.R
 import com.news.example.myproject.base.component.BaseFragment
 import com.news.example.myproject.base.component.BaseRefreshFragment
 import com.news.example.myproject.model.sort.NewsSortInfo
-import com.news.example.myproject.model.sort.NewsSortListResponse
-import com.news.example.myproject.model.sort.SortFilter
 import com.news.example.myproject.model.sort.SortInfoData
 import com.news.example.myproject.ui.main.home.sort.SortEditFragment
 import com.news.example.myproject.ui.main.home.sort.SortFragment
+import com.news.example.myproject.ui.main.home.sort.sp.SortPresenter
 import com.news.example.myproject.ui.main.mp.MainPresenter
 import com.news.example.myproject.ui.main.mv.MainView
 import com.news.example.myproject.ui.main.recommend.RecommendFragment
@@ -39,6 +38,8 @@ class HomeFragment : BaseFragment(), MainView {
     private var bannerAdapter: SearchBannerAdapter? = null
     private var hotSearchList: MutableList<String>? = null
     private var fpItems: FragmentPagerItems? = null
+    private var mSortData: SortInfoData? = null
+    private var sortInfoList: MutableList<NewsSortInfo> = ArrayList()
 
     companion object {
         const val MAIN_INDEX = 0
@@ -54,34 +55,32 @@ class HomeFragment : BaseFragment(), MainView {
         MainPresenter(this)
     }
 
+    private val sortPresenter by lazy {
+        SortPresenter()
+    }
+
     override fun getLayoutId(savedInstanceState: Bundle?): Int {
         return R.layout.fragment_home
     }
 
-    private var mSortListRes: NewsSortListResponse? = null
-    private var mSortData: SortInfoData? = null
-    private var sortInfoList: MutableList<NewsSortInfo> = ArrayList()
-
     override fun initEnv() {
-        recommend = getString(R.string.recommend)
+        sortPresenter.recommend = getString(R.string.recommend)
         homePresenter.getCategoryExtra()
         homePresenter.articleHotWords()
         fpItems = FragmentPagerItems.with(_mActivity).create()
+        setOnClickListener()
+    }
+
+    private fun setOnClickListener() {
         vbvHomeSearch?.setOnClickListener {
             SearchActivity.showClass(ArrayList(), "")
         }
         ivSortCustom?.setOnClickListener {
-            editSortList()
+            SortEditFragment.Builder()
+                    .setFragmentManager(_mActivity.supportFragmentManager)
+                    .setSortData(this, sortListCallback, sortInfoList[showIndex], mSortData)
+                    .create().showDialog()
         }
-    }
-
-    private fun editSortList() {
-        val sortList: List<NewsSortInfo>? = mSortListRes?.data
-        mSortData = SortFilter.divideList(sortList)
-        SortEditFragment.Builder()
-                .setFragmentManager(_mActivity.supportFragmentManager)
-                .setSortData(this, sortListCallback, if (sortList?.isEmpty() == true) null else sortList?.get(showIndex), mSortData)
-                .create().showDialog()
     }
 
     private val sortListCallback = SortEditFragment.EditSortListCallback { isChange, showIndex, sortData ->
@@ -96,12 +95,7 @@ class HomeFragment : BaseFragment(), MainView {
 
         ThreadPool.execute(object : AbstractSafeThread() {
             override fun deal() {
-//                val json = JsonUtil.objectToJson(sortData)
-//                if (UserOperationUtil.whetherLogin()) {
-//                    val sortPresenter = SortPresenter(this@HomeFragment)
-//                    sortPresenter.uploadSortData(json)
-//                }
-//                AppSharedPreferences.INSTANCE.saveString(AppSharedPreferences.SORT_MINE, json)
+                SortPresenter().saveSortData(sortData)
             }
         })
     }
@@ -126,28 +120,27 @@ class HomeFragment : BaseFragment(), MainView {
         }
     }
 
-    private fun initTabLayout(res: NewsSortListResponse?) {
+    private fun initTabLayout(res: SortInfoData?) {
         ViewUtil.setMargins(clHomeRootView, 0, CommonUtil.getStatusBarHeight(_mActivity), 0, 0)
-        sortInfoList = res?.data ?: ArrayList()
-        val sortSize = sortInfoList.size
         //循环添加分类页
-        for (i in 0 until sortSize) {
-            val it = sortInfoList[i]
-            it.apply {
-                when {
-                    recommend == it.name -> fpItems?.add(PagerFragmentItem.of(recommend, RecommendFragment::class.java))
-                    i < 10 -> {
-                        it.itemType = NewsSortInfo.CHOOSE
-                        val arts = Bundle()
-                        arts.putString(SortFragment.SORT_NAME, it.category)
-                        fpItems?.add(PagerFragmentItem.of(it.name, SortFragment::class.java, arts))
-                    }
-                    else -> it.itemType = NewsSortInfo.MORE
+        res?.getAllList()?.forEach {
+            when {
+                sortPresenter.recommend == it.name -> {
+                    fpItems?.add(PagerFragmentItem.of(it.name, RecommendFragment::class.java))
+                    sortInfoList.add(it)
+                }
+                it.itemType == NewsSortInfo.CHOOSE -> {
+                    val arts = Bundle()
+                    arts.putString(SortFragment.SORT_NAME, it.category)
+                    fpItems?.add(PagerFragmentItem.of(it.name, SortFragment::class.java, arts))
+                }
+
+                else -> {
                 }
             }
         }
         fAdapter = FragmentPagerItemAdapter(childFragmentManager, fpItems)
-        viewpager.adapter = fAdapter
+        viewpager.adapter = fAdapter!!
         viewpager.offscreenPageLimit = 7
         tlHomeHF.setViewPager(viewpager)
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -185,7 +178,7 @@ class HomeFragment : BaseFragment(), MainView {
             fAdapter?.notifyDataSetChanged()
         }
         for (sort in sortList) {
-            if (ObjectUtils.equals(recommend, sort.name)) {
+            if (ObjectUtils.equals(sortPresenter.recommend, sort.name)) {
                 fpItems?.add(PagerFragmentItem.of(sort.name, RecommendFragment::class.java))
             } else if (sort.itemType == NewsSortInfo.CHOOSE) {
                 val arts = Bundle()
@@ -216,19 +209,9 @@ class HomeFragment : BaseFragment(), MainView {
         }
     }
 
-    //手动添加推荐页
-    private var recommend = ""
-
-    override fun getCategoryExtraSuccess(res: NewsSortListResponse?) {
-        mSortListRes = res
-        val sortList: MutableList<NewsSortInfo>? = mSortListRes?.data
-        if (sortList != null) {
-            val recommendSort = NewsSortInfo()
-            recommendSort.name = recommend
-            recommendSort.itemType = NewsSortInfo.FIXED
-            sortList.add(0, recommendSort)
-        }
-        initTabLayout(res)
+    override fun getCategoryExtraSuccess(res: MutableList<NewsSortInfo>?) {
+        mSortData = sortPresenter.compareList(res)
+        initTabLayout(mSortData)
     }
 
     override fun loadDataFail(apiTag: InterfaceConfig.HttpHelperTag?, errorInfo: String?) {
