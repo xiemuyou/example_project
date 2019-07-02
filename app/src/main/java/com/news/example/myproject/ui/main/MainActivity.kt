@@ -2,7 +2,6 @@ package com.news.example.myproject.ui.main
 
 import android.os.Bundle
 import android.widget.Toast
-
 import com.blankj.utilcode.util.ObjectUtils
 import com.library.widgets.statusbar.StatusBarCompat
 import com.news.example.myproject.R
@@ -10,7 +9,6 @@ import com.news.example.myproject.base.component.BaseActivity
 import com.news.example.myproject.ui.main.home.HomeFragment
 import com.news.example.myproject.ui.main.mine.MineFragment
 import com.news.example.myproject.ui.main.video.VideoFragment
-
 import kotlinx.android.synthetic.main.activity_main.*
 import me.yokeyword.fragmentation.SupportFragment
 
@@ -118,6 +116,10 @@ class MainActivity : BaseActivity() {
     private var exitTime: Long = 0
 
     override fun onBackPressedSupport() {
+        if (showTabIndex != HomeFragment.MAIN_INDEX) {
+            switchTabView(HomeFragment.MAIN_INDEX)
+            return
+        }
         if (System.currentTimeMillis() - exitTime > 2000) {
             Toast.makeText(this, R.string.again_accord_exit, Toast.LENGTH_SHORT).show()
             exitTime = System.currentTimeMillis()

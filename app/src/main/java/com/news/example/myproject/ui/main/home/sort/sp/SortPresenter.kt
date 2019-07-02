@@ -5,6 +5,7 @@ import com.library.thread.ThreadPool
 import com.library.util.JsonUtil
 import com.library.util.PreferencesUtils
 import com.news.example.myproject.model.sort.NewsSortInfo
+import com.news.example.myproject.model.sort.SortFilter
 import com.news.example.myproject.model.sort.SortInfoData
 
 /**
@@ -19,32 +20,37 @@ class SortPresenter {
      * 2.名称有变化,修改本地名称
      * 3.服务器新增添加到本地
      */
-    fun compareList(sList: MutableList<NewsSortInfo>?): SortInfoData? {
-        val newData = if (sList != null) getNewSortData(sList) else null
-        val saveData = getSaveSortData()
-        if (saveData?.getAllList().isNullOrEmpty()) {
-            return newData
+    fun compareList(sortList: MutableList<NewsSortInfo>?): SortInfoData? {
+        var newData = if (sortList != null) getNewSortData(sortList) else null
+        var saveData = getSaveSortData()
+//        if (saveData?.getAllList().isNullOrEmpty()) {
+//            return newData
+//        }
+//        return saveData
+
+        var saveList = saveData?.getAllList()
+        val sList = newData?.getAllList()
+        if (saveList == null || sList == null) {
+            return saveData ?: newData
         }
+        //1:本地保存,服务器已经删除,删除本地
+        saveList = saveList.filter {
+            sList.contains(it)
+        } as MutableList<NewsSortInfo>?
+
+        sList.forEach { info ->
+            saveList?.forEach {
+                if (it == info) {
+                    it.name = info.name
+                }
+            }
+            if (saveList?.contains(info) == false) {
+                saveList.add(info)
+            }
+        }
+        saveData = SortFilter.divideList(saveList)
+        saveSortData(saveData)
         return saveData
-//        var saveList = getSaveList()
-//        if (saveList == null || sList == null) {
-//            return sList ?: saveList
-//        }
-//        //1:本地保存,服务器已经删除,删除本地
-//        saveList = saveList.filter {
-//            sList.contains(it)
-//        } as MutableList<NewsSortInfo>?
-//        sList.forEach {
-//            val pos = saveList?.indexOf(it) ?: 0
-//            //2:名称有变化,修改本地名称
-//            saveList?.elementAtOrNull(pos)?.name = it.name
-//            //3:服务器新增添加到本地
-//            if (saveList?.contains(it) == false) {
-//                saveList.add(it)
-//            }
-//        }
-//        PreferencesUtils.setStringPreferences(sortListKey, JsonUtil.objetcToJson(saveList))
-//        return saveList
     }
 
     private fun getNewSortData(sortInfoList: MutableList<NewsSortInfo>): SortInfoData? {
@@ -67,6 +73,7 @@ class SortPresenter {
 
     //手动添加推荐页
     var recommend = ""
+    var TAG = "SortPresenter"
 
     /**
      * 添加固定的分类
@@ -74,9 +81,16 @@ class SortPresenter {
     private fun getNewsFixedList(): MutableList<NewsSortInfo> {
         val fixedList: MutableList<NewsSortInfo> = ArrayList(1)
         val recommendSort = NewsSortInfo()
+        recommendSort.concern_id = "001"
         recommendSort.name = recommend
         recommendSort.itemType = NewsSortInfo.FIXED
         fixedList.add(0, recommendSort)
+
+        val newSort = NewsSortInfo()
+        newSort.concern_id = "002"
+        newSort.name = "关注"
+        newSort.itemType = NewsSortInfo.FIXED
+        fixedList.add(1, newSort)
         return fixedList
     }
 

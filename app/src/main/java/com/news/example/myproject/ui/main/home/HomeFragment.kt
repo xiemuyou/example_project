@@ -114,7 +114,6 @@ class HomeFragment : BaseFragment(), MainView {
             sortInfoList.clear()
             sortInfoList.addAll(sortData.fixedList)
             sortInfoList.addAll(sortData.chooseList)
-            sortInfoList.addAll(sortData.editList)
             getFragmentItems(sortInfoList)
             fAdapter?.notifyDataSetChanged()
         }
@@ -129,7 +128,8 @@ class HomeFragment : BaseFragment(), MainView {
                     fpItems?.add(PagerFragmentItem.of(it.name, RecommendFragment::class.java))
                     sortInfoList.add(it)
                 }
-                it.itemType == NewsSortInfo.CHOOSE -> {
+                it.itemType == NewsSortInfo.FIXED || it.itemType == NewsSortInfo.CHOOSE -> {
+                    sortInfoList.add(it)
                     val arts = Bundle()
                     arts.putString(SortFragment.SORT_NAME, it.category)
                     fpItems?.add(PagerFragmentItem.of(it.name, SortFragment::class.java, arts))
@@ -180,7 +180,7 @@ class HomeFragment : BaseFragment(), MainView {
         for (sort in sortList) {
             if (ObjectUtils.equals(sortPresenter.recommend, sort.name)) {
                 fpItems?.add(PagerFragmentItem.of(sort.name, RecommendFragment::class.java))
-            } else if (sort.itemType == NewsSortInfo.CHOOSE) {
+            } else if (sort.itemType == NewsSortInfo.FIXED || sort.itemType == NewsSortInfo.CHOOSE) {
                 val arts = Bundle()
                 arts.putString(SortFragment.SORT_NAME, sort.category)
                 fpItems?.add(PagerFragmentItem.of(sort.name, SortFragment::class.java, arts))

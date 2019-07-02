@@ -70,6 +70,7 @@ class MainPresenter(view: MainView) : BasePresenter<MainView>(view) {
                 val sortObj: JSONObject = array[i] as JSONObject
                 sort.name = sortObj.getString("name")
                 sort.category = sortObj.getString("category")
+                sort.concern_id = sortObj.getString("concern_id")
                 list.add(sort)
             }
             res.data = list
