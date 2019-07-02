@@ -49,8 +49,8 @@ class CommonWebFragment : BaseFragment(), ConsultWebCallback.ConsultCallBack {
             PreferencesUtils.remove(contentKey)
         } else {
             webView?.loadUrl(webUrl)
+            initWebView()
         }
-        initWebView()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -90,10 +90,6 @@ class CommonWebFragment : BaseFragment(), ConsultWebCallback.ConsultCallBack {
         settings?.setSupportZoom(false)
         settings?.displayZoomControls = false
         //解决华为手机P10，底部闪烁的问题
-        //TODO 崩溃 ,先注释
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && RomUtils.isEmui()) {
-//            JsBridgeWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null)
-//        }
         settings?.javaScriptEnabled = true
         webView?.addJavascriptInterface(this, "App")
         webView?.addJavascriptInterface(ConsultWebCallback(this), "SuperCall")
@@ -106,12 +102,13 @@ class CommonWebFragment : BaseFragment(), ConsultWebCallback.ConsultCallBack {
         settings?.allowContentAccess = true
 
         webView?.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(p0: WebView?, p1: String?): Boolean {
+            override fun shouldOverrideUrlLoading(p0: WebView?, url: String?): Boolean {
+                webView?.loadUrl(url)
                 return true
             }
 
             override fun shouldInterceptRequest(p0: WebView?, p1: String?): WebResourceResponse? {
-                if (p1 != null && p1.startsWith("http")/* && p1.endsWith("x-oss-process=image/resize,w_720")*/) {
+                if (p1 != null && p1.startsWith("http")) {
                     try {
                         ThreadPool.execute {
                             val future: FutureTarget<File> = Glide.with(FApplication.getContext()).downloadOnly().load(p1).submit()

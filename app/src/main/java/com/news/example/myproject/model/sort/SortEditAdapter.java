@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import com.blankj.utilcode.util.SizeUtils;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.library.util.LogUtil;
 import com.news.example.myproject.R;
 
 import java.util.List;
@@ -45,8 +44,6 @@ public class SortEditAdapter extends BaseMultiItemQuickAdapter<NewsSortInfo, Bas
         }
         String sortName = item.getName();
         int nameLen = sortName != null ? sortName.length() : 0;
-        LogUtil.d(TAG, "SortName = " + sortName + "; ItemType = " + helper.getItemViewType());
-        LogUtil.d(TAG, "====================");
         switch (helper.getItemViewType()) {
             case NewsSortInfo.FIXED:
             case NewsSortInfo.CHOOSE:

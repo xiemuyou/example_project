@@ -171,7 +171,6 @@ public class SortEditFragment extends BaseDialogFragment {
         sortAdapter.notifyItemRangeChanged(position, mBuilder.getSortList().size());
         //***
         sortInfo.setItemType(NewsSortInfo.MORE);
-        //sortInfo.setView_type(SortInfo.TYPE_MORE_CATEGORY);
         mBuilder.getMoreSortList().add(0, sortInfo);
         moreSortAdapter.notifyItemInserted(0);
     }
@@ -186,7 +185,6 @@ public class SortEditFragment extends BaseDialogFragment {
         moreSortAdapter.notifyItemRemoved(position);
         moreSortAdapter.notifyItemRangeChanged(position, mBuilder.getMoreSortList().size());
         sortInfo.setItemType(NewsSortInfo.CHOOSE);
-        //sortInfo.setView_type(SortInfo.TYPE_USER_CATEGORY);
         mBuilder.getSortList().add(sortInfo);
         sortAdapter.notifyItemInserted(mBuilder.getSortList().size() - 1);
     }

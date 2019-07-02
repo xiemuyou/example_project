@@ -24,7 +24,7 @@ import com.news.example.myproject.znet.InterfaceConfig;
 public class WelcomeActivity extends AppCompatActivity implements WelcomeView {
     /**
      * 显示引导页次数
-     * home键退出,修改再次会进入欢迎页的bug
+     * home键退出,修改再次会进入引导页的bug
      */
     private static int showGuideCnt = 0;
 
@@ -60,10 +60,5 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeView {
                 finish();
             }
         }, 3000);
-    }
-
-    @Override
-    public void onBackPressed() {
-        //super.onBackPressed();
     }
 }

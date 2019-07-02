@@ -3,10 +3,10 @@
     android:id="@+id/tvCustomText"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
     android:background="@color/transparent"
     android:gravity="center"
-    android:paddingStart="10dp"
-    android:paddingEnd="10dp"
     android:textAllCaps="true"
     android:textColor="@drawable/custom_tab_medium"
     android:textSize="@dimen/commonFontSize_14" />
