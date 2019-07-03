@@ -6,7 +6,6 @@ import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ObjectUtils;
-import com.library.widgets.ToastUtils;
 import com.library.widgets.canrefresh.CanRecyclerViewHeaderFooter;
 import com.library.widgets.canrefresh.CanRefreshLayout;
 import com.library.widgets.canrefresh.LoadDataState;
@@ -182,7 +181,6 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
 
     @Override
     public void loadDataFail(InterfaceConfig.HttpHelperTag apiTag, String errorInfo) {
-        showNotice(errorInfo, ToastUtils.ToastType.ERROR_TYPE);
         loadState = LoadDataState.LOAD_FAIL;
         loadComplete(0);
     }
@@ -193,6 +191,7 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
      * @param currentSize 当前加载数据大小,加载错误为0
      */
     private void loadComplete(int currentSize) {
+        footer.setVisibility(View.GONE);
         int dataSize = 0;
         if (mDataList != null) {
             dataSize = mDataList.size();

@@ -6,7 +6,6 @@ import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ObjectUtils;
-import com.library.widgets.ToastUtils;
 import com.library.widgets.canrefresh.CanRecyclerViewHeaderFooter;
 import com.library.widgets.canrefresh.CanRefreshLayout;
 import com.library.widgets.canrefresh.LoadDataState;
@@ -149,7 +148,6 @@ public abstract class BaseRefreshActivity<T> extends BaseActivity implements
 
     @Override
     public void loadDataFail(InterfaceConfig.HttpHelperTag apiTag, String errorInfo) {
-        showNotice(errorInfo, ToastUtils.ToastType.ERROR_TYPE);
         loadState = LoadDataState.LOAD_FAIL;
         loadComplete(0);
     }
@@ -158,6 +156,7 @@ public abstract class BaseRefreshActivity<T> extends BaseActivity implements
      * 加载成功
      */
     private void loadComplete(int currentSize) {
+        footer.setVisibility(View.GONE);
         loadState = RefreshStateUtil.getLoadState(loadState, currentSize, mDataList.size(), CNT);
         switch (loadState) {
             case EMPTY:
