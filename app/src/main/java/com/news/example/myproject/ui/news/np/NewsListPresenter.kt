@@ -89,6 +89,9 @@ class NewsListPresenter(view: NewsListView) : BasePresenter<NewsListView>(view) 
                         if (key == "publish_time") {
                             news.publish_time = value.toLongOrNull()
                         }
+                        if (key == "group_id") {
+                            news.newsId = value
+                        }
                         if (key == "name") {
                             user.name = if (value.length > 8) value.replace(value.substring(8), "...") else value
                         }

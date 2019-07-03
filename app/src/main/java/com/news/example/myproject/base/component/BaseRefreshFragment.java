@@ -1,10 +1,9 @@
 package com.news.example.myproject.base.component;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.View;
 
 import com.blankj.utilcode.util.ObjectUtils;
 import com.library.widgets.ToastUtils;
@@ -18,6 +17,7 @@ import com.library.widgets.emptyview.OtherViewHolder;
 import com.news.example.myproject.R;
 import com.news.example.myproject.base.mvp.BaseView;
 import com.news.example.myproject.global.Constants;
+import com.news.example.myproject.model.sort.SortFilter;
 import com.news.example.myproject.znet.InterfaceConfig;
 
 import java.util.ArrayList;
@@ -62,7 +62,7 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
     /**
      * 数据列表
      */
-    private List<T> followList;
+    private List<T> mDataList;
     /**
      * 数据数量
      */
@@ -83,7 +83,7 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
 
     @Override
     public void initEnv() {
-        followList = new ArrayList<>();
+        mDataList = new ArrayList<>();
         OtherViewHolder otherHolder = new OtherViewHolder(_mActivity);
         otherHolder.setOnEmptyRetryListener(() -> {
             page = 0;
@@ -92,7 +92,7 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
         ovHintView.setHolder(otherHolder);
         ovHintView.showLoadingView();
 
-        adapter = getRefreshAdapter(followList);
+        adapter = getRefreshAdapter(mDataList);
         canContentView.setAdapter(adapter);
 
         //添加下拉刷新
@@ -168,20 +168,27 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
         ovHintView.showContentView();
         int getSize = 0;
 
-        if (followList == null) {
-            followList = new ArrayList<>();
+        if (mDataList == null) {
+            mDataList = new ArrayList<>();
         }
         if (page == 0) {
-            followList.clear();
+            mDataList.clear();
         }
 
-        if (ObjectUtils.isNotEmpty(dataList)) {
+        if (ObjectUtils.isNotEmpty(dataToHeavy(dataList))) {
             getSize = dataList.size();
-            followList.addAll(dataList);
+            mDataList.addAll(dataList);
         }
         adapter.notifyDataSetChanged();
         loadState = LoadDataState.SUCCESS;
         loadComplete(getSize);
+    }
+
+    private List<T> dataToHeavy(List<T> dataList) {
+        if (mDataList == null) {
+            return dataList;
+        }
+        return SortFilter.INSTANCE.dataToHeavy(mDataList, dataList);
     }
 
     @Override
@@ -199,8 +206,8 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
     private void loadComplete(int currentSize) {
         flLoadMoreView.setVisibility(View.GONE);
         int dataSize = 0;
-        if (followList != null) {
-            dataSize = followList.size();
+        if (mDataList != null) {
+            dataSize = mDataList.size();
         }
         loadState = RefreshStateUtil.getLoadState(loadState, currentSize, dataSize, Constants.CNT_NUMBER);
         switch (loadState) {
@@ -214,6 +221,9 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
                     page--;
                 }
                 footer.setLoadEnable(false);
+                if (page > 1) {
+                    ToastUtils.showToast(_mActivity, R.string.not_more_data, ToastUtils.ToastType.ERROR_TYPE);
+                }
                 break;
 
             case LOAD_MORE:

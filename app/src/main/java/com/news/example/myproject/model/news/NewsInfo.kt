@@ -9,12 +9,22 @@ import com.news.example.myproject.model.user.UserInfo
 data class NewsInfo(
         var content: String? = "",
         var title: String? = "",
+        var newsId: String? = "",
         var stick_label: String? = "",
         var publish_time: Long? = 0L,
         var display_url: String? = "",
         var userInfo: UserInfo? = UserInfo(),
         var images: List<String>? = ArrayList()
-)
+) {
+    override fun equals(other: Any?): Boolean {
+//        LogUtil.d("NewsInfo", "otherId:${if (other is NewsInfo) other.newsId else "0"} ,newId:$newsId")
+        return other is NewsInfo && other.newsId == newsId
+    }
+
+    override fun hashCode(): Int {
+        return newsId?.hashCode() ?: 0
+    }
+}
 
 /*
 

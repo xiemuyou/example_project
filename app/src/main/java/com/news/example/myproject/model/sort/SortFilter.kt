@@ -48,4 +48,10 @@ object SortFilter {
         }
         return sortData
     }
+
+    fun <T> dataToHeavy(oldDataList: MutableList<T>, newDataList: MutableList<T>): List<T> {
+        return newDataList.filter {
+            !oldDataList.contains(it)
+        }
+    }
 }
