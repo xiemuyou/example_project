@@ -2,6 +2,8 @@ package com.news.example.myproject.base.component;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,6 +52,10 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
     View flLoadMoreView;
     @BindView(R.id.footer)
     CanRecyclerViewHeaderFooter footer;
+    @BindView(R.id.load_more_load_end_view)
+    FrameLayout flFootComplete;
+    @BindView(R.id.load_more_loading_view)
+    LinearLayout flFootLoading;
     /**
      * 空白显示
      */
@@ -132,6 +138,8 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
         page++;
         refreshDataList();
         flLoadMoreView.setVisibility(View.VISIBLE);
+        flFootLoading.setVisibility(View.VISIBLE);
+        flFootComplete.setVisibility(View.GONE);
     }
 
     @Override
@@ -222,12 +230,16 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
                 }
                 footer.setLoadEnable(false);
                 if (page > 1) {
-                    ToastUtils.showToast(_mActivity, R.string.not_more_data, ToastUtils.ToastType.ERROR_TYPE);
+                    flLoadMoreView.setVisibility(View.VISIBLE);
+                    flFootLoading.setVisibility(View.GONE);
+                    flFootComplete.setVisibility(View.VISIBLE);
                 }
                 break;
 
             case LOAD_MORE:
                 flLoadMoreView.setVisibility(View.VISIBLE);
+                flFootLoading.setVisibility(View.VISIBLE);
+                flFootComplete.setVisibility(View.GONE);
                 footer.setLoadEnable(true);
                 break;
 

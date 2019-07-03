@@ -9,7 +9,7 @@
     <FrameLayout
         android:id="@+id/flLoadMoreView"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="@dimen/px_80">
 
         <LinearLayout
             android:id="@+id/load_more_loading_view"
@@ -52,13 +52,13 @@
         <FrameLayout
             android:id="@+id/load_more_load_end_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone">
+            android:layout_height="@dimen/px_80">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:text="@string/not_more_data"
                 android:textColor="@android:color/darker_gray" />
         </FrameLayout>
     </FrameLayout>
