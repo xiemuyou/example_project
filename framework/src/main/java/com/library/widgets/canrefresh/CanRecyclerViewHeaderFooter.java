@@ -1,20 +1,21 @@
 package com.library.widgets.canrefresh;
 
 import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.FrameLayout;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.FrameLayout;
 
 import java.util.Arrays;
 
-
 /**
- * Created by canyinghao on 16/7/13.
+ * @author canyinghao
+ * @date 16/7/13
  * Copyright 2016 canyinghao
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,54 +29,50 @@ import java.util.Arrays;
  */
 public class CanRecyclerViewHeaderFooter extends FrameLayout {
 
-    //    是否依附在RecyclerView上
+    /***    是否依附在RecyclerView上**/
     private boolean isAttached;
-    //    是头部还是底部
+    /***    是头部还是底部*/
     private boolean isHeader = true;
-    //  是否触摸中
+    /***  是否触摸中*/
     private boolean isRecyclerTouch;
-    //   偏移的距离
+    /***   偏移的距离*/
     private int downTranslation;
-    //   RecyclerView是否颠倒
+    /***   RecyclerView是否颠倒*/
     private boolean isReversed;
-    //    RecyclerView是否水平
+    /***    RecyclerView是否水平*/
     private boolean isVertical;
-    //  用以缓存是否调用加载
+    /***  用以缓存是否调用加载*/
     private boolean isCanLoad;
-    //  设置是否可加载
+    /***  设置是否可加载*/
     private boolean isLoadEnable = true;
-
-    //  是否加载完成
+    /***  是否加载完成*/
     private boolean isLoadComplete = true;
-
-
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    //  给RecyclerView的头部底部加Decoration
+    /***  给RecyclerView的头部底部加Decoration*/
     private CanItemDecoration decoration;
-    //  loadmore的监听事件
+    /***  loadmore的监听事件*/
     private OnLoadMoreListener loadMoreListener;
-
-    // 滑动监听
+    /***   滑动监听**/
     private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+
         @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
             onScrollChanged();
         }
     };
 
-    //  依附监听
+    /*** 依附监听**/
     private RecyclerView.OnChildAttachStateChangeListener onAttachListener = new RecyclerView.OnChildAttachStateChangeListener() {
         @Override
-        public void onChildViewAttachedToWindow(View view) {
+        public void onChildViewAttachedToWindow(@NonNull View view) {
         }
 
         @Override
-        public void onChildViewDetachedFromWindow(View view) {
+        public void onChildViewDetachedFromWindow(@NonNull View view) {
             post(new Runnable() {
                 @Override
                 public void run() {
-
                     if (!recyclerView.isComputingLayout()) {
                         recyclerView.invalidateItemDecorations();
                     }
@@ -162,12 +159,12 @@ public class CanRecyclerViewHeaderFooter extends FrameLayout {
         if (layoutManager instanceof GridLayoutManager) {
             GridLayoutManager grid = (GridLayoutManager) layoutManager;
             this.isReversed = grid.getReverseLayout();
-            this.isVertical = grid.getOrientation() == LinearLayoutManager.VERTICAL;
+            this.isVertical = grid.getOrientation() == RecyclerView.VERTICAL;
 
         } else if (layoutManager instanceof LinearLayoutManager) {
             LinearLayoutManager linear = (LinearLayoutManager) layoutManager;
             this.isReversed = linear.getReverseLayout();
-            this.isVertical = linear.getOrientation() == LinearLayoutManager.VERTICAL;
+            this.isVertical = linear.getOrientation() == RecyclerView.VERTICAL;
 
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             StaggeredGridLayoutManager staggeredGrid = (StaggeredGridLayoutManager) layoutManager;
@@ -178,12 +175,6 @@ public class CanRecyclerViewHeaderFooter extends FrameLayout {
 
     /**
      * 重写该方法，更新头部底部宽高
-     *
-     * @param changed
-     * @param l
-     * @param t
-     * @param r
-     * @param b
      */
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
@@ -335,6 +326,9 @@ public class CanRecyclerViewHeaderFooter extends FrameLayout {
     }
 
     public interface OnLoadMoreListener {
+        /**
+         * 加载更多
+         */
         void onLoadMore();
     }
 }

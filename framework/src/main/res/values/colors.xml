@@ -11,6 +11,7 @@
     <color name="white_40">#66FFFFFF</color>
     <!-- 黑色 -->
     <color name="black">#000000</color>
+    <color name="darker_gray">#AAA</color>
     <!-- 默认红色颜色 -->
     <color name="red_back_color">#F05C54</color>
 

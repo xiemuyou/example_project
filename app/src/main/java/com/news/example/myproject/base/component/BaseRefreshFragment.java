@@ -2,8 +2,6 @@ package com.news.example.myproject.base.component;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +18,7 @@ import com.news.example.myproject.R;
 import com.news.example.myproject.base.mvp.BaseView;
 import com.news.example.myproject.global.Constants;
 import com.news.example.myproject.model.sort.SortFilter;
+import com.news.example.myproject.widgets.refresh.RefreshFootView;
 import com.news.example.myproject.znet.InterfaceConfig;
 
 import java.util.ArrayList;
@@ -48,14 +47,9 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
      */
     @BindView(R.id.refresh)
     public CanRefreshLayout refresh;
-    @BindView(R.id.flLoadMoreView)
-    View flLoadMoreView;
     @BindView(R.id.footer)
-    CanRecyclerViewHeaderFooter footer;
-    @BindView(R.id.load_more_load_end_view)
-    FrameLayout flFootComplete;
-    @BindView(R.id.load_more_loading_view)
-    LinearLayout flFootLoading;
+    RefreshFootView footer;
+
     /**
      * 空白显示
      */
@@ -109,6 +103,7 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
         footer.attachTo(canContentView, false);
         //到底自动加载
         footer.setLoadMoreListener(this);
+        footer.setTryAgainClickListener((view) -> refreshDataList());
     }
 
     @Override
@@ -137,9 +132,7 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
     public void onLoadMore() {
         page++;
         refreshDataList();
-        flLoadMoreView.setVisibility(View.VISIBLE);
-        flFootLoading.setVisibility(View.VISIBLE);
-        flFootComplete.setVisibility(View.GONE);
+        footer.setFootState(LoadDataState.LOAD_MORE);
     }
 
     @Override
@@ -157,18 +150,6 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
         }
         canContentView.scrollToPosition(0);
         refresh.autoRefresh();
-//        int top = -1;
-//        int height = -1;
-//        if (canContentView.getChildAt(0) != null) {
-//            top = canContentView.getChildAt(0).getTop();
-//            height = -canContentView.getChildAt(0).getHeight();
-//        }
-//        if (top > height) {
-//            canContentView.smoothScrollToPosition(0);
-//        } else {
-//            canContentView.scrollToPosition(0);
-//        }
-//        refresh.autoRefresh();
     }
 
     public void loadDataSuccess(List<T> dataList) {
@@ -212,7 +193,6 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
      * @param currentSize 当前加载数据大小,加载错误为0
      */
     private void loadComplete(int currentSize) {
-        flLoadMoreView.setVisibility(View.GONE);
         int dataSize = 0;
         if (mDataList != null) {
             dataSize = mDataList.size();
@@ -228,19 +208,6 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
                 if (page > 0) {
                     page--;
                 }
-                footer.setLoadEnable(false);
-                if (page > 1) {
-                    flLoadMoreView.setVisibility(View.VISIBLE);
-                    flFootLoading.setVisibility(View.GONE);
-                    flFootComplete.setVisibility(View.VISIBLE);
-                }
-                break;
-
-            case LOAD_MORE:
-                flLoadMoreView.setVisibility(View.VISIBLE);
-                flFootLoading.setVisibility(View.VISIBLE);
-                flFootComplete.setVisibility(View.GONE);
-                footer.setLoadEnable(true);
                 break;
 
             case LOAD_MORE_FAIL:
@@ -260,6 +227,7 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
                 break;
         }
 
+        footer.setFootState(loadState);
         refresh.setLoadMoreEnabled(false);
         refresh.loadMoreComplete();
         refresh.refreshComplete();

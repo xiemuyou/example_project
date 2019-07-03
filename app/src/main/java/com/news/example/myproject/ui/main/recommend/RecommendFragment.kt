@@ -13,7 +13,6 @@ import com.news.example.myproject.ui.news.np.NewsListPresenter
 import com.news.example.myproject.ui.news.nv.NewsListView
 import com.news.example.myproject.ui.web.NoHeadCommonWebActivity
 import com.news.example.myproject.widgets.news.InformationItemContentView
-import com.news.example.myproject.znet.InterfaceConfig
 
 /**
  * @author xiemy
@@ -59,9 +58,5 @@ class RecommendFragment : BaseRefreshFragment<NewsInfo>(), NewsListView {
 
     override fun getDataSuccess(response: RecommendResponse?) {
         loadDataSuccess(response?.data)
-    }
-
-    override fun loadDataFail(apiTag: InterfaceConfig.HttpHelperTag, errorInfo: String) {
-
     }
 }

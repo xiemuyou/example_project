@@ -21,5 +21,5 @@ public enum LoadDataState {
     //加载失败
     LOAD_FAIL,
     //加载更多失败
-    LOAD_MORE_FAIL
+    LOAD_MORE_FAIL;
 }

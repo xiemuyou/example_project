@@ -1,8 +1,9 @@
 package com.news.example.myproject.base.component;
 
 import android.os.Bundle;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ObjectUtils;
 import com.library.widgets.ToastUtils;
@@ -16,6 +17,7 @@ import com.library.widgets.emptyview.OtherViewHolder;
 import com.news.example.myproject.R;
 import com.news.example.myproject.base.mvp.BaseView;
 import com.news.example.myproject.global.Constants;
+import com.news.example.myproject.widgets.refresh.RefreshFootView;
 import com.news.example.myproject.znet.InterfaceConfig;
 
 import java.util.ArrayList;
@@ -47,10 +49,8 @@ public abstract class BaseRefreshActivity<T> extends BaseActivity implements
      */
     @BindView(R.id.refresh)
     public CanRefreshLayout refresh;
-    @BindView(R.id.flLoadMoreView)
-    View flLoadMoreView;
     @BindView(R.id.footer)
-    CanRecyclerViewHeaderFooter footer;
+    RefreshFootView footer;
     /**
      * 空白显示
      */
@@ -79,12 +79,9 @@ public abstract class BaseRefreshActivity<T> extends BaseActivity implements
     public void initEnv() {
         mDataList = new ArrayList<>();
         OtherViewHolder otherHolder = new OtherViewHolder(this);
-        otherHolder.setOnEmptyRetryListener(new OtherViewHolder.EmptyRetryListener() {
-            @Override
-            public void onEmptyRetryListener() {
-                page = 0;
-                refreshDataList();
-            }
+        otherHolder.setOnEmptyRetryListener(() -> {
+            page = 0;
+            refreshDataList();
         });
         ovHintView.setHolder(otherHolder);
         ovHintView.showLoadingView();
@@ -120,7 +117,7 @@ public abstract class BaseRefreshActivity<T> extends BaseActivity implements
     public void onLoadMore() {
         page++;
         refreshDataList();
-        flLoadMoreView.setVisibility(View.VISIBLE);
+        footer.setFootState(LoadDataState.LOAD_MORE);
     }
 
     @Override
@@ -161,7 +158,6 @@ public abstract class BaseRefreshActivity<T> extends BaseActivity implements
      * 加载成功
      */
     private void loadComplete(int currentSize) {
-        flLoadMoreView.setVisibility(View.GONE);
         loadState = RefreshStateUtil.getLoadState(loadState, currentSize, mDataList.size(), CNT);
         switch (loadState) {
             case EMPTY:
@@ -173,12 +169,6 @@ public abstract class BaseRefreshActivity<T> extends BaseActivity implements
                 if (page > 0) {
                     page--;
                 }
-                footer.setLoadEnable(false);
-                break;
-
-            case LOAD_MORE:
-                flLoadMoreView.setVisibility(View.VISIBLE);
-                footer.setLoadEnable(true);
                 break;
 
             case LOAD_MORE_FAIL:
@@ -198,6 +188,7 @@ public abstract class BaseRefreshActivity<T> extends BaseActivity implements
                 break;
         }
 
+        footer.setFootState(loadState);
         refresh.setLoadMoreEnabled(false);
         refresh.loadMoreComplete();
         refresh.refreshComplete();

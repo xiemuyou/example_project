@@ -24,7 +24,10 @@
         android:clipToPadding="false" />
 
     <!--上拉底部-->
-    <include layout="@layout/view_foot_more_loading" />
+    <com.news.example.myproject.widgets.refresh.RefreshFootView
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <!--空白/错误/加载提示-->
     <com.library.widgets.emptyview.OtherView
