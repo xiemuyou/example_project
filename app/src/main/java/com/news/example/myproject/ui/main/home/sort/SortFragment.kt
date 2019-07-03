@@ -1,5 +1,6 @@
 package com.news.example.myproject.ui.main.home.sort
 
+import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -26,6 +27,10 @@ class SortFragment : BaseRefreshFragment<NewsInfo>(), NewsListView {
 
     private val followPresenter by lazy {
         NewsListPresenter(this)
+    }
+
+    override fun getLayoutId(savedInstanceState: Bundle?): Int {
+        return R.layout.fragment_sort
     }
 
     override fun initEnv() {
