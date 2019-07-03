@@ -25,12 +25,12 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.library.util.VerificationUtils;
 import com.library.widgets.dialog.BaseDialogFragment;
+import com.library.widgets.statusbar.StatusBarTools;
 import com.news.example.myproject.R;
 import com.news.example.myproject.model.sort.NewsSortInfo;
 import com.news.example.myproject.model.sort.SortEditAdapter;
 import com.news.example.myproject.model.sort.SortFilter;
 import com.news.example.myproject.model.sort.SortInfoData;
-import com.news.example.myproject.ui.main.home.HomeFragment;
 import com.news.example.myproject.ui.main.recommend.RecommendFragment;
 
 import java.io.Serializable;
@@ -60,7 +60,7 @@ public class SortEditFragment extends BaseDialogFragment {
 
     }
 
-    public SortEditFragment(SortEditFragment.Builder builder) {
+    private SortEditFragment(SortEditFragment.Builder builder) {
         this.mBuilder = builder;
     }
 
@@ -169,7 +169,6 @@ public class SortEditFragment extends BaseDialogFragment {
         NewsSortInfo sortInfo = mBuilder.getSortList().remove(position);
         sortAdapter.notifyItemRemoved(position);
         sortAdapter.notifyItemRangeChanged(position, mBuilder.getSortList().size());
-        //***
         sortInfo.setItemType(NewsSortInfo.MORE);
         mBuilder.getMoreSortList().add(0, sortInfo);
         moreSortAdapter.notifyItemInserted(0);
@@ -285,7 +284,7 @@ public class SortEditFragment extends BaseDialogFragment {
         rvMore = v.findViewById(R.id.rv_more);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mLayoutParent.setPadding(0, getStatusBarHeight(), 0, 0);
+            mLayoutParent.setPadding(0, StatusBarTools.getStatusBarHeight(this), 0, 0);
         }
 
         tvEdit.setOnClickListener(v1 -> {
@@ -318,7 +317,6 @@ public class SortEditFragment extends BaseDialogFragment {
          */
         private float dimAmount = 0.6f;
         private FragmentManager fragmentManager;
-        private HomeFragment homeFragment;
         private EditSortListCallback mEditSortListCallback;
         private NewsSortInfo posSortInfo;
         private SortInfoData sortRes;
@@ -329,11 +327,9 @@ public class SortEditFragment extends BaseDialogFragment {
         private List<NewsSortInfo> allList = new ArrayList<>();
 
         public SortEditFragment.Builder setSortData(
-                HomeFragment homeFragment,
                 EditSortListCallback editSortListCallback,
                 NewsSortInfo posSortInfo,
                 SortInfoData sortRes) {
-            this.homeFragment = homeFragment;
             this.mEditSortListCallback = editSortListCallback;
             this.posSortInfo = posSortInfo;
             this.sortRes = sortRes;
@@ -343,17 +339,8 @@ public class SortEditFragment extends BaseDialogFragment {
             return this;
         }
 
-        public HomeFragment getHomeFragment() {
-            return homeFragment;
-        }
-
-        public NewsSortInfo getPosSortInfo() {
+        NewsSortInfo getPosSortInfo() {
             return posSortInfo;
-        }
-
-        public SortEditFragment.Builder setDimAmount(Float dimAmount) {
-            this.dimAmount = dimAmount;
-            return this;
         }
 
         public SortEditFragment.Builder setFragmentManager(FragmentManager fragmentManager) {
@@ -361,26 +348,22 @@ public class SortEditFragment extends BaseDialogFragment {
             return this;
         }
 
-        public FragmentManager getFragmentManager() {
+        FragmentManager getFragmentManager() {
             return fragmentManager;
-        }
-
-        public float getDimAmount() {
-            return dimAmount;
         }
 
         public SortEditFragment create() {
             return new SortEditFragment(this);
         }
 
-        public SortInfoData getSortRes() {
+        SortInfoData getSortRes() {
             if (sortRes == null) {
                 sortRes = new SortInfoData();
             }
             return sortRes;
         }
 
-        public List<NewsSortInfo> getSortList() {
+        List<NewsSortInfo> getSortList() {
             if (sortList == null) {
                 sortList = new ArrayList<>();
                 sortList.addAll(getSortRes().getFixedList());
@@ -389,7 +372,7 @@ public class SortEditFragment extends BaseDialogFragment {
             return sortList;
         }
 
-        public List<NewsSortInfo> getFixList() {
+        List<NewsSortInfo> getFixList() {
             if (fixList == null) {
                 fixList = new ArrayList<>();
                 fixList.addAll(getSortRes().getFixedList());
@@ -397,7 +380,7 @@ public class SortEditFragment extends BaseDialogFragment {
             return fixList;
         }
 
-        public List<NewsSortInfo> getMoreSortList() {
+        List<NewsSortInfo> getMoreSortList() {
             if (moreList == null) {
                 moreList = new ArrayList<>();
                 moreList.addAll(getSortRes().getEditList());
@@ -405,7 +388,7 @@ public class SortEditFragment extends BaseDialogFragment {
             return moreList;
         }
 
-        public List<NewsSortInfo> getAllList() {
+        List<NewsSortInfo> getAllList() {
             allList.clear();
             if (sortList != null) {
                 allList.addAll(sortList);
@@ -416,7 +399,7 @@ public class SortEditFragment extends BaseDialogFragment {
             return allList;
         }
 
-        public EditSortListCallback getEditSortListCallback() {
+        EditSortListCallback getEditSortListCallback() {
             return mEditSortListCallback;
         }
     }

@@ -6,6 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.news.example.myproject.R
 import com.news.example.myproject.base.component.BaseRefreshFragment
+import com.news.example.myproject.global.ParamConstants
 import com.news.example.myproject.model.news.NewsInfo
 import com.news.example.myproject.model.news.RecommendResponse
 import com.news.example.myproject.ui.news.np.NewsListPresenter
@@ -19,11 +20,9 @@ import com.news.example.myproject.znet.InterfaceConfig
  * @date 2018/3/19.
  */
 class SortFragment : BaseRefreshFragment<NewsInfo>(), NewsListView {
-    var category = ""
 
-    companion object {
-        const val SORT_NAME = "sortName"
-    }
+    var category = ""
+    var concernId = ""
 
     private val followPresenter by lazy {
         NewsListPresenter(this)
@@ -31,7 +30,8 @@ class SortFragment : BaseRefreshFragment<NewsInfo>(), NewsListView {
 
     override fun initEnv() {
         super.initEnv()
-        category = arguments?.getString(SORT_NAME) ?: ""
+        category = arguments?.getString(ParamConstants.CATEGORY) ?: ""
+        concernId = arguments?.getString(ParamConstants.CONCERN_ID) ?: ""
     }
 
     override fun getRefreshAdapter(dataList: List<NewsInfo>): RecyclerView.Adapter<*> {
@@ -50,7 +50,7 @@ class SortFragment : BaseRefreshFragment<NewsInfo>(), NewsListView {
     }
 
     override fun refreshDataList() {
-        followPresenter.getSearchUsers(category)
+        followPresenter.getNewsList(category, concernId, page++, CNT)
     }
 
     override fun getDataSuccess(response: RecommendResponse?) {

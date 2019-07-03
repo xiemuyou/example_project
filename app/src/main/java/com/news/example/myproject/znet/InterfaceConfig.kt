@@ -50,6 +50,11 @@ object InterfaceConfig {
          */
         NEWS_FEED_V58(HttpConfig.SNS_SDK, "api/news/feed/v58/"),
         /**
+         * 分类信息
+         * https://is.snssdk.com/api/news/feed/v39/?category=news_entertainment&concern_id=6215497896830175745&refer=1&count=20
+         */
+        NEWS_FEED_V39(HttpConfig.SNS_SDK, "api/news/feed/v39/"),
+        /**
          * 崩溃上报
          */
         RX_URL_REPORT_CRASH_LOG(HttpConfig.SNS_SDK, "UiP1/ReportCrashLog"),
