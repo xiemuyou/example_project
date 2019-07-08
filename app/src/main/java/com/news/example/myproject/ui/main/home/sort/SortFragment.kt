@@ -24,7 +24,7 @@ class SortFragment : BaseRefreshFragment<NewsInfo>(), NewsListView {
     var category = ""
     private var concernId = ""
 
-    private val followPresenter by lazy {
+    private val followPresenter: NewsListPresenter by lazy {
         NewsListPresenter(this)
     }
 

@@ -3,6 +3,7 @@ package com.news.example.myproject.ui.news.np
 import android.text.TextUtils
 import com.blankj.utilcode.util.StringUtils
 import com.news.example.myproject.base.mvp.BasePresenter
+import com.news.example.myproject.global.Constants
 import com.news.example.myproject.global.ParamConstants
 import com.news.example.myproject.model.base.BaseApiResponse
 import com.news.example.myproject.model.news.NewsInfo
@@ -32,7 +33,7 @@ class NewsListPresenter(view: NewsListView) : BasePresenter<NewsListView>(view) 
         val params = HashMap<String, Any>()
         params[ParamConstants.CATEGORY] = category
         params[ParamConstants.CONCERN_ID] = concernId
-        params[ParamConstants.COUNT] = count ?: 20
+        params[ParamConstants.COUNT] = count ?: Constants.CNT_NUMBER
         params[ParamConstants.REFER] = refer
         RxRequestCallback().request(params = params, api = InterfaceConfig.HttpHelperTag.NEWS_FEED_V39, presenter = this)
     }

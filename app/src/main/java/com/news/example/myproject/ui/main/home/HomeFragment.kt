@@ -52,11 +52,11 @@ class HomeFragment : BaseFragment(), MainView {
         }
     }
 
-    private val homePresenter by lazy {
+    private val homePresenter: MainPresenter by lazy {
         MainPresenter(this)
     }
 
-    private val sortPresenter by lazy {
+    private val sortPresenter: SortPresenter by lazy {
         SortPresenter()
     }
 
