@@ -10,7 +10,6 @@ import com.library.util.ViewUtil
 import com.news.example.myproject.R
 import com.news.example.myproject.base.component.BaseFragment
 import com.news.example.myproject.base.component.BaseRefreshFragment
-import com.news.example.myproject.global.ParamConstants
 import com.news.example.myproject.model.sort.NewsSortInfo
 import com.news.example.myproject.model.sort.SortInfoData
 import com.news.example.myproject.ui.main.home.sort.SortEditFragment
@@ -79,7 +78,7 @@ class HomeFragment : BaseFragment(), MainView {
         ivSortCustom?.setOnClickListener {
             SortEditFragment.Builder()
                     .setFragmentManager(_mActivity.supportFragmentManager)
-                    .setSortData(sortListCallback, sortInfoList[showIndex], mSortData)
+                    .setSortData(this, sortListCallback, sortInfoList[showIndex], mSortData)
                     .create().showDialog()
         }
     }
@@ -132,8 +131,7 @@ class HomeFragment : BaseFragment(), MainView {
                 it.itemType == NewsSortInfo.FIXED || it.itemType == NewsSortInfo.CHOOSE -> {
                     sortInfoList.add(it)
                     val arts = Bundle()
-                    arts.putString(ParamConstants.CATEGORY, it.category)
-                    arts.putString(ParamConstants.CONCERN_ID, it.concern_id)
+                    arts.putString(SortFragment.SORT_NAME, it.category)
                     fpItems?.add(PagerFragmentItem.of(it.name, SortFragment::class.java, arts))
                 }
 
@@ -184,8 +182,7 @@ class HomeFragment : BaseFragment(), MainView {
                 fpItems?.add(PagerFragmentItem.of(sort.name, RecommendFragment::class.java))
             } else if (sort.itemType == NewsSortInfo.FIXED || sort.itemType == NewsSortInfo.CHOOSE) {
                 val arts = Bundle()
-                arts.putString(ParamConstants.CATEGORY, sort.category)
-                arts.putString(ParamConstants.CONCERN_ID, sort.concern_id)
+                arts.putString(SortFragment.SORT_NAME, sort.category)
                 fpItems?.add(PagerFragmentItem.of(sort.name, SortFragment::class.java, arts))
             }
         }

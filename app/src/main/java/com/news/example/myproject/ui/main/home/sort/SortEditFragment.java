@@ -17,31 +17,25 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alibaba.android.vlayout.DelegateAdapter;
-import com.alibaba.android.vlayout.VirtualLayoutManager;
-import com.alibaba.android.vlayout.layout.GridLayoutHelper;
-import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.blankj.utilcode.util.ObjectUtils;
-import com.blankj.utilcode.util.SizeUtils;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.library.util.VerificationUtils;
 import com.library.widgets.dialog.BaseDialogFragment;
-import com.library.widgets.statusbar.StatusBarTools;
 import com.news.example.myproject.R;
 import com.news.example.myproject.model.sort.NewsSortInfo;
+import com.news.example.myproject.model.sort.SortEditAdapter;
 import com.news.example.myproject.model.sort.SortFilter;
 import com.news.example.myproject.model.sort.SortInfoData;
+import com.news.example.myproject.ui.main.home.HomeFragment;
 import com.news.example.myproject.ui.main.recommend.RecommendFragment;
-import com.news.example.myproject.ui.test.OnRecyclerItemClickListener;
-import com.news.example.myproject.ui.test.SortEditAdapter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -57,17 +51,16 @@ public class SortEditFragment extends BaseDialogFragment {
 
     private Context context;
     private SortEditFragment.Builder mBuilder;
-    private RecyclerView rvSortEdit;
-    private TextView tvSortEdit, tvTip;
-    private DelegateAdapter delegateAdapter;
+    private RecyclerView rvMine, rvMore;
+    private TextView tvEdit, tvTip;
+    private SortEditAdapter sortAdapter, moreSortAdapter;
     private boolean isChange = false;
-    private List<NewsSortInfo> mDataList;
 
     public SortEditFragment() {
 
     }
 
-    private SortEditFragment(SortEditFragment.Builder builder) {
+    public SortEditFragment(SortEditFragment.Builder builder) {
         this.mBuilder = builder;
     }
 
@@ -119,118 +112,52 @@ public class SortEditFragment extends BaseDialogFragment {
         setCancelable(false);
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_edit_sort, null);
         initView(view);
-        initRecyclerView();
         initData();
         return view;
     }
 
-    private void initRecyclerView() {
-        mDataList = new ArrayList<>();
-
-        final VirtualLayoutManager layoutManager = new VirtualLayoutManager(context);
-        rvSortEdit.setLayoutManager(layoutManager);
-
-        final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
-        rvSortEdit.setRecycledViewPool(viewPool);
-        viewPool.setMaxRecycledViews(0, 20);
-        layoutManager.setRecycleOffset(3000);
-
-        delegateAdapter = new DelegateAdapter(layoutManager, true);
-        rvSortEdit.setAdapter(delegateAdapter);
-
-        final List<DelegateAdapter.Adapter> adapters = new LinkedList<>();
-
-        GridLayoutHelper helper = new GridLayoutHelper(4);
-        helper.setMargin(SizeUtils.dp2px(12F), 0, 0, 0);
-        helper.setAutoExpand(false);
-
-        mDataList.addAll(mBuilder.getSortList());
-        SortEditAdapter sortAdapter = new SortEditAdapter(context, mBuilder.getSortList(), helper);
-        adapters.add(sortAdapter);
-
-        List<NewsSortInfo> titleList = new ArrayList<>(1);
-        NewsSortInfo titleSort = new NewsSortInfo();
-        titleSort.setItemType(NewsSortInfo.TITLE);
-        titleList.add(titleSort);
-
-        mDataList.add(titleSort);
-        SortEditAdapter titleAdapter = new SortEditAdapter(context, titleList, new LinearLayoutHelper());
-        adapters.add(titleAdapter);
-
-        GridLayoutHelper helper1 = new GridLayoutHelper(4);
-        helper1.setAutoExpand(false);
-        helper1.setMargin(SizeUtils.dp2px(12F), 0, 0, 0);
-
-        mDataList.addAll(mBuilder.getMoreSortList());
-        SortEditAdapter moreSortAdapter = new SortEditAdapter(context, mBuilder.getMoreSortList(), helper1);
-        adapters.add(moreSortAdapter);
-        delegateAdapter.setAdapters(adapters);
-    }
-
     private void initData() {
-        itemTouchHelper.attachToRecyclerView(rvSortEdit);
-        rvSortEdit.setNestedScrollingEnabled(false);
-        rvSortEdit.addOnItemTouchListener(new OnRecyclerItemClickListener(rvSortEdit) {
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder) {
-                if (viewHolder != null) {
-                    setItemClick(viewHolder);
-                }
+        sortAdapter = new SortEditAdapter(mBuilder.getSortList());
+        rvMine.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        itemTouchHelper.attachToRecyclerView(rvMine);
+        rvMine.setAdapter(sortAdapter);
+        rvMine.setNestedScrollingEnabled(false);
+        sortAdapter.setOnLongPressListener((helper, item) -> {
+            if (helper.getAdapterPosition() < mBuilder.getFixList().size()) {
+                return;
             }
-
-            @Override
-            public void onItemLongClick(RecyclerView.ViewHolder viewHolder) {
-                NewsSortInfo info = null;
-                int position = viewHolder != null ? viewHolder.getAdapterPosition() : -1;
-                if (mDataList != null && mDataList.size() > position) {
-                    info = mDataList.get(position);
-                }
-                int itemType = info != null && info.getItemType() != null ? info.getItemType() : -1;
-                if (itemType == NewsSortInfo.CHOOSE) {
-                    tvTip.setText(R.string.drag_and_drop_to_sort);
-                    itemTouchHelper.startDrag(viewHolder);
-                }
-            }
+            tvTip.setText(R.string.drag_and_drop_to_sort);
+            itemTouchHelper.startDrag(helper);
         });
-    }
-
-    private void setItemClick(@NonNull RecyclerView.ViewHolder viewHolder) {
-        int position = viewHolder.getAdapterPosition();
-        if (VerificationUtils.isFastDoubleClick(R.id.rvSortEdit)) {
-            return;
-        }
-        NewsSortInfo info = null;
-        if (mDataList != null && mDataList.size() > position) {
-            info = mDataList.get(position);
-        }
-        int itemType = info != null && info.getItemType() != null ? info.getItemType() : -1;
-        switch (itemType) {
-            case NewsSortInfo.CHOOSE:
-            case NewsSortInfo.FIXED:
-                if (VerificationUtils.isFastDoubleClick(R.id.rvSortEdit)) {
+        sortAdapter.setOnItemClickListener((adapter, view, position) -> {
+            if (VerificationUtils.isFastDoubleClick(R.id.rvSortEdit)) {
+                return;
+            }
+            if (isEdit()) {
+                if (position < mBuilder.getFixList().size()) {
                     return;
                 }
-                if (isEdit()) {
-                    if (position < mBuilder.getFixList().size()) {
-                        return;
-                    }
-                    isChange = true;
-                    toMoreList(position);
-                } else if (mBuilder != null && mBuilder.getEditSortListCallback() != null) {
-
-                    mBuilder.getEditSortListCallback().editSortList(isChange, position, SortFilter.INSTANCE.divideList(mBuilder.getAllList()));
-                    dismiss();
-                }
-                break;
-
-            case NewsSortInfo.MORE:
                 isChange = true;
-                toMineList(position);
-                break;
+                toMoreList(position);
+            } else if (mBuilder != null && mBuilder.getEditSortListCallback() != null) {
 
-            default:
-                break;
-        }
+                mBuilder.getEditSortListCallback().editSortList(isChange, position, SortFilter.INSTANCE.divideList(mBuilder.getAllList()));
+                dismiss();
+            }
+        });
+
+        //更多Adapter
+        moreSortAdapter = new SortEditAdapter(mBuilder.getMoreSortList());
+        rvMore.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        rvMore.setNestedScrollingEnabled(false);
+        rvMore.setAdapter(moreSortAdapter);
+        moreSortAdapter.setOnItemClickListener((adapter, view, position) -> {
+            if (VerificationUtils.isFastDoubleClick(R.id.rvSortMore)) {
+                return;
+            }
+            isChange = true;
+            toMineList(position);
+        });
     }
 
     /**
@@ -239,12 +166,13 @@ public class SortEditFragment extends BaseDialogFragment {
      * @param position 操作位置
      */
     private void toMoreList(int position) {
-//        NewsSortInfo sortInfo = mBuilder.getSortList().remove(position);
-//        sortAdapter.notifyItemRemoved(position);
-//        sortAdapter.notifyItemRangeChanged(position, mBuilder.getSortList().size());
-//        sortInfo.setItemType(NewsSortInfo.MORE);
-//        mBuilder.getMoreSortList().add(0, sortInfo);
-//        moreSortAdapter.notifyItemInserted(0);
+        NewsSortInfo sortInfo = mBuilder.getSortList().remove(position);
+        sortAdapter.notifyItemRemoved(position);
+        sortAdapter.notifyItemRangeChanged(position, mBuilder.getSortList().size());
+        //***
+        sortInfo.setItemType(NewsSortInfo.MORE);
+        mBuilder.getMoreSortList().add(0, sortInfo);
+        moreSortAdapter.notifyItemInserted(0);
     }
 
     /**
@@ -253,50 +181,48 @@ public class SortEditFragment extends BaseDialogFragment {
      * @param position 添加位置
      */
     private void toMineList(int position) {
-//        NewsSortInfo sortInfo = mBuilder.getMoreSortList().remove(position);
-//        moreSortAdapter.notifyItemRemoved(position);
-//        moreSortAdapter.notifyItemRangeChanged(position, mBuilder.getMoreSortList().size());
-//        sortInfo.setItemType(NewsSortInfo.CHOOSE);
-//        mBuilder.getSortList().add(sortInfo);
-//        sortAdapter.notifyItemInserted(mBuilder.getSortList().size() - 1);
+        NewsSortInfo sortInfo = mBuilder.getMoreSortList().remove(position);
+        moreSortAdapter.notifyItemRemoved(position);
+        moreSortAdapter.notifyItemRangeChanged(position, mBuilder.getMoreSortList().size());
+        sortInfo.setItemType(NewsSortInfo.CHOOSE);
+        mBuilder.getSortList().add(sortInfo);
+        sortAdapter.notifyItemInserted(mBuilder.getSortList().size() - 1);
     }
 
     private ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
         @Override
         public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-            final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
-            final int swipeFlags = 0;
-            return makeMovementFlags(dragFlags, swipeFlags);
+            if (recyclerView.getLayoutManager() instanceof GridLayoutManager) {
+                final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                final int swipeFlags = 0;
+                return makeMovementFlags(dragFlags, swipeFlags);
+            } else {
+                final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+                final int swipeFlags = 0;
+                return makeMovementFlags(dragFlags, swipeFlags);
+            }
         }
 
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
             //得到当拖拽的viewHolder的Position
             int fromPosition = viewHolder.getAdapterPosition();
-            NewsSortInfo formInfo = getNewsSortInfoByPosition(fromPosition);
-            int itemType = (formInfo != null && formInfo.getItemType() != null) ? formInfo.getItemType() : -1;
-            if (itemType != NewsSortInfo.CHOOSE) {
-                return false;
-            }
             //拿到当前拖拽到的item的viewHolder
             int toPosition = target.getAdapterPosition();
-            NewsSortInfo toInfo = getNewsSortInfoByPosition(fromPosition);
-            int toItemType = (toInfo != null && toInfo.getItemType() != null) ? toInfo.getItemType() : -1;
-            if (toItemType != NewsSortInfo.TITLE) {
-                if (fromPosition < toPosition) {
-                    for (int i = fromPosition; i < toPosition; i++) {
-                        Collections.swap(mDataList, i, i + 1);
-                    }
-                } else {
-                    for (int i = fromPosition; i > toPosition; i--) {
-                        Collections.swap(mDataList, i, i - 1);
-                    }
-                }
-                delegateAdapter.notifyItemMoved(fromPosition, toPosition);
+            if (toPosition < mBuilder.getFixList().size()) {
                 return true;
-            } else {
-                return false;
             }
+            if (fromPosition < toPosition) {
+                for (int i = fromPosition; i < toPosition; i++) {
+                    Collections.swap(mBuilder.getSortList(), i, i + 1);
+                }
+            } else {
+                for (int i = fromPosition; i > toPosition; i--) {
+                    Collections.swap(mBuilder.getSortList(), i, i - 1);
+                }
+            }
+            sortAdapter.notifyItemMoved(fromPosition, toPosition);
+            return true;
         }
 
         @Override
@@ -308,7 +234,7 @@ public class SortEditFragment extends BaseDialogFragment {
         public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
             if (viewHolder instanceof BaseViewHolder) {
                 ((BaseViewHolder) viewHolder).getView(R.id.ivSortClose).setVisibility(View.VISIBLE);
-                tvSortEdit.setText(R.string.finish);
+                tvEdit.setText(R.string.finish);
             }
             super.onSelectedChanged(viewHolder, actionState);
         }
@@ -316,11 +242,11 @@ public class SortEditFragment extends BaseDialogFragment {
         @Override
         public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
             super.clearView(recyclerView, viewHolder);
-//            if (!sortAdapter.isShowClose()) {
-//                tvSortEdit.setText(R.string.finish);
-//                sortAdapter.setIsShowClose(true);
-//                sortAdapter.notifyDataSetChanged();
-//            }
+            if (!sortAdapter.isShowClose()) {
+                tvEdit.setText(R.string.finish);
+                sortAdapter.setIsShowClose(true);
+                sortAdapter.notifyDataSetChanged();
+            }
             isChange = true;
         }
 
@@ -329,13 +255,6 @@ public class SortEditFragment extends BaseDialogFragment {
             return false;
         }
     });
-
-    private NewsSortInfo getNewsSortInfoByPosition(int position) {
-        if (mDataList == null || mDataList.size() < position) {
-            return null;
-        }
-        return mDataList.get(position);
-    }
 
     private void toHomeCallBack() {
         if (mBuilder != null && mBuilder.getEditSortListCallback() != null) {
@@ -359,26 +278,27 @@ public class SortEditFragment extends BaseDialogFragment {
             dismiss();
         });
         View mLayoutParent = v.findViewById(R.id.mLayoutParent);
-        tvSortEdit = v.findViewById(R.id.tvSortEdit);
-        tvTip = v.findViewById(R.id.tvSortTip);
-        rvSortEdit = v.findViewById(R.id.rvSortEdit);
+        tvEdit = v.findViewById(R.id.tv_edit);
+        tvTip = v.findViewById(R.id.tv_tip);
+        rvMine = v.findViewById(R.id.rvSortEdit);
+        rvMore = v.findViewById(R.id.rvSortMore);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mLayoutParent.setPadding(0, StatusBarTools.getStatusBarHeight(this), 0, 0);
+            mLayoutParent.setPadding(0, getStatusBarHeight(), 0, 0);
         }
 
-        tvSortEdit.setOnClickListener(v1 -> {
-//            String text = tvSortEdit.getText().toString();
-//            if (text.equals(getString(R.string.editor))) {
-//                tvSortEdit.setText(getString(R.string.finish));
-//                sortAdapter.setIsShowClose(true);
-//                tvTip.setText(R.string.drag_and_drop_to_sort);
-//            } else {
-//                tvSortEdit.setText(getString(R.string.editor));
-//                sortAdapter.setIsShowClose(false);
-//                tvTip.setText(R.string.click_go_to_sort);
-//            }
-//            sortAdapter.notifyDataSetChanged();
+        tvEdit.setOnClickListener(v1 -> {
+            String text = tvEdit.getText().toString();
+            if (text.equals(getString(R.string.editor))) {
+                tvEdit.setText(getString(R.string.finish));
+                sortAdapter.setIsShowClose(true);
+                tvTip.setText(R.string.drag_and_drop_to_sort);
+            } else {
+                tvEdit.setText(getString(R.string.editor));
+                sortAdapter.setIsShowClose(false);
+                tvTip.setText(R.string.click_go_to_sort);
+            }
+            sortAdapter.notifyDataSetChanged();
         });
     }
 
@@ -386,7 +306,7 @@ public class SortEditFragment extends BaseDialogFragment {
      * 是否编辑状态
      */
     private boolean isEdit() {
-        String text = tvSortEdit.getText().toString();
+        String text = tvEdit.getText().toString();
         return ObjectUtils.equals(getString(R.string.finish), text);
     }
 
@@ -397,6 +317,7 @@ public class SortEditFragment extends BaseDialogFragment {
          */
         private float dimAmount = 0.6f;
         private FragmentManager fragmentManager;
+        private HomeFragment homeFragment;
         private EditSortListCallback mEditSortListCallback;
         private NewsSortInfo posSortInfo;
         private SortInfoData sortRes;
@@ -407,9 +328,11 @@ public class SortEditFragment extends BaseDialogFragment {
         private List<NewsSortInfo> allList = new ArrayList<>();
 
         public SortEditFragment.Builder setSortData(
+                HomeFragment homeFragment,
                 EditSortListCallback editSortListCallback,
                 NewsSortInfo posSortInfo,
                 SortInfoData sortRes) {
+            this.homeFragment = homeFragment;
             this.mEditSortListCallback = editSortListCallback;
             this.posSortInfo = posSortInfo;
             this.sortRes = sortRes;
@@ -419,8 +342,17 @@ public class SortEditFragment extends BaseDialogFragment {
             return this;
         }
 
-        NewsSortInfo getPosSortInfo() {
+        public HomeFragment getHomeFragment() {
+            return homeFragment;
+        }
+
+        public NewsSortInfo getPosSortInfo() {
             return posSortInfo;
+        }
+
+        public SortEditFragment.Builder setDimAmount(Float dimAmount) {
+            this.dimAmount = dimAmount;
+            return this;
         }
 
         public SortEditFragment.Builder setFragmentManager(FragmentManager fragmentManager) {
@@ -428,22 +360,26 @@ public class SortEditFragment extends BaseDialogFragment {
             return this;
         }
 
-        FragmentManager getFragmentManager() {
+        public FragmentManager getFragmentManager() {
             return fragmentManager;
+        }
+
+        public float getDimAmount() {
+            return dimAmount;
         }
 
         public SortEditFragment create() {
             return new SortEditFragment(this);
         }
 
-        SortInfoData getSortRes() {
+        public SortInfoData getSortRes() {
             if (sortRes == null) {
                 sortRes = new SortInfoData();
             }
             return sortRes;
         }
 
-        List<NewsSortInfo> getSortList() {
+        public List<NewsSortInfo> getSortList() {
             if (sortList == null) {
                 sortList = new ArrayList<>();
                 sortList.addAll(getSortRes().getFixedList());
@@ -452,7 +388,7 @@ public class SortEditFragment extends BaseDialogFragment {
             return sortList;
         }
 
-        List<NewsSortInfo> getFixList() {
+        public List<NewsSortInfo> getFixList() {
             if (fixList == null) {
                 fixList = new ArrayList<>();
                 fixList.addAll(getSortRes().getFixedList());
@@ -460,7 +396,7 @@ public class SortEditFragment extends BaseDialogFragment {
             return fixList;
         }
 
-        List<NewsSortInfo> getMoreSortList() {
+        public List<NewsSortInfo> getMoreSortList() {
             if (moreList == null) {
                 moreList = new ArrayList<>();
                 moreList.addAll(getSortRes().getEditList());
@@ -468,7 +404,7 @@ public class SortEditFragment extends BaseDialogFragment {
             return moreList;
         }
 
-        List<NewsSortInfo> getAllList() {
+        public List<NewsSortInfo> getAllList() {
             allList.clear();
             if (sortList != null) {
                 allList.addAll(sortList);
@@ -479,7 +415,7 @@ public class SortEditFragment extends BaseDialogFragment {
             return allList;
         }
 
-        EditSortListCallback getEditSortListCallback() {
+        public EditSortListCallback getEditSortListCallback() {
             return mEditSortListCallback;
         }
     }

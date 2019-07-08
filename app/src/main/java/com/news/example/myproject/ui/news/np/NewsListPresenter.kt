@@ -26,17 +26,6 @@ class NewsListPresenter(view: NewsListView) : BasePresenter<NewsListView>(view) 
         RxRequestCallback().request(params = null, api = InterfaceConfig.HttpHelperTag.NEWS_FEED_V58, presenter = this)
     }
 
-    //NEWS_FEED_V39
-    //refer=1&count=20
-    fun getNewsList(category: String, concernId: String, refer: Int = 1, count: Int? = 0) {
-        val params = HashMap<String, Any>()
-        params[ParamConstants.CATEGORY] = category
-        params[ParamConstants.CONCERN_ID] = concernId
-        params[ParamConstants.COUNT] = count ?: 20
-        params[ParamConstants.REFER] = refer
-        RxRequestCallback().request(params = params, api = InterfaceConfig.HttpHelperTag.NEWS_FEED_V39, presenter = this)
-    }
-
     override fun onLoadDataSuccess(apiTag: InterfaceConfig.HttpHelperTag, modelRes: BaseApiResponse<*>, params: Map<String, Any>) {
     }
 

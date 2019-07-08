@@ -51,7 +51,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvSortTip"
+                    android:id="@+id/tv_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -63,7 +63,7 @@
 
                 <!--编辑按钮-->
                 <TextView
-                    android:id="@+id/tvSortEdit"
+                    android:id="@+id/tv_edit"
                     android:layout_width="@dimen/px_120"
                     android:layout_height="@dimen/px_60"
                     android:layout_alignParentEnd="true"
@@ -80,14 +80,43 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSortEdit"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:clipToPadding="true"
-                android:paddingLeft="0dp"
-                android:paddingRight="0dp"
-                android:requiresFadingEdge="none"
-                android:scrollbars="vertical" />
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/px_0"
+                android:paddingEnd="@dimen/px_24" />
 
+            <!--更多频道提示文本-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/px_116"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/px_24"
+                android:paddingEnd="@dimen/px_0">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_channel"
+                    android:textColor="@color/color_2C2C2C"
+                    android:textSize="@dimen/px_36_sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/px_12"
+                    android:text="@string/click_add_sort"
+                    android:textColor="@color/color_C9C9C9"
+                    android:textSize="@dimen/px_28_sp" />
+            </LinearLayout>
+
+            <!--更多频道-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSortMore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/px_24"
+                android:paddingEnd="@dimen/px_0" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

@@ -21,8 +21,13 @@ class SortPresenter {
      * 3.服务器新增添加到本地
      */
     fun compareList(sortList: MutableList<NewsSortInfo>?): SortInfoData? {
-        val newData = if (sortList != null) getNewSortData(sortList) else null
+        var newData = if (sortList != null) getNewSortData(sortList) else null
         var saveData = getSaveSortData()
+//        if (saveData?.getAllList().isNullOrEmpty()) {
+//            return newData
+//        }
+//        return saveData
+
         var saveList = saveData?.getAllList()
         val sList = newData?.getAllList()
         if (saveList == null || sList == null) {
@@ -68,6 +73,7 @@ class SortPresenter {
 
     //手动添加推荐页
     var recommend = ""
+    var TAG = "SortPresenter"
 
     /**
      * 添加固定的分类
@@ -80,11 +86,11 @@ class SortPresenter {
         recommendSort.itemType = NewsSortInfo.FIXED
         fixedList.add(0, recommendSort)
 
-//        val newSort = NewsSortInfo()
-//        newSort.concern_id = "002"
-//        newSort.name = "关注"
-//        newSort.itemType = NewsSortInfo.FIXED
-//        fixedList.add(1, newSort)
+        val newSort = NewsSortInfo()
+        newSort.concern_id = "002"
+        newSort.name = "关注"
+        newSort.itemType = NewsSortInfo.FIXED
+        fixedList.add(1, newSort)
         return fixedList
     }
 

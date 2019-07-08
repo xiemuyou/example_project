@@ -10,19 +10,15 @@ object ParamConstants {
     /**
      * 默认一页加载数量
      */
-    const val COUNT = "count"
+    const val CNT = "cnt"
     /**
      * 加载数量
      */
-    const val REFER = "refer"
+    const val FROM = "form"
     /**
      * 分类
      */
     const val CATEGORY = "category"
-    /**
-     * 分类id
-     */
-    const val CONCERN_ID = "concern_id"
     /**
      * 搜索Key
      */

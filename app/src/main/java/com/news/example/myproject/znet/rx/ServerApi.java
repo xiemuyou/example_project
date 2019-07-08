@@ -97,8 +97,8 @@ public class ServerApi {
                     //请求网络失败后读取缓存
                     .cacheMode(internetConfig.getCacheMode());
         }
-        request.converter(new JsonConvert<>(type));
-        return request.adapt(new ObservableBody<>());
+        request.converter(new JsonConvert<T>(type));
+        return request.adapt(new ObservableBody<T>());
     }
 
     /**
