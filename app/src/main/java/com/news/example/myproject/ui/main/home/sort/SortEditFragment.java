@@ -30,7 +30,6 @@ import com.news.example.myproject.model.sort.NewsSortInfo;
 import com.news.example.myproject.model.sort.SortEditAdapter;
 import com.news.example.myproject.model.sort.SortFilter;
 import com.news.example.myproject.model.sort.SortInfoData;
-import com.news.example.myproject.ui.main.home.HomeFragment;
 import com.news.example.myproject.ui.main.recommend.RecommendFragment;
 
 import java.io.Serializable;
@@ -317,7 +316,6 @@ public class SortEditFragment extends BaseDialogFragment {
          */
         private float dimAmount = 0.6f;
         private FragmentManager fragmentManager;
-        private HomeFragment homeFragment;
         private EditSortListCallback mEditSortListCallback;
         private NewsSortInfo posSortInfo;
         private SortInfoData sortRes;
@@ -328,11 +326,9 @@ public class SortEditFragment extends BaseDialogFragment {
         private List<NewsSortInfo> allList = new ArrayList<>();
 
         public SortEditFragment.Builder setSortData(
-                HomeFragment homeFragment,
                 EditSortListCallback editSortListCallback,
                 NewsSortInfo posSortInfo,
                 SortInfoData sortRes) {
-            this.homeFragment = homeFragment;
             this.mEditSortListCallback = editSortListCallback;
             this.posSortInfo = posSortInfo;
             this.sortRes = sortRes;
@@ -340,10 +336,6 @@ public class SortEditFragment extends BaseDialogFragment {
             getFixList();
             getMoreSortList();
             return this;
-        }
-
-        public HomeFragment getHomeFragment() {
-            return homeFragment;
         }
 
         public NewsSortInfo getPosSortInfo() {
