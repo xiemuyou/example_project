@@ -51,6 +51,10 @@ object ParamConstants {
      */
     const val TITLE = "title"
     /**
+     * ID
+     */
+    const val NEWS_ID = "newsId"
+    /**
      * 页面头部分割线
      */
     const val DIVER_FLAG = "diverFlag"

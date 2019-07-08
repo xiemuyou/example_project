@@ -1,6 +1,7 @@
 package com.news.example.myproject.znet
 
 import com.lzy.okgo.cache.CacheMode
+import com.news.example.myproject.global.ParamConstants
 
 /**
  * 接口配置
@@ -28,7 +29,7 @@ object InterfaceConfig {
             /**请求类型 post|get */
             val method: String? = METHOD_GET,
             /**接口api*/
-            private val apiTag: String,
+            var apiTag: String,
             /**网络请求配置api*/
             var config: RequestConfig? = null) {
 
@@ -54,6 +55,13 @@ object InterfaceConfig {
          * https://is.snssdk.com/api/news/feed/v39/?category=news_entertainment&concern_id=6215497896830175745&refer=1&count=20
          */
         NEWS_FEED_V39(HttpConfig.SNS_SDK, "api/news/feed/v39/"),
+        /**
+         * 详情
+         * http://m.toutiao.com/i6709356026359365643/info/
+         */
+        GET_EWS_CONTENT(HttpConfig.MTT, "i${ParamConstants.NEWS_ID}/info/",
+                RequestConfig().setCacheMode(CacheMode.NO_CACHE)
+                        .setCacheTime(10000).setRetryCount(3)),
         /**
          * 崩溃上报
          */

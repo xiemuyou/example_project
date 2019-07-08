@@ -6,7 +6,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
-import android.widget.ScrollView;
+
+import com.library.widgets.fcnestedscrollview.FCNestedScrollView;
 
 /**
  * 可拉动ScrollView
@@ -14,7 +15,7 @@ import android.widget.ScrollView;
  * @author user
  * @date 2016/10/19.
  */
-public class ReboundScrollView extends ScrollView {
+public class ReboundScrollView extends FCNestedScrollView {
 
     private static final String TAG = "BounceScrollView";
     /**
@@ -42,7 +43,15 @@ public class ReboundScrollView extends ScrollView {
      */
     private boolean upDownSlide = false;
 
+    public ReboundScrollView(Context context) {
+        super(context);
+    }
+
     public ReboundScrollView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public ReboundScrollView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs);
     }
 

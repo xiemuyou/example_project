@@ -48,14 +48,12 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //基础框架
     implementation project(path: ':framework')
+    //基础框架
+    implementation project(path: ':vlayout')
     def viewDependencies = rootProject.ext.viewDependencies
-    implementation(viewDependencies.vlayout) {
-        transitive = true
-    }
     implementation viewDependencies.butterKnife
     //3.0 需要添加
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
-    implementation viewDependencies.vlayout
     implementation viewDependencies.fragmentation
     // (必选) 腾讯X5 webView，适配4.3系统
     compileOnly files('libs/tbs_sdk_thirdapp_v3.5.0.jar')

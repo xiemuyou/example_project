@@ -1,4 +1,4 @@
-package com.news.example.myproject.widgets.refresh;
+package com.library.widgets.canrefresh;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,9 +8,7 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
-import com.library.widgets.canrefresh.CanRecyclerViewHeaderFooter;
-import com.library.widgets.canrefresh.LoadDataState;
-import com.news.example.myproject.R;
+import com.library.R;
 
 /**
  * @author xiemy2
@@ -40,6 +38,12 @@ public class RefreshFootView extends CanRecyclerViewHeaderFooter {
         this.pbFootLoading = foot.findViewById(R.id.pbFootLoading);
         this.tvFootText = foot.findViewById(R.id.tvFootText);
         this.context = context;
+    }
+
+    private View.OnClickListener mClickListener;
+
+    public void setTryAgainClickListener(View.OnClickListener clickListener) {
+        this.mClickListener = clickListener;
     }
 
     public void setFootState(LoadDataState loadState) {
@@ -85,11 +89,5 @@ public class RefreshFootView extends CanRecyclerViewHeaderFooter {
                 setVisibility(GONE);
                 break;
         }
-    }
-
-    private View.OnClickListener mClickListener;
-
-    public void setTryAgainClickListener(View.OnClickListener clickListener) {
-        this.mClickListener = clickListener;
     }
 }

@@ -27,9 +27,10 @@ public class BaseApiResponse<T> {
     private long time;
     private String message;
     private int code;
+    private boolean success;
 
     public boolean isSuccess() {
-        return "success".equals(message);
+        return "success".equals(message) || success;
     }
 
     public long getTime() {

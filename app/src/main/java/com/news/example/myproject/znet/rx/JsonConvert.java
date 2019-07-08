@@ -16,6 +16,7 @@
 package com.news.example.myproject.znet.rx;
 
 import com.google.gson.stream.JsonReader;
+import com.library.util.LogUtil;
 import com.lzy.okgo.convert.Converter;
 
 import org.json.JSONArray;
@@ -35,6 +36,7 @@ import okhttp3.ResponseBody;
  * 描    述：
  * 修订历史：
  * ================================================
+ *
  * @author jeasonlzy
  */
 public class JsonConvert<T> implements Converter<T> {
@@ -59,7 +61,7 @@ public class JsonConvert<T> implements Converter<T> {
      * 这里的解析工作不同的业务逻辑基本都不一样,所以需要自己实现,以下给出的时模板代码,实际使用根据需要修改
      */
     @Override
-    public T convertResponse(Response response) throws Throwable {
+    public T convertResponse(Response response) {
 
         // 重要的事情说三遍，不同的业务，这里的代码逻辑都不一样，如果你不修改，那么基本不可用
         // 重要的事情说三遍，不同的业务，这里的代码逻辑都不一样，如果你不修改，那么基本不可用
@@ -69,22 +71,27 @@ public class JsonConvert<T> implements Converter<T> {
         // 如果你对这里的代码原理不清楚，可以看这里的详细原理说明: https://github.com/jeasonlzy/okhttp-OkGo/wiki/JsonCallback
         // 如果你对这里的代码原理不清楚，可以看这里的详细原理说明: https://github.com/jeasonlzy/okhttp-OkGo/wiki/JsonCallback
 
-        if (type == null) {
-            if (clazz == null) {
-                // 如果没有通过构造函数传进来，就自动解析父类泛型的真实类型（有局限性，继承后就无法解析到）
-                Type genType = getClass().getGenericSuperclass();
-                type = ((ParameterizedType) genType).getActualTypeArguments()[0];
-            } else {
-                return parseClass(response, clazz);
+        try {
+            if (type == null) {
+                if (clazz == null) {
+                    // 如果没有通过构造函数传进来，就自动解析父类泛型的真实类型（有局限性，继承后就无法解析到）
+                    Type genType = getClass().getGenericSuperclass();
+                    type = ((ParameterizedType) genType).getActualTypeArguments()[0];
+                } else {
+                    return parseClass(response, clazz);
+                }
             }
-        }
 
-        if (type instanceof ParameterizedType) {
-            return parseParameterizedType(response, (ParameterizedType) type);
-        } else if (type instanceof Class) {
-            return parseClass(response, (Class<?>) type);
-        } else {
-            return parseType(response, type);
+            if (type instanceof ParameterizedType) {
+                return parseParameterizedType(response, (ParameterizedType) type);
+            } else if (type instanceof Class) {
+                return parseClass(response, (Class<?>) type);
+            } else {
+                return parseType(response, type);
+            }
+        } catch (Exception e) {
+            LogUtil.d(e.getMessage());
+            return null;
         }
     }
 

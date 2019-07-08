@@ -1,7 +1,5 @@
 package com.news.example.myproject.model.sort
 
-import com.news.example.myproject.model.base.BaseMultiItemEntity
-
 /**
  * @author xiemy2
  * @date 2019/5/27
@@ -15,8 +13,7 @@ data class NewsSortInfo(
         var tip_new: String? = "",
         var default_add: String? = "",
         var concern_id: String? = "",
-        var type: String? = "",
-        var icon_url: String? = "") : BaseMultiItemEntity {
+        var icon_url: String? = "") /*: BaseMultiItemEntity*/ {
 
     companion object {
         //固定
@@ -29,7 +26,7 @@ data class NewsSortInfo(
         const val MORE = 3
     }
 
-    override fun setItemType(itemType: Int) {
+    /*override */fun setItemType(itemType: Int) {
         this.itemType = itemType
     }
 
@@ -41,7 +38,7 @@ data class NewsSortInfo(
         return super.hashCode()
     }
 
-    override fun getItemType(): Int {
-        return itemType ?: -1
+    fun getType(): Int {
+        return itemType ?: 0
     }
 }

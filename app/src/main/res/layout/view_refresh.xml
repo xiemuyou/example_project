@@ -21,11 +21,12 @@
         android:id="@id/can_content_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false" />
+        android:clipToPadding="false"
+        android:overScrollMode="never" />
 
     <!--上拉底部-->
-    <com.news.example.myproject.widgets.refresh.RefreshFootView
-        android:id="@+id/footer"
+    <com.library.widgets.canrefresh.RefreshFootView
+        android:id="@id/footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

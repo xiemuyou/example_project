@@ -7,6 +7,8 @@
     <string name="head">头部</string>
     <string name="avatar">头像</string>
     <string name="share">分享</string>
+    <string name="comment">评论</string>
+    <string name="consult_input_consult_tips">留下你的评论..</string>
     <string name="wechat">微信</string>
     <string name="wechat_moments">朋友圈</string>
     <string name="qq">QQ</string>

@@ -16,11 +16,11 @@ ext {
     supportLibraryVersion = "27.1.1"
     constraintLayoutVersion = "1.0.2"
     //fragmentation fragment封装 https://github.com/YoKeyword/Fragmentation
-    fragmentationVersion = "1.3.3"
+    fragmentationVersion = "1.0.1"
     //butterknife view注入 https://github.com/JakeWharton/butterknife
     butterKnifeVersion = '10.0.0'
     //vlayout 整套布局方案和布局间的组件复用 https://github.com/alibaba/vlayout/
-    vlayoutVersion = "1.2.8@aar"
+//    vlayoutVersion = "1.2.8@aar"
     //SmartTabLayout 需要用到的Util //https://github.com/ogaclejapan/SmartTabLayout
     smartTabLayoutVersion = "v4:1.0.0@aar"
     //方便的RecycleViewAdapter https://github.com/CymChad/BaseRecyclerViewAdapterHelper
@@ -61,8 +61,8 @@ ext {
     viewDependencies = [
             butterKnife    : "com.jakewharton:butterknife:${butterKnifeVersion}",
             apt_butterKnife: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
-            vlayout        : "com.alibaba.android:vlayout:${vlayoutVersion}",
-            fragmentation  : "me.yokeyword:fragmentation:${fragmentationVersion}",
+//            vlayout        : "com.alibaba.android:vlayout:${vlayoutVersion}",
+            fragmentation  : "me.yokeyword:fragmentationx:${fragmentationVersion}",
             smartTabLayout : "com.ogaclejapan.smarttablayout:utils-${smartTabLayoutVersion}",
             rvadapterHelper: "com.github.CymChad:BaseRecyclerViewAdapterHelper:${rvadapterVersion}",
             immbersionBar  : "com.gyf.barlibrary:barlibrary:${immbersionBarVersion}"

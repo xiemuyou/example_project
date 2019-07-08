@@ -12,6 +12,8 @@
     <string name="video">视频</string>
     <string name="play">播放</string>
     <string name="unlock">锁</string>
+    <string name="consult_see_disclaimer">免责声明</string>
+    <string name="title_stretch_read">延展阅读</string>
     <!-- 视频 End -->
 
     <!-- 我的 Start -->
@@ -41,4 +43,10 @@
     <string name="click_go_to_sort">点击进入频道</string>
     <string name="click_add_sort">点击可添加频道</string>
     <!-- 类型编辑 End -->
+
+    <!-- 分类编辑 Start -->
+    <string name="sort_edit">分类编辑</string>
+
+    <!-- 分类编辑 End -->
+
 </resources>

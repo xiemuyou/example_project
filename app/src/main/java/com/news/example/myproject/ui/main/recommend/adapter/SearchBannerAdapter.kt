@@ -7,7 +7,6 @@ import com.library.widgets.vb.BaseBannerAdapter
 import com.library.widgets.vb.VerticalBannerView
 import com.news.example.myproject.R
 import com.news.example.myproject.ui.search.SearchActivity
-import java.util.*
 
 /**
  *

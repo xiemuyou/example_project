@@ -16,7 +16,7 @@ import com.library.widgets.emptyview.OtherViewHolder;
 import com.news.example.myproject.R;
 import com.news.example.myproject.base.mvp.BaseView;
 import com.news.example.myproject.global.Constants;
-import com.news.example.myproject.widgets.refresh.RefreshFootView;
+import com.library.widgets.canrefresh.RefreshFootView;
 import com.news.example.myproject.znet.InterfaceConfig;
 
 import java.util.ArrayList;

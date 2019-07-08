@@ -3,20 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white_transparency"
-    android:paddingStart="@dimen/px_12"
-    android:paddingEnd="@dimen/px_0"
+    android:paddingStart="@dimen/px_0"
+    android:paddingEnd="@dimen/px_24"
     android:paddingBottom="@dimen/px_24">
 
     <TextView
         android:id="@+id/tvSortLabel"
         android:layout_width="match_parent"
         android:layout_height="@dimen/px_88"
-        android:layout_marginStart="@dimen/px_12"
-        android:layout_marginTop="@dimen/px_12"
         android:background="@drawable/bg_text_sort"
         android:gravity="center"
         android:maxLines="1"
-        android:text=""
         android:textColor="@color/color_2C2C2C"
         android:textSize="15sp" />
 
