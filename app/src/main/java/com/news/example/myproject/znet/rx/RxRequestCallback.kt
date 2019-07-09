@@ -40,14 +40,14 @@ class RxRequestCallback {
      */
     fun <M : Any> request(params: MutableMap<String, Any>? = null, api: InterfaceConfig.HttpHelperTag, entityClass: Class<M>?, presenter: BasePresenter<*>?) {
         val observable = if (InterfaceConfig.METHOD_GET == api.method) {
-            ServerApi.getData<M>(api.apiUrl, addUserParams(params), entityClass, api.config)
+            ServerApi.getData(api.apiUrl, addUserParams(params), entityClass, api.config)
         } else {
             ServerApi.postData(api.apiUrl, addUserParams(params), entityClass, api.config)
         }
-        if (presenter == null) {
+        if (observable == null || presenter == null) {
             return
         }
-        observable?.subscribeOn(Schedulers.io())
+        observable.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe(object : Observer<M> {
 

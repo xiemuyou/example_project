@@ -22,14 +22,14 @@ class MainPresenter(view: MainView) : BasePresenter<MainView>(view) {
      * https://is.snssdk.com/2/article/hot_words/
      */
     fun articleHotWords() {
-        RxRequestCallback().request(params = null, api = InterfaceConfig.HttpHelperTag.ARTICLE_HOT_WORDS, entityClass = StringListResponse::class.java, presenter = this)
+        RxRequestCallback().request(api = InterfaceConfig.HttpHelperTag.ARTICLE_HOT_WORDS, entityClass = StringListResponse::class.java, presenter = this)
     }
 
     /**
      * 分类
      */
     fun getCategoryExtra() {
-        RxRequestCallback().request(params = null, api = InterfaceConfig.HttpHelperTag.ARTICLE_CATEGORY_GET_EXTRA_V1, presenter = this)
+        RxRequestCallback().request(api = InterfaceConfig.HttpHelperTag.ARTICLE_CATEGORY_GET_EXTRA_V1, presenter = this)
     }
 
     override fun onLoadDataSuccess(apiTag: InterfaceConfig.HttpHelperTag, modelRes: BaseApiResponse<*>, params: Map<String, Any>?) {

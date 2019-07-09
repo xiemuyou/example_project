@@ -2,6 +2,7 @@ package com.news.example.myproject.ui.web
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.text.TextUtils
@@ -12,7 +13,6 @@ import com.bumptech.glide.request.FutureTarget
 import com.library.FApplication
 import com.library.thread.ThreadPool
 import com.library.util.PreferencesUtils
-import com.news.example.myproject.R
 import com.news.example.myproject.base.component.BaseFragment
 import com.news.example.myproject.global.ParamConstants
 import com.tencent.smtt.export.external.interfaces.WebResourceError
@@ -22,6 +22,7 @@ import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
 import kotlinx.android.synthetic.main.fragment_common_web.*
 import java.io.File
+
 
 /**
  * 供参考
@@ -35,7 +36,7 @@ class CommonWebFragment : BaseFragment(), ConsultWebCallback.ConsultCallBack {
     var webView: X5WebView? = null
 
     override fun getLayoutId(savedInstanceState: Bundle?): Int {
-        return R.layout.fragment_common_web
+        return com.news.example.myproject.R.layout.fragment_common_web
     }
 
     override fun initEnv() {
@@ -63,8 +64,12 @@ class CommonWebFragment : BaseFragment(), ConsultWebCallback.ConsultCallBack {
                 progressBar?.visibility = View.VISIBLE
             }
 
-            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                webView?.loadUrl(url)
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    webView?.loadUrl(request.toString())
+                } else {
+                    webView?.loadUrl(request?.url.toString())
+                }
                 return true
             }
 
@@ -102,8 +107,13 @@ class CommonWebFragment : BaseFragment(), ConsultWebCallback.ConsultCallBack {
         settings?.allowContentAccess = true
 
         webView?.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(p0: WebView?, url: String?): Boolean {
-                webView?.loadUrl(url)
+
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    webView?.loadUrl(request.toString())
+                } else {
+                    webView?.loadUrl(request?.url.toString())
+                }
                 return true
             }
 
@@ -159,7 +169,7 @@ class CommonWebFragment : BaseFragment(), ConsultWebCallback.ConsultCallBack {
         super.onDestroy()
         //清空缓存
         webView?.clearCache(true)
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             flWebViewContent?.removeView(webView)
             webView?.removeAllViews()
             webView?.destroy()

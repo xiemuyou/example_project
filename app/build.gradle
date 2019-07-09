@@ -18,7 +18,7 @@ android {
         targetSdkVersion globalConfiguration.anroidTargetSdkVersion
 
         versionCode 1
-        versionName "1.0.6"
+        versionName "1.0.7"
 
         ndk {
             //选择要添加的对应cpu类型的.so库。
@@ -56,7 +56,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     implementation viewDependencies.fragmentation
     // (必选) 腾讯X5 webView，适配4.3系统
-    compileOnly files('libs/tbs_sdk_thirdapp_v3.5.0.jar')
+    compileOnly files('libs/tbs_sdk_thirdapp_v4.3.0.jar')
     implementation viewDependencies.rvadapterHelper
     implementation viewDependencies.smartTabLayout
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

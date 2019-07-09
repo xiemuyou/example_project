@@ -29,6 +29,5 @@
             android:text="@string/mine"
             android:textColor="@color/text_color_2C2C2C"
             android:textSize="@dimen/px_36_sp" />
-
     </RelativeLayout>
 </FrameLayout>

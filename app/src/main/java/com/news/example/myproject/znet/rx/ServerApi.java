@@ -127,7 +127,7 @@ public class ServerApi {
                     .cacheMode(internetConfig.getCacheMode());
         }
         request.converter(new JsonConvert<>(clazz));
-        return request.adapt(new ObservableBody<T>());
+        return request.adapt(new ObservableBody<>());
     }
 
     /**
