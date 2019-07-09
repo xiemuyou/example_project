@@ -1,18 +1,19 @@
 package com.news.example.myproject.widgets.news;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SizeUtils;
@@ -71,14 +72,14 @@ public class InformationItemContentView extends RelativeLayout {
     ImageView ivInfoPic2;
     @BindView(R.id.ivInfoPic3)
     ImageView ivInfoPic3;
-    @BindView(R.id.flImagsContent)
-    FrameLayout flImagsContent;
     @BindView(R.id.ivUserAvatar0)
     ImageView ivUserAvatar0;
     @BindView(R.id.flUserAvatar)
     FrameLayout flUserAvatar;
     @BindView(R.id.rlItemBottomView)
     RelativeLayout rlItemBottomView;
+    @BindView(R.id.llItemImgs)
+    LinearLayout llItemImgs;
     @BindView(R.id.clItemThreePic)
     ConstraintLayout clItemThreePic;
 
@@ -147,7 +148,7 @@ public class InformationItemContentView extends RelativeLayout {
         if (rlItemBottomView != null) {
             ViewUtil.setMargins(rlItemBottomView, SizeUtils.dp2px(18), SizeUtils.dp2px(15), 0, SizeUtils.dp2px(10));
         }
-        flImagsContent.setVisibility(View.GONE);
+        llItemImgs.setVisibility(View.GONE);
         clItemSimpleGraph.setVisibility(View.GONE);
         clItemThreePic.setVisibility(View.VISIBLE);
         tvInformationDesc.setText(info.getTitle());
@@ -233,12 +234,12 @@ public class InformationItemContentView extends RelativeLayout {
      * @param info 资讯详情
      */
     private void setThreePicLayout(@NonNull Context context, @NonNull final NewsInfo info, boolean showUserPic, String commentOrCreateTime) {
-        flImagsContent.setVisibility(View.VISIBLE);
+        llItemImgs.setVisibility(View.VISIBLE);
         clItemSimpleGraph.setVisibility(View.GONE);
         clItemThreePic.setVisibility(View.VISIBLE);
         tvInformationDesc.setText(info.getTitle());
         tvNickOrCreateTime.setText(commentOrCreateTime);
-        ViewUtil.setSmallImgViewHeight(flImagsContent);
+        ViewUtil.setSmallImgViewHeight(llItemImgs);
         //设置图片(3图)4/3宽高比
         ViewUtil.setSmallImageViewSize(ivInfoPic1);
         ViewUtil.setSmallImageViewSize(ivInfoPic2);

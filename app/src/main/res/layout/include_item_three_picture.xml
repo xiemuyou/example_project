@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clItemThreePic"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -27,59 +28,53 @@
             android:paddingEnd="@dimen/px_36"
             android:textColor="@color/text_color_2C2C2C"
             android:textSize="@dimen/px_34_sp" />
-
     </com.news.example.myproject.widgets.extra.LineSpaceExtraContainer>
 
-    <FrameLayout
-        android:id="@+id/flImagsContent"
+    <LinearLayout
+        android:id="@+id/llItemImgs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="@dimen/px_36"
         android:layout_marginTop="@dimen/px_22"
         android:layout_marginEnd="@dimen/px_36"
+        android:background="@color/white"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lsecTitle">
+        app:layout_constraintTop_toBottomOf="@+id/lsecTitle"
+        tools:ignore="UselessParent">
 
-        <LinearLayout
-            android:id="@+id/llItemImgs"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/ivInfoPic1"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:orientation="horizontal">
+            android:layout_marginEnd="@dimen/px_3"
+            android:layout_weight="1"
+            android:background="@drawable/shape_color_10000000_corner_left_12_stroke"
+            android:contentDescription="@string/background"
+            android:scaleType="centerCrop" />
 
-            <ImageView
-                android:id="@+id/ivInfoPic1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/px_3"
-                android:layout_weight="1"
-                android:background="@drawable/shape_color_10000000_corner_left_12_stroke"
-                android:contentDescription="@string/background"
-                android:scaleType="centerCrop" />
+        <ImageView
+            android:id="@+id/ivInfoPic2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/px_3"
+            android:layout_marginEnd="@dimen/px_3"
+            android:layout_weight="1"
+            android:background="@drawable/shape_color_10000000_stroke_1"
+            android:contentDescription="@string/background"
+            android:scaleType="centerCrop" />
 
-            <ImageView
-                android:id="@+id/ivInfoPic2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/px_3"
-                android:layout_marginEnd="@dimen/px_3"
-                android:layout_weight="1"
-                android:background="@drawable/shape_color_10000000_stroke_1"
-                android:contentDescription="@string/background"
-                android:scaleType="centerCrop" />
-
-            <ImageView
-                android:id="@+id/ivInfoPic3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/px_3"
-                android:layout_weight="1"
-                android:background="@drawable/shape_color_10000000_corner_right_12_stroke"
-                android:contentDescription="@string/background"
-                android:scaleType="centerCrop" />
-        </LinearLayout>
-    </FrameLayout>
+        <ImageView
+            android:id="@+id/ivInfoPic3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/px_3"
+            android:layout_weight="1"
+            android:background="@drawable/shape_color_10000000_corner_right_12_stroke"
+            android:contentDescription="@string/background"
+            android:scaleType="centerCrop" />
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/rlItemBottomView"
@@ -88,7 +83,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flImagsContent">
+        app:layout_constraintTop_toBottomOf="@+id/llItemImgs">
 
         <FrameLayout
             android:id="@+id/flUserAvatar"

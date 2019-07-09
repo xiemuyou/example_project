@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -113,7 +114,8 @@
                 android:layout_toEndOf="@+id/flUserAvatar1"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/text_color_9F9F9F"
-                android:textSize="@dimen/px_22_sp" />
+                android:textSize="@dimen/px_22_sp"
+                tools:ignore="RelativeOverlap" />
 
             <!--更多-->
             <ImageView
@@ -137,6 +139,8 @@
             android:paddingEnd="0dp"
             android:paddingBottom="@dimen/px_18"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivSimpleGraph">
 
             <FrameLayout

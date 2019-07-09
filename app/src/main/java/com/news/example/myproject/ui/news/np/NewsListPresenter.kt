@@ -21,9 +21,7 @@ import java.util.*
  */
 class NewsListPresenter(view: NewsListView) : BasePresenter<NewsListView>(view) {
 
-    fun getSearchUsers(searchKey: String) {
-        val params = HashMap<String, Any>()
-        params[ParamConstants.CATEGORY] = searchKey
+    fun getRecommendList() {
         RxRequestCallback().request(params = null, api = InterfaceConfig.HttpHelperTag.NEWS_FEED_V58, presenter = this)
     }
 

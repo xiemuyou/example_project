@@ -27,7 +27,7 @@ class RecommendFragment : BaseRefreshFragment<NewsInfo>(), NewsListView {
         const val SORT_NAME = "sortName"
     }
 
-    private val followPresenter by lazy {
+    private val recommendPresenter by lazy {
         NewsListPresenter(this)
     }
 
@@ -52,7 +52,7 @@ class RecommendFragment : BaseRefreshFragment<NewsInfo>(), NewsListView {
     }
 
     override fun refreshDataList() {
-        followPresenter.getSearchUsers(category)
+        recommendPresenter.getRecommendList()
         (parentFragment as HomeFragment?)?.checkHotSearchList()
     }
 

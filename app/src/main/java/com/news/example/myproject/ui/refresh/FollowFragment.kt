@@ -60,7 +60,7 @@ class FollowFragment : BaseRefreshFragment<NewsInfo>(), NewsListView {
         if (followPresenter == null) {
             followPresenter = NewsListPresenter(this)
         }
-        refresh.postDelayed({ followPresenter!!.getSearchUsers("测试") }, 1000)
+        refresh.postDelayed({ followPresenter?.getNewsList("测试", "") }, 1000)
     }
 
     override fun getDataSuccess(response: RecommendResponse?) {

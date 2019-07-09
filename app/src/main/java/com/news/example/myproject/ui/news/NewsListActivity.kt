@@ -1,12 +1,9 @@
 package com.news.example.myproject.ui.news
 
-import android.text.TextUtils
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.library.util.ImageLoadUtils
@@ -31,7 +28,10 @@ import com.news.example.myproject.ui.refresh.FollowActivity
  */
 class NewsListActivity : BaseRefreshActivity<UserInfo>(), NewsListView {
 
-    private var refreshPresenter: NewsListPresenter? = null
+    private val refreshPresenter :NewsListPresenter by lazy {
+        NewsListPresenter(this)
+    }
+
     private var searchText: String? = null
 
     override fun initEnv() {
@@ -63,11 +63,7 @@ class NewsListActivity : BaseRefreshActivity<UserInfo>(), NewsListView {
     }
 
     override fun refreshDataList() {
-        if (refreshPresenter == null) {
-            refreshPresenter = NewsListPresenter(this)
-        }
-        val searchKey = if (TextUtils.isEmpty(searchText)) searchText else "1"
-        canContentView.postDelayed({ refreshPresenter!!.getSearchUsers(searchKey!!) }, 2000)
+        canContentView.postDelayed({ refreshPresenter?.getNewsList("", "") }, 2000)
     }
 
     override fun getDataSuccess(response: RecommendResponse?) {
