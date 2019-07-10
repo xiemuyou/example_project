@@ -16,7 +16,7 @@ import com.news.example.myproject.global.ParamConstants
  * @author xiemy
  * @date 2018/3/6
  */
-class CommonWebActivity : BaseActivity() {
+open class CommonWebActivity : BaseActivity() {
 
     companion object {
 
@@ -48,15 +48,17 @@ class CommonWebActivity : BaseActivity() {
             this.finish()
             return
         }
-        var title = intent.getStringExtra(ParamConstants.TITLE)
-        title = if (title != null && title.length > 8) title.replace(title.substring(8), "...") else title
-        val diverFlag = intent.getBooleanExtra(ParamConstants.DIVER_FLAG, true)
-        showHead(!TextUtils.isEmpty(title), diverFlag)
-        setHeadTitle(title)
-
+        setWebTitle(intent.getStringExtra(ParamConstants.TITLE))
         val url = intent.getStringExtra(ParamConstants.WEB_URL)
         val content = intent.getStringExtra(ParamConstants.CONTENT_KEY)
         loadRootFragment(R.id.flContainer, CommonWebFragment.newInstance(webUrl = url, webContent = content))
+    }
+
+    fun setWebTitle(title: String?) {
+        val mTitle = if (title != null && title.length > 8) title.replace(title.substring(8), "...") else title
+        val diverFlag = intent.getBooleanExtra(ParamConstants.DIVER_FLAG, true)
+        showHead(!TextUtils.isEmpty(mTitle), diverFlag)
+        setHeadTitle(mTitle)
     }
 
     override fun onBackPressedSupport() {

@@ -1,7 +1,6 @@
 package com.news.example.myproject.ui.news.nv
 
 import com.news.example.myproject.base.mvp.BaseView
-import com.news.example.myproject.model.news.NewsDetails
 
 /**
  * 刷新页UI更新
@@ -14,7 +13,8 @@ interface NewsDetailsView : BaseView {
     /**
      * 成功获取数据,允许数据为NULL
      *
-     * @param response 测试
+     * @param url 连接
+     * @param flag 标记
      */
-    fun getDataSuccess(response: NewsDetails?)
+    fun onSetWebView(content: String?, flag: Boolean?)
 }

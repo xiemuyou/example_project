@@ -9,9 +9,9 @@ import com.news.example.myproject.base.component.BaseRefreshFragment
 import com.news.example.myproject.model.news.NewsInfo
 import com.news.example.myproject.model.news.RecommendResponse
 import com.news.example.myproject.ui.main.home.HomeFragment
+import com.news.example.myproject.ui.news.NewsDetailsActivity
 import com.news.example.myproject.ui.news.np.NewsListPresenter
 import com.news.example.myproject.ui.news.nv.NewsListView
-import com.news.example.myproject.ui.web.NoHeadCommonWebActivity
 import com.news.example.myproject.widgets.news.InformationItemContentView
 
 /**
@@ -46,7 +46,8 @@ class RecommendFragment : BaseRefreshFragment<NewsInfo>(), NewsListView {
         }
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { mAdapter, _, position ->
             val info = mAdapter.getItem(position) as NewsInfo? ?: return@OnItemClickListener
-            info.display_url?.let { NoHeadCommonWebActivity.showClass(_mActivity, it) }
+            info.let { NewsDetailsActivity.showClass(it) }
+            //info.display_url?.let { NoHeadCommonWebActivity.showClass(_mActivity, it) }
         }
         return adapter
     }

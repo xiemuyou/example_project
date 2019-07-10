@@ -1,6 +1,7 @@
 package com.news.example.myproject.model.news
 
 import com.news.example.myproject.model.user.UserInfo
+import java.io.Serializable
 
 /**
  * @author xiemy2
@@ -15,7 +16,7 @@ data class NewsInfo(
         var display_url: String? = "",
         var userInfo: UserInfo? = UserInfo(),
         var images: List<String>? = ArrayList()
-) {
+) : Serializable {
     override fun equals(other: Any?): Boolean {
         return other is NewsInfo && other.newsId == newsId
     }

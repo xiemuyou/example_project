@@ -42,13 +42,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme"
-            android:windowSoftInputMode="adjustPan|adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity android:name=".ui.news.NewsListActivity" />
 

@@ -64,12 +64,8 @@ class CommonWebFragment : BaseFragment(), ConsultWebCallback.ConsultCallBack {
                 progressBar?.visibility = View.VISIBLE
             }
 
-            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    webView?.loadUrl(request.toString())
-                } else {
-                    webView?.loadUrl(request?.url.toString())
-                }
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                webView?.loadUrl(url)
                 return true
             }
 
@@ -107,12 +103,20 @@ class CommonWebFragment : BaseFragment(), ConsultWebCallback.ConsultCallBack {
         settings?.allowContentAccess = true
 
         webView?.webViewClient = object : WebViewClient() {
-
-            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+            override fun shouldOverrideUrlLoading(p0: WebView?, url: String?): Boolean {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    webView?.loadUrl(request.toString())
+                    webView?.loadUrl(url)
                 } else {
-                    webView?.loadUrl(request?.url.toString())
+                    webView?.loadUrl(url)
+                }
+                return true
+            }
+
+            override fun shouldOverrideUrlLoading(view: WebView?, p1: WebResourceRequest?): Boolean {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    webView?.loadUrl(p1.toString())
+                } else {
+                    webView?.loadUrl(p1?.url.toString())
                 }
                 return true
             }
@@ -169,7 +173,7 @@ class CommonWebFragment : BaseFragment(), ConsultWebCallback.ConsultCallBack {
         super.onDestroy()
         //清空缓存
         webView?.clearCache(true)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             flWebViewContent?.removeView(webView)
             webView?.removeAllViews()
             webView?.destroy()

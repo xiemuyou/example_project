@@ -62,12 +62,7 @@ public abstract class BaseToolbarActivity extends SupportActivity {
         if (tbHead != null) {
             setSupportActionBar(tbHead);
             tbHead.setNavigationIcon(R.drawable.back_black);
-            tbHead.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    backPressed();
-                }
-            });
+            tbHead.setNavigationOnClickListener(v -> backPressed());
         }
     }
 

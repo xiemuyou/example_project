@@ -17,7 +17,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginStart="@dimen/px_36"
+        android:layout_marginEnd="@dimen/px_36"
         android:background="@null"
+        android:ellipsize="end"
+        android:maxLines="2"
         android:textColor="@color/color_272B3C"
         android:textSize="@dimen/commonFontSize_16"
         android:textStyle="bold" />
