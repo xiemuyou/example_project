@@ -1,7 +1,6 @@
 package com.news.example.myproject.ui.news.np
 
 import android.webkit.JavascriptInterface
-import com.blankj.utilcode.util.ToastUtils
 import com.news.example.myproject.base.mvp.BasePresenter
 import com.news.example.myproject.global.DefaultValue
 import com.news.example.myproject.model.base.BaseApiResponse
@@ -10,6 +9,7 @@ import com.news.example.myproject.model.news.NewsDetailsResponse
 import com.news.example.myproject.ui.news.nv.NewsDetailsView
 import com.news.example.myproject.znet.InterfaceConfig
 import com.news.example.myproject.znet.rx.RxRequestCallback
+import org.jsoup.Jsoup
 import java.util.*
 import java.util.regex.Pattern
 
@@ -32,20 +32,14 @@ class NewsDetailsPresenter(view: NewsDetailsView) : BasePresenter<NewsDetailsVie
     override fun onLoadDataSuccess(apiTag: InterfaceConfig.HttpHelperTag, modelRes: BaseApiResponse<*>?, params: Map<String, Any>?) {
         if (apiTag == InterfaceConfig.HttpHelperTag.GET_EWS_CONTENT) {
             val newsRes = modelRes as? NewsDetailsResponse
-            mvpView.onSetWebView(getHTML(newsRes?.data), true)
+            val content = getNewContent(getHTML(newsRes?.data))
+            mvpView.onSetWebView(content, true)
         }
     }
 
     private fun getHTML(news: NewsDetails?): String? {
         val title = news?.title
         val content = news?.content
-//        val doc = Jsoup.parse(content, "UTF-8")
-//        val elements = doc.getElementsByClass("con-words")
-//        for (element in elements) {
-//            element.attr("width","100%").attr("height","auto")
-//            content = element.toString()
-//            break
-//        }
         if (content != null) {
             val css = "<link rel=\"stylesheet\" href=\"file:///android_asset/toutiao_light.css\" type=\"text/css\">"
             return "<!DOCTYPE html>\n" +
@@ -70,6 +64,21 @@ class NewsDetailsPresenter(view: NewsDetailsView) : BasePresenter<NewsDetailsVie
     }
 
     /**
+     * 将html文本内容中包含img标签的图片，宽度变为屏幕宽度，高度根据宽度比例自适应
+     **/
+    private fun getNewContent(htmlText: String?): String {
+        if (htmlText.isNullOrEmpty()) {
+            return ""
+        }
+        val doc = Jsoup.parse(htmlText)
+        val elements = doc.getElementsByTag("img")
+        elements.forEach {
+            it.attr("width", "100%").attr("height", "auto")
+        }
+        return doc.toString()
+    }
+
+    /**
      * js 通信接口，定义供 JavaScript 调用的交互接口
      * 点击图片启动新的 Activity，并传入点击图片对应的 url 和页面所有图片
      * 对应的 url
@@ -78,7 +87,7 @@ class NewsDetailsPresenter(view: NewsDetailsView) : BasePresenter<NewsDetailsVie
      */
     @JavascriptInterface
     fun openImage(url: String) {
-        ToastUtils.showLong("图片点击")
+        //ToastUtils.showLong("图片点击")
 
 //        if (!TextUtils.isEmpty(url)) {
 //            val list = getAllImageUrlFromHtml(html)

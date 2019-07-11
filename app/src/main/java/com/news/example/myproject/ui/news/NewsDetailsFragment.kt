@@ -19,7 +19,6 @@ import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
-import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.fragment_news_detail.*
 
 /**
@@ -99,7 +98,7 @@ class NewsDetailsFragment : BaseFragment(), NewsDetailsView {
         // 判断是否为无图模式
         //settings.blockNetworkImage = SettingUtil.getInstance().getIsNoPhotoMode()
         //设置webView里字体大小
-        settings.textSize = WebSettings.TextSize.LARGER
+        settings.textSize = WebSettings.TextSize.LARGEST
 
         // 不调用第三方浏览器即可进行页面反应
         webView.webViewClient = object : WebViewClient() {
@@ -112,9 +111,8 @@ class NewsDetailsFragment : BaseFragment(), NewsDetailsView {
 
             override fun onPageFinished(view: WebView, url: String) {
                 onHideLoading()
-                // 注入 js 函数监听
+                // 注入 js 函数(图片点击)监听
                 webView.loadUrl(Constants.JS_INJECT_IMG)
-                imgReset()
                 webView.loadUrl("javascript:App.resize(document.body.getBoundingClientRect().height)")
                 webView.loadUrl("javascript:clearEmpty()")
                 super.onPageFinished(view, url)
@@ -165,26 +163,11 @@ class NewsDetailsFragment : BaseFragment(), NewsDetailsView {
 
     fun onHideLoading() {
         progressBar?.hide()
-        refresh_layout?.post { refresh_layout?.isRefreshing = false }
+        swipeRefreshLayout?.post { swipeRefreshLayout?.isRefreshing = false }
     }
 
     override fun loadDataFail(apiTag: InterfaceConfig.HttpHelperTag?, errorInfo: String?) {
         showNotice(errorInfo)
         onSetWebView(null, false)
-    }
-
-    /**
-     * 对图片进行重置大小，宽度就是手机屏幕宽度，高度根据宽度比便自动缩放
-     **/
-    private fun imgReset() {
-        webView.loadUrl("javascript:(function(){" +
-                "alert('提示')" +
-                "var objs = document.getElementsByTagName('img'); " +
-                "for(var i=0;i<objs.length;i++)  " +
-                "{"
-                + "var img = objs[i];   " +
-                "    img.style.maxWidth = '100%'; img.style.height = 'auto';  " +
-                "}" +
-                "})()")
     }
 }
