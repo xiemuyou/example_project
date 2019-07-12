@@ -51,7 +51,6 @@ object InterfaceConfig {
          */
         NEWS_FEED_V58(HttpConfig.SNS_SDK, "api/news/feed/v58/"),
         /**
-<<<<<<< HEAD
          * 分类信息
          * https://is.snssdk.com/api/news/feed/v39/?category=news_entertainment&concern_id=6215497896830175745&refer=1&count=20
          */
@@ -64,8 +63,6 @@ object InterfaceConfig {
                 RequestConfig().setCacheMode(CacheMode.NO_CACHE)
                         .setCacheTime(10000).setRetryCount(3)),
         /**
-=======
->>>>>>> parent of 4bb8f93... 【分类】添加分类接口
          * 崩溃上报
          */
         RX_URL_REPORT_CRASH_LOG(HttpConfig.SNS_SDK, "UiP1/ReportCrashLog"),
@@ -77,6 +74,7 @@ object InterfaceConfig {
          * 头条搜索
          */
         SEARCH_TOU_TIAO(HttpConfig.SNS_SDK, "search"),
+        SEARCH_TOU_TIAO_NEW(HttpConfig.SNS_SDK, "api/2/wap/search_content/"),
         /* ------------------------ > 搜索  Search End <---------------------- */
 
 
