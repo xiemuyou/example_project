@@ -26,12 +26,6 @@ object SortFilter {
     }
 
     fun <T> dataToHeavy(oldDataList: MutableList<T>, newDataList: MutableList<T>): List<T> {
-//        for (sortInfo in newDataList) {
-//            if (!oldDataList.contains(sortInfo)) {
-//
-//            }
-//        }
-
         return newDataList.filter {
             !oldDataList.contains(it)
         }

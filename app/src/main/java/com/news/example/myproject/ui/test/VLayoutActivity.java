@@ -24,6 +24,7 @@
 
 package com.news.example.myproject.ui.test;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -99,9 +100,7 @@ public class VLayoutActivity extends Activity {
 
     private TextView mFirstText;
     private TextView mLastText;
-
     private TextView mCountText;
-
     private TextView mTotalOffsetText;
 
     @Override
@@ -136,12 +135,13 @@ public class VLayoutActivity extends Activity {
         });
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int scrollState) {
 
             }
 
+            @SuppressLint("SetTextI18n")
             @Override
-            public void onScrolled(RecyclerView recyclerView, int i, int i2) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int i, int i2) {
                 mFirstText.setText("First: " + layoutManager.findFirstVisibleItemPosition());
                 mLastText.setText("Existing: " + MainViewHolder.existing + " Created: " + MainViewHolder.createdTimes);
                 mCountText.setText("Count: " + recyclerView.getChildCount());
@@ -206,14 +206,15 @@ public class VLayoutActivity extends Activity {
             adapters.add(new SubAdapter(this, new LinearLayoutHelper(), 1) {
 
                 @Override
-                public void onViewRecycled(MainViewHolder holder) {
+                public void onViewRecycled(@NonNull MainViewHolder holder) {
                     if (holder.itemView instanceof ViewPager) {
                         ((ViewPager) holder.itemView).setAdapter(null);
                     }
                 }
 
+                @NonNull
                 @Override
-                public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                public MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                     if (viewType == 1) {
                         return new MainViewHolder(LayoutInflater.from(VLayoutActivity.this).inflate(R.layout.view_pager, parent, false));
                     }
@@ -231,7 +232,7 @@ public class VLayoutActivity extends Activity {
                 }
 
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
                     if (holder.itemView instanceof ViewPager) {
                         ViewPager viewPager = (ViewPager) holder.itemView;
 
@@ -274,7 +275,7 @@ public class VLayoutActivity extends Activity {
             final Handler mainHandler = new Handler(Looper.getMainLooper());
             adapters.add(new SubAdapter(this, layoutHelper1, 1) {
                 @Override
-                public void onBindViewHolder(final MainViewHolder holder, int position) {
+                public void onBindViewHolder(@NonNull final MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
                     final SubAdapter subAdapter = this;
                     //mainHandler.postDelayed(new Runnable() {
@@ -292,7 +293,7 @@ public class VLayoutActivity extends Activity {
             adapters.add(new SubAdapter(this, layoutHelper2, 6) {
 
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
                     if (position % 2 == 0) {
                         VirtualLayoutManager.LayoutParams layoutParams = new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300);
                         layoutParams.mAspectRatio = 5;
@@ -398,7 +399,7 @@ public class VLayoutActivity extends Activity {
             adapters.add(new SubAdapter(this, helper, 4) {
 
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
                     VirtualLayoutManager.LayoutParams layoutParams = new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300);
                     if (position % 2 == 0) {
@@ -415,7 +416,7 @@ public class VLayoutActivity extends Activity {
             helper.setBgColor(0xFF86345A);
             adapters.add(new SubAdapter(this, helper, 4) {
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
                     VirtualLayoutManager.LayoutParams layoutParams = new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300);
                     holder.itemView.setLayoutParams(layoutParams);
@@ -469,7 +470,7 @@ public class VLayoutActivity extends Activity {
             adapters.add(new SubAdapter(this, layoutHelper, 5) {
 
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
                     if (position == 0) {
                         VirtualLayoutManager.LayoutParams layoutParams = new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300);
                         layoutParams.mAspectRatio = 4;
@@ -504,7 +505,7 @@ public class VLayoutActivity extends Activity {
             helper.setPadding(10, 10, 10, 10);
             adapters.add(new SubAdapter(this, helper, 4) {
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
                     VirtualLayoutManager.LayoutParams lp = (VirtualLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
                     if (position == 0) {
@@ -530,7 +531,7 @@ public class VLayoutActivity extends Activity {
             VirtualLayoutManager.LayoutParams lp = new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             adapters.add(new SubAdapter(this, helper, 3, lp) {
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
                     VirtualLayoutManager.LayoutParams lp = (VirtualLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
                     if (position == 0) {
@@ -553,7 +554,7 @@ public class VLayoutActivity extends Activity {
 
             adapters.add(new SubAdapter(this, layoutHelper, 1) {
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
                     VirtualLayoutManager.LayoutParams layoutParams = new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200);
                     holder.itemView.setLayoutParams(layoutParams);
@@ -594,7 +595,7 @@ public class VLayoutActivity extends Activity {
             helper.setGap(10);
             adapters.add(new SubAdapter(this, helper, 80) {
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
                     VirtualLayoutManager.LayoutParams lp = (VirtualLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
                     // lp.bottomMargin = 1;
@@ -606,7 +607,7 @@ public class VLayoutActivity extends Activity {
         if (FIX_LAYOUT) {
             adapters.add(new SubAdapter(this, new ScrollFixLayoutHelper(20, 20), 1) {
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
                     VirtualLayoutManager.LayoutParams layoutParams = new VirtualLayoutManager.LayoutParams(200, 200);
                     holder.itemView.setLayoutParams(layoutParams);
@@ -632,7 +633,7 @@ public class VLayoutActivity extends Activity {
             helper.setBgColor(0xFF86345A);
             adapters.add(new SubAdapter(this, helper, 27) {
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
                     VirtualLayoutManager.LayoutParams layoutParams = new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200);
                     if (position % 2 == 0) {
@@ -772,6 +773,7 @@ public class VLayoutActivity extends Activity {
         }
 
         @Override
+        @NonNull
         public MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             return new MainViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item, parent, false));
         }
@@ -858,6 +860,7 @@ public class VLayoutActivity extends Activity {
             return mLayoutHelper;
         }
 
+        @NonNull
         @Override
         public MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             return new MainViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item, parent, false));

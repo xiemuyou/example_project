@@ -27,7 +27,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/white</item>
-        <item name="android:background">@drawable/welcome</item>
+        <item name="android:background">@drawable/splash_bg</item>
     </style>
 
     <!-- 全屏透明专题 -->

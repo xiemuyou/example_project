@@ -6,7 +6,7 @@
     <item android:bottom="@dimen/px_300">
         <bitmap
             android:gravity="center"
-            android:src="@drawable/welcome_pic" />
+            android:src="@drawable/icon" />
     </item>
 
     <item android:bottom="@dimen/px_180">
