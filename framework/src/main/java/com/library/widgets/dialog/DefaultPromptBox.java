@@ -1,13 +1,14 @@
 package com.library.widgets.dialog;
 
 import android.content.Context;
-import androidx.annotation.ColorRes;
-import androidx.annotation.StringRes;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.StringRes;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
@@ -191,10 +192,10 @@ public class DefaultPromptBox extends BaseDialog {
 
         public DefaultPromptBox create(boolean flag) {
             final DefaultPromptBox promptBox = new DefaultPromptBox(context);
-            View dVIew = promptBox.getRootView();
-            tvPromptTitle = dVIew.findViewById(R.id.tvPromptTitle);
-            tvPromptContent = dVIew.findViewById(R.id.tvPromptContent);
-            tvPromptDetermine = dVIew.findViewById(R.id.tvPromptDetermine);
+            View dView = promptBox.getRootView();
+            tvPromptTitle = dView.findViewById(R.id.tvPromptTitle);
+            tvPromptContent = dView.findViewById(R.id.tvPromptContent);
+            tvPromptDetermine = dView.findViewById(R.id.tvPromptDetermine);
             tvPromptDetermine.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -206,7 +207,7 @@ public class DefaultPromptBox extends BaseDialog {
                 }
             });
 
-            tvPromptCancel = dVIew.findViewById(R.id.tvPromptCancel);
+            tvPromptCancel = dView.findViewById(R.id.tvPromptCancel);
             if (showCancel) {
                 tvPromptCancel.setOnClickListener(new View.OnClickListener() {
 
@@ -245,14 +246,11 @@ public class DefaultPromptBox extends BaseDialog {
             if (promptCancelColor != 0) {
                 tvPromptCancel.setTextColor(context.getResources().getColor(promptCancelColor));
             }
-
-            LogUtil.d(TAG, "点击关闭" + (!showCancel || flag));
-
             promptBox.setCancelable(!showCancel || flag);
-            ViewGroup.LayoutParams layoutParams = dVIew.getLayoutParams();
+            ViewGroup.LayoutParams layoutParams = dView.getLayoutParams();
             layoutParams.width = ScreenUtils.getScreenWidth() - SizeUtils.dp2px(90);
             layoutParams.height = (int) (ScreenUtils.getScreenHeight() * 0.25);
-            dVIew.setLayoutParams(layoutParams);
+            dView.setLayoutParams(layoutParams);
             return promptBox;
         }
 

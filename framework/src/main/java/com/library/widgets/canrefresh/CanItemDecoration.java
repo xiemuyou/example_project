@@ -1,11 +1,13 @@
 package com.library.widgets.canrefresh;
 
 import android.graphics.Rect;
+import android.view.View;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import android.view.View;
 
 /**
  * Created by canyinghao on 16/7/13.
@@ -52,7 +54,7 @@ public class CanItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         boolean relatedPosition;
         if (isHeader) {
@@ -103,19 +105,19 @@ public class CanItemDecoration extends RecyclerView.ItemDecoration {
             GridLayoutManager grid = (GridLayoutManager) layoutManager;
             this.rowSpan = grid.getSpanCount();
             this.isReversed = grid.getReverseLayout();
-            this.isVertical = grid.getOrientation() == LinearLayoutManager.VERTICAL;
+            this.isVertical = grid.getOrientation() == RecyclerView.VERTICAL;
 
         } else if (layoutManager instanceof LinearLayoutManager) {
             LinearLayoutManager linear = (LinearLayoutManager) layoutManager;
             this.rowSpan = 1;
             this.isReversed = linear.getReverseLayout();
-            this.isVertical = linear.getOrientation() == LinearLayoutManager.VERTICAL;
+            this.isVertical = linear.getOrientation() == RecyclerView.VERTICAL;
 
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             StaggeredGridLayoutManager staggeredGrid = (StaggeredGridLayoutManager) layoutManager;
             this.rowSpan = staggeredGrid.getSpanCount();
             this.isReversed = staggeredGrid.getReverseLayout();
-            this.isVertical = staggeredGrid.getOrientation() == LinearLayoutManager.VERTICAL;
+            this.isVertical = staggeredGrid.getOrientation() == RecyclerView.VERTICAL;
         }
     }
 }

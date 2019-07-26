@@ -151,6 +151,8 @@ class MaskView extends ViewGroup {
                     mChildTmpRect.bottom = ((int) mTargetRect.height() + child.getMeasuredHeight()) >> 1;
                     mChildTmpRect.offset(mTargetRect.left, mTargetRect.top);
                     break;
+                default:
+                    break;
             }
             //额外的xy偏移
             mChildTmpRect.offset((int) (density * lp.offsetX + 0.5f),
@@ -175,6 +177,8 @@ class MaskView extends ViewGroup {
                 rect.right = mTargetRect.right;
                 rect.left = rect.right - child.getMeasuredWidth();
                 break;
+            default:
+                break;
         }
     }
 
@@ -192,6 +196,8 @@ class MaskView extends ViewGroup {
             case LayoutParams.PARENT_END:
                 rect.bottom = mTargetRect.bottom;
                 rect.top = mTargetRect.bottom - child.getMeasuredHeight();
+                break;
+            default:
                 break;
         }
     }
@@ -245,7 +251,7 @@ class MaskView extends ViewGroup {
                 drawChild(canvas, child, drawingTime);
             }
         } catch (NullPointerException e) {
-
+            //nothing
         }
     }
 

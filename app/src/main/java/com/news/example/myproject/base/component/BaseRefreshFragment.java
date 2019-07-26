@@ -162,8 +162,8 @@ public abstract class BaseRefreshFragment<T> extends BaseLazyFragment
         if (page == 0) {
             mDataList.clear();
         }
-
-        if (ObjectUtils.isNotEmpty(dataToHeavy(dataList))) {
+        dataList = dataToHeavy(dataList);
+        if (ObjectUtils.isNotEmpty(dataList)) {
             getSize = dataList.size();
             mDataList.addAll(dataList);
         }

@@ -33,7 +33,7 @@ data class NewsSortInfo(
     }
 
     override fun equals(other: Any?): Boolean {
-        return other is NewsSortInfo && other.concern_id == concern_id
+        return other is NewsSortInfo && (other.concern_id == concern_id || other.name == name)
     }
 
     override fun hashCode(): Int {

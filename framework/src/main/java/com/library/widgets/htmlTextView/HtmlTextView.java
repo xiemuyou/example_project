@@ -1,10 +1,11 @@
 package com.library.widgets.htmlTextView;
 
 import android.content.Context;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 import java.io.InputStream;
 
@@ -47,20 +48,16 @@ public class HtmlTextView extends AppCompatTextView {
      */
     public void setHtmlFromString(String html) {
         Html.ImageGetter imgGetter = new NetWorkImageGetter(this, getContext());
-
         // this uses Android's Html class for basic parsing, and HtmlTagHandler
         setText(Html.fromHtml(html, imgGetter, new HtmlTagHandler()));
-
         // make links work
         setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     public void setHtmlFromString(String html, int roundPx, int uiWidth) {
         Html.ImageGetter imgGetter = new NetWorkImageGetter(this, getContext(), roundPx, uiWidth);
-
         // this uses Android's Html class for basic parsing, and HtmlTagHandler
         setText(Html.fromHtml(html, imgGetter, new HtmlTagHandler()));
-
         // make links work
         setMovementMethod(LinkMovementMethod.getInstance());
     }

@@ -8,13 +8,14 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
 
 import com.library.util.LogUtil;
 
@@ -130,8 +131,8 @@ class ImageStytle extends TextStyle {
                     Paint textPaint = new Paint(paint);
                     textPaint.setColor(textColor);
                     // textPaint.textSize(textSize);
-                    float newY = y - padding.bottom - (textPaint.getFontMetrics().bottom - textPaint.descent());
-                    canvas.drawText(text.subSequence(start, end).toString(), x + padding.left, newY, textPaint);
+                    float ny = y - padding.bottom - (textPaint.getFontMetrics().bottom - textPaint.descent());
+                    canvas.drawText(text.subSequence(start, end).toString(), x + padding.left, ny, textPaint);
                 }
             };
             spannableString.setSpan(imageSpan, 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

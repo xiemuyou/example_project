@@ -77,7 +77,7 @@ android {
     buildToolsVersion globalConfiguration.androidBuildToolsVersion
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion globalConfiguration.anroidTargetSdkVersion
         versionCode 1
         versionName "1.0.1"

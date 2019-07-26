@@ -2,7 +2,6 @@ package com.news.example.myproject.ui.main.video.vp
 
 import android.text.TextUtils
 import com.news.example.myproject.base.mvp.BasePresenter
-import com.news.example.myproject.global.ParamConstants
 import com.news.example.myproject.model.base.BaseApiResponse
 import com.news.example.myproject.model.user.UserInfo
 import com.news.example.myproject.model.video.VideoDetails
@@ -13,9 +12,7 @@ import com.news.example.myproject.znet.rx.RxRequestCallback
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import java.util.ArrayList
-
-import java.util.HashMap
+import java.util.*
 
 /**
  * @author xiemy
@@ -23,10 +20,8 @@ import java.util.HashMap
  */
 class VideoPresenter(view: VideoView) : BasePresenter<VideoView>(view) {
 
-    fun getTodayVideoList(searchKey: String) {
-        val params = HashMap<String, Any>()
-        params[ParamConstants.CATEGORY] = searchKey
-        RxRequestCallback().request(params = null, api = InterfaceConfig.HttpHelperTag.TODAY_VIDEO, presenter = this)
+    fun getTodayVideoList() {
+        RxRequestCallback().request(api = InterfaceConfig.HttpHelperTag.TODAY_VIDEO, presenter = this)
     }
 
     override fun onLoadDataSuccess(apiTag: InterfaceConfig.HttpHelperTag, modelRes: BaseApiResponse<*>, params: Map<String, Any>) {

@@ -89,23 +89,17 @@ public class NetWorkImageGetter implements Html.ImageGetter {
      */
     private Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
         try {
-            Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-                    bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+            Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(output);
             final Paint paint = new Paint();
-            final Rect rect = new Rect(0, 0, bitmap.getWidth(),
-                    bitmap.getHeight());
-            final RectF rectF = new RectF(new Rect(0, 0, bitmap.getWidth(),
-                    bitmap.getHeight()));
+            final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+            final RectF rf = new RectF(new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()));
             paint.setAntiAlias(true);
             canvas.drawARGB(0, 0, 0, 0);
             paint.setColor(Color.BLACK);
-            canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+            canvas.drawRoundRect(rf, roundPx, roundPx, paint);
             paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-
-            final Rect src = new Rect(0, 0, bitmap.getWidth(),
-                    bitmap.getHeight());
-
+            final Rect src = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
             canvas.drawBitmap(bitmap, src, rect, paint);
             return output;
         } catch (Exception e) {

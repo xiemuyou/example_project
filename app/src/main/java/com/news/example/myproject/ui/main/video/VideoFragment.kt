@@ -81,7 +81,7 @@ class VideoFragment : BaseRefreshFragment<VideoDetails>(), VideoView {
     }
 
     override fun refreshDataList() {
-        videoPresenter.getTodayVideoList("")
+        videoPresenter.getTodayVideoList()
     }
 
     override fun getVideoListSuccess(videoList: MutableList<VideoDetails>?) {

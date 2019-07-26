@@ -148,7 +148,7 @@ public class ImageStyleBuilder {
     }
 
     public StyleBuilder commit() {
-        ImageStytle stytleItem = new ImageStytle(
+        ImageStytle styleItem = new ImageStytle(
                 text, textSize,
                 textColor, highlightAlpha,
                 backgroundColor,
@@ -161,6 +161,6 @@ public class ImageStyleBuilder {
                 imageBitmap, imageDrawable,
                 width, height
         );
-        return styleBuilder.addStyleItem(stytleItem);
+        return styleBuilder.addStyleItem(styleItem);
     }
 }

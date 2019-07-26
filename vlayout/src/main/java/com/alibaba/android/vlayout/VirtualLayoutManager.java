@@ -37,6 +37,7 @@ import android.view.ViewParent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -77,9 +78,11 @@ public class VirtualLayoutManager extends ExposeLinearLayoutManagerEx implements
     private static final String TRACE_LAYOUT = "VLM onLayoutChildren";
     private static final String TRACE_SCROLL = "VLM scroll";
     public static boolean sDebuggable = false;
+
     public static void enableDebugging(boolean isDebug) {
         sDebuggable = isDebug;
     }
+
     public static final int HORIZONTAL = OrientationHelper.HORIZONTAL;
     public static final int VERTICAL = OrientationHelper.VERTICAL;
     OrientationHelperEx mOrientationHelper;
@@ -258,12 +261,9 @@ public class VirtualLayoutManager extends ExposeLinearLayoutManagerEx implements
         this.mHelperFinder.setLayouts(helpers);
 
         layoutHelpers = mHelperFinder.getLayoutHelpers();
-        Iterator<LayoutHelper> iterator = layoutHelpers.iterator();
-        while (iterator.hasNext()) {
-            LayoutHelper layoutHelper = iterator.next();
+        for (LayoutHelper layoutHelper : layoutHelpers) {
             newHelpersSet.put(System.identityHashCode(layoutHelper), layoutHelper);
         }
-
         for (Iterator<Map.Entry<Integer, LayoutHelper>> it = oldHelpersSet.entrySet().iterator(); it.hasNext(); ) {
             Map.Entry<Integer, LayoutHelper> entry = it.next();
             Integer key = entry.getKey();
@@ -272,7 +272,6 @@ public class VirtualLayoutManager extends ExposeLinearLayoutManagerEx implements
                 it.remove();
             }
         }
-
 
         for (LayoutHelper helper : oldHelpersSet.values()) {
             helper.clear(this);
@@ -380,7 +379,7 @@ public class VirtualLayoutManager extends ExposeLinearLayoutManagerEx implements
         mTempAnchorInfoWrapper.coordinate = anchorInfo.mCoordinate;
         List<LayoutHelper> layoutHelpers = mHelperFinder.getLayoutHelpers();
         Iterator<LayoutHelper> iterator = layoutHelpers.iterator();
-        LayoutHelper layoutHelper = null;
+        LayoutHelper layoutHelper;
         while (iterator.hasNext()) {
             layoutHelper = iterator.next();
             layoutHelper.onRefreshLayout(state, mTempAnchorInfoWrapper, this);
@@ -452,7 +451,7 @@ public class VirtualLayoutManager extends ExposeLinearLayoutManagerEx implements
         if (mNested == 0) {
             List<LayoutHelper> reverseLayoutHelpers = mHelperFinder.reverse();
             Iterator<LayoutHelper> iterator = reverseLayoutHelpers.iterator();
-            LayoutHelper layoutHelper = null;
+            LayoutHelper layoutHelper;
             while (iterator.hasNext()) {
                 layoutHelper = iterator.next();
                 layoutHelper.beforeLayout(recycler, state, this);
@@ -469,10 +468,7 @@ public class VirtualLayoutManager extends ExposeLinearLayoutManagerEx implements
             final int startPosition = findFirstVisibleItemPosition();
             final int endPosition = findLastVisibleItemPosition();
             List<LayoutHelper> layoutHelpers = mHelperFinder.getLayoutHelpers();
-            Iterator<LayoutHelper> iterator = layoutHelpers.iterator();
-            LayoutHelper layoutHelper = null;
-            while (iterator.hasNext()) {
-                layoutHelper = iterator.next();
+            for (LayoutHelper layoutHelper : layoutHelpers) {
                 try {
                     layoutHelper.afterLayout(recycler, state, startPosition, endPosition, scrolled, this);
                 } catch (Exception e) {
@@ -482,7 +478,21 @@ public class VirtualLayoutManager extends ExposeLinearLayoutManagerEx implements
                 }
             }
 
-            if (null != mViewLifeCycleHelper) {
+
+//            Iterator<LayoutHelper> iterator = layoutHelpers.iterator();
+//            LayoutHelper layoutHelper;
+//            while (iterator.hasNext()) {
+//                layoutHelper = iterator.next();
+//                try {
+//                    layoutHelper.afterLayout(recycler, state, startPosition, endPosition, scrolled, this);
+//                } catch (Exception e) {
+//                    if (VirtualLayoutManager.sDebuggable) {
+//                        throw e;
+//                    }
+//                }
+//            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && null != mViewLifeCycleHelper) {
                 mViewLifeCycleHelper.checkViewStatusInScreen();
             }
         }

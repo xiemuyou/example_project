@@ -22,7 +22,9 @@ public class FCRecyclerView extends RecyclerView {
     private static final String TAG = "FCRecycleView";
 
     private int nestedScrollModel = MODEL_ALL;
-    /** 当滚到顶或底部的时候 否联动parent滚动 */
+    /**
+     * 当滚到顶或底部的时候 否联动parent滚动
+     */
     private boolean isLinkedParent;
 
     public FCRecyclerView(Context context) {
@@ -59,6 +61,7 @@ public class FCRecyclerView extends RecyclerView {
 
     /**
      * 当滚到顶或底部的时候 否联动parent滚动
+     *
      * @param direction < 0 向下滚，> 0 向上滚
      * @return
      */
@@ -85,6 +88,8 @@ public class FCRecyclerView extends RecyclerView {
             case MODEL_NONE:
                 flag = false;
                 break;
+            default:
+                break;
         }
         return flag;
     }
@@ -101,11 +106,9 @@ public class FCRecyclerView extends RecyclerView {
 
     @Override
     public boolean dispatchNestedPreScroll(int dx, int dy, int[] consumed, int[] offsetInWindow, int type) {
-//        Log.i(TAG, "dispatchNestedPreScroll: " + type);
         if (isCanScrollVertically(dy)) {
             return false;
         } else {
-//            Log.i(TAG, "=============" + type);
             if (type == ViewCompat.TYPE_TOUCH || isLinkedParentFling(dy)) {
                 return super.dispatchNestedPreScroll(dx, dy, consumed, offsetInWindow, type);
             } else {

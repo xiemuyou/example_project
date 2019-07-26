@@ -52,9 +52,9 @@ public class SortEditAdapter extends DelegateAdapter.Adapter<SortEditAdapter.Sor
 
     @Override
     public int getItemViewType(int position) {
-        NewsSortInfo info = sortInfoList.get(position);
-        Integer itemType = info.getItemType();
-        return itemType != null ? itemType : 0;
+//        NewsSortInfo info = sortInfoList.get(position);
+//        Integer itemType = info.getItemType();
+        return 0; // itemType != null ? itemType : 0;
     }
 
     @NonNull

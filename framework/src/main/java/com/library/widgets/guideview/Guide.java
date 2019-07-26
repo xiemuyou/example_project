@@ -57,7 +57,7 @@ public class Guide implements View.OnKeyListener, View.OnClickListener {
         if (mMaskView == null) {
             mMaskView = onCreateView(activity);
         }
-        ViewGroup content = (ViewGroup) activity.findViewById(android.R.id.content);
+        ViewGroup content = activity.findViewById(android.R.id.content);
         if (mMaskView.getParent() == null) {
             content.addView(mMaskView);
             if (mConfiguration.mEnterAnimationId != -1) {
@@ -146,8 +146,7 @@ public class Guide implements View.OnKeyListener, View.OnClickListener {
     }
 
     private MaskView onCreateView(Activity activity) {
-        ViewGroup content = (ViewGroup) activity.findViewById(android.R.id.content);
-        // ViewGroup content = (ViewGroup) activity.getWindow().getDecorView();
+        ViewGroup content = activity.findViewById(android.R.id.content);
         MaskView maskView = new MaskView(activity);
         maskView.setFullingColor(activity.getResources().getColor(mConfiguration.mFullingColorId));
         maskView.setFullingAlpha(mConfiguration.mAlpha);
@@ -164,7 +163,7 @@ public class Guide implements View.OnKeyListener, View.OnClickListener {
         // For removing the height of status bar we need the root content view's
         // location on screen
         int parentX = 0;
-        int parentY = 0;
+        int parentY;
         final int[] loc = new int[2];
         content.getLocationInWindow(loc);
         //通知栏的高度
@@ -193,12 +192,6 @@ public class Guide implements View.OnKeyListener, View.OnClickListener {
                 e.printStackTrace();
             }
         }
-        // if (content != null) {
-        // int[] loc = new int[2];
-        // content.getLocationInWindow(loc);
-        // parentX = loc[0];
-        // parentY = loc[1];
-        // }
 
         if (mConfiguration.mTargetView != null) {
             maskView.setTargetRect(Common.getViewAbsRect(mConfiguration.mTargetView, parentX, parentY));

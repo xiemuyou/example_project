@@ -17,10 +17,6 @@
 
 package com.library.widgets.htmlTextView;
 
-import java.util.Vector;
-
-import org.xml.sax.XMLReader;
-
 import android.text.Editable;
 import android.text.Html;
 import android.text.Layout;
@@ -30,6 +26,10 @@ import android.text.style.BulletSpan;
 import android.text.style.LeadingMarginSpan;
 import android.text.style.TypefaceSpan;
 import android.util.Log;
+
+import org.xml.sax.XMLReader;
+
+import java.util.Vector;
 
 /**
  * Some parts of this code are based on android.text.Html
@@ -46,14 +46,12 @@ public class HtmlTagHandler implements Html.TagHandler {
     }
 
     @Override
-    public void handleTag(final boolean opening, final String tag, Editable output,
-                          final XMLReader xmlReader) {
+    public void handleTag(final boolean opening, final String tag, Editable output, final XMLReader xmlReader) {
         if (opening) {
             // opening tag
             if (HtmlTextView.DEBUG) {
                 Log.d(HtmlTextView.TAG, "opening, output: " + output.toString());
             }
-
             if (tag.equalsIgnoreCase("ul") || tag.equalsIgnoreCase("ol")
                     || tag.equalsIgnoreCase("dd")) {
                 mListParents.add(tag);
@@ -78,8 +76,7 @@ public class HtmlTagHandler implements Html.TagHandler {
             } else if (tag.equalsIgnoreCase("code")) {
                 end(output, Code.class, new TypefaceSpan("monospace"), false);
             } else if (tag.equalsIgnoreCase("center")) {
-                end(output, Center.class,
-                        new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), true);
+                end(output, Center.class, new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), true);
             }
         }
     }
@@ -93,7 +90,6 @@ public class HtmlTagHandler implements Html.TagHandler {
     private void start(Editable output, Object mark) {
         int len = output.length();
         output.setSpan(mark, len, len, Spannable.SPAN_MARK_MARK);
-
         if (HtmlTextView.DEBUG) {
             Log.d(HtmlTextView.TAG, "len: " + len);
         }
@@ -132,7 +128,7 @@ public class HtmlTagHandler implements Html.TagHandler {
      */
     private Object getLast(Editable text, Class kind) {
         Object[] objs = text.getSpans(0, text.length(), kind);
-        if (objs.length == 0) {
+        if (objs == null || objs.length == 0) {
             return null;
         } else {
             for (int i = objs.length; i > 0; i--) {
@@ -154,15 +150,12 @@ public class HtmlTagHandler implements Html.TagHandler {
             output.setSpan(new BulletSpan(15 * mListParents.size()), start, output.length(), 0);
         } else if (mListParents.lastElement().equals("ol")) {
             mListItemCount++;
-
             output.append("\n");
             String[] split = output.toString().split("\n");
-
             int lastIndex = split.length - 1;
             int start = output.length() - split[lastIndex].length() - 1;
             output.insert(start, mListItemCount + ". ");
-            output.setSpan(new LeadingMarginSpan.Standard(15 * mListParents.size()), start,
-                    output.length(), 0);
+            output.setSpan(new LeadingMarginSpan.Standard(15 * mListParents.size()), start, output.length(), 0);
         }
     }
 }

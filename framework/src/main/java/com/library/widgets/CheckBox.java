@@ -97,15 +97,16 @@ public class CheckBox extends LinearLayout {
     }
 
     public void setBackground() {
-        switch (type) {
-            case FOCUS:
-                checkbox.setBackgroundResource(isSelected ? R.drawable.default_selected : R.drawable.default_unselect);
-                break;
-
-            default:
-                checkbox.setBackgroundResource(isSelected ? R.drawable.default_selected : R.drawable.default_unselect);
-                break;
-        }
+        checkbox.setBackgroundResource(isSelected ? R.drawable.default_selected : R.drawable.default_unselect);
+//        switch (type) {
+//            case FOCUS:
+//                checkbox.setBackgroundResource(isSelected ? R.drawable.default_selected : R.drawable.default_unselect);
+//                break;
+//
+//            default:
+//                checkbox.setBackgroundResource(isSelected ? R.drawable.default_selected : R.drawable.default_unselect);
+//                break;
+//        }
     }
 
     public OnClick onClick;

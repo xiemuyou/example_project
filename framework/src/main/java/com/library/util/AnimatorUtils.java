@@ -209,16 +209,16 @@ public class AnimatorUtils {
      * 平移动画
      *
      * @param time         动画时间
-     * @param Direction    方向 GO_LEFT,GO_UP,GO_RIGHT,GO_DOWN
+     * @param direction    方向 GO_LEFT,GO_UP,GO_RIGHT,GO_DOWN
      * @param length       移动距离
      * @param interpolator 插值器
      * @return
      */
-    public AnimatorUtils addTranslate(int time, int Direction, int length, Interpolator interpolator) {
+    public AnimatorUtils addTranslate(int time, int direction, int length, Interpolator interpolator) {
 
         PropertyValuesHolder animatorHolder;
 
-        switch (Direction) {
+        switch (direction) {
             case LEFT_DIRECTION:
                 animatorHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_X, -length);
                 break;
@@ -251,14 +251,14 @@ public class AnimatorUtils {
      * 平移动画
      *
      * @param time         动画时间
-     * @param Direction    方向 GO_LEFT,GO_UP,GO_RIGHT,GO_DOWN
+     * @param direction    方向 GO_LEFT,GO_UP,GO_RIGHT,GO_DOWN
      * @param length       移动距离
      * @param interpolator 插值器
      * @return
      */
-    public AnimatorUtils addTranslate(String tag, int time, int Direction, int length, Interpolator interpolator) {
+    public AnimatorUtils addTranslate(String tag, int time, int direction, int length, Interpolator interpolator) {
         PropertyValuesHolder animatorHolder;
-        switch (Direction) {
+        switch (direction) {
             case LEFT_DIRECTION:
                 animatorHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_X, -length);
                 break;

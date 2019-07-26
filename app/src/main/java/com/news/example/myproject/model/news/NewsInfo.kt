@@ -1,5 +1,6 @@
 package com.news.example.myproject.model.news
 
+import com.library.util.LogUtil
 import com.news.example.myproject.model.user.UserInfo
 import java.io.Serializable
 
@@ -17,11 +18,18 @@ data class NewsInfo(
         var userInfo: UserInfo? = UserInfo(),
         var images: List<String>? = ArrayList()
 ) : Serializable {
+
     override fun equals(other: Any?): Boolean {
-        return other is NewsInfo && other.newsId == newsId
+        val isEquals = other is NewsInfo && (other.newsId == newsId || other.title == title)
+        if (other is NewsInfo && other.title == title) {
+            LogUtil.d("NewsInfo", "otherId=${other.newsId}==$newsId and otherName=${other.title} == $title and isEquals=$isEquals")
+        }
+        return isEquals
     }
 
     override fun hashCode(): Int {
-        return newsId?.hashCode() ?: 0
+        var result = title?.hashCode() ?: 0
+        result = 31 * result + (newsId?.hashCode() ?: 0)
+        return result
     }
 }

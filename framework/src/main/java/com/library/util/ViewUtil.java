@@ -3,9 +3,6 @@ package com.library.util;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.StringRes;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -14,6 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
@@ -72,7 +74,7 @@ public class ViewUtil {
             return;
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            v.setTextColor(context.getResources().getColor(textColor, null));
+            v.setTextColor(ContextCompat.getColor(context, textColor));
         } else {
             v.setTextColor(context.getResources().getColor(textColor));
         }
@@ -90,7 +92,7 @@ public class ViewUtil {
             return;
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            v.setBackgroundColor(context.getResources().getColor(bgColor, null));
+            v.setBackgroundColor(ContextCompat.getColor(context, bgColor));
         } else {
             v.setBackgroundColor(context.getResources().getColor(bgColor));
         }
@@ -101,7 +103,7 @@ public class ViewUtil {
             return;
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            v.setBackground(context.getResources().getDrawable(bgRes, null));
+            v.setBackground(ContextCompat.getDrawable(context, bgRes));
         } else {
             v.setBackground(context.getResources().getDrawable(bgRes));
         }
@@ -125,7 +127,7 @@ public class ViewUtil {
                                         @ColorRes int colorRes, TextView moreColorTextView) {
         String moreColorStr = context.getString(resId, insetStr);
         SpannableString joinCountStr = new SpannableString(moreColorStr);
-        joinCountStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(colorRes)),
+        joinCountStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context, colorRes)),
                 moreColorStr.indexOf(insetStr), moreColorStr.indexOf(insetStr) + insetStr
                         .length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         moreColorTextView.setText(joinCountStr);
@@ -138,9 +140,12 @@ public class ViewUtil {
         }
         Drawable drawableOff;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            drawableOff = context.getResources().getDrawable(drawableRes, null);
+            drawableOff = ContextCompat.getDrawable(context, drawableRes);
         } else {
             drawableOff = context.getResources().getDrawable(drawableRes);
+        }
+        if (drawableOff == null) {
+            return;
         }
         //调用setCompoundDrawables时，必须调用Drawable.setBounds()方法,否则图片不显示
         drawableOff.setBounds(0, 0, drawableOff.getMinimumWidth(), drawableOff.getMinimumHeight());

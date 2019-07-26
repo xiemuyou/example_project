@@ -160,9 +160,9 @@ public class GuideView extends RelativeLayout {
     private void showStartAnimator(View view) {
         final long animShowTime = 400;
         ObjectAnimator alpha = ObjectAnimator.ofFloat(view, "alpha", 0.0F, 1.0F);
-        ObjectAnimator translationX = ObjectAnimator.ofFloat(view, "translationY", 100, 0);
+        ObjectAnimator tx = ObjectAnimator.ofFloat(view, "translationY", 100, 0);
         AnimatorSet animSet = new AnimatorSet();
-        animSet.play(translationX).with(alpha);
+        animSet.play(tx).with(alpha);
         animSet.setDuration(animShowTime);
         animSet.start();
     }
