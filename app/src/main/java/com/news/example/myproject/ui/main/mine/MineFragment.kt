@@ -77,8 +77,7 @@ class MineFragment : BaseFragment(), MineView {
 
     private val changeListener = NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
         if (scrollY < SizeUtils.dp2px(100f)) {
-            val alpha = scrollY.toFloat() / SizeUtils.dp2px(100f)
-            rlMineHead?.alpha = alpha
+            rlMineHead?.alpha = scrollY.toFloat() / SizeUtils.dp2px(100f)
         } else {
             rlMineHead?.alpha = 1f
         }

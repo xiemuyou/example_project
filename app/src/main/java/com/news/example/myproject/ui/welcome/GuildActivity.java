@@ -23,6 +23,7 @@ public class GuildActivity extends BaseActivity {
 
     @Override
     public int getLayoutId(Bundle savedInstanceState) {
+        setStatusTransparent();
         return R.layout.activity_guild;
     }
 

@@ -7,6 +7,7 @@ import com.library.global.FConstants
 import com.library.util.AppIntroUtil
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor
+import com.mob.MobSDK
 import com.news.example.myproject.znet.RequestConfig
 import com.tencent.smtt.sdk.QbSdk
 import okhttp3.OkHttpClient
@@ -172,7 +173,7 @@ internal class ThirdPartyInit {
      * @param context Application上下文对象
      */
     private fun initMob(context: Application) {
-        //        MobSDK.init(context, "MobAppkey", "MobAppsecret");
+        MobSDK.init(context)
     }
 
     /**

@@ -31,7 +31,7 @@
     </style>
 
     <!-- 全屏透明专题 -->
-    <style name="FullscreenTheme.TransparentTheme" parent="FullscreenTheme">
+    <style name="FullscreenTheme.TransparentTheme" parent="AppTheme">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/transparent</item>
         <item name="colorPrimaryDark">@color/transparent</item>

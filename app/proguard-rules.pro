@@ -279,4 +279,17 @@
 -keep class * extends com.test.myproject.model.base.BaseApiResponse{*;}
 -keep class com.test.myproject.model.**{*; }
 
+#MOB
+-keep class cn.sharesdk.**{*;}
+-keep class com.sina.**{*;}
+-keep class **.R$* {*;}
+-keep class **.R{*;}
+-keep class com.mob.**{*;}
+-keep class m.framework.**{*;}
+-keep class com.bytedance.**{*;}
+-dontwarn cn.sharesdk.**
+-dontwarn com.sina.**
+-dontwarn com.mob.**
+-dontwarn **.R$*
+
 

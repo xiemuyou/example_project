@@ -49,4 +49,7 @@
 
     <!-- 分类编辑 End -->
 
+    <!-- 分享 Start -->
+    <string name="no_wechat">尚未安装微信，请先安装微信</string>
+    <!-- 分享 End -->
 </resources>
